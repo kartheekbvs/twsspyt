@@ -85,7 +85,10 @@ NAV = '''<div class="nav-items" id="navItems">
 <a href="{P}data/feature-engineering.html" class="nav-item">Feature Engineering</a>
 <a href="{P}data/matplotlib.html" class="nav-item">Matplotlib</a>
 <a href="{P}data/seaborn.html" class="nav-item">Seaborn</a>
-</div></div></div>'''
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4DA; Resources</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="{P}resources/python-programs.html" class="nav-item">140+ Python Programs</a>
+</div></div></div></div></div>'''
 
 def make_page(rel_path, title, section, emoji, diff, bc, intro, books, body, prev, next_):
     fp = os.path.join(BASE, rel_path)
