@@ -319,6 +319,6 @@ X_reconstructed = pca.inverse_transform(X_pca)
 reconstruction_error = np.mean((X_scaled - X_reconstructed) ** <span class="nm">2</span>)
 <span class="bi">print</span>(<span class="st">f"Reconstruction error: {reconstruction_error:.4f}"</span>)</pre>
 <div class="output-block"><div class="output-label">&#x25B6; Output</div>(150, 4) &rarr; (150, 2)<br>Explained: [0.7277 0.2303] &mdash; Total: 95.80%<br>Components for 95%: 2</div></div></section>''',
-("pipelines.html","Pipelines"),("../data/preprocessing.html","Preprocessing"))
+("pipelines.html","Pipelines"),("preprocessing.html","Preprocessing"))
 
 print("clustering.html + pipelines.html + feature-selection.html expanded!")

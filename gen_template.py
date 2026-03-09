@@ -69,6 +69,7 @@ NAV = '''<div class="nav-items" id="navItems">
 <a href="{P}ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
 <a href="{P}ml/clustering.html" class="nav-item">K-Means Clustering</a>
 <a href="{P}ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+<a href="{P}ml/preprocessing.html" class="nav-item">Data Preprocessing</a>
 </div></div>
 <div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
 <div class="nav-section-items">
@@ -81,7 +82,6 @@ NAV = '''<div class="nav-items" id="navItems">
 <div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
 <div class="nav-section-items">
 <a href="{P}data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
-<a href="{P}data/preprocessing.html" class="nav-item">Data Preprocessing</a>
 <a href="{P}data/feature-engineering.html" class="nav-item">Feature Engineering</a>
 <a href="{P}data/matplotlib.html" class="nav-item">Matplotlib</a>
 <a href="{P}data/seaborn.html" class="nav-item">Seaborn</a>

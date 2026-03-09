@@ -158,7 +158,7 @@ random_search.fit(X_train, y_train)
 ("intro-ml.html","Intro to ML"),("linear-regression.html","Linear Regression"))
 
 # PREPROCESSING
-make_page("data/preprocessing.html","Preprocessing &amp; Encoding","Data Analysis","&#x1F4CA;","intermediate","Data &rarr; Preprocessing",
+make_page("ml/preprocessing.html","Preprocessing &amp; Encoding","Machine Learning","&#x1F4CA;","intermediate","ML &rarr; Preprocessing",
 "sklearn.preprocessing provides scalers (StandardScaler, MinMaxScaler, RobustScaler), encoders (LabelEncoder, OneHotEncoder, OrdinalEncoder), and transformers (PolynomialFeatures, PowerTransformer). Also covers sklearn.impute for missing values (SimpleImputer, KNNImputer).",
 "Hands-On ML &mdash; Aur&eacute;lien G&eacute;ron",
 '''<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
@@ -322,6 +322,6 @@ imp_knn = KNNImputer(n_neighbors=<span class="nm">2</span>)
 <li><code>SimpleImputer(most_frequent)</code> &mdash; categorical data</li>
 <li><code>KNNImputer</code> &mdash; preserves relationships between features</li>
 </ul></div></div></section>''',
-("../ml/model-evaluation.html","Model Evaluation"),("feature-engineering.html","Feature Engineering"))
+("model-evaluation.html","Model Evaluation"),("../data/feature-engineering.html","Feature Engineering"))
 
 print("model-evaluation.html + preprocessing.html expanded!")

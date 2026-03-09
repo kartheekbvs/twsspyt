@@ -25,113 +25,91 @@
         <div class="search-box"><input type="text" id="searchInput" placeholder="🔍 Search topics..."
                 class="search-input"></div>
         <div class="nav-items" id="navItems">
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐍 Python Fundamentals</span><span
-                        class="chevron">▼</span></div>
-                <div class="nav-section-items">
-                    <a href="introduction.html" class="nav-item">Introduction to Python</a>
-                    <a href="variables-datatypes.html" class="nav-item active">Variables & Data Types</a>
-                    <a href="operators.html" class="nav-item">Operators</a>
-                    <a href="control-flow.html" class="nav-item">Control Flow</a>
-                    <a href="loops.html" class="nav-item">Loops</a>
-                    <a href="functions.html" class="nav-item">Functions</a>
-                    <a href="strings.html" class="nav-item">Strings</a>
-                    <a href="lists.html" class="nav-item">Lists</a>
-                    <a href="tuples.html" class="nav-item">Tuples</a>
-                    <a href="dictionaries.html" class="nav-item">Dictionaries</a>
-                    <a href="sets.html" class="nav-item">Sets</a>
-                    <a href="file-io.html" class="nav-item">File I/O</a>
-                    <a href="exceptions.html" class="nav-item">Exception Handling</a>
-                    <a href="modules.html" class="nav-item">Modules & Packages</a>
-                </div>
-            </div>
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)"><span>🏗️ OOP</span><span
-                        class="chevron">▼</span></div>
-                <div class="nav-section-items">
-                    <a href="../oop/classes-objects.html" class="nav-item">Classes & Objects</a>
-                    <a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
-                    <a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
-                    <a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
-                    <a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
-                    <a href="../oop/decorators.html" class="nav-item">Decorators</a>
-                </div>
-            </div>
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)"><span>⚡ Advanced Python</span><span
-                        class="chevron">▼</span></div>
-                <div class="nav-section-items">
-                    <a href="../advanced/generators.html" class="nav-item">Generators & Iterators</a>
-                    <a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
-                    <a href="../advanced/lambda.html" class="nav-item">Lambda & Functional</a>
-                    <a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
-                    <a href="../advanced/async.html" class="nav-item">Async & Await</a>
-                </div>
-            </div>
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)"><span>🔢 NumPy</span><span
-                        class="chevron">▼</span></div>
-                <div class="nav-section-items">
-                    <a href="../numpy/arrays.html" class="nav-item">Arrays & ndarray</a>
-                    <a href="../numpy/operations.html" class="nav-item">Array Operations</a>
-                    <a href="../numpy/indexing.html" class="nav-item">Indexing & Slicing</a>
-                    <a href="../numpy/reshaping.html" class="nav-item">Reshaping & Stacking</a>
-                    <a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
-                    <a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
-                    <a href="../numpy/random.html" class="nav-item">Random Module</a>
-                </div>
-            </div>
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐼 Pandas</span><span
-                        class="chevron">▼</span></div>
-                <div class="nav-section-items">
-                    <a href="../pandas/series-dataframe.html" class="nav-item">Series & DataFrame</a>
-                    <a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
-                    <a href="../pandas/selection.html" class="nav-item">Selection & Filtering</a>
-                    <a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
-                    <a href="../pandas/groupby.html" class="nav-item">GroupBy & Aggregation</a>
-                    <a href="../pandas/merging.html" class="nav-item">Merging & Joining</a>
-                    <a href="../pandas/visualization.html" class="nav-item">Visualization</a>
-                </div>
-            </div>
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)"><span>🤖 Machine Learning</span><span
-                        class="chevron">▼</span></div>
-                <div class="nav-section-items">
-                    <a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
-                    <a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
-                    <a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
-                    <a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
-                    <a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
-                    <a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
-                    <a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
-                    <a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
-                    <a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
-                </div>
-            </div>
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)"><span>🧠 Deep Learning</span><span
-                        class="chevron">▼</span></div>
-                <div class="nav-section-items">
-                    <a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
-                    <a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
-                    <a href="../dl/cnn.html" class="nav-item">CNN</a>
-                    <a href="../dl/rnn-lstm.html" class="nav-item">RNN & LSTM</a>
-                    <a href="../dl/transformers.html" class="nav-item">Transformers</a>
-                </div>
-            </div>
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleSection(this)"><span>📊 Data Analysis</span><span
-                        class="chevron">▼</span></div>
-                <div class="nav-section-items">
-                    <a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
-                    <a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
-                    <a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
-                    <a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
-                    <a href="../data/seaborn.html" class="nav-item">Seaborn</a>
-                </div>
-            </div>
-        </div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+<a href="../ml/preprocessing.html" class="nav-item">Data Preprocessing</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4DA; Resources</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../resources/python-programs.html" class="nav-item">140+ Python Programs</a>
+</div></div></div></div></div>
     </nav>
 
     <main class="main-content" id="mainContent">
