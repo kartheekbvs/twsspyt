@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exception Handling - Python Learning Hub</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../../index.html" class="logo">
+                <div class="logo-icon">🐍</div>
+                <div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete
+                        Reference</span></div>
+            </a>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+        <div class="search-box"><input type="text" id="searchInput" placeholder="🔍 Search topics..."
+                class="search-input"></div>
+        <div class="nav-items" id="navItems">
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐍 Python Fundamentals</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="introduction.html" class="nav-item">Introduction to Python</a>
+                    <a href="variables-datatypes.html" class="nav-item">Variables & Data Types</a>
+                    <a href="control-flow.html" class="nav-item">Control Flow</a>
+                    <a href="loops.html" class="nav-item">Loops</a>
+                    <a href="functions.html" class="nav-item">Functions</a>
+                    <a href="strings.html" class="nav-item">Strings</a>
+                    <a href="lists.html" class="nav-item">Lists</a>
+                    <a href="dictionaries.html" class="nav-item">Dictionaries</a>
+                    <a href="file-io.html" class="nav-item">File I/O</a>
+                    <a href="exceptions.html" class="nav-item active">Exception Handling</a>
+                    <a href="modules.html" class="nav-item">Modules & Packages</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🏗️ OOP</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../oop/classes-objects.html" class="nav-item">Classes & Objects</a>
+                    <a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+                    <a href="../oop/decorators.html" class="nav-item">Decorators</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>⚡ Advanced Python</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../advanced/generators.html" class="nav-item">Generators & Iterators</a>
+                    <a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+                    <a href="../advanced/lambda.html" class="nav-item">Lambda & Functional</a>
+                    <a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+                    <a href="../advanced/async.html" class="nav-item">Async & Await</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🔢 NumPy</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../numpy/arrays.html" class="nav-item">Arrays & ndarray</a>
+                    <a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐼 Pandas</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../pandas/series-dataframe.html" class="nav-item">Series & DataFrame</a>
+                    <a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+                    <a href="../pandas/selection.html" class="nav-item">Selection & Filtering</a>
+                    <a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+                    <a href="../pandas/groupby.html" class="nav-item">GroupBy & Aggregation</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🤖 Machine Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+                    <a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+                    <a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+                    <a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🧠 Deep Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>📊 Data Analysis</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../data/exploratory.html" class="nav-item">EDA</a>
+                    <a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+                    <a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content" id="mainContent">
+        <header class="topbar">
+            <button class="mobile-toggle" id="mobileToggle">☰</button>
+            <div class="topbar-breadcrumb"><a href="../../index.html"
+                    style="color:var(--accent);text-decoration:none;">Home</a> → Python Fundamentals → Exception
+                Handling</div>
+            <div class="topbar-progress"><span class="progress-text">Reading</span>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill" id="progressFill"></div>
+                </div><span id="progressPercent">0%</span>
+            </div>
+        </header>
+
+        <div class="page-content">
+            <div class="page-header">
+                <span class="topic-badge">🐍 Python Fundamentals</span>
+                <h1>Exception Handling</h1>
+                <p class="page-intro">Exceptions are runtime errors that disrupt normal program flow. Python uses a
+                    <code>try/except/else/finally</code> structure to handle them gracefully. This chapter covers the
+                    exception hierarchy, all built-in exceptions, custom exceptions, context managers, and best
+                    practices.</p>
+                <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+                    <span class="difficulty-badge intermediate">● Intermediate</span>
+                    <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">📖 <em>Python Programming
+                            (2024)</em></span>
+                </div>
+            </div>
+
+            <div class="toc-box">
+                <h4>📋 Table of Contents</h4>
+                <ol>
+                    <li><a href="#try-except">try / except / else / finally</a></li>
+                    <li><a href="#builtin-exceptions">Built-in Exception Types</a></li>
+                    <li><a href="#multiple">Handling Multiple Exceptions</a></li>
+                    <li><a href="#raise">Raising Exceptions</a></li>
+                    <li><a href="#custom">Custom Exceptions</a></li>
+                    <li><a href="#best-practices">Best Practices</a></li>
+                </ol>
+            </div>
+
+            <section class="content-section" id="try-except">
+                <h2>1 · try / except / else / finally</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Full try/except Structure</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="kw">try</span>:
+    <span class="cm"># Code that might raise an exception</span>
+    result = <span class="nm">10</span> / <span class="nm">0</span>
+<span class="kw">except</span> <span class="cl">ZeroDivisionError</span> <span class="kw">as</span> e:
+    <span class="cm"># Runs if ZeroDivisionError occurs</span>
+    <span class="bi">print</span>(<span class="st">f"Caught: <span class="kw">{</span>e<span class="kw">}</span>"</span>)      <span class="cm"># Caught: division by zero</span>
+<span class="kw">else</span>:
+    <span class="cm"># Runs ONLY if no exception was raised</span>
+    <span class="bi">print</span>(<span class="st">f"Result: <span class="kw">{</span>result<span class="kw">}</span>"</span>)
+<span class="kw">finally</span>:
+    <span class="cm"># ALWAYS runs — cleanup code goes here</span>
+    <span class="bi">print</span>(<span class="st">"Cleanup done"</span>)
+
+<span class="cm"># ── When no exception ────────────────────────────────────</span>
+<span class="kw">try</span>:
+    result = <span class="nm">10</span> / <span class="nm">2</span>
+<span class="kw">except</span> <span class="cl">ZeroDivisionError</span>:
+    <span class="bi">print</span>(<span class="st">"Error!"</span>)
+<span class="kw">else</span>:
+    <span class="bi">print</span>(<span class="st">f"Success: <span class="kw">{</span>result<span class="kw">}</span>"</span>)  <span class="cm"># This runs</span>
+<span class="kw">finally</span>:
+    <span class="bi">print</span>(<span class="st">"Always runs"</span>)</pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>Caught: division by zero<br>Cleanup done<br>Success:
+                        5.0<br>Always runs
+                    </div>
+                </div>
+                <div class="return-value-box">
+                    <div class="rv-label">🔁 Clause Execution Rules</div>
+                    <p style="font-size:.9rem;color:var(--purple);margin-top:.5rem;">
+                        <code>try</code> executes first → if exception: <code>except</code> runs → if no exception:
+                        <code>else</code> runs → <code>finally</code> <strong>always</strong> runs regardless (even with
+                        <code>return</code> inside try, or SystemExit).
+                    </p>
+                </div>
+            </section>
+
+            <section class="content-section" id="builtin-exceptions">
+                <h2>2 · Built-in Exception Types</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Exception</th>
+                            <th>When Raised</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>ValueError</code></td>
+                            <td>Right type, wrong value</td>
+                            <td><code>int("abc")</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>TypeError</code></td>
+                            <td>Wrong type for operation</td>
+                            <td><code>"a" + 1</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>KeyError</code></td>
+                            <td>Dict key not found</td>
+                            <td><code>d["missing"]</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>IndexError</code></td>
+                            <td>List index out of range</td>
+                            <td><code>lst[100]</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>AttributeError</code></td>
+                            <td>Attribute doesn't exist</td>
+                            <td><code>None.split()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>NameError</code></td>
+                            <td>Variable not defined</td>
+                            <td><code>print(x)</code> (x undefined)</td>
+                        </tr>
+                        <tr>
+                            <td><code>ZeroDivisionError</code></td>
+                            <td>Division by zero</td>
+                            <td><code>10 / 0</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>FileNotFoundError</code></td>
+                            <td>File doesn't exist</td>
+                            <td><code>open("nope.txt")</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>StopIteration</code></td>
+                            <td>Iterator exhausted</td>
+                            <td><code>next(empty_iter)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>RuntimeError</code></td>
+                            <td>Generic runtime error</td>
+                            <td>Recursion depth, etc.</td>
+                        </tr>
+                        <tr>
+                            <td><code>NotImplementedError</code></td>
+                            <td>Abstract method called</td>
+                            <td>Subclass didn't implement</td>
+                        </tr>
+                        <tr>
+                            <td><code>AssertionError</code></td>
+                            <td><code>assert</code> failed</td>
+                            <td><code>assert x > 0</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="content-section" id="multiple">
+                <h2>3 · Handling Multiple Exceptions</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Multiple except Clauses</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre
+                        class="code-block"><span class="kw">def</span> <span class="fn">safe_divide</span>(a, b):
+    <span class="kw">try</span>:
+        result = a / b
+        <span class="kw">return</span> <span class="bi">round</span>(result, <span class="nm">2</span>)
+    <span class="kw">except</span> <span class="cl">ZeroDivisionError</span>:
+        <span class="bi">print</span>(<span class="st">"Error: Cannot divide by zero"</span>)
+        <span class="kw">return</span> <span class="kw">None</span>
+    <span class="kw">except</span> <span class="cl">TypeError</span> <span class="kw">as</span> e:
+        <span class="bi">print</span>(<span class="st">f"Type error: <span class="kw">{</span>e<span class="kw">}</span>"</span>)
+        <span class="kw">return</span> <span class="kw">None</span>
+
+<span class="bi">print</span>(safe_divide(<span class="nm">10</span>, <span class="nm">2</span>))    <span class="cm"># 5.0</span>
+<span class="bi">print</span>(safe_divide(<span class="nm">10</span>, <span class="nm">0</span>))    <span class="cm"># Error: Cannot divide by zero → None</span>
+<span class="bi">print</span>(safe_divide(<span class="nm">10</span>, <span class="st">"a"</span>))  <span class="cm"># Type error: ... → None</span>
+
+<span class="cm"># Multiple exceptions in one except clause</span>
+<span class="kw">try</span>:
+    value = <span class="bi">int</span>(<span class="bi">input</span>(<span class="st">"Enter a number: "</span>))
+    result = <span class="nm">100</span> / value
+<span class="kw">except</span> (<span class="cl">ValueError</span>, <span class="cl">ZeroDivisionError</span>) <span class="kw">as</span> e:
+    <span class="bi">print</span>(<span class="st">f"Input error: <span class="kw">{</span>e<span class="kw">}</span>"</span>)
+
+<span class="cm"># Bare except catches ALL exceptions (not recommended)</span>
+<span class="kw">try</span>:
+    risky_operation()
+<span class="kw">except</span> <span class="cl">Exception</span> <span class="kw">as</span> e:  <span class="cm"># Better: catch Exception base class</span>
+    <span class="bi">print</span>(<span class="st">f"Unexpected: <span class="kw">{</span><span class="bi">type</span>(e).__name__<span class="kw">}</span>: <span class="kw">{</span>e<span class="kw">}</span>"</span>)</pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>5.0<br>Error: Cannot divide by zero<br>None<br>Type
+                        error: unsupported operand type(s) for /: 'int' and 'str'<br>None
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="raise">
+                <h2>4 · Raising Exceptions</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · raise & re-raise</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre
+                        class="code-block"><span class="cm"># raise: manually trigger an exception</span>
+<span class="kw">def</span> <span class="fn">set_age</span>(age):
+    <span class="kw">if</span> <span class="kw">not</span> <span class="bi">isinstance</span>(age, <span class="bi">int</span>):
+        <span class="kw">raise</span> <span class="cl">TypeError</span>(f<span class="st">"Age must be int, got <span class="kw">{</span><span class="bi">type</span>(age).__name__<span class="kw">}</span>"</span>)
+    <span class="kw">if</span> age < <span class="nm">0</span> <span class="kw">or</span> age > <span class="nm">150</span>:
+        <span class="kw">raise</span> <span class="cl">ValueError</span>(<span class="st">f"Age <span class="kw">{</span>age<span class="kw">}</span> is out of valid range [0, 150]"</span>)
+    <span class="kw">return</span> age
+
+<span class="kw">try</span>:
+    set_age(-<span class="nm">5</span>)
+<span class="kw">except</span> <span class="cl">ValueError</span> <span class="kw">as</span> e:
+    <span class="bi">print</span>(<span class="st">f"Caught: <span class="kw">{</span>e<span class="kw">}</span>"</span>)
+
+<span class="cm"># re-raise: re-raise current exception for caller to handle</span>
+<span class="kw">def</span> <span class="fn">load_config</span>(path):
+    <span class="kw">try</span>:
+        <span class="kw">with</span> <span class="bi">open</span>(path) <span class="kw">as</span> f:
+            <span class="kw">return</span> f.read()
+    <span class="kw">except</span> <span class="cl">FileNotFoundError</span>:
+        <span class="bi">print</span>(<span class="st">f"Config file not found: <span class="kw">{</span>path<span class="kw">}</span>"</span>)
+        <span class="kw">raise</span>   <span class="cm"># re-raise same exception</span>
+
+<span class="cm"># Exception chaining with 'from'</span>
+<span class="kw">try</span>:
+    <span class="kw">raise</span> <span class="cl">ValueError</span>(<span class="st">"Invalid input"</span>) <span class="kw">from</span> <span class="kw">None</span>  <span class="cm"># suppress original</span>
+<span class="kw">except</span> <span class="cl">ValueError</span> <span class="kw">as</span> e:
+    <span class="bi">print</span>(<span class="st">f"Raised: <span class="kw">{</span>e<span class="kw">}</span>"</span>)</pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>Caught: Age -5 is out of valid range [0, 150]<br>Raised:
+                        Invalid input
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="custom">
+                <h2>5 · Custom Exceptions</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Custom Exception Classes</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre
+                        class="code-block"><span class="cm"># Custom exceptions inherit from Exception</span>
+<span class="kw">class</span> <span class="cl">AppError</span>(<span class="cl">Exception</span>):
+    <span class="st">"""Base class for application errors."""</span>
+    <span class="kw">pass</span>
+
+<span class="kw">class</span> <span class="cl">ValidationError</span>(<span class="cl">AppError</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, field: <span class="bi">str</span>, message: <span class="bi">str</span>):
+        self.field   = field
+        self.message = message
+        <span class="bi">super</span>().__init__(<span class="st">f"Field '<span class="kw">{</span>field<span class="kw">}</span>': <span class="kw">{</span>message<span class="kw">}</span>"</span>)
+
+<span class="kw">class</span> <span class="cl">DatabaseError</span>(<span class="cl">AppError</span>):
+    <span class="st">"""Raised on database failures."""</span>
+    <span class="kw">pass</span>
+
+<span class="cm"># Use them</span>
+<span class="kw">def</span> <span class="fn">validate_email</span>(email):
+    <span class="kw">if</span> <span class="st">"@"</span> <span class="kw">not</span> <span class="kw">in</span> email:
+        <span class="kw">raise</span> <span class="cl">ValidationError</span>(<span class="st">"email"</span>, <span class="st">"Must contain '@' symbol"</span>)
+
+<span class="kw">try</span>:
+    validate_email(<span class="st">"notanemail"</span>)
+<span class="kw">except</span> <span class="cl">ValidationError</span> <span class="kw">as</span> e:
+    <span class="bi">print</span>(<span class="st">f"Validation failed: <span class="kw">{</span>e<span class="kw">}</span>"</span>)
+    <span class="bi">print</span>(<span class="st">f"Field: <span class="kw">{</span>e.field<span class="kw">}</span>"</span>)
+<span class="kw">except</span> <span class="cl">AppError</span> <span class="kw">as</span> e:
+    <span class="bi">print</span>(<span class="st">f"App error: <span class="kw">{</span>e<span class="kw">}</span>"</span>)</pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>Validation failed: Field 'email': Must contain '@'
+                        symbol<br>Field: email
+                    </div>
+                </div>
+                <div class="callout tip">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content"><strong>Custom Exception Hierarchy</strong>
+                        <p>Create a base <code>AppError</code> class, then specific subclasses. This allows callers to
+                            catch specific errors or all app errors in one <code>except AppError</code> clause —
+                            following the Open/Closed principle.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="best-practices">
+                <h2>6 · Best Practices</h2>
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content"><strong>Never do bare <code>except:</code></strong>
+                        <p>Using <code>except:</code> without specifying an exception type catches <em>everything</em>,
+                            including <code>KeyboardInterrupt</code> (Ctrl+C) and <code>SystemExit</code>. Always
+                            specify the exception type(s).</p>
+                    </div>
+                </div>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Best Practice Patterns</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="cm"># ✅ GOOD: Be specific, catch what you can handle</span>
+<span class="kw">try</span>:
+    data = <span class="bi">int</span>(user_input)
+<span class="kw">except</span> <span class="cl">ValueError</span>:
+    data = <span class="nm">0</span>
+
+<span class="cm"># ❌ BAD: Catch-all silences real bugs</span>
+<span class="kw">try</span>:
+    data = <span class="bi">int</span>(user_input)
+<span class="kw">except</span>:
+    data = <span class="nm">0</span>  <span class="cm"># Hides ALL errors, even MemoryError!</span>
+
+<span class="cm"># ✅ GOOD: Use finally for cleanup, or context managers</span>
+<span class="kw">with</span> <span class="bi">open</span>(<span class="st">"file.txt"</span>) <span class="kw">as</span> f:
+    data = f.read()   <span class="cm"># File closes automatically, even on error</span>
+
+<span class="cm"># ✅ GOOD: Log and re-raise in libraries</span>
+<span class="kw">import</span> logging
+
+<span class="kw">try</span>:
+    result = risky_operation()
+<span class="kw">except</span> <span class="cl">Exception</span> <span class="kw">as</span> e:
+    logging.error(<span class="st">f"Operation failed: <span class="kw">{</span>e<span class="kw">}</span>"</span>, exc_info=<span class="kw">True</span>)
+    <span class="kw">raise</span>   <span class="cm"># Let caller decide how to handle it</span></pre>
+                </div>
+            </section>
+        </div>
+
+        <div class="page-nav">
+            <a href="file-io.html"><span class="nav-direction">← Previous</span><span class="nav-topic">File
+                    I/O</span></a>
+            <a href="modules.html" class="next"><span class="nav-direction">Next →</span><span class="nav-topic">Modules
+                    & Packages</span></a>
+        </div>
+        <footer class="footer">
+            <p>🐍 Python Learning Hub — Built from leading textbooks for deep understanding</p>
+        </footer>
+    </main>
+    <script src="../../js/main.js"></script>
+</body>
+
+</html>

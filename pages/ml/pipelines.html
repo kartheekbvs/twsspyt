@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pipelines &amp; ColumnTransformer - Python Learning Hub</title>
+<meta name="description" content="Pipelines &amp; ColumnTransformer - comprehensive textbook reference with code examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../../index.html" class="logo"><div class="logo-icon">&#x1F40D;</div><div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete Reference</span></div></a><button class="sidebar-toggle" id="sidebarToggle">&#x2630;</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="&#x1F50D; Search topics..." class="search-input"></div>
+<div class="nav-items" id="navItems">
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+</div></div></div>
+</nav>
+<main class="main-content" id="mainContent">
+<header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; ML &rarr; Pipelines</div>
+<div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
+</header>
+<div class="page-content">
+<div class="page-header">
+<span class="topic-badge">&#x1F916; Machine Learning</span>
+<h1>Pipelines &amp; ColumnTransformer</h1>
+<p class="page-intro">sklearn.pipeline automates ML workflows by chaining preprocessing and model steps. Covers Pipeline, make_pipeline, ColumnTransformer, make_column_transformer, and FeatureUnion for creating reproducible, leak-free ML workflows.</p>
+<div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+<span class="difficulty-badge advanced">&#x25CF; Advanced</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>sklearn Documentation</em></span>
+</div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
+<li><a href="#s1">Pipeline</a></li>
+<li><a href="#s2">ColumnTransformer</a></li>
+<li><a href="#s3">Complete Pipeline Example</a></li>
+</ol></div>
+
+<section class="content-section" id="s1"><h2>1 &middot; Pipeline</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">from</span> sklearn.pipeline <span class="kw">import</span> Pipeline, make_pipeline
+<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler
+<span class="kw">from</span> sklearn.impute <span class="kw">import</span> SimpleImputer
+<span class="kw">from</span> sklearn.svm <span class="kw">import</span> SVC
+<span class="kw">from</span> sklearn.datasets <span class="kw">import</span> load_iris
+<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split, cross_val_score
+
+X, y = load_iris(return_X_y=<span class="kw">True</span>)
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=<span class="nm">42</span>)
+
+<span class="cm"># Pipeline with named steps</span>
+pipe = Pipeline([
+    (<span class="st">"imputer"</span>, SimpleImputer(strategy=<span class="st">"mean"</span>)),
+    (<span class="st">"scaler"</span>, StandardScaler()),
+    (<span class="st">"classifier"</span>, SVC(kernel=<span class="st">"rbf"</span>))
+])
+
+<span class="cm"># One line: fit + predict (no data leakage!)</span>
+pipe.fit(X_train, y_train)
+<span class="bi">print</span>(<span class="st">f"Pipeline accuracy: {pipe.score(X_test, y_test):.4f}"</span>)
+
+<span class="cm"># make_pipeline: auto-generates step names</span>
+pipe2 = make_pipeline(StandardScaler(), SVC())
+pipe2.fit(X_train, y_train)
+<span class="bi">print</span>(<span class="st">f"make_pipeline: {pipe2.score(X_test, y_test):.4f}"</span>)
+
+<span class="cm"># CV with pipeline (prevents leakage!)</span>
+scores = cross_val_score(pipe, X, y, cv=<span class="nm">5</span>)
+<span class="bi">print</span>(<span class="st">f"CV scores: {scores.mean():.4f} &plusmn; {scores.std():.4f}"</span>)
+
+<span class="cm"># Access steps</span>
+<span class="bi">print</span>(pipe.named_steps[<span class="st">"scaler"</span>])
+<span class="bi">print</span>(pipe[<span class="nm">1</span>])  <span class="cm"># same as named_steps["scaler"]</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Pipeline accuracy: 0.9737<br>CV scores: 0.9733 &plusmn; 0.0163</div></div></section>
+
+<section class="content-section" id="s2"><h2>2 &middot; ColumnTransformer</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; Mixed Data Types</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">from</span> sklearn.compose <span class="kw">import</span> ColumnTransformer, make_column_transformer
+<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> OneHotEncoder
+<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestClassifier
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="cm"># Sample dataset with mixed types</span>
+df = pd.DataFrame({
+    <span class="st">"age"</span>: [<span class="nm">25</span>, <span class="nm">30</span>, <span class="nm">35</span>, <span class="nm">40</span>, <span class="nm">28</span>, <span class="nm">33</span>],
+    <span class="st">"salary"</span>: [<span class="nm">30000</span>, <span class="nm">50000</span>, np.nan, <span class="nm">70000</span>, <span class="nm">35000</span>, <span class="nm">60000</span>],
+    <span class="st">"city"</span>: [<span class="st">"NYC"</span>,<span class="st">"LA"</span>,<span class="st">"NYC"</span>,<span class="st">"Chicago"</span>,<span class="st">"LA"</span>,<span class="st">"NYC"</span>],
+    <span class="st">"education"</span>: [<span class="st">"BS"</span>,<span class="st">"MS"</span>,<span class="st">"PhD"</span>,<span class="st">"BS"</span>,<span class="st">"MS"</span>,<span class="st">"PhD"</span>]
+})
+y = [<span class="nm">0</span>, <span class="nm">1</span>, <span class="nm">1</span>, <span class="nm">1</span>, <span class="nm">0</span>, <span class="nm">1</span>]
+
+numeric_features = [<span class="st">"age"</span>, <span class="st">"salary"</span>]
+categorical_features = [<span class="st">"city"</span>, <span class="st">"education"</span>]
+
+<span class="cm"># ColumnTransformer: apply different transformers to different columns</span>
+preprocessor = ColumnTransformer(transformers=[
+    (<span class="st">"num"</span>, Pipeline([
+        (<span class="st">"imputer"</span>, SimpleImputer(strategy=<span class="st">"mean"</span>)),
+        (<span class="st">"scaler"</span>, StandardScaler())
+    ]), numeric_features),
+    (<span class="st">"cat"</span>, OneHotEncoder(handle_unknown=<span class="st">"ignore"</span>), categorical_features)
+])
+
+<span class="cm"># Full pipeline: preprocess + model</span>
+full_pipe = Pipeline([
+    (<span class="st">"preprocessor"</span>, preprocessor),
+    (<span class="st">"classifier"</span>, RandomForestClassifier(n_estimators=<span class="nm">50</span>, random_state=<span class="nm">42</span>))
+])
+
+full_pipe.fit(df, y)
+<span class="bi">print</span>(<span class="st">f"Training score: {full_pipe.score(df, y):.4f}"</span>)
+<span class="bi">print</span>(<span class="st">f"Prediction: {full_pipe.predict(df[:2])}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Training score: 1.0000<br>Prediction: [0 1]</div></div></section>
+
+<section class="content-section" id="s3"><h2>3 &middot; Complete Pipeline with GridSearchCV</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> GridSearchCV
+
+<span class="cm"># Pipeline + GridSearch</span>
+pipe = make_pipeline(StandardScaler(), SVC())
+
+<span class="cm"># Use step__param naming convention</span>
+param_grid = {
+    <span class="st">"svc__C"</span>: [<span class="nm">0.1</span>, <span class="nm">1</span>, <span class="nm">10</span>],
+    <span class="st">"svc__kernel"</span>: [<span class="st">"linear"</span>, <span class="st">"rbf"</span>],
+    <span class="st">"svc__gamma"</span>: [<span class="st">"scale"</span>, <span class="st">"auto"</span>]
+}
+
+grid = GridSearchCV(pipe, param_grid, cv=<span class="nm">5</span>, scoring=<span class="st">"accuracy"</span>)
+grid.fit(X_train, y_train)
+
+<span class="bi">print</span>(<span class="st">f"Best params: {grid.best_params_}"</span>)
+<span class="bi">print</span>(<span class="st">f"Best score: {grid.best_score_:.4f}"</span>)
+<span class="bi">print</span>(<span class="st">f"Test: {grid.score(X_test, y_test):.4f}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Best params: {'svc__C': 1, 'svc__kernel': 'rbf', 'svc__gamma': 'scale'}<br>Best score: 0.9750</div></div>
+<div class="callout warning"><div class="callout-icon">&#x26A0;&#xFE0F;</div><div class="callout-content"><strong>Why use Pipelines?</strong>
+<ul><li>Prevents <strong>data leakage</strong> (scaler only sees training data)</li>
+<li><strong>Reproducible</strong>: single object to save/load</li>
+<li>Works with <strong>cross_val_score</strong> and <strong>GridSearchCV</strong></li></ul></div></div></section>
+</div>
+<div class="page-nav">
+<a href="clustering.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Clustering</span></a>
+<a href="feature-selection.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Feature Selection</span></a>
+</div>
+<footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
+</main>
+<script src="../../js/main.js"></script>
+</body></html>

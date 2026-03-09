@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operators - Python Learning Hub</title>
+    <meta name="description"
+        content="Python operators — arithmetic, comparison, logical, bitwise, assignment, identity and membership operators with deep examples.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../../index.html" class="logo">
+                <div class="logo-icon">🐍</div>
+                <div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete
+                        Reference</span></div>
+            </a>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+        <div class="search-box"><input type="text" id="searchInput" placeholder="🔍 Search topics..."
+                class="search-input"></div>
+        <div class="nav-items" id="navItems">
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐍 Python Fundamentals</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="introduction.html" class="nav-item">Introduction to Python</a>
+                    <a href="variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+                    <a href="operators.html" class="nav-item active">Operators</a>
+                    <a href="control-flow.html" class="nav-item">Control Flow</a>
+                    <a href="loops.html" class="nav-item">Loops</a>
+                    <a href="functions.html" class="nav-item">Functions</a>
+                    <a href="strings.html" class="nav-item">Strings</a>
+                    <a href="lists.html" class="nav-item">Lists</a>
+                    <a href="tuples.html" class="nav-item">Tuples</a>
+                    <a href="dictionaries.html" class="nav-item">Dictionaries</a>
+                    <a href="sets.html" class="nav-item">Sets</a>
+                    <a href="file-io.html" class="nav-item">File I/O</a>
+                    <a href="exceptions.html" class="nav-item">Exception Handling</a>
+                    <a href="modules.html" class="nav-item">Modules &amp; Packages</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🏗️ OOP</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+                    <a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+                    <a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+                    <a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+                    <a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+                    <a href="../oop/decorators.html" class="nav-item">Decorators</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>⚡ Advanced Python</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+                    <a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+                    <a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+                    <a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+                    <a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🔢 NumPy</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+                    <a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+                    <a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+                    <a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+                    <a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+                    <a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+                    <a href="../numpy/random.html" class="nav-item">Random Module</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐼 Pandas</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+                    <a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+                    <a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+                    <a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+                    <a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+                    <a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+                    <a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🤖 Machine Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+                    <a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+                    <a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+                    <a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+                    <a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+                    <a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+                    <a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+                    <a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+                    <a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🧠 Deep Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+                    <a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+                    <a href="../dl/cnn.html" class="nav-item">CNN</a>
+                    <a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+                    <a href="../dl/transformers.html" class="nav-item">Transformers</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>📊 Data Analysis</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+                    <a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+                    <a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+                    <a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+                    <a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content" id="mainContent">
+        <header class="topbar">
+            <button class="mobile-toggle" id="mobileToggle">☰</button>
+            <div class="topbar-breadcrumb">
+                <a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> → Python
+                Fundamentals → Operators
+            </div>
+            <div class="topbar-progress">
+                <span class="progress-text">Reading</span>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill" id="progressFill"></div>
+                </div>
+                <span id="progressPercent">0%</span>
+            </div>
+        </header>
+
+        <div class="page-content">
+            <div class="page-header">
+                <span class="topic-badge">🐍 Python Fundamentals</span>
+                <h1>Operators</h1>
+                <p class="page-intro">Operators are symbols that perform operations on values and variables. Python
+                    provides arithmetic, comparison, logical, assignment, bitwise, identity, and membership operators —
+                    each with defined precedence rules.</p>
+                <div style="display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap;">
+                    <span class="difficulty-badge beginner">● Beginner</span>
+                    <span style="font-size:0.8rem;color:var(--text-muted);align-self:center;">📖 Based on: <em>Python
+                            Programming (2024), Learning Python — Mark Lutz</em></span>
+                </div>
+            </div>
+
+            <div class="toc-box">
+                <h4>📋 Table of Contents</h4>
+                <ol>
+                    <li><a href="#arithmetic">Arithmetic Operators</a></li>
+                    <li><a href="#comparison">Comparison Operators</a></li>
+                    <li><a href="#logical">Logical Operators</a></li>
+                    <li><a href="#assignment">Assignment Operators</a></li>
+                    <li><a href="#bitwise">Bitwise Operators</a></li>
+                    <li><a href="#identity">Identity &amp; Membership Operators</a></li>
+                    <li><a href="#precedence">Operator Precedence</a></li>
+                </ol>
+            </div>
+
+            <section class="content-section" id="arithmetic">
+                <h2>1 · Arithmetic Operators</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Name</th>
+                            <th>Example</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>+</code></td>
+                            <td>Addition</td>
+                            <td><code>5 + 3</code></td>
+                            <td><code>8</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>-</code></td>
+                            <td>Subtraction</td>
+                            <td><code>5 - 3</code></td>
+                            <td><code>2</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>*</code></td>
+                            <td>Multiplication</td>
+                            <td><code>5 * 3</code></td>
+                            <td><code>15</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/</code></td>
+                            <td>True Division</td>
+                            <td><code>7 / 2</code></td>
+                            <td><code>3.5</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>//</code></td>
+                            <td>Floor Division</td>
+                            <td><code>7 // 2</code></td>
+                            <td><code>3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>%</code></td>
+                            <td>Modulus</td>
+                            <td><code>7 % 2</code></td>
+                            <td><code>1</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>**</code></td>
+                            <td>Exponentiation</td>
+                            <td><code>2 ** 8</code></td>
+                            <td><code>256</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang-badge">Python · arithmetic.py</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block">a, b = 17, 5
+print(a + b)    # 22
+print(a - b)    # 12
+print(a * b)    # 85
+print(a / b)    # 3.4  — always float in Python 3
+print(a // b)   # 3    — floor division
+print(a % b)    # 2    — remainder
+print(a ** b)   # 1419857
+
+# Floor division with negatives rounds toward -infinity
+print(-7 // 2)  # -4  (not -3)
+print(7 // -2)  # -4  (not -3)</pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>22 · 12 · 85 · 3.4 · 3 · 2 · 1419857 · -4 · -4
+                    </div>
+                </div>
+                <div class="return-value-box">
+                    <div class="rv-label">🔁 Key: / vs //</div>
+                    <p style="font-size:0.9rem;color:var(--purple);margin-top:0.5rem;"><code>/</code> always returns
+                        <code>float</code> (e.g., <code>4/2 == 2.0</code>). Use <code>//</code> for integer floor
+                        division. Breaking change from Python 2.</p>
+                </div>
+            </section>
+
+            <section class="content-section" id="comparison">
+                <h2>2 · Comparison Operators</h2>
+                <p>Always return <code>bool</code>. Python uniquely supports <strong>chained comparisons</strong>.</p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Meaning</th>
+                            <th>Example</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>==</code></td>
+                            <td>Equal</td>
+                            <td><code>5 == 5</code></td>
+                            <td><code>True</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>!=</code></td>
+                            <td>Not equal</td>
+                            <td><code>5 != 3</code></td>
+                            <td><code>True</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&gt;</code></td>
+                            <td>Greater than</td>
+                            <td><code>5 &gt; 3</code></td>
+                            <td><code>True</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;</code></td>
+                            <td>Less than</td>
+                            <td><code>3 &lt; 5</code></td>
+                            <td><code>True</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&gt;=</code></td>
+                            <td>Greater or equal</td>
+                            <td><code>5 &gt;= 5</code></td>
+                            <td><code>True</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;=</code></td>
+                            <td>Less or equal</td>
+                            <td><code>3 &lt;= 4</code></td>
+                            <td><code>True</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang-badge">Python · comparison.py</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block">x = 10
+print(x == 10)          # True
+print(x != 5)           # True
+
+# Chained comparisons — unique to Python!
+age = 25
+print(18 <= age < 65)   # True  (checks both conditions)
+print(1 < 2 < 3 < 4)   # True
+
+# String comparison is lexicographic (by ASCII value)
+print("apple" &lt; "banana")  # True ('a' &lt; 'b')</pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>True · True · True · True · True
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="logical">
+                <h2>3 · Logical Operators</h2>
+                <p>Logical operators use <strong>short-circuit evaluation</strong> and return the actual value (not just
+                    True/False).</p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Description</th>
+                            <th>Short-circuits at</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>and</code></td>
+                            <td>True if both operands are truthy</td>
+                            <td>First falsy value</td>
+                        </tr>
+                        <tr>
+                            <td><code>or</code></td>
+                            <td>True if any operand is truthy</td>
+                            <td>First truthy value</td>
+                        </tr>
+                        <tr>
+                            <td><code>not</code></td>
+                            <td>Reverses truthiness</td>
+                            <td>Always evaluates</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang-badge">Python · logical.py</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block">print(True and False)   # False
+print(True or False)    # True
+print(not True)         # False
+
+# or returns first truthy value (not just bool)
+print(0 or "hello")     # 'hello'
+print("hi" or "bye")    # 'hi'
+print(None or 42)       # 42
+
+# Common pattern: default value
+name = None
+display = name or "Anonymous"
+print(display)          # Anonymous
+
+# and returns first falsy, or last if all truthy
+print(1 and 2 and 3)   # 3  (all truthy, returns last)
+print(1 and 0 and 3)   # 0  (0 is falsy)</pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>False · True · False · hello · hi · 42 · Anonymous · 3 ·
+                        0
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="assignment">
+                <h2>4 · Assignment Operators</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Equivalent</th>
+                            <th>Example (x=10)</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>=</code></td>
+                            <td>Assign</td>
+                            <td><code>x = 5</code></td>
+                            <td><code>x → 5</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>+=</code></td>
+                            <td><code>x = x + n</code></td>
+                            <td><code>x += 3</code></td>
+                            <td><code>x → 13</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>-=</code></td>
+                            <td><code>x = x - n</code></td>
+                            <td><code>x -= 3</code></td>
+                            <td><code>x → 7</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>*=</code></td>
+                            <td><code>x = x * n</code></td>
+                            <td><code>x *= 2</code></td>
+                            <td><code>x → 20</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/=</code></td>
+                            <td><code>x = x / n</code></td>
+                            <td><code>x /= 4</code></td>
+                            <td><code>x → 2.5</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>//=</code></td>
+                            <td><code>x = x // n</code></td>
+                            <td><code>x //= 3</code></td>
+                            <td><code>x → 3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>%=</code></td>
+                            <td><code>x = x % n</code></td>
+                            <td><code>x %= 3</code></td>
+                            <td><code>x → 1</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>**=</code></td>
+                            <td><code>x = x ** n</code></td>
+                            <td><code>x **= 2</code></td>
+                            <td><code>x → 100</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>:=</code></td>
+                            <td>Walrus (assign+use)</td>
+                            <td><code>if (n := len(a)) &gt; 5</code></td>
+                            <td>Python 3.8+</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang-badge">Python · walrus.py</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"># Walrus operator (:=) — assign and use in same expression
+data = [1, 2, 3, 4, 5]
+if (n := len(data)) > 3:
+    print(f"List has {n} items — processing...")
+# Output: List has 5 items — processing...
+
+# Useful in while loops
+import io
+stream = io.StringIO("hello world")
+while chunk := stream.read(5):
+    print(repr(chunk))</pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>List has 5 items — processing...<br>'hello'<br>'
+                        worl'<br>'d'
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="bitwise">
+                <h2>5 · Bitwise Operators</h2>
+                <p>Work on integers at the binary bit level. Common in flags, masks, and performance-critical code.</p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Name</th>
+                            <th>a=0b1010, b=0b1100</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&amp;</code></td>
+                            <td>AND</td>
+                            <td><code>a &amp; b</code></td>
+                            <td><code>0b1000 = 8</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>|</code></td>
+                            <td>OR</td>
+                            <td><code>a | b</code></td>
+                            <td><code>0b1110 = 14</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>^</code></td>
+                            <td>XOR</td>
+                            <td><code>a ^ b</code></td>
+                            <td><code>0b0110 = 6</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>~</code></td>
+                            <td>NOT</td>
+                            <td><code>~a</code></td>
+                            <td><code>-11</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;&lt;</code></td>
+                            <td>Left shift</td>
+                            <td><code>a &lt;&lt; 1</code></td>
+                            <td><code>20</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&gt;&gt;</code></td>
+                            <td>Right shift</td>
+                            <td><code>a &gt;&gt; 1</code></td>
+                            <td><code>5</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang-badge">Python · bitwise.py</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block">a = 0b1010   # 10
+b = 0b1100   # 12
+
+print(bin(a & b))   # 0b1000 (8)
+print(bin(a | b))   # 0b1110 (14)
+print(bin(a ^ b))   # 0b110  (6)
+print(~a)           # -11  (two's complement: -(n+1))
+
+# Shifts = fast multiply/divide by 2
+print(8 << 1)   # 16  (8 * 2)
+print(8 >> 1)   # 4   (8 / 2)
+print(1 << 3)   # 8   (1 * 2^3 = 8)</pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>0b1000 · 0b1110 · 0b110 · -11 · 16 · 4 · 8
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="identity">
+                <h2>6 · Identity &amp; Membership Operators</h2>
+                <h3><code>is</code> / <code>is not</code> — Identity</h3>
+                <p>Tests if two variables point to the <strong>same object in memory</strong>, not equal value.</p>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang-badge">Python · identity_membership.py</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block">a = [1, 2, 3]
+b = a           # same object
+c = [1, 2, 3]   # same value, different object
+
+print(a == c)   # True  — equal value
+print(a is c)   # False — different objects
+print(a is b)   # True  — same object
+
+# Always use 'is' for None checks
+x = None
+print(x is None)   # True ✓ (preferred over == None)
+
+# Membership: 'in' and 'not in'
+fruits = ["apple", "banana", "cherry"]
+print("apple" in fruits)        # True
+print("grape" not in fruits)    # True
+
+# Works on strings, dicts (checks keys), sets
+print("py" in "python")                  # True
+print("name" in {"name": "Alice"})        # True</pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>True · False · True · True · True · True · True · True
+                    </div>
+                </div>
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content">
+                        <strong>== vs is</strong>
+                        <p>Never use <code>is</code> to compare integers or strings for equality — only for
+                            <code>None</code>, <code>True</code>, <code>False</code>. CPython caches small ints (-5 to
+                            256) which can give misleading results with <code>is</code>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="precedence">
+                <h2>7 · Operator Precedence (High → Low)</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Priority</th>
+                            <th>Operators</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1 (highest)</td>
+                            <td><code>()</code></td>
+                            <td>Parentheses</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><code>**</code></td>
+                            <td>Exponentiation (right-assoc)</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><code>+x, -x, ~x</code></td>
+                            <td>Unary operators</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><code>*, /, //, %</code></td>
+                            <td>Multiplication/division</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><code>+, -</code></td>
+                            <td>Addition/subtraction</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><code>&lt;&lt;, &gt;&gt;</code></td>
+                            <td>Bit shifts</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td><code>&amp;</code></td>
+                            <td>Bitwise AND</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td><code>^</code></td>
+                            <td>Bitwise XOR</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td><code>|</code></td>
+                            <td>Bitwise OR</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td><code>==, !=, &lt;, &gt;, is, in ...</code></td>
+                            <td>Comparisons</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td><code>not</code></td>
+                            <td>Logical NOT</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td><code>and</code></td>
+                            <td>Logical AND</td>
+                        </tr>
+                        <tr>
+                            <td>13 (lowest)</td>
+                            <td><code>or</code></td>
+                            <td>Logical OR</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang-badge">Python · precedence.py</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block">print(2 + 3 * 4)       # 14  (* before +)
+print((2 + 3) * 4)     # 20  (parens override)
+print(2 ** 3 ** 2)     # 512  (right-assoc: 2**(3**2)=2**9)
+print(not False and True or False)  # True
+# Evaluates: (not False) and True or False
+#          = True and True or False
+#          = True or False → True</pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>14 · 20 · 512 · True
+                    </div>
+                </div>
+                <div class="callout tip">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <strong>Best Practice</strong>
+                        <p>Use parentheses to make precedence explicit in complex expressions. Don't rely on memorising
+                            the full precedence table — readability matters more.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="page-nav">
+            <a href="variables-datatypes.html">
+                <span class="nav-direction">← Previous</span>
+                <span class="nav-topic">Variables &amp; Data Types</span>
+            </a>
+            <a href="control-flow.html" class="next">
+                <span class="nav-direction">Next →</span>
+                <span class="nav-topic">Control Flow</span>
+            </a>
+        </div>
+        <footer class="footer">
+            <p>🐍 Python Learning Hub — Built from leading textbooks for deep understanding</p>
+        </footer>
+    </main>
+    <script src="../../js/main.js"></script>
+</body>
+
+</html>

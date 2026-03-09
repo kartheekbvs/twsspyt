@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Handling - Python Learning Hub</title>
+<meta name="description" content="File Handling - comprehensive textbook reference with code examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../../index.html" class="logo"><div class="logo-icon">&#x1F40D;</div><div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete Reference</span></div></a><button class="sidebar-toggle" id="sidebarToggle">&#x2630;</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="&#x1F50D; Search topics..." class="search-input"></div>
+<div class="nav-items" id="navItems">
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+</div></div></div>
+</nav>
+<main class="main-content" id="mainContent">
+<header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; NumPy &rarr; File Handling</div>
+<div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
+</header>
+<div class="page-content">
+<div class="page-header">
+<span class="topic-badge">&#x1F522; NumPy</span>
+<h1>File Handling</h1>
+<p class="page-intro">NumPy provides functions to save and load arrays from disk: np.save/load for binary .npy files, np.savez for compressed archives, np.savetxt/loadtxt for text CSV files, and np.genfromtxt for handling messy data with missing values.</p>
+<div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+<span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>NumPy User Guide</em></span>
+</div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
+<li><a href="#s1">Binary Files: save &amp; load</a></li>
+<li><a href="#s2">Compressed Archives: savez</a></li>
+<li><a href="#s3">Text Files: savetxt &amp; loadtxt</a></li>
+<li><a href="#s4">genfromtxt (Missing Data)</a></li>
+</ol></div>
+
+<section class="content-section" id="s1"><h2>1 &middot; Binary Files: np.save() &amp; np.load()</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+arr = np.array([[<span class="nm">1</span>,<span class="nm">2</span>,<span class="nm">3</span>],[<span class="nm">4</span>,<span class="nm">5</span>,<span class="nm">6</span>]])
+
+<span class="cm"># np.save() &mdash; save single array as .npy (binary)</span>
+np.save(<span class="st">"my_array.npy"</span>, arr)
+
+<span class="cm"># np.load() &mdash; load .npy file</span>
+loaded = np.load(<span class="st">"my_array.npy"</span>)
+<span class="bi">print</span>(loaded)
+<span class="bi">print</span>(np.array_equal(arr, loaded))  <span class="cm"># True</span>
+
+<span class="cm"># .npy format preserves dtype, shape, and order exactly</span>
+<span class="bi">print</span>(<span class="st">f"dtype: {loaded.dtype}, shape: {loaded.shape}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[[1 2 3] [4 5 6]]<br>True<br>dtype: int64, shape: (2, 3)</div></div></section>
+
+<section class="content-section" id="s2"><h2>2 &middot; Compressed Archives: np.savez()</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Save multiple arrays in one .npz file</span>
+a = np.array([<span class="nm">1</span>,<span class="nm">2</span>,<span class="nm">3</span>])
+b = np.array([[<span class="nm">4</span>,<span class="nm">5</span>],[<span class="nm">6</span>,<span class="nm">7</span>]])
+
+np.savez(<span class="st">"arrays.npz"</span>, x=a, y=b)
+
+<span class="cm"># Load .npz file</span>
+data = np.load(<span class="st">"arrays.npz"</span>)
+<span class="bi">print</span>(data.files)     <span class="cm"># ['x', 'y']</span>
+<span class="bi">print</span>(data[<span class="st">'x'</span>])      <span class="cm"># [1 2 3]</span>
+<span class="bi">print</span>(data[<span class="st">'y'</span>])      <span class="cm"># [[4 5] [6 7]]</span>
+
+<span class="cm"># Compressed version (smaller file size)</span>
+np.savez_compressed(<span class="st">"compressed.npz"</span>, x=a, y=b)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>files: ['x', 'y']<br>x: [1 2 3]<br>y: [[4 5] [6 7]]</div></div></section>
+
+<section class="content-section" id="s3"><h2>3 &middot; Text Files: savetxt &amp; loadtxt</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">data = np.array([[<span class="nm">1.5</span>, <span class="nm">2.3</span>, <span class="nm">3.7</span>],
+                 [<span class="nm">4.1</span>, <span class="nm">5.9</span>, <span class="nm">6.2</span>]])
+
+<span class="cm"># np.savetxt() &mdash; save as human-readable text</span>
+np.savetxt(<span class="st">"data.csv"</span>, data, delimiter=<span class="st">","</span>,
+           header=<span class="st">"col1,col2,col3"</span>, fmt=<span class="st">"%.2f"</span>,
+           comments=<span class="st">""</span>)
+
+<span class="cm"># np.loadtxt() &mdash; load text file</span>
+loaded = np.loadtxt(<span class="st">"data.csv"</span>, delimiter=<span class="st">","</span>, skiprows=<span class="nm">1</span>)
+<span class="bi">print</span>(loaded)
+
+<span class="cm"># Options for loadtxt</span>
+<span class="cm"># skiprows=N    &mdash; skip N header rows</span>
+<span class="cm"># usecols=(0,2) &mdash; load only columns 0 and 2</span>
+<span class="cm"># dtype=float   &mdash; specify output dtype</span>
+<span class="cm"># unpack=True   &mdash; transpose (cols become separate vars)</span>
+col1, col2, col3 = np.loadtxt(<span class="st">"data.csv"</span>, delimiter=<span class="st">","</span>,
+                               skiprows=<span class="nm">1</span>, unpack=<span class="kw">True</span>)
+<span class="bi">print</span>(<span class="st">f"Column 1: {col1}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[[1.5 2.3 3.7]<br> [4.1 5.9 6.2]]<br>Column 1: [1.5 4.1]</div></div></section>
+
+<section class="content-section" id="s4"><h2>4 &middot; genfromtxt (Missing Data Handling)</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># np.genfromtxt() &mdash; handles missing values gracefully</span>
+<span class="cm"># Suppose data.csv has missing entries:</span>
+<span class="cm"># 1.0,2.0,3.0</span>
+<span class="cm"># 4.0,,6.0</span>
+<span class="cm"># 7.0,8.0,</span>
+
+<span class="kw">from</span> io <span class="kw">import</span> StringIO
+csv_data = <span class="st">"""1.0,2.0,3.0
+4.0,,6.0
+7.0,8.0,"""</span>
+
+data = np.genfromtxt(StringIO(csv_data), delimiter=<span class="st">","</span>,
+                     filling_values=<span class="nm">0</span>)
+<span class="bi">print</span>(data)
+<span class="cm"># [[1. 2. 3.]</span>
+<span class="cm">#  [4. 0. 6.]   &mdash; missing filled with 0</span>
+<span class="cm">#  [7. 8. 0.]]</span>
+
+<span class="cm"># With NaN for missing (default)</span>
+data_nan = np.genfromtxt(StringIO(csv_data), delimiter=<span class="st">","</span>)
+<span class="bi">print</span>(data_nan)
+<span class="cm"># [[1. 2. 3.]</span>
+<span class="cm">#  [4. nan 6.]</span>
+<span class="cm">#  [7. 8. nan]]</span>
+
+<span class="cm"># Key parameters:</span>
+<span class="cm"># missing_values=''   &mdash; what counts as missing</span>
+<span class="cm"># filling_values=0    &mdash; what to substitute</span>
+<span class="cm"># dtype=None          &mdash; auto-detect types</span>
+<span class="cm"># names=True          &mdash; use first row as column names</span>
+<span class="cm"># skip_header=1       &mdash; skip header rows</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[[1. 2. 3.]<br> [4. 0. 6.]<br> [7. 8. 0.]]</div></div>
+<div class="callout tip"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>When to use which?</strong>
+<ul><li><code>np.save/load</code>: Fastest. Use for NumPy-only workflows.</li>
+<li><code>np.savez</code>: Multiple arrays in one file.</li>
+<li><code>np.savetxt/loadtxt</code>: Human-readable CSV. Clean data only.</li>
+<li><code>np.genfromtxt</code>: Messy data with missing values.</li>
+<li><code>pd.read_csv</code>: Use Pandas for anything more complex.</li></ul></div></div></section>
+</div>
+<div class="page-nav">
+<a href="random.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Random Module</span></a>
+<a href="../pandas/series-dataframe.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Pandas</span></a>
+</div>
+<footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
+</main>
+<script src="../../js/main.js"></script>
+</body></html>

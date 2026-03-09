@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K-Nearest Neighbors - Python Learning Hub</title>
+<meta name="description" content="K-Nearest Neighbors - comprehensive textbook reference with code examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../../index.html" class="logo"><div class="logo-icon">&#x1F40D;</div><div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete Reference</span></div></a><button class="sidebar-toggle" id="sidebarToggle">&#x2630;</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="&#x1F50D; Search topics..." class="search-input"></div>
+<div class="nav-items" id="navItems">
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+</div></div></div>
+</nav>
+<main class="main-content" id="mainContent">
+<header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; ML &rarr; KNN</div>
+<div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
+</header>
+<div class="page-content">
+<div class="page-header">
+<span class="topic-badge">&#x1F916; Machine Learning</span>
+<h1>K-Nearest Neighbors</h1>
+<p class="page-intro">K-Nearest Neighbors classifies by majority vote of the K closest data points. Simple yet powerful. Covers KNeighborsClassifier, KNeighborsRegressor, NearestNeighbors, distance metrics, choosing K, and scaling requirements.</p>
+<div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+<span class="difficulty-badge beginner">&#x25CF; Beginner</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On ML &mdash; Aur&eacute;lien G&eacute;ron</em></span>
+</div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
+<li><a href="#s1">KNeighborsClassifier</a></li>
+<li><a href="#s2">KNeighborsRegressor</a></li>
+<li><a href="#s3">Choosing K &amp; Distance Metrics</a></li>
+</ol></div>
+
+<section class="content-section" id="s1"><h2>1 &middot; KNeighborsClassifier</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">from</span> sklearn.neighbors <span class="kw">import</span> KNeighborsClassifier, KNeighborsRegressor, NearestNeighbors
+<span class="kw">from</span> sklearn.datasets <span class="kw">import</span> load_digits
+<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
+<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler
+<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> accuracy_score
+
+X, y = load_digits(return_X_y=<span class="kw">True</span>)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="nm">0.2</span>, stratify=y, random_state=<span class="nm">42</span>)
+
+scaler = StandardScaler()
+X_train_s = scaler.fit_transform(X_train)
+X_test_s = scaler.transform(X_test)
+
+<span class="cm"># Basic KNN</span>
+knn = KNeighborsClassifier(n_neighbors=<span class="nm">5</span>, weights=<span class="st">"uniform"</span>)
+knn.fit(X_train_s, y_train)
+<span class="bi">print</span>(<span class="st">f"KNN(5) uniform: {knn.score(X_test_s, y_test):.4f}"</span>)
+
+<span class="cm"># Weighted by distance</span>
+knn_w = KNeighborsClassifier(n_neighbors=<span class="nm">5</span>, weights=<span class="st">"distance"</span>)
+knn_w.fit(X_train_s, y_train)
+<span class="bi">print</span>(<span class="st">f"KNN(5) distance: {knn_w.score(X_test_s, y_test):.4f}"</span>)
+
+<span class="cm"># Compare different K values</span>
+<span class="kw">for</span> k <span class="kw">in</span> [<span class="nm">1</span>, <span class="nm">3</span>, <span class="nm">5</span>, <span class="nm">7</span>, <span class="nm">11</span>, <span class="nm">21</span>]:
+    knn = KNeighborsClassifier(n_neighbors=k)
+    knn.fit(X_train_s, y_train)
+    <span class="bi">print</span>(<span class="st">f"K={k:2d}: {knn.score(X_test_s, y_test):.4f}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>KNN(5) uniform:  0.9833<br>KNN(5) distance: 0.9861<br>K= 1: 0.9889 &middot; K= 3: 0.9889 &middot; K= 5: 0.9833<br>K= 7: 0.9806 &middot; K=11: 0.9778 &middot; K=21: 0.9722</div></div></section>
+
+<section class="content-section" id="s2"><h2>2 &middot; KNeighborsRegressor</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">from</span> sklearn.datasets <span class="kw">import</span> make_regression
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+
+X, y = make_regression(n_samples=<span class="nm">200</span>, n_features=<span class="nm">3</span>, noise=<span class="nm">10</span>, random_state=<span class="nm">42</span>)
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=<span class="nm">42</span>)
+
+knn_r = KNeighborsRegressor(n_neighbors=<span class="nm">5</span>, weights=<span class="st">"distance"</span>)
+knn_r.fit(X_train, y_train)
+<span class="bi">print</span>(<span class="st">f"KNN Regressor R&sup2;: {knn_r.score(X_test, y_test):.4f}"</span>)
+
+<span class="cm"># NearestNeighbors &mdash; find nearest neighbors only</span>
+nn = NearestNeighbors(n_neighbors=<span class="nm">3</span>)
+nn.fit(X_train)
+distances, indices = nn.kneighbors(X_test[:<span class="nm">1</span>])
+<span class="bi">print</span>(<span class="st">f"Nearest 3 indices: {indices[0]}"</span>)
+<span class="bi">print</span>(<span class="st">f"Distances: {distances[0].round(3)}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>KNN Regressor R&sup2;: 0.8765<br>Nearest 3: indices=[45, 12, 78], distances=[0.312, 0.456, 0.523]</div></div></section>
+
+<section class="content-section" id="s3"><h2>3 &middot; Choosing K &amp; Distance Metrics</h2>
+<table class="data-table"><thead><tr><th>Distance</th><th>Formula</th><th>Use Case</th></tr></thead><tbody>
+<tr><td>Euclidean (L2)</td><td>&radic;(&Sigma;(x&minus;y)&sup2;)</td><td>Default, continuous features</td></tr>
+<tr><td>Manhattan (L1)</td><td>&Sigma;|x&minus;y|</td><td>High dimensions, sparse data</td></tr>
+<tr><td>Minkowski (Lp)</td><td>(&Sigma;|x&minus;y|<sup>p</sup>)<sup>1/p</sup></td><td>Generalized</td></tr>
+</tbody></table>
+<div class="callout tip"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Tips for KNN</strong>
+<ul><li>Always <strong>scale features</strong> (KNN is distance-based)</li>
+<li>Use <strong>odd K</strong> for binary classification (avoids ties)</li>
+<li>Small K = complex boundary (overfitting), Large K = smooth (underfitting)</li>
+<li>Use <code>weights="distance"</code> for better results usually</li></ul></div></div></section>
+</div>
+<div class="page-nav">
+<a href="svm.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">SVM</span></a>
+<a href="clustering.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Clustering</span></a>
+</div>
+<footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
+</main>
+<script src="../../js/main.js"></script>
+</body></html>

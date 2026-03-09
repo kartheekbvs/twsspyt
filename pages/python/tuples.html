@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tuples - Python Learning Hub</title>
+<meta name="description" content="Tuples - comprehensive textbook reference with code examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../../index.html" class="logo"><div class="logo-icon">&#x1F40D;</div><div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete Reference</span></div></a><button class="sidebar-toggle" id="sidebarToggle">&#x2630;</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="&#x1F50D; Search topics..." class="search-input"></div>
+<div class="nav-items" id="navItems">
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+</div></div></div>
+</nav>
+<main class="main-content" id="mainContent">
+<header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; Python Fundamentals &rarr; Tuples</div>
+<div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
+</header>
+<div class="page-content">
+<div class="page-header">
+<span class="topic-badge">&#x1F40D; Python Fundamentals</span>
+<h1>Tuples</h1>
+<p class="page-intro">Tuples are immutable, ordered sequences. Like lists but cannot be modified after creation. They are hashable (usable as dict keys), faster to iterate, and ideal for fixed collections. Python uses them extensively for multiple return values and unpacking.</p>
+<div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+<span class="difficulty-badge beginner">&#x25CF; Beginner</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python Programming (2024), Fluent Python &mdash; Luciano Ramalho</em></span>
+</div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol><li><a href="#s1">Creating Tuples</a></li><li><a href="#s2">Accessing Elements</a></li><li><a href="#s3">Tuple Unpacking</a></li><li><a href="#s4">Methods &amp; Operations</a></li><li><a href="#s5">Named Tuples</a></li><li><a href="#s6">Tuples vs Lists</a></li></ol></div>
+
+<section class="content-section" id="s1"><h2>1 &middot; Creating Tuples</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">t1 = (<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>)
+t2 = <span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>         <span class="cm"># parentheses optional</span>
+t3 = (<span class="nm">42</span>,)                  <span class="cm"># single-item &mdash; COMMA required!</span>
+t4 = ()                     <span class="cm"># empty tuple</span>
+t5 = <span class="bi">tuple</span>([<span class="nm">1</span>,<span class="nm">2</span>,<span class="nm">3</span>])        <span class="cm"># from list</span>
+t6 = <span class="bi">tuple</span>(<span class="st">"hello"</span>)         <span class="cm"># ('h','e','l','l','o')</span>
+
+<span class="bi">print</span>(<span class="bi">type</span>((<span class="nm">42</span>,)))  <span class="cm"># &lt;class 'tuple'&gt;</span>
+<span class="bi">print</span>(<span class="bi">type</span>((<span class="nm">42</span>)))   <span class="cm"># &lt;class 'int'&gt; &mdash; NO comma = not tuple!</span>
+
+<span class="cm"># Tuples can hold mixed types</span>
+person = (<span class="st">"Alice"</span>, <span class="nm">30</span>, <span class="kw">True</span>, [<span class="nm">1</span>,<span class="nm">2</span>])
+<span class="bi">print</span>(person[<span class="nm">0</span>])   <span class="cm"># Alice</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>&lt;class 'tuple'&gt;<br>&lt;class 'int'&gt;<br>Alice</div></div></section>
+
+<section class="content-section" id="s2"><h2>2 &middot; Accessing Elements</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">coords = (<span class="nm">10</span>, <span class="nm">20</span>, <span class="nm">30</span>)
+<span class="bi">print</span>(coords[<span class="nm">0</span>])     <span class="cm"># 10</span>
+<span class="bi">print</span>(coords[-<span class="nm">1</span>])    <span class="cm"># 30</span>
+<span class="bi">print</span>(coords[<span class="nm">1</span>:])    <span class="cm"># (20, 30)</span>
+<span class="bi">print</span>(<span class="bi">len</span>(coords))   <span class="cm"># 3</span>
+<span class="bi">print</span>(<span class="nm">20</span> <span class="kw">in</span> coords)  <span class="cm"># True</span>
+
+<span class="cm"># Immutable &mdash; cannot assign</span>
+<span class="cm"># coords[0] = 99  # TypeError!</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>10 &middot; 30 &middot; (20, 30) &middot; 3 &middot; True</div></div></section>
+
+<section class="content-section" id="s3"><h2>3 &middot; Tuple Unpacking</h2>
+<p>Python's most powerful tuple feature &mdash; assign multiple variables from a tuple in one line. Works with any iterable.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; unpacking.py</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Basic unpacking</span>
+x, y, z = (<span class="nm">10</span>, <span class="nm">20</span>, <span class="nm">30</span>)
+<span class="bi">print</span>(x, y, z)   <span class="cm"># 10 20 30</span>
+
+<span class="cm"># Elegant swap</span>
+a, b = <span class="nm">1</span>, <span class="nm">2</span>
+a, b = b, a
+<span class="bi">print</span>(a, b)      <span class="cm"># 2 1</span>
+
+<span class="cm"># Star unpacking (Python 3+)</span>
+first, *rest = (<span class="nm">1</span>,<span class="nm">2</span>,<span class="nm">3</span>,<span class="nm">4</span>,<span class="nm">5</span>)
+<span class="bi">print</span>(first, rest)    <span class="cm"># 1 [2,3,4,5]</span>
+
+*init, last = (<span class="nm">1</span>,<span class="nm">2</span>,<span class="nm">3</span>,<span class="nm">4</span>,<span class="nm">5</span>)
+<span class="bi">print</span>(init, last)     <span class="cm"># [1,2,3,4] 5</span>
+
+<span class="cm"># Ignore values with _</span>
+name, _, age = (<span class="st">"Alice"</span>, <span class="st">"Engineer"</span>, <span class="nm">30</span>)
+<span class="bi">print</span>(name, age)      <span class="cm"># Alice 30</span>
+
+<span class="cm"># Nested unpacking</span>
+(a, b), c = (<span class="nm">1</span>, <span class="nm">2</span>), <span class="nm">3</span>
+<span class="bi">print</span>(a, b, c)        <span class="cm"># 1 2 3</span>
+
+<span class="cm"># In for loops</span>
+points = [(<span class="nm">1</span>,<span class="nm">2</span>), (<span class="nm">3</span>,<span class="nm">4</span>), (<span class="nm">5</span>,<span class="nm">6</span>)]
+<span class="kw">for</span> x, y <span class="kw">in</span> points:
+    <span class="bi">print</span>(<span class="st">f"({x},{y})"</span>, end=<span class="st">" "</span>)
+<span class="cm"># (1,2) (3,4) (5,6)</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>10 20 30<br>2 1<br>1 [2,3,4,5]<br>[1,2,3,4] 5<br>Alice 30<br>1 2 3<br>(1,2) (3,4) (5,6)</div></div></section>
+
+<section class="content-section" id="s4"><h2>4 &middot; Methods &amp; Operations</h2>
+<table class="data-table"><thead><tr><th>Method/Op</th><th>Description</th><th>Example</th><th>Result</th></tr></thead><tbody>
+<tr><td><code>.count(x)</code></td><td>Count occurrences</td><td><code>(1,1,2).count(1)</code></td><td><code>2</code></td></tr>
+<tr><td><code>.index(x)</code></td><td>First index of x</td><td><code>(1,2,3).index(2)</code></td><td><code>1</code></td></tr>
+<tr><td><code>+</code></td><td>Concatenate</td><td><code>(1,2)+(3,4)</code></td><td><code>(1,2,3,4)</code></td></tr>
+<tr><td><code>*</code></td><td>Repeat</td><td><code>(1,2)*3</code></td><td><code>(1,2,1,2,1,2)</code></td></tr>
+<tr><td><code>sorted()</code></td><td>Returns sorted list</td><td><code>sorted((3,1,2))</code></td><td><code>[1,2,3]</code></td></tr>
+</tbody></table></section>
+
+<section class="content-section" id="s5"><h2>5 &middot; Named Tuples</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">from</span> collections <span class="kw">import</span> namedtuple
+
+Point = namedtuple(<span class="st">"Point"</span>, [<span class="st">"x"</span>, <span class="st">"y"</span>])
+p = Point(<span class="nm">3</span>, <span class="nm">4</span>)
+
+<span class="bi">print</span>(p.x, p.y)     <span class="cm"># 3 4 (access by name)</span>
+<span class="bi">print</span>(p[<span class="nm">0</span>])          <span class="cm"># 3   (still works as tuple)</span>
+<span class="bi">print</span>(p)             <span class="cm"># Point(x=3, y=4)</span>
+<span class="bi">print</span>(p._asdict())   <span class="cm"># {'x': 3, 'y': 4}</span>
+
+Employee = namedtuple(<span class="st">"Employee"</span>, <span class="st">"name dept salary"</span>)
+emp = Employee(<span class="st">"Alice"</span>, <span class="st">"Engineering"</span>, <span class="nm">95000</span>)
+<span class="bi">print</span>(emp.name, emp.salary)  <span class="cm"># Alice 95000</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>3 4<br>3<br>Point(x=3, y=4)<br>{'x': 3, 'y': 4}<br>Alice 95000</div></div></section>
+
+<section class="content-section" id="s6"><h2>6 &middot; Tuples vs Lists</h2>
+<table class="data-table"><thead><tr><th>Feature</th><th>Tuple</th><th>List</th></tr></thead><tbody>
+<tr><td>Mutable</td><td>No &#x274C;</td><td>Yes &#x2705;</td></tr>
+<tr><td>Hashable</td><td>Yes (dict key)</td><td>No</td></tr>
+<tr><td>Speed</td><td>Faster iteration</td><td>Slightly slower</td></tr>
+<tr><td>Memory</td><td>Less memory</td><td>More memory</td></tr>
+<tr><td>Use case</td><td>Fixed data, records</td><td>Growing collections</td></tr>
+<tr><td>Syntax</td><td><code>(1, 2, 3)</code></td><td><code>[1, 2, 3]</code></td></tr>
+</tbody></table>
+<div class="callout note"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Rule of Thumb</strong><p>Use <strong>tuples</strong> for heterogeneous, fixed-size data (DB rows, coordinates, function returns). Use <strong>lists</strong> for homogeneous, variable-size collections.</p></div></div></section>
+</div>
+<div class="page-nav">
+<a href="lists.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Lists</span></a>
+<a href="dictionaries.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Dictionaries</span></a>
+</div>
+<footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
+</main>
+<script src="../../js/main.js"></script>
+</body></html>

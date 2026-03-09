@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Series Analysis - Python Learning Hub</title>
+<meta name="description" content="Time Series Analysis - comprehensive textbook reference with code examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../../index.html" class="logo"><div class="logo-icon">&#x1F40D;</div><div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete Reference</span></div></a><button class="sidebar-toggle" id="sidebarToggle">&#x2630;</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="&#x1F50D; Search topics..." class="search-input"></div>
+<div class="nav-items" id="navItems">
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+</div></div></div>
+</nav>
+<main class="main-content" id="mainContent">
+<header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; Pandas &rarr; Time Series</div>
+<div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
+</header>
+<div class="page-content">
+<div class="page-header">
+<span class="topic-badge">&#x1F43C; Pandas</span>
+<h1>Time Series Analysis</h1>
+<p class="page-intro">Pandas has excellent support for time series data: DatetimeIndex, date_range, resampling, rolling windows, shifting/lagging, period conversion, and timezone handling. Essential for financial data, sensor data, and any temporal analysis.</p>
+<div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+<span class="difficulty-badge advanced">&#x25CF; Advanced</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis &mdash; Wes McKinney</em></span>
+</div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
+<li><a href="#s1">DatetimeIndex &amp; date_range</a></li>
+<li><a href="#s2">Resampling (Downsampling &amp; Upsampling)</a></li>
+<li><a href="#s3">Rolling &amp; Expanding Windows</a></li>
+<li><a href="#s4">Shifting &amp; Lagging</a></li>
+<li><a href="#s5">Timedelta &amp; Period</a></li>
+</ol></div>
+
+<section class="content-section" id="s1"><h2>1 &middot; DatetimeIndex &amp; date_range</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="cm"># pd.to_datetime() &mdash; convert strings to datetime</span>
+dates = pd.to_datetime([<span class="st">"2024-01-01"</span>,<span class="st">"2024-02-15"</span>,<span class="st">"2024-03-30"</span>])
+<span class="bi">print</span>(dates)
+<span class="bi">print</span>(dates.year)      <span class="cm"># [2024, 2024, 2024]</span>
+<span class="bi">print</span>(dates.month)     <span class="cm"># [1, 2, 3]</span>
+<span class="bi">print</span>(dates.day_name()) <span class="cm"># ['Monday', 'Thursday', 'Saturday']</span>
+
+<span class="cm"># pd.date_range() &mdash; generate date sequences</span>
+<span class="bi">print</span>(pd.date_range(<span class="st">"2024-01-01"</span>, periods=<span class="nm">5</span>, freq=<span class="st">"D"</span>))    <span class="cm"># daily</span>
+<span class="bi">print</span>(pd.date_range(<span class="st">"2024-01-01"</span>, periods=<span class="nm">4</span>, freq=<span class="st">"W"</span>))    <span class="cm"># weekly</span>
+<span class="bi">print</span>(pd.date_range(<span class="st">"2024-01-01"</span>, periods=<span class="nm">12</span>, freq=<span class="st">"ME"</span>))  <span class="cm"># month-end</span>
+<span class="bi">print</span>(pd.date_range(<span class="st">"2024-01-01"</span>, periods=<span class="nm">4</span>, freq=<span class="st">"QE"</span>))   <span class="cm"># quarter-end</span>
+<span class="bi">print</span>(pd.date_range(<span class="st">"2024-01-01"</span>, periods=<span class="nm">8</span>, freq=<span class="st">"h"</span>))    <span class="cm"># hourly</span>
+
+<span class="cm"># Create time series</span>
+ts = pd.Series(np.random.randn(<span class="nm">365</span>),
+               index=pd.date_range(<span class="st">"2024-01-01"</span>, periods=<span class="nm">365</span>, freq=<span class="st">"D"</span>))
+<span class="bi">print</span>(ts.head())
+
+<span class="cm"># Slicing by date strings</span>
+<span class="bi">print</span>(ts[<span class="st">"2024-03"</span>])         <span class="cm"># all of March 2024</span>
+<span class="bi">print</span>(ts[<span class="st">"2024-01"</span>:<span class="st">"2024-03"</span>])  <span class="cm"># Jan through March</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>DatetimeIndex(['2024-01-01','2024-01-02',...,'2024-01-05'])<br>ts head: date-indexed random values</div></div></section>
+
+<section class="content-section" id="s2"><h2>2 &middot; Resampling</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Downsampling: daily &rarr; monthly</span>
+monthly = ts.resample(<span class="st">"ME"</span>).mean()
+<span class="bi">print</span>(monthly.head())
+
+<span class="cm"># Different aggregations</span>
+<span class="bi">print</span>(ts.resample(<span class="st">"ME"</span>).sum())     <span class="cm"># monthly total</span>
+<span class="bi">print</span>(ts.resample(<span class="st">"ME"</span>).std())     <span class="cm"># monthly std</span>
+<span class="bi">print</span>(ts.resample(<span class="st">"ME"</span>).first())   <span class="cm"># first value per month</span>
+<span class="bi">print</span>(ts.resample(<span class="st">"ME"</span>).last())    <span class="cm"># last value per month</span>
+
+<span class="cm"># Multiple aggs</span>
+<span class="bi">print</span>(ts.resample(<span class="st">"ME"</span>).agg([<span class="st">"mean"</span>,<span class="st">"min"</span>,<span class="st">"max"</span>]))
+
+<span class="cm"># Upsampling: monthly &rarr; daily (with interpolation)</span>
+daily = monthly.resample(<span class="st">"D"</span>).interpolate(method=<span class="st">"linear"</span>)
+<span class="bi">print</span>(daily.head(<span class="nm">10</span>))
+
+<span class="cm"># OHLC resampling (finance)</span>
+<span class="bi">print</span>(ts.resample(<span class="st">"ME"</span>).ohlc().head())  <span class="cm"># open, high, low, close</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Monthly mean: 2024-01-31: 0.05, 2024-02-29: -0.12, ...</div></div></section>
+
+<section class="content-section" id="s3"><h2>3 &middot; Rolling &amp; Expanding Windows</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Rolling window (moving average)</span>
+<span class="bi">print</span>(ts.rolling(window=<span class="nm">7</span>).mean().head(<span class="nm">10</span>))   <span class="cm"># 7-day MA</span>
+<span class="bi">print</span>(ts.rolling(window=<span class="nm">30</span>).mean().head(<span class="nm">35</span>))  <span class="cm"># 30-day MA</span>
+
+<span class="cm"># Rolling std, min, max</span>
+<span class="bi">print</span>(ts.rolling(<span class="nm">7</span>).std().head(<span class="nm">10</span>))
+<span class="bi">print</span>(ts.rolling(<span class="nm">7</span>).min().head(<span class="nm">10</span>))
+
+<span class="cm"># Minimum periods (allow NaN at start)</span>
+<span class="bi">print</span>(ts.rolling(<span class="nm">7</span>, min_periods=<span class="nm">1</span>).mean().head(<span class="nm">10</span>))
+
+<span class="cm"># Centered window</span>
+<span class="bi">print</span>(ts.rolling(<span class="nm">7</span>, center=<span class="kw">True</span>).mean().head(<span class="nm">10</span>))
+
+<span class="cm"># Expanding window (cumulative from start)</span>
+<span class="bi">print</span>(ts.expanding().mean().head(<span class="nm">10</span>))  <span class="cm"># cumulative mean</span>
+<span class="bi">print</span>(ts.expanding().sum().head(<span class="nm">10</span>))   <span class="cm"># cumulative sum</span>
+
+<span class="cm"># Exponentially weighted moving average</span>
+<span class="bi">print</span>(ts.ewm(span=<span class="nm">7</span>).mean().head(<span class="nm">10</span>))</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[Rolling averages with NaN for first (window-1) values]</div></div></section>
+
+<section class="content-section" id="s4"><h2>4 &middot; Shifting &amp; Lagging</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># shift(n) &mdash; shift values by n periods</span>
+<span class="bi">print</span>(ts.head())
+<span class="bi">print</span>(ts.shift(<span class="nm">1</span>).head())    <span class="cm"># lag by 1 day</span>
+<span class="bi">print</span>(ts.shift(-<span class="nm">1</span>).head())   <span class="cm"># lead by 1 day</span>
+
+<span class="cm"># Percent change</span>
+<span class="bi">print</span>(ts.pct_change().head())  <span class="cm"># day-over-day % change</span>
+
+<span class="cm"># Difference</span>
+<span class="bi">print</span>(ts.diff().head())        <span class="cm"># day-over-day difference</span>
+<span class="bi">print</span>(ts.diff(<span class="nm">7</span>).head(<span class="nm">10</span>))    <span class="cm"># week-over-week diff</span>
+
+<span class="cm"># Common pattern: create lag features for ML</span>
+df_ts = pd.DataFrame({<span class="st">"value"</span>: ts.values[:<span class="nm">10</span>]})
+df_ts[<span class="st">"lag_1"</span>] = df_ts[<span class="st">"value"</span>].shift(<span class="nm">1</span>)
+df_ts[<span class="st">"lag_7"</span>] = df_ts[<span class="st">"value"</span>].shift(<span class="nm">7</span>)
+df_ts[<span class="st">"diff_1"</span>] = df_ts[<span class="st">"value"</span>].diff()
+<span class="bi">print</span>(df_ts)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[DataFrame with value, lag_1, lag_7, diff_1 columns]</div></div></section>
+
+<section class="content-section" id="s5"><h2>5 &middot; Timedelta &amp; Period</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Timedelta &mdash; duration</span>
+td = pd.Timedelta(<span class="st">"5 days 3 hours"</span>)
+<span class="bi">print</span>(td)
+<span class="bi">print</span>(pd.Timestamp(<span class="st">"2024-01-01"</span>) + td)  <span class="cm"># 2024-01-06 03:00:00</span>
+
+<span class="cm"># Timedelta arithmetic</span>
+dates = pd.date_range(<span class="st">"2024-01-01"</span>, periods=<span class="nm">5</span>)
+<span class="bi">print</span>(dates + pd.Timedelta(days=<span class="nm">10</span>))  <span class="cm"># shift all by 10 days</span>
+
+<span class="cm"># Date components</span>
+ts_df = pd.DataFrame({<span class="st">"date"</span>: pd.date_range(<span class="st">"2024-01-01"</span>, periods=<span class="nm">100</span>)})
+ts_df[<span class="st">"year"</span>] = ts_df[<span class="st">"date"</span>].dt.year
+ts_df[<span class="st">"month"</span>] = ts_df[<span class="st">"date"</span>].dt.month
+ts_df[<span class="st">"day"</span>] = ts_df[<span class="st">"date"</span>].dt.day
+ts_df[<span class="st">"weekday"</span>] = ts_df[<span class="st">"date"</span>].dt.day_name()
+ts_df[<span class="st">"quarter"</span>] = ts_df[<span class="st">"date"</span>].dt.quarter
+<span class="bi">print</span>(ts_df.head())
+
+<span class="cm"># Timezone handling</span>
+utc = pd.Timestamp(<span class="st">"2024-01-01"</span>, tz=<span class="st">"UTC"</span>)
+eastern = utc.tz_convert(<span class="st">"US/Eastern"</span>)
+<span class="bi">print</span>(<span class="st">f"UTC: {utc} &rarr; Eastern: {eastern}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Timedelta: 5 days 03:00:00<br>date components: year, month, day, weekday, quarter</div></div></section>
+</div>
+<div class="page-nav">
+<a href="visualization.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Visualization</span></a>
+<a href="../data-analysis/exploratory.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Data Analysis</span></a>
+</div>
+<footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
+</main>
+<script src="../../js/main.js"></script>
+</body></html>

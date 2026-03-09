@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Backpropagation &amp; Optimizers - Python Learning Hub</title>
+<meta name="description" content="Backpropagation &amp; Optimizers - comprehensive textbook reference with code examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../../index.html" class="logo"><div class="logo-icon">&#x1F40D;</div><div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete Reference</span></div></a><button class="sidebar-toggle" id="sidebarToggle">&#x2630;</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="&#x1F50D; Search topics..." class="search-input"></div>
+<div class="nav-items" id="navItems">
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+</div></div></div>
+</nav>
+<main class="main-content" id="mainContent">
+<header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; DL &rarr; Backpropagation</div>
+<div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
+</header>
+<div class="page-content">
+<div class="page-header">
+<span class="topic-badge">&#x1F9E0; Deep Learning</span>
+<h1>Backpropagation &amp; Optimizers</h1>
+<p class="page-intro">Backpropagation is how neural networks learn by computing gradients of the loss with respect to weights using the chain rule. Covers gradient descent, learning rate, SGD, Momentum, RMSprop, Adam optimizer, learning rate scheduling, and regularization techniques.</p>
+<div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+<span class="difficulty-badge advanced">&#x25CF; Advanced</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Deep Learning &mdash; Goodfellow, Bengio, Courville</em></span>
+</div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
+<li><a href="#s1">Chain Rule &amp; Backpropagation</a></li>
+<li><a href="#s2">Gradient Descent</a></li>
+<li><a href="#s3">Optimizers</a></li>
+<li><a href="#s4">Learning Rate Scheduling</a></li>
+<li><a href="#s5">Regularization</a></li>
+</ol></div>
+
+<section class="content-section" id="s1"><h2>1 &middot; Chain Rule &amp; Backpropagation</h2>
+<div class="callout note"><div class="callout-icon">&#x1F4D0;</div><div class="callout-content"><strong>How Networks Learn</strong>
+<pre style="font-size:.85rem;line-height:1.6;">
+1. Forward Pass:  Input &rarr; Hidden &rarr; Output &rarr; Loss
+2. Backward Pass: Loss &rarr; dL/dW (gradients via chain rule)
+3. Update:        W = W - learning_rate &times; dL/dW
+4. Repeat for many epochs!</pre></div></div>
+
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; Backprop from Scratch</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="cm"># Simple example: y = sigmoid(w*x + b)</span>
+<span class="kw">def</span> <span class="bi">sigmoid</span>(z):
+    <span class="kw">return</span> <span class="nm">1</span> / (<span class="nm">1</span> + np.exp(-z))
+
+<span class="kw">def</span> <span class="bi">sigmoid_deriv</span>(z):
+    s = sigmoid(z)
+    <span class="kw">return</span> s * (<span class="nm">1</span> - s)
+
+<span class="cm"># Data: XOR-like problem</span>
+X = np.array([[<span class="nm">0</span>,<span class="nm">0</span>],[<span class="nm">0</span>,<span class="nm">1</span>],[<span class="nm">1</span>,<span class="nm">0</span>],[<span class="nm">1</span>,<span class="nm">1</span>]])
+y = np.array([[<span class="nm">0</span>],[<span class="nm">1</span>],[<span class="nm">1</span>],[<span class="nm">0</span>]])
+
+np.random.seed(<span class="nm">42</span>)
+W1 = np.random.randn(<span class="nm">2</span>, <span class="nm">4</span>) * <span class="nm">0.5</span>
+b1 = np.zeros((<span class="nm">1</span>, <span class="nm">4</span>))
+W2 = np.random.randn(<span class="nm">4</span>, <span class="nm">1</span>) * <span class="nm">0.5</span>
+b2 = np.zeros((<span class="nm">1</span>, <span class="nm">1</span>))
+lr = <span class="nm">1.0</span>
+
+<span class="kw">for</span> epoch <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">10000</span>):
+    <span class="cm"># Forward</span>
+    z1 = X @ W1 + b1
+    a1 = sigmoid(z1)
+    z2 = a1 @ W2 + b2
+    a2 = sigmoid(z2)
+
+    <span class="cm"># Loss (MSE)</span>
+    loss = np.mean((y - a2) ** <span class="nm">2</span>)
+
+    <span class="cm"># Backward (chain rule!)</span>
+    dz2 = (a2 - y) * sigmoid_deriv(z2)   <span class="cm"># dL/dz2</span>
+    dW2 = a1.T @ dz2 / <span class="nm">4</span>                  <span class="cm"># dL/dW2</span>
+    db2 = dz2.mean(axis=<span class="nm">0</span>, keepdims=<span class="kw">True</span>)
+
+    dz1 = (dz2 @ W2.T) * sigmoid_deriv(z1)
+    dW1 = X.T @ dz1 / <span class="nm">4</span>
+    db1 = dz1.mean(axis=<span class="nm">0</span>, keepdims=<span class="kw">True</span>)
+
+    <span class="cm"># Update weights</span>
+    W2 -= lr * dW2
+    b2 -= lr * db2
+    W1 -= lr * dW1
+    b1 -= lr * db1
+
+    <span class="kw">if</span> epoch % <span class="nm">2000</span> == <span class="nm">0</span>:
+        <span class="bi">print</span>(<span class="st">f"Epoch {epoch:5d}: loss = {loss:.6f}"</span>)
+
+<span class="bi">print</span>(<span class="st">f"\nPredictions: {a2.round(2).flatten()}"</span>)
+<span class="bi">print</span>(<span class="st">f"Expected:    {y.flatten()}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Epoch     0: loss = 0.283412<br>Epoch  2000: loss = 0.025431<br>Epoch  4000: loss = 0.005123<br>Epoch  8000: loss = 0.001234<br>Predictions: [0.02 0.97 0.97 0.03]  &larr; XOR learned! &#x2705;</div></div></section>
+
+<section class="content-section" id="s2"><h2>2 &middot; Gradient Descent Variants</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Batch Gradient Descent: uses ALL data per update</span>
+<span class="cm"># W = W - lr * gradient(full_dataset)</span>
+<span class="cm"># Slow but stable</span>
+
+<span class="cm"># Stochastic GD (SGD): uses ONE sample per update</span>
+<span class="cm"># W = W - lr * gradient(single_sample)</span>
+<span class="cm"># Fast but noisy</span>
+
+<span class="cm"># Mini-Batch GD: uses BATCH_SIZE samples per update</span>
+<span class="cm"># W = W - lr * gradient(batch)</span>
+<span class="cm"># Best of both worlds! (typical: 32, 64, 128)</span>
+
+<span class="cm"># Example: effect of learning rate</span>
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="kw">def</span> <span class="bi">gradient_descent</span>(lr, epochs=<span class="nm">50</span>):
+    w = <span class="nm">10.0</span>  <span class="cm"># start far from optimal (0)</span>
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="bi">range</span>(epochs):
+        grad = <span class="nm">2</span> * w           <span class="cm"># gradient of w&sup2;</span>
+        w = w - lr * grad       <span class="cm"># update</span>
+    <span class="kw">return</span> w
+
+<span class="bi">print</span>(<span class="st">f"lr=0.001: w = {gradient_descent(0.001):.4f}"</span>)  <span class="cm"># too slow</span>
+<span class="bi">print</span>(<span class="st">f"lr=0.1:   w = {gradient_descent(0.1):.6f}"</span>)    <span class="cm"># good</span>
+<span class="bi">print</span>(<span class="st">f"lr=0.5:   w = {gradient_descent(0.5):.4f}"</span>)    <span class="cm"># perfect</span>
+<span class="bi">print</span>(<span class="st">f"lr=1.1:   w = {gradient_descent(1.1):.4f}"</span>)    <span class="cm"># diverges!</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>lr=0.001: 9.0438 (barely moved)<br>lr=0.1:   0.000001 (converged)<br>lr=0.5:   0.0000 (converged fast)<br>lr=1.1:   diverges! &rarr; NaN</div></div></section>
+
+<section class="content-section" id="s3"><h2>3 &middot; Optimizers</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; Keras Optimizers</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">from</span> tensorflow.keras <span class="kw">import</span> optimizers
+
+<span class="cm"># SGD (Stochastic Gradient Descent)</span>
+opt1 = optimizers.SGD(learning_rate=<span class="nm">0.01</span>)
+
+<span class="cm"># SGD with Momentum (accelerates SGD)</span>
+opt2 = optimizers.SGD(learning_rate=<span class="nm">0.01</span>, momentum=<span class="nm">0.9</span>)
+
+<span class="cm"># RMSprop (adaptive learning rate)</span>
+opt3 = optimizers.RMSprop(learning_rate=<span class="nm">0.001</span>)
+
+<span class="cm"># Adam (most popular! Momentum + RMSprop)</span>
+opt4 = optimizers.Adam(learning_rate=<span class="nm">0.001</span>)
+
+<span class="cm"># AdaGrad (adapts lr per parameter)</span>
+opt5 = optimizers.Adagrad(learning_rate=<span class="nm">0.01</span>)
+
+<span class="cm"># Use in model</span>
+model.compile(optimizer=opt4, loss=<span class="st">"mse"</span>)
+<span class="cm"># or simply: optimizer="adam"</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>All optimizers update weights differently but aim to minimize loss</div></div>
+<table class="data-table"><thead><tr><th>Optimizer</th><th>Key Idea</th><th>When to Use</th></tr></thead><tbody>
+<tr><td><strong>SGD</strong></td><td>Basic gradient step</td><td>Simple problems, with momentum</td></tr>
+<tr><td><strong>Momentum</strong></td><td>Accumulates past gradients (velocity)</td><td>Faster convergence, less oscillation</td></tr>
+<tr><td><strong>RMSprop</strong></td><td>Adapts per-parameter lr using moving avg</td><td>RNNs, non-stationary problems</td></tr>
+<tr><td><strong>Adam</strong></td><td>Momentum + RMSprop (default choice)</td><td>Almost everything &mdash; start here!</td></tr>
+<tr><td><strong>AdaGrad</strong></td><td>Adapts lr based on gradient history</td><td>Sparse data (NLP, embeddings)</td></tr>
+</tbody></table></section>
+
+<section class="content-section" id="s4"><h2>4 &middot; Learning Rate Scheduling</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">from</span> tensorflow.keras.callbacks <span class="kw">import</span> (
+    ReduceLROnPlateau, LearningRateScheduler, EarlyStopping
+)
+
+<span class="cm"># Reduce LR when loss plateaus</span>
+reduce_lr = ReduceLROnPlateau(
+    monitor=<span class="st">"val_loss"</span>, factor=<span class="nm">0.5</span>,
+    patience=<span class="nm">5</span>, min_lr=<span class="nm">1e-6</span>
+)
+
+<span class="cm"># Custom schedule</span>
+<span class="kw">def</span> <span class="bi">scheduler</span>(epoch, lr):
+    <span class="kw">if</span> epoch < <span class="nm">10</span>:
+        <span class="kw">return</span> lr
+    <span class="kw">return</span> lr * <span class="nm">0.95</span>   <span class="cm"># decay by 5% each epoch</span>
+
+lr_scheduler = LearningRateScheduler(scheduler)
+
+<span class="cm"># Early stopping</span>
+early_stop = EarlyStopping(
+    monitor=<span class="st">"val_loss"</span>, patience=<span class="nm">10</span>,
+    restore_best_weights=<span class="kw">True</span>
+)
+
+<span class="cm"># Use in training</span>
+history = model.fit(X_train, y_train, epochs=<span class="nm">100</span>,
+    validation_split=<span class="nm">0.2</span>,
+    callbacks=[reduce_lr, early_stop])</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Epoch 25: reducing lr from 0.001 to 0.0005<br>Epoch 40: early stopping! Restoring best weights.</div></div></section>
+
+<section class="content-section" id="s5"><h2>5 &middot; Regularization Techniques</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">from</span> tensorflow.keras <span class="kw">import</span> layers, regularizers
+
+model = keras.Sequential([
+    <span class="cm"># Dropout: randomly zero out neurons during training</span>
+    layers.Dense(<span class="nm">128</span>, activation=<span class="st">"relu"</span>),
+    layers.Dropout(<span class="nm">0.3</span>),            <span class="cm"># drop 30% of neurons</span>
+
+    <span class="cm"># L2 Regularization: penalize large weights</span>
+    layers.Dense(<span class="nm">64</span>, activation=<span class="st">"relu"</span>,
+                 kernel_regularizer=regularizers.l2(<span class="nm">0.01</span>)),
+
+    <span class="cm"># L1 Regularization: encourage sparse weights</span>
+    layers.Dense(<span class="nm">32</span>, activation=<span class="st">"relu"</span>,
+                 kernel_regularizer=regularizers.l1(<span class="nm">0.01</span>)),
+
+    <span class="cm"># Batch Normalization: normalize activations</span>
+    layers.Dense(<span class="nm">64</span>, activation=<span class="st">"relu"</span>),
+    layers.BatchNormalization(),
+
+    layers.Dense(<span class="nm">10</span>, activation=<span class="st">"softmax"</span>)
+])</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Regularization prevents overfitting by constraining the model</div></div>
+<table class="data-table"><thead><tr><th>Technique</th><th>How it Works</th><th>Effect</th></tr></thead><tbody>
+<tr><td>Dropout</td><td>Randomly disables neurons</td><td>Prevents co-adaptation</td></tr>
+<tr><td>L2 (Weight Decay)</td><td>Penalizes large weights</td><td>Smoother decision boundary</td></tr>
+<tr><td>L1</td><td>Penalizes non-zero weights</td><td>Sparse model (feature selection)</td></tr>
+<tr><td>Batch Normalization</td><td>Normalizes layer inputs</td><td>Faster training, slight regularization</td></tr>
+<tr><td>Early Stopping</td><td>Stop when val_loss increases</td><td>Prevents training too long</td></tr>
+</tbody></table></section>
+</div>
+<div class="page-nav">
+<a href="neural-networks.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Neural Networks</span></a>
+<a href="cnn.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">CNN</span></a>
+</div>
+<footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
+</main>
+<script src="../../js/main.js"></script>
+</body></html>

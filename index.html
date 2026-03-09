@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Learning Hub - Complete Textbook Reference</title>
+    <meta name="description"
+        content="Complete Python learning resource with textbook-level explanations, code examples, and interactive learning.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <div class="logo-icon">🐍</div>
+                <div class="logo-text">
+                    <span class="logo-title">PyTextbook</span>
+                    <span class="logo-sub">Complete Reference</span>
+                </div>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">☰</button>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Search topics..." class="search-input">
+        </div>
+
+        <div class="nav-items" id="navItems">
+            <!-- Python Fundamentals -->
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span>🐍 Python Fundamentals</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="nav-section-items">
+                    <a href="pages/python/introduction.html" class="nav-item">Introduction to Python</a>
+                    <a href="pages/python/variables-datatypes.html" class="nav-item">Variables & Data Types</a>
+                    <a href="pages/python/operators.html" class="nav-item">Operators</a>
+                    <a href="pages/python/control-flow.html" class="nav-item">Control Flow (if/elif/else)</a>
+                    <a href="pages/python/loops.html" class="nav-item">Loops (for & while)</a>
+                    <a href="pages/python/functions.html" class="nav-item">Functions</a>
+                    <a href="pages/python/strings.html" class="nav-item">Strings</a>
+                    <a href="pages/python/lists.html" class="nav-item">Lists</a>
+                    <a href="pages/python/tuples.html" class="nav-item">Tuples</a>
+                    <a href="pages/python/dictionaries.html" class="nav-item">Dictionaries</a>
+                    <a href="pages/python/sets.html" class="nav-item">Sets</a>
+                    <a href="pages/python/file-io.html" class="nav-item">File I/O</a>
+                    <a href="pages/python/exceptions.html" class="nav-item">Exception Handling</a>
+                    <a href="pages/python/modules.html" class="nav-item">Modules & Packages</a>
+                </div>
+            </div>
+
+            <!-- OOP -->
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span>🏗️ Object-Oriented Programming</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="nav-section-items">
+                    <a href="pages/oop/classes-objects.html" class="nav-item">Classes & Objects</a>
+                    <a href="pages/oop/inheritance.html" class="nav-item">Inheritance</a>
+                    <a href="pages/oop/polymorphism.html" class="nav-item">Polymorphism</a>
+                    <a href="pages/oop/encapsulation.html" class="nav-item">Encapsulation</a>
+                    <a href="pages/oop/magic-methods.html" class="nav-item">Magic Methods (Dunder)</a>
+                    <a href="pages/oop/decorators.html" class="nav-item">Decorators</a>
+                </div>
+            </div>
+
+            <!-- Advanced Python -->
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span>⚡ Advanced Python</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="nav-section-items">
+                    <a href="pages/advanced/generators.html" class="nav-item">Generators & Iterators</a>
+                    <a href="pages/advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+                    <a href="pages/advanced/lambda.html" class="nav-item">Lambda & Functional</a>
+                    <a href="pages/advanced/context-managers.html" class="nav-item">Context Managers</a>
+                    <a href="pages/advanced/async.html" class="nav-item">Async & Await</a>
+                </div>
+            </div>
+
+            <!-- NumPy -->
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span>🔢 NumPy</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="nav-section-items">
+                    <a href="pages/numpy/arrays.html" class="nav-item">Arrays & ndarray</a>
+                    <a href="pages/numpy/operations.html" class="nav-item">Array Operations</a>
+                    <a href="pages/numpy/indexing.html" class="nav-item">Indexing & Slicing</a>
+                    <a href="pages/numpy/reshaping.html" class="nav-item">Reshaping & Stacking</a>
+                    <a href="pages/numpy/math-functions.html" class="nav-item">Math Functions</a>
+                    <a href="pages/numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+                    <a href="pages/numpy/random.html" class="nav-item">Random Module</a>
+                </div>
+            </div>
+
+            <!-- Pandas -->
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span>🐼 Pandas</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="nav-section-items">
+                    <a href="pages/pandas/series-dataframe.html" class="nav-item">Series & DataFrame</a>
+                    <a href="pages/pandas/reading-data.html" class="nav-item">Reading Data (CSV, Excel)</a>
+                    <a href="pages/pandas/selection.html" class="nav-item">Selection & Filtering</a>
+                    <a href="pages/pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+                    <a href="pages/pandas/groupby.html" class="nav-item">GroupBy & Aggregation</a>
+                    <a href="pages/pandas/merging.html" class="nav-item">Merging & Joining</a>
+                    <a href="pages/pandas/visualization.html" class="nav-item">Visualization</a>
+                </div>
+            </div>
+
+            <!-- Machine Learning -->
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span>🤖 Machine Learning</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="nav-section-items">
+                    <a href="pages/ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+                    <a href="pages/ml/linear-regression.html" class="nav-item">Linear Regression</a>
+                    <a href="pages/ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+                    <a href="pages/ml/decision-trees.html" class="nav-item">Decision Trees</a>
+                    <a href="pages/ml/random-forest.html" class="nav-item">Random Forest</a>
+                    <a href="pages/ml/svm.html" class="nav-item">Support Vector Machine</a>
+                    <a href="pages/ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+                    <a href="pages/ml/clustering.html" class="nav-item">K-Means Clustering</a>
+                    <a href="pages/ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+                </div>
+            </div>
+
+            <!-- Deep Learning -->
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span>🧠 Deep Learning</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="nav-section-items">
+                    <a href="pages/dl/neural-networks.html" class="nav-item">Neural Networks</a>
+                    <a href="pages/dl/backpropagation.html" class="nav-item">Backpropagation</a>
+                    <a href="pages/dl/cnn.html" class="nav-item">CNN (Image Recognition)</a>
+                    <a href="pages/dl/rnn-lstm.html" class="nav-item">RNN & LSTM</a>
+                    <a href="pages/dl/transformers.html" class="nav-item">Transformers</a>
+                </div>
+            </div>
+
+            <!-- Data Wrangling -->
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)">
+                    <span>📊 Data Analysis</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="nav-section-items">
+                    <a href="pages/data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+                    <a href="pages/data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+                    <a href="pages/data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+                    <a href="pages/data/matplotlib.html" class="nav-item">Matplotlib Plotting</a>
+                    <a href="pages/data/seaborn.html" class="nav-item">Seaborn Visualization</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">☰</button>
+            <div class="topbar-breadcrumb">Home</div>
+            <div class="topbar-progress">
+                <span class="progress-text">Learning Progress</span>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+                <span id="progressPercent">0%</span>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="home-hero">
+            <div class="hero-badge">📚 Textbook-Level Reference</div>
+            <h1>Python Learning Hub</h1>
+            <p class="hero-subtitle">
+                The complete Python learning resource — from fundamentals to deep learning,
+                with detailed explanations, code examples, return values, and step-by-step breakdowns
+                extracted from leading textbooks.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-num">50+</div>
+                    <div class="stat-label">Topics</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">200+</div>
+                    <div class="stat-label">Code Examples</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">9</div>
+                    <div class="stat-label">Textbooks Covered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">7</div>
+                    <div class="stat-label">Chapters</div>
+                </div>
+            </div>
+            <a href="pages/python/introduction.html" class="hero-cta">Start Learning Python →</a>
+        </section>
+
+        <!-- Chapter Grid -->
+        <section class="chapters-section">
+            <h2 class="section-title">📖 Learning Chapters</h2>
+            <div class="chapter-grid">
+                <a href="pages/python/introduction.html" class="chapter-card">
+                    <div class="chapter-icon">🐍</div>
+                    <div class="chapter-info">
+                        <h3>Python Fundamentals</h3>
+                        <p>Variables, data types, control flow, loops, functions, strings, lists, dicts, file I/O</p>
+                        <div class="chapter-meta">14 Topics · Beginner</div>
+                    </div>
+                </a>
+                <a href="pages/oop/classes-objects.html" class="chapter-card">
+                    <div class="chapter-icon">🏗️</div>
+                    <div class="chapter-info">
+                        <h3>Object-Oriented Programming</h3>
+                        <p>Classes, objects, inheritance, polymorphism, encapsulation, magic methods</p>
+                        <div class="chapter-meta">6 Topics · Intermediate</div>
+                    </div>
+                </a>
+                <a href="pages/advanced/generators.html" class="chapter-card">
+                    <div class="chapter-icon">⚡</div>
+                    <div class="chapter-info">
+                        <h3>Advanced Python</h3>
+                        <p>Generators, comprehensions, lambda, context managers, async/await</p>
+                        <div class="chapter-meta">5 Topics · Advanced</div>
+                    </div>
+                </a>
+                <a href="pages/numpy/arrays.html" class="chapter-card">
+                    <div class="chapter-icon">🔢</div>
+                    <div class="chapter-info">
+                        <h3>NumPy</h3>
+                        <p>Arrays, operations, indexing, reshaping, math functions, linear algebra</p>
+                        <div class="chapter-meta">7 Topics · Intermediate</div>
+                    </div>
+                </a>
+                <a href="pages/pandas/series-dataframe.html" class="chapter-card">
+                    <div class="chapter-icon">🐼</div>
+                    <div class="chapter-info">
+                        <h3>Pandas</h3>
+                        <p>Series, DataFrames, data cleaning, groupby, merging, visualization</p>
+                        <div class="chapter-meta">7 Topics · Intermediate</div>
+                    </div>
+                </a>
+                <a href="pages/ml/intro-ml.html" class="chapter-card">
+                    <div class="chapter-icon">🤖</div>
+                    <div class="chapter-info">
+                        <h3>Machine Learning</h3>
+                        <p>Linear/logistic regression, decision trees, SVM, KNN, clustering, evaluation</p>
+                        <div class="chapter-meta">9 Topics · Advanced</div>
+                    </div>
+                </a>
+                <a href="pages/dl/neural-networks.html" class="chapter-card">
+                    <div class="chapter-icon">🧠</div>
+                    <div class="chapter-info">
+                        <h3>Deep Learning</h3>
+                        <p>Neural networks, backpropagation, CNN, RNN/LSTM, Transformers</p>
+                        <div class="chapter-meta">5 Topics · Expert</div>
+                    </div>
+                </a>
+                <a href="pages/data/exploratory.html" class="chapter-card">
+                    <div class="chapter-icon">📊</div>
+                    <div class="chapter-info">
+                        <h3>Data Analysis</h3>
+                        <p>EDA, preprocessing, feature engineering, Matplotlib, Seaborn</p>
+                        <div class="chapter-meta">5 Topics · Intermediate</div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Books Reference -->
+        <section class="books-section">
+            <h2 class="section-title">📚 Reference Textbooks</h2>
+            <div class="books-grid">
+                <div class="book-card">
+                    <div class="book-spine" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+                    <div class="book-info">
+                        <h4>Python Programming</h4>
+                        <p>Core language reference with practical examples</p>
+                        <span class="book-tag">Fundamentals</span>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-spine" style="background: linear-gradient(135deg, #f093fb, #f5576c);"></div>
+                    <div class="book-info">
+                        <h4>Python for Data Analysis</h4>
+                        <p>Pandas, NumPy and IPython — by Wes McKinney</p>
+                        <span class="book-tag">Data Science</span>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-spine" style="background: linear-gradient(135deg, #4facfe, #00f2fe);"></div>
+                    <div class="book-info">
+                        <h4>NumPy User Guide</h4>
+                        <p>Official NumPy documentation and user manual</p>
+                        <span class="book-tag">NumPy</span>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-spine" style="background: linear-gradient(135deg, #43e97b, #38f9d7);"></div>
+                    <div class="book-info">
+                        <h4>Machine Learning with Python Cookbook</h4>
+                        <p>Practical solutions from preprocessing to deep learning</p>
+                        <span class="book-tag">Machine Learning</span>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-spine" style="background: linear-gradient(135deg, #fa709a, #fee140);"></div>
+                    <div class="book-info">
+                        <h4>Learning scikit-learn</h4>
+                        <p>Machine learning in Python with scikit-learn</p>
+                        <span class="book-tag">Scikit-learn</span>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-spine" style="background: linear-gradient(135deg, #a18cd1, #fbc2eb);"></div>
+                    <div class="book-info">
+                        <h4>Deep Learning — Ian Goodfellow</h4>
+                        <p>The definitive textbook on deep learning theory</p>
+                        <span class="book-tag">Deep Learning</span>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-spine" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);"></div>
+                    <div class="book-info">
+                        <h4>Data Science & Analytics with Python</h4>
+                        <p>Comprehensive data science workflow guide</p>
+                        <span class="book-tag">Data Science</span>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-spine" style="background: linear-gradient(135deg, #96fbc4, #f9f586);"></div>
+                    <div class="book-info">
+                        <h4>ML Engineering eBook</h4>
+                        <p>End-to-end machine learning engineering practices</p>
+                        <span class="book-tag">MLOps</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>🐍 Python Learning Hub — Built from leading textbooks for deep understanding</p>
+        </footer>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

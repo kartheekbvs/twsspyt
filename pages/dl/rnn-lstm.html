@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RNN, LSTM &amp; GRU - Python Learning Hub</title>
+<meta name="description" content="RNN, LSTM &amp; GRU - comprehensive textbook reference with code examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../../index.html" class="logo"><div class="logo-icon">&#x1F40D;</div><div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete Reference</span></div></a><button class="sidebar-toggle" id="sidebarToggle">&#x2630;</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="&#x1F50D; Search topics..." class="search-input"></div>
+<div class="nav-items" id="navItems">
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+</div></div></div>
+</nav>
+<main class="main-content" id="mainContent">
+<header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; DL &rarr; RNN &amp; LSTM</div>
+<div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
+</header>
+<div class="page-content">
+<div class="page-header">
+<span class="topic-badge">&#x1F9E0; Deep Learning</span>
+<h1>RNN, LSTM &amp; GRU</h1>
+<p class="page-intro">Recurrent Neural Networks process sequential data (text, time series). Covers vanilla RNNs, vanishing gradients, LSTM cells, GRU cells, bidirectional RNNs, text generation, and sequence-to-sequence models with Keras implementations.</p>
+<div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+<span class="difficulty-badge advanced">&#x25CF; Advanced</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Deep Learning with Python &mdash; Fran&ccedil;ois Chollet</em></span>
+</div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
+<li><a href="#s1">Sequences &amp; Vanilla RNN</a></li>
+<li><a href="#s2">Vanishing Gradient Problem</a></li>
+<li><a href="#s3">LSTM (Long Short-Term Memory)</a></li>
+<li><a href="#s4">GRU (Gated Recurrent Unit)</a></li>
+<li><a href="#s5">Bidirectional &amp; Stacked RNNs</a></li>
+<li><a href="#s6">Text Classification Example</a></li>
+</ol></div>
+
+<section class="content-section" id="s1"><h2>1 &middot; Sequences &amp; Vanilla RNN</h2>
+<div class="callout note"><div class="callout-icon">&#x1F4D0;</div><div class="callout-content"><strong>RNN: Memory for Sequences</strong>
+<pre style="font-size:.85rem;line-height:1.6;">
+x(t=0)   x(t=1)   x(t=2)   &hellip;   x(t=n)
+  &darr;        &darr;        &darr;              &darr;
+[RNN] &rarr; [RNN] &rarr; [RNN] &rarr; &hellip; &rarr; [RNN] &rarr; output
+  h0       h1       h2              hn
+
+h(t) = tanh(W_h &middot; h(t-1) + W_x &middot; x(t) + b)
+Each step has access to previous hidden state!</pre></div></div>
+
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; Manual RNN Cell</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="cm"># Simple RNN from scratch</span>
+np.random.seed(<span class="nm">42</span>)
+hidden_size = <span class="nm">4</span>
+input_size = <span class="nm">3</span>
+
+W_h = np.random.randn(hidden_size, hidden_size) * <span class="nm">0.1</span>
+W_x = np.random.randn(hidden_size, input_size) * <span class="nm">0.1</span>
+b = np.zeros(hidden_size)
+
+<span class="cm"># Process a sequence of 5 time steps</span>
+sequence = np.random.randn(<span class="nm">5</span>, input_size)
+h = np.zeros(hidden_size)  <span class="cm"># initial hidden state</span>
+
+<span class="kw">for</span> t, x_t <span class="kw">in</span> <span class="bi">enumerate</span>(sequence):
+    h = np.tanh(W_h @ h + W_x @ x_t + b)
+    <span class="bi">print</span>(<span class="st">f"t={t}: h = {h.round(3)}"</span>)
+
+<span class="bi">print</span>(<span class="st">f"\nFinal hidden state: {h.round(3)}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>t=0: h = [ 0.012 -0.078  0.045  0.023]<br>t=1: h = [-0.034  0.056  0.012  0.089]<br>...<br>Final hidden state encodes the entire sequence!</div></div></section>
+
+<section class="content-section" id="s2"><h2>2 &middot; Vanishing Gradient Problem</h2>
+<table class="data-table"><thead><tr><th>Problem</th><th>Cause</th><th>Solution</th></tr></thead><tbody>
+<tr><td>Vanishing Gradient</td><td>Gradients shrink exponentially through time</td><td>LSTM, GRU, gradient clipping</td></tr>
+<tr><td>Exploding Gradient</td><td>Gradients grow exponentially</td><td>Gradient clipping, smaller learning rate</td></tr>
+<tr><td>Short-term Memory</td><td>RNN forgets early inputs</td><td>LSTM&#39;s cell state preserves long-term info</td></tr>
+</tbody></table></section>
+
+<section class="content-section" id="s3"><h2>3 &middot; LSTM (Long Short-Term Memory)</h2>
+<div class="callout note"><div class="callout-icon">&#x1F4D0;</div><div class="callout-content"><strong>LSTM has 3 Gates + Cell State</strong>
+<ul><li><strong>Forget Gate</strong>: What to forget from cell state</li>
+<li><strong>Input Gate</strong>: What new info to store</li>
+<li><strong>Output Gate</strong>: What to output from cell state</li>
+<li><strong>Cell State</strong>: Long-term memory highway (&ldquo;conveyor belt&rdquo;)</li></ul></div></div>
+
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; LSTM in Keras</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">from</span> tensorflow.keras <span class="kw">import</span> layers, models
+
+<span class="cm"># LSTM for sequence classification</span>
+model = models.Sequential([
+    layers.LSTM(<span class="nm">64</span>, input_shape=(<span class="nm">100</span>, <span class="nm">1</span>),   <span class="cm"># 100 time steps, 1 feature</span>
+                return_sequences=<span class="kw">False</span>),       <span class="cm"># only final output</span>
+    layers.Dense(<span class="nm">32</span>, activation=<span class="st">"relu"</span>),
+    layers.Dense(<span class="nm">1</span>, activation=<span class="st">"sigmoid"</span>)
+])
+model.compile(optimizer=<span class="st">"adam"</span>, loss=<span class="st">"binary_crossentropy"</span>)
+model.summary()</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>lstm (LSTM)    (None, 64)    16896 params<br>dense          (None, 32)    2080<br>dense_1        (None, 1)     33</div></div></section>
+
+<section class="content-section" id="s4"><h2>4 &middot; GRU (Gated Recurrent Unit)</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># GRU: simpler than LSTM, 2 gates (reset + update), no cell state</span>
+model = models.Sequential([
+    layers.GRU(<span class="nm">64</span>, input_shape=(<span class="nm">100</span>, <span class="nm">1</span>)),
+    layers.Dense(<span class="nm">1</span>, activation=<span class="st">"sigmoid"</span>)
+])
+<span class="cm"># GRU has ~25% fewer params than LSTM</span>
+<span class="cm"># Performance is often comparable</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>GRU: 12,864 params vs LSTM: 16,896 (25% fewer)</div></div>
+<table class="data-table"><thead><tr><th>Feature</th><th>LSTM</th><th>GRU</th></tr></thead><tbody>
+<tr><td>Gates</td><td>3 (forget, input, output)</td><td>2 (reset, update)</td></tr>
+<tr><td>Memory</td><td>Cell state + hidden state</td><td>Hidden state only</td></tr>
+<tr><td>Parameters</td><td>More</td><td>~25% fewer</td></tr>
+<tr><td>Performance</td><td>Better on long sequences</td><td>Similar, faster training</td></tr>
+</tbody></table></section>
+
+<section class="content-section" id="s5"><h2>5 &middot; Bidirectional &amp; Stacked RNNs</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Bidirectional: reads sequence forward AND backward</span>
+model = models.Sequential([
+    layers.Bidirectional(
+        layers.LSTM(<span class="nm">64</span>, return_sequences=<span class="kw">True</span>),
+        input_shape=(<span class="nm">100</span>, <span class="nm">1</span>)
+    ),
+    layers.Bidirectional(layers.LSTM(<span class="nm">32</span>)),  <span class="cm"># stacked</span>
+    layers.Dense(<span class="nm">1</span>, activation=<span class="st">"sigmoid"</span>)
+])
+<span class="cm"># Bidirectional doubles the output units (64*2=128 per step)</span>
+
+<span class="cm"># Stacked LSTM: use return_sequences=True for all but last</span>
+model = models.Sequential([
+    layers.LSTM(<span class="nm">64</span>, return_sequences=<span class="kw">True</span>, input_shape=(<span class="nm">100</span>,<span class="nm">1</span>)),
+    layers.LSTM(<span class="nm">32</span>, return_sequences=<span class="kw">False</span>),
+    layers.Dense(<span class="nm">1</span>)
+])</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Bidirectional: forward h + backward h = richer representation</div></div></section>
+
+<section class="content-section" id="s6"><h2>6 &middot; Text Classification (IMDB Reviews)</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> tensorflow <span class="kw">as</span> tf
+<span class="kw">from</span> tensorflow.keras <span class="kw">import</span> layers, models
+
+<span class="cm"># Load IMDB dataset</span>
+vocab_size = <span class="nm">10000</span>
+max_len = <span class="nm">200</span>
+(X_train, y_train), (X_test, y_test) = tf.keras.datasets.imdb.load_data(
+    num_words=vocab_size)
+X_train = tf.keras.preprocessing.sequence.pad_sequences(X_train, maxlen=max_len)
+X_test = tf.keras.preprocessing.sequence.pad_sequences(X_test, maxlen=max_len)
+
+<span class="cm"># Build LSTM model</span>
+model = models.Sequential([
+    layers.Embedding(vocab_size, <span class="nm">128</span>, input_length=max_len),
+    layers.Bidirectional(layers.LSTM(<span class="nm">64</span>, dropout=<span class="nm">0.2</span>)),
+    layers.Dense(<span class="nm">32</span>, activation=<span class="st">"relu"</span>),
+    layers.Dropout(<span class="nm">0.5</span>),
+    layers.Dense(<span class="nm">1</span>, activation=<span class="st">"sigmoid"</span>)
+])
+
+model.compile(optimizer=<span class="st">"adam"</span>, loss=<span class="st">"binary_crossentropy"</span>, metrics=[<span class="st">"accuracy"</span>])
+history = model.fit(X_train, y_train, epochs=<span class="nm">5</span>, batch_size=<span class="nm">64</span>, validation_split=<span class="nm">0.2</span>)
+<span class="bi">print</span>(<span class="st">f"Test accuracy: {model.evaluate(X_test, y_test)[1]:.4f}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Epoch 5: accuracy: 0.9234 &middot; val_accuracy: 0.8756<br>Test accuracy: 0.8687</div></div></section>
+</div>
+<div class="page-nav">
+<a href="backpropagation.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Backpropagation</span></a>
+<a href="transformers.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Transformers</span></a>
+</div>
+<footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
+</main>
+<script src="../../js/main.js"></script>
+</body></html>

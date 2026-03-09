@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Module - Python Learning Hub</title>
+<meta name="description" content="Random Module - comprehensive textbook reference with code examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../../index.html" class="logo"><div class="logo-icon">&#x1F40D;</div><div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete Reference</span></div></a><button class="sidebar-toggle" id="sidebarToggle">&#x2630;</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="&#x1F50D; Search topics..." class="search-input"></div>
+<div class="nav-items" id="navItems">
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+</div></div></div>
+</nav>
+<main class="main-content" id="mainContent">
+<header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; NumPy &rarr; Random Module</div>
+<div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
+</header>
+<div class="page-content">
+<div class="page-header">
+<span class="topic-badge">&#x1F522; NumPy</span>
+<h1>Random Module</h1>
+<p class="page-intro">NumPy&#39;s random module generates arrays of random numbers from various distributions. Essential for simulations, data augmentation, train/test splits, initializing neural network weights, and Monte Carlo methods. Covers legacy API, new Generator API, distributions, seeding, shuffling, and sampling.</p>
+<div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+<span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>NumPy User Guide, Python for Data Analysis &mdash; Wes McKinney</em></span>
+</div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
+<li><a href="#s1">New Generator API vs Legacy</a></li>
+<li><a href="#s2">Uniform &amp; Integer Generation</a></li>
+<li><a href="#s3">Distributions</a></li>
+<li><a href="#s4">Seeds &amp; Reproducibility</a></li>
+<li><a href="#s5">Shuffling &amp; Sampling</a></li>
+<li><a href="#s6">Permutations</a></li>
+</ol></div>
+
+<section class="content-section" id="s1"><h2>1 &middot; New Generator API vs Legacy</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="cm"># NEW API (recommended &mdash; NumPy 1.17+)</span>
+rng = np.random.default_rng(seed=<span class="nm">42</span>)
+<span class="bi">print</span>(rng.random(<span class="nm">5</span>))              <span class="cm"># 5 uniform [0,1)</span>
+<span class="bi">print</span>(rng.integers(<span class="nm">0</span>, <span class="nm">100</span>, <span class="nm">5</span>))   <span class="cm"># 5 random ints [0,100)</span>
+<span class="bi">print</span>(rng.standard_normal(<span class="nm">5</span>))     <span class="cm"># 5 standard normal</span>
+
+<span class="cm"># LEGACY API (still widely used in tutorials)</span>
+np.random.seed(<span class="nm">42</span>)
+<span class="bi">print</span>(np.random.rand(<span class="nm">5</span>))          <span class="cm"># 5 uniform [0,1)</span>
+<span class="bi">print</span>(np.random.randn(<span class="nm">5</span>))         <span class="cm"># 5 standard normal</span>
+<span class="bi">print</span>(np.random.randint(<span class="nm">0</span>,<span class="nm">100</span>,<span class="nm">5</span>)) <span class="cm"># 5 random ints [0,100)</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[0.773 0.438 0.859 0.697 0.094]<br>[72 10 35 81 24]</div></div>
+<div class="callout tip"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Best Practice</strong><p>Use the new <code>default_rng()</code> API. It has better statistical properties, is thread-safe, and supports modern seeding. The legacy API is maintained for backward compatibility.</p></div></div></section>
+
+<section class="content-section" id="s2"><h2>2 &middot; Uniform &amp; Integer Generation</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">rng = np.random.default_rng(<span class="nm">42</span>)
+
+<span class="cm"># Uniform [0, 1)</span>
+<span class="bi">print</span>(rng.random((<span class="nm">2</span>,<span class="nm">3</span>)))  <span class="cm"># 2x3 matrix</span>
+
+<span class="cm"># Uniform [low, high)</span>
+<span class="bi">print</span>(rng.uniform(<span class="nm">5</span>, <span class="nm">10</span>, <span class="nm">4</span>))    <span class="cm"># 4 floats in [5,10)</span>
+
+<span class="cm"># Integers [low, high)</span>
+<span class="bi">print</span>(rng.integers(<span class="nm">1</span>, <span class="nm">7</span>, <span class="nm">10</span>))   <span class="cm"># 10 dice rolls</span>
+<span class="bi">print</span>(rng.integers(<span class="nm">0</span>, <span class="nm">2</span>, (<span class="nm">3</span>,<span class="nm">3</span>)))  <span class="cm"># 3x3 binary matrix</span>
+
+<span class="cm"># Legacy equivalents</span>
+np.random.seed(<span class="nm">42</span>)
+<span class="bi">print</span>(np.random.rand(<span class="nm">3</span>,<span class="nm">2</span>))      <span class="cm"># 3x2 uniform</span>
+<span class="bi">print</span>(np.random.randint(<span class="nm">1</span>,<span class="nm">7</span>,<span class="nm">10</span>)) <span class="cm"># 10 dice rolls</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[[0.77 0.44 0.86] [0.70 0.09 0.98]]<br>[7.3 5.9 8.1 6.4]<br>[2 5 1 3 6 4 1 2 5 3]</div></div></section>
+
+<section class="content-section" id="s3"><h2>3 &middot; Distributions</h2>
+<table class="data-table"><thead><tr><th>Distribution</th><th>New API</th><th>Legacy API</th><th>Use Case</th></tr></thead><tbody>
+<tr><td>Normal</td><td><code>rng.normal(mu, sigma, size)</code></td><td><code>np.random.normal()</code></td><td>Data simulation</td></tr>
+<tr><td>Uniform</td><td><code>rng.uniform(lo, hi, size)</code></td><td><code>np.random.uniform()</code></td><td>Random init</td></tr>
+<tr><td>Binomial</td><td><code>rng.binomial(n, p, size)</code></td><td><code>np.random.binomial()</code></td><td>Coin flips</td></tr>
+<tr><td>Poisson</td><td><code>rng.poisson(lam, size)</code></td><td><code>np.random.poisson()</code></td><td>Event count</td></tr>
+<tr><td>Exponential</td><td><code>rng.exponential(scale, size)</code></td><td><code>np.random.exponential()</code></td><td>Wait times</td></tr>
+<tr><td>Multinomial</td><td><code>rng.multinomial(n, pvals)</code></td><td><code>np.random.multinomial()</code></td><td>Multi-class</td></tr>
+<tr><td>Beta</td><td><code>rng.beta(a, b, size)</code></td><td><code>np.random.beta()</code></td><td>Probabilities</td></tr>
+<tr><td>Gamma</td><td><code>rng.gamma(shape, scale, size)</code></td><td><code>np.random.gamma()</code></td><td>Right-skewed data</td></tr>
+</tbody></table>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">rng = np.random.default_rng(<span class="nm">42</span>)
+
+<span class="cm"># Normal distribution</span>
+samples = rng.normal(loc=<span class="nm">0</span>, scale=<span class="nm">1</span>, size=<span class="nm">10000</span>)
+<span class="bi">print</span>(<span class="st">f"Normal: mean={samples.mean():.3f}, std={samples.std():.3f}"</span>)
+
+<span class="cm"># Binomial (10 coin flips, fair coin, 5 experiments)</span>
+flips = rng.binomial(n=<span class="nm">10</span>, p=<span class="nm">0.5</span>, size=<span class="nm">5</span>)
+<span class="bi">print</span>(<span class="st">f"Coin flip heads: {flips}"</span>)  <span class="cm"># e.g., [4 6 5 3 7]</span>
+
+<span class="cm"># Poisson (events per interval)</span>
+events = rng.poisson(lam=<span class="nm">5</span>, size=<span class="nm">10</span>)
+<span class="bi">print</span>(<span class="st">f"Poisson events: {events}"</span>)
+
+<span class="cm"># Exponential (wait between events)</span>
+waits = rng.exponential(scale=<span class="nm">2.0</span>, size=<span class="nm">5</span>)
+<span class="bi">print</span>(<span class="st">f"Wait times: {waits.round(2)}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Normal: mean=-0.003, std=0.998<br>Coin flip heads: [4 6 5 3 7]<br>Poisson: [6 4 3 7 5 4 8 2 6 5]</div></div></section>
+
+<section class="content-section" id="s4"><h2>4 &middot; Seeds &amp; Reproducibility</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Same seed = same sequence EVERY TIME</span>
+rng1 = np.random.default_rng(seed=<span class="nm">42</span>)
+rng2 = np.random.default_rng(seed=<span class="nm">42</span>)
+<span class="bi">print</span>(rng1.random(<span class="nm">3</span>))  <span class="cm"># [0.773 0.438 0.859]</span>
+<span class="bi">print</span>(rng2.random(<span class="nm">3</span>))  <span class="cm"># [0.773 0.438 0.859] SAME!</span>
+
+<span class="cm"># Legacy seeding</span>
+np.random.seed(<span class="nm">42</span>)
+<span class="bi">print</span>(np.random.rand(<span class="nm">3</span>))  <span class="cm"># reproducible</span>
+np.random.seed(<span class="nm">42</span>)
+<span class="bi">print</span>(np.random.rand(<span class="nm">3</span>))  <span class="cm"># same output</span>
+
+<span class="cm"># SeedSequence for advanced spawning</span>
+<span class="kw">from</span> numpy.random <span class="kw">import</span> SeedSequence
+ss = SeedSequence(<span class="nm">12345</span>)
+child_seeds = ss.spawn(<span class="nm">4</span>)  <span class="cm"># for parallel workers</span>
+rngs = [np.random.default_rng(s) <span class="kw">for</span> s <span class="kw">in</span> child_seeds]</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[0.773 0.438 0.859]<br>[0.773 0.438 0.859] &mdash; Same!</div></div></section>
+
+<section class="content-section" id="s5"><h2>5 &middot; Shuffling &amp; Sampling</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">rng = np.random.default_rng(<span class="nm">42</span>)
+
+<span class="cm"># shuffle() &mdash; modifies IN-PLACE</span>
+arr = np.arange(<span class="nm">10</span>)
+rng.shuffle(arr)
+<span class="bi">print</span>(<span class="st">f"Shuffled: {arr}"</span>)
+
+<span class="cm"># choice() &mdash; random sampling</span>
+<span class="bi">print</span>(rng.choice([<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>], size=<span class="nm">5</span>, replace=<span class="kw">True</span>))
+<span class="bi">print</span>(rng.choice(<span class="nm">100</span>, size=<span class="nm">5</span>, replace=<span class="kw">False</span>))  <span class="cm"># no repeats</span>
+
+<span class="cm"># Weighted sampling</span>
+items = [<span class="st">"common"</span>, <span class="st">"uncommon"</span>, <span class="st">"rare"</span>]
+weights = [<span class="nm">0.7</span>, <span class="nm">0.25</span>, <span class="nm">0.05</span>]
+<span class="bi">print</span>(rng.choice(items, size=<span class="nm">10</span>, p=weights))
+
+<span class="cm"># Legacy shuffle</span>
+np.random.seed(<span class="nm">42</span>)
+a = np.arange(<span class="nm">10</span>)
+np.random.shuffle(a)  <span class="cm"># in-place</span>
+<span class="bi">print</span>(a)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Shuffled: [8 1 5 0 7 2 9 4 3 6]<br>['b' 'a' 'c' 'a' 'd']</div></div></section>
+
+<section class="content-section" id="s6"><h2>6 &middot; Permutations</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">rng = np.random.default_rng(<span class="nm">42</span>)
+
+<span class="cm"># permutation() &mdash; returns NEW shuffled array (original unchanged)</span>
+a = np.arange(<span class="nm">10</span>)
+perm = rng.permutation(a)
+<span class="bi">print</span>(<span class="st">f"Original:    {a}"</span>)     <span class="cm"># unchanged</span>
+<span class="bi">print</span>(<span class="st">f"Permutation: {perm}"</span>)
+
+<span class="cm"># permutation with integer &mdash; permute range(n)</span>
+<span class="bi">print</span>(rng.permutation(<span class="nm">5</span>))   <span class="cm"># e.g., [3 0 4 1 2]</span>
+
+<span class="cm"># Common ML pattern: shuffle rows of dataset</span>
+X = np.array([[<span class="nm">1</span>,<span class="nm">2</span>],[<span class="nm">3</span>,<span class="nm">4</span>],[<span class="nm">5</span>,<span class="nm">6</span>],[<span class="nm">7</span>,<span class="nm">8</span>],[<span class="nm">9</span>,<span class="nm">10</span>]])
+y = np.array([<span class="nm">0</span>, <span class="nm">1</span>, <span class="nm">0</span>, <span class="nm">1</span>, <span class="nm">0</span>])
+
+idx = rng.permutation(<span class="bi">len</span>(X))
+X_shuffled = X[idx]
+y_shuffled = y[idx]
+<span class="bi">print</span>(<span class="st">f"Shuffled X:\n{X_shuffled}"</span>)
+<span class="bi">print</span>(<span class="st">f"Shuffled y: {y_shuffled}"</span>)
+
+<span class="cm"># Legacy</span>
+np.random.seed(<span class="nm">0</span>)
+<span class="bi">print</span>(np.random.permutation(<span class="nm">10</span>))</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Original: [0 1 2 3 4 5 6 7 8 9]<br>Permutation: [8 1 5 0 7 2 9 4 3 6]</div></div></section>
+</div>
+<div class="page-nav">
+<a href="linear-algebra.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Linear Algebra</span></a>
+<a href="../pandas/series-dataframe.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Pandas Series</span></a>
+</div>
+<footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
+</main>
+<script src="../../js/main.js"></script>
+</body></html>

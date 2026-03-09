@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>List, Dict &amp; Set Comprehensions - Python Learning Hub</title>
+<meta name="description" content="List, Dict &amp; Set Comprehensions - comprehensive textbook reference with code examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../../index.html" class="logo"><div class="logo-icon">&#x1F40D;</div><div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete Reference</span></div></a><button class="sidebar-toggle" id="sidebarToggle">&#x2630;</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="&#x1F50D; Search topics..." class="search-input"></div>
+<div class="nav-items" id="navItems">
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+</div></div></div>
+</nav>
+<main class="main-content" id="mainContent">
+<header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; Advanced &rarr; Comprehensions</div>
+<div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
+</header>
+<div class="page-content">
+<div class="page-header">
+<span class="topic-badge">&#x2699;&#xFE0F; Advanced Python</span>
+<h1>List, Dict &amp; Set Comprehensions</h1>
+<p class="page-intro">Comprehensions are concise one-liner ways to create lists, dicts, and sets. They replace verbose loops with elegant, readable expressions. Covers list comprehensions, dict comprehensions, set comprehensions, nested comprehensions, conditional expressions, and walrus operator.</p>
+<div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+<span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python Docs, Fluent Python &mdash; Luciano Ramalho</em></span>
+</div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
+<li><a href="#s1">List Comprehensions</a></li>
+<li><a href="#s2">Conditionals in Comprehensions</a></li>
+<li><a href="#s3">Nested Comprehensions</a></li>
+<li><a href="#s4">Dict &amp; Set Comprehensions</a></li>
+</ol></div>
+
+<section class="content-section" id="s1"><h2>1 &middot; List Comprehensions</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Syntax: [expression for item in iterable]</span>
+
+<span class="cm"># Squares</span>
+squares = [x**<span class="nm">2</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">10</span>)]
+<span class="bi">print</span>(squares)  <span class="cm"># [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</span>
+
+<span class="cm"># String operations</span>
+words = [<span class="st">"hello"</span>, <span class="st">"world"</span>, <span class="st">"python"</span>]
+upper = [w.upper() <span class="kw">for</span> w <span class="kw">in</span> words]
+<span class="bi">print</span>(upper)  <span class="cm"># ['HELLO', 'WORLD', 'PYTHON']</span>
+
+<span class="cm"># Vs traditional loop (same result)</span>
+result = []
+<span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">10</span>):
+    result.append(x**<span class="nm">2</span>)
+<span class="cm"># Comprehension is ~30% faster!</span>
+
+<span class="cm"># With function calls</span>
+lengths = [<span class="bi">len</span>(w) <span class="kw">for</span> w <span class="kw">in</span> words]
+<span class="bi">print</span>(lengths)  <span class="cm"># [5, 5, 6]</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]<br>['HELLO', 'WORLD', 'PYTHON']<br>[5, 5, 6]</div></div></section>
+
+<section class="content-section" id="s2"><h2>2 &middot; Conditionals</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Filter (if at the END)</span>
+evens = [x <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">20</span>) <span class="kw">if</span> x % <span class="nm">2</span> == <span class="nm">0</span>]
+<span class="bi">print</span>(evens)  <span class="cm"># [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]</span>
+
+<span class="cm"># Transform (if/else BEFORE for)</span>
+parity = [<span class="st">"even"</span> <span class="kw">if</span> x % <span class="nm">2</span> == <span class="nm">0</span> <span class="kw">else</span> <span class="st">"odd"</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">5</span>)]
+<span class="bi">print</span>(parity)  <span class="cm"># ['even', 'odd', 'even', 'odd', 'even']</span>
+
+<span class="cm"># Multiple conditions</span>
+fizzbuzz = [
+    <span class="st">"FizzBuzz"</span> <span class="kw">if</span> x%<span class="nm">15</span>==<span class="nm">0</span>
+    <span class="kw">else</span> <span class="st">"Fizz"</span> <span class="kw">if</span> x%<span class="nm">3</span>==<span class="nm">0</span>
+    <span class="kw">else</span> <span class="st">"Buzz"</span> <span class="kw">if</span> x%<span class="nm">5</span>==<span class="nm">0</span>
+    <span class="kw">else</span> x
+    <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">1</span>, <span class="nm">16</span>)
+]
+<span class="bi">print</span>(fizzbuzz)
+
+<span class="cm"># Filter AND transform</span>
+squared_evens = [x**<span class="nm">2</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">10</span>) <span class="kw">if</span> x % <span class="nm">2</span> == <span class="nm">0</span>]
+<span class="bi">print</span>(squared_evens)  <span class="cm"># [0, 4, 16, 36, 64]</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'FizzBuzz']</div></div></section>
+
+<section class="content-section" id="s3"><h2>3 &middot; Nested Comprehensions</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Flatten a 2D list</span>
+matrix = [[<span class="nm">1</span>,<span class="nm">2</span>,<span class="nm">3</span>], [<span class="nm">4</span>,<span class="nm">5</span>,<span class="nm">6</span>], [<span class="nm">7</span>,<span class="nm">8</span>,<span class="nm">9</span>]]
+flat = [x <span class="kw">for</span> row <span class="kw">in</span> matrix <span class="kw">for</span> x <span class="kw">in</span> row]
+<span class="bi">print</span>(flat)  <span class="cm"># [1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+
+<span class="cm"># Create 2D list (matrix)</span>
+grid = [[i*<span class="nm">3</span>+j <span class="kw">for</span> j <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">3</span>)] <span class="kw">for</span> i <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">3</span>)]
+<span class="bi">print</span>(grid)  <span class="cm"># [[0,1,2], [3,4,5], [6,7,8]]</span>
+
+<span class="cm"># Transpose a matrix</span>
+transposed = [[row[i] <span class="kw">for</span> row <span class="kw">in</span> matrix] <span class="kw">for</span> i <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">3</span>)]
+<span class="bi">print</span>(transposed)  <span class="cm"># [[1,4,7], [2,5,8], [3,6,9]]</span>
+
+<span class="cm"># Cartesian product</span>
+colors = [<span class="st">"red"</span>, <span class="st">"blue"</span>]
+sizes = [<span class="st">"S"</span>, <span class="st">"M"</span>, <span class="st">"L"</span>]
+combos = [(c, s) <span class="kw">for</span> c <span class="kw">in</span> colors <span class="kw">for</span> s <span class="kw">in</span> sizes]
+<span class="bi">print</span>(combos)
+<span class="cm"># [('red','S'), ('red','M'), ('red','L'), ('blue','S'), ...]</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[1, 2, 3, 4, 5, 6, 7, 8, 9]<br>[[1,4,7], [2,5,8], [3,6,9]]<br>[('red','S'), ('red','M'), ('red','L'), ('blue','S'), ('blue','M'), ('blue','L')]</div></div></section>
+
+<section class="content-section" id="s4"><h2>4 &middot; Dict &amp; Set Comprehensions</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Dict comprehension</span>
+squares_dict = {x: x**<span class="nm">2</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">6</span>)}
+<span class="bi">print</span>(squares_dict)  <span class="cm"># {0:0, 1:1, 2:4, 3:9, 4:16, 5:25}</span>
+
+<span class="cm"># Swap keys and values</span>
+original = {<span class="st">"a"</span>: <span class="nm">1</span>, <span class="st">"b"</span>: <span class="nm">2</span>, <span class="st">"c"</span>: <span class="nm">3</span>}
+swapped = {v: k <span class="kw">for</span> k, v <span class="kw">in</span> original.items()}
+<span class="bi">print</span>(swapped)  <span class="cm"># {1: 'a', 2: 'b', 3: 'c'}</span>
+
+<span class="cm"># Filter a dict</span>
+scores = {<span class="st">"Alice"</span>: <span class="nm">85</span>, <span class="st">"Bob"</span>: <span class="nm">42</span>, <span class="st">"Charlie"</span>: <span class="nm">91</span>, <span class="st">"Diana"</span>: <span class="nm">67</span>}
+passed = {k: v <span class="kw">for</span> k, v <span class="kw">in</span> scores.items() <span class="kw">if</span> v >= <span class="nm">60</span>}
+<span class="bi">print</span>(passed)  <span class="cm"># {'Alice': 85, 'Charlie': 91, 'Diana': 67}</span>
+
+<span class="cm"># Set comprehension (unique values)</span>
+text = <span class="st">"hello world"</span>
+vowels = {c <span class="kw">for</span> c <span class="kw">in</span> text <span class="kw">if</span> c <span class="kw">in</span> <span class="st">"aeiou"</span>}
+<span class="bi">print</span>(vowels)  <span class="cm"># {'e', 'o'}</span>
+
+<span class="cm"># Word frequency</span>
+words = <span class="st">"the cat sat on the mat"</span>.split()
+freq = {w: words.count(w) <span class="kw">for</span> w <span class="kw">in</span> <span class="bi">set</span>(words)}
+<span class="bi">print</span>(freq)  <span class="cm"># {'the': 2, 'cat': 1, 'sat': 1, ...}</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>{0:0, 1:1, 2:4, 3:9, 4:16, 5:25}<br>{1: 'a', 2: 'b', 3: 'c'}<br>{'Alice': 85, 'Charlie': 91, 'Diana': 67}<br>{'e', 'o'}</div></div></section>
+</div>
+<div class="page-nav">
+<a href="lambda.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Lambda</span></a>
+<a href="generators.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Generators</span></a>
+</div>
+<footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
+</main>
+<script src="../../js/main.js"></script>
+</body></html>

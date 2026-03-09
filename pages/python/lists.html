@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Lists - Python Learning Hub</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../../index.html" class="logo">
+                <div class="logo-icon">🐍</div>
+                <div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete
+                        Reference</span></div>
+            </a>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+        <div class="search-box"><input type="text" id="searchInput" placeholder="🔍 Search topics..."
+                class="search-input"></div>
+        <div class="nav-items" id="navItems">
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐍 Python Fundamentals</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="introduction.html" class="nav-item">Introduction to Python</a>
+                    <a href="variables-datatypes.html" class="nav-item">Variables & Data Types</a>
+                    <a href="operators.html" class="nav-item">Operators</a>
+                    <a href="control-flow.html" class="nav-item">Control Flow</a>
+                    <a href="loops.html" class="nav-item">Loops</a>
+                    <a href="functions.html" class="nav-item">Functions</a>
+                    <a href="strings.html" class="nav-item">Strings</a>
+                    <a href="lists.html" class="nav-item active">Lists</a>
+                    <a href="tuples.html" class="nav-item">Tuples</a>
+                    <a href="dictionaries.html" class="nav-item">Dictionaries</a>
+                    <a href="sets.html" class="nav-item">Sets</a>
+                    <a href="file-io.html" class="nav-item">File I/O</a>
+                    <a href="exceptions.html" class="nav-item">Exception Handling</a>
+                    <a href="modules.html" class="nav-item">Modules & Packages</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🏗️ OOP</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../oop/classes-objects.html" class="nav-item">Classes & Objects</a>
+                    <a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+                    <a href="../oop/decorators.html" class="nav-item">Decorators</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>⚡ Advanced Python</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../advanced/generators.html" class="nav-item">Generators & Iterators</a>
+                    <a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+                    <a href="../advanced/lambda.html" class="nav-item">Lambda & Functional</a>
+                    <a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+                    <a href="../advanced/async.html" class="nav-item">Async & Await</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🔢 NumPy</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../numpy/arrays.html" class="nav-item">Arrays & ndarray</a>
+                    <a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+                    <a href="../numpy/indexing.html" class="nav-item">Indexing & Slicing</a>
+                    <a href="../numpy/reshaping.html" class="nav-item">Reshaping & Stacking</a>
+                    <a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+                    <a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+                    <a href="../numpy/random.html" class="nav-item">Random Module</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐼 Pandas</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../pandas/series-dataframe.html" class="nav-item">Series & DataFrame</a>
+                    <a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+                    <a href="../pandas/selection.html" class="nav-item">Selection & Filtering</a>
+                    <a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+                    <a href="../pandas/groupby.html" class="nav-item">GroupBy & Aggregation</a>
+                    <a href="../pandas/merging.html" class="nav-item">Merging & Joining</a>
+                    <a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🤖 Machine Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+                    <a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+                    <a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+                    <a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+                    <a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+                    <a href="../ml/svm.html" class="nav-item">SVM</a>
+                    <a href="../ml/knn.html" class="nav-item">KNN</a>
+                    <a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+                    <a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🧠 Deep Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+                    <a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+                    <a href="../dl/cnn.html" class="nav-item">CNN</a>
+                    <a href="../dl/rnn-lstm.html" class="nav-item">RNN & LSTM</a>
+                    <a href="../dl/transformers.html" class="nav-item">Transformers</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>📊 Data Analysis</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../data/exploratory.html" class="nav-item">EDA</a>
+                    <a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+                    <a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+                    <a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+                    <a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content" id="mainContent">
+        <header class="topbar">
+            <button class="mobile-toggle" id="mobileToggle">☰</button>
+            <div class="topbar-breadcrumb"><a href="../../index.html"
+                    style="color:var(--accent);text-decoration:none;">Home</a> → Python Fundamentals → Lists</div>
+            <div class="topbar-progress"><span class="progress-text">Reading</span>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill" id="progressFill"></div>
+                </div><span id="progressPercent">0%</span>
+            </div>
+        </header>
+
+        <div class="page-content">
+            <div class="page-header">
+                <span class="topic-badge">🐍 Python Fundamentals</span>
+                <h1>Lists</h1>
+                <p class="page-intro">Lists are Python's most versatile built-in data structure — ordered, mutable, and
+                    able to hold any mix of types. This chapter covers creation, indexing, slicing, all methods (append,
+                    extend, insert, remove, sort, etc.), list comprehensions, and common patterns.</p>
+                <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+                    <span class="difficulty-badge beginner">● Beginner</span>
+                    <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">📖 <em>Python Programming
+                            (2024)</em></span>
+                </div>
+            </div>
+
+            <div class="toc-box">
+                <h4>📋 Table of Contents</h4>
+                <ol>
+                    <li><a href="#creating">Creating Lists</a></li>
+                    <li><a href="#indexing">Indexing & Slicing</a></li>
+                    <li><a href="#methods">All List Methods</a></li>
+                    <li><a href="#sorting">Sorting</a></li>
+                    <li><a href="#comprehensions">List Comprehensions</a></li>
+                    <li><a href="#nested">Nested Lists (2-D)</a></li>
+                    <li><a href="#common-patterns">Common Patterns</a></li>
+                </ol>
+            </div>
+
+            <section class="content-section" id="creating">
+                <h2>1 · Creating Lists</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · List Creation</span><button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="cm"># Empty list</span>
+a = []
+b = <span class="bi">list</span>()
+
+<span class="cm"># With values (mixed types allowed)</span>
+nums = [<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>, <span class="nm">4</span>, <span class="nm">5</span>]
+mixed = [<span class="nm">42</span>, <span class="st">"hello"</span>, <span class="kw">True</span>, <span class="nm">3.14</span>, <span class="kw">None</span>]
+
+<span class="cm"># From other iterables</span>
+chars = <span class="bi">list</span>(<span class="st">"Python"</span>)        <span class="cm"># ['P', 'y', 't', 'h', 'o', 'n']</span>
+evens = <span class="bi">list</span>(<span class="bi">range</span>(<span class="nm">0</span>, <span class="nm">10</span>, <span class="nm">2</span>)) <span class="cm"># [0, 2, 4, 6, 8]</span>
+
+<span class="cm"># Repeated values</span>
+zeros = [<span class="nm">0</span>] * <span class="nm">5</span>              <span class="cm"># [0, 0, 0, 0, 0]</span>
+
+<span class="bi">print</span>(chars)   <span class="cm"># ['P', 'y', 't', 'h', 'o', 'n']</span>
+<span class="bi">print</span>(evens)   <span class="cm"># [0, 2, 4, 6, 8]</span>
+<span class="bi">print</span>(zeros)   <span class="cm"># [0, 0, 0, 0, 0]</span>
+<span class="bi">print</span>(<span class="bi">len</span>(nums))  <span class="cm"># 5</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>['P', 'y', 't', 'h', 'o', 'n']<br>[0, 2, 4, 6, 8]<br>[0,
+                        0, 0, 0, 0]<br>5
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="indexing">
+                <h2>2 · Indexing & Slicing</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Indexing & Slicing</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block">fruits = [<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>, <span class="st">"date"</span>, <span class="st">"elderberry"</span>]
+<span class="cm">#          0         1          2          3        4  (forward)</span>
+<span class="cm">#         -5        -4         -3         -2       -1  (reverse)</span>
+
+<span class="cm"># Basic indexing</span>
+<span class="bi">print</span>(fruits[<span class="nm">0</span>])     <span class="cm"># "apple"</span>
+<span class="bi">print</span>(fruits[-<span class="nm">1</span>])    <span class="cm"># "elderberry"</span>
+<span class="bi">print</span>(fruits[-<span class="nm">2</span>])    <span class="cm"># "date"</span>
+
+<span class="cm"># Slicing: [start:stop:step]  (stop is EXCLUSIVE)</span>
+<span class="bi">print</span>(fruits[<span class="nm">1</span>:<span class="nm">3</span>])   <span class="cm"># ['banana', 'cherry']</span>
+<span class="bi">print</span>(fruits[:<span class="nm">3</span>])    <span class="cm"># ['apple', 'banana', 'cherry']</span>
+<span class="bi">print</span>(fruits[<span class="nm">2</span>:])    <span class="cm"># ['cherry', 'date', 'elderberry']</span>
+<span class="bi">print</span>(fruits[::-<span class="nm">1</span>])  <span class="cm"># Reversed: ['elderberry', 'date', ...]</span>
+<span class="bi">print</span>(fruits[::<span class="nm">2</span>])   <span class="cm"># Every 2nd: ['apple', 'cherry', 'elderberry']</span>
+
+<span class="cm"># Slice assignment (modifies in-place!)</span>
+fruits[<span class="nm">1</span>:<span class="nm">3</span>] = [<span class="st">"blueberry"</span>, <span class="st">"coconut"</span>]
+<span class="bi">print</span>(fruits)
+<span class="cm"># ['apple', 'blueberry', 'coconut', 'date', 'elderberry']</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>apple<br>elderberry<br>date<br>['banana',
+                        'cherry']<br>['apple', 'banana', 'cherry']<br>['cherry', 'date', 'elderberry']<br>['elderberry',
+                        'date', 'cherry', 'banana', 'apple']<br>['apple', 'cherry', 'elderberry']
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="methods">
+                <h2>3 · All List Methods</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · List Methods (Complete)</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block">nums = [<span class="nm">3</span>, <span class="nm">1</span>, <span class="nm">4</span>, <span class="nm">1</span>, <span class="nm">5</span>]
+
+<span class="cm"># Adding elements</span>
+nums.append(<span class="nm">9</span>)             <span class="cm"># [3,1,4,1,5,9]  — adds to end</span>
+nums.insert(<span class="nm">2</span>, <span class="nm">99</span>)         <span class="cm"># [3,1,99,4,1,5,9] — inserts at index 2</span>
+nums.extend([<span class="nm">10</span>, <span class="nm">11</span>])      <span class="cm"># adds multiple items from iterable</span>
+
+<span class="cm"># Removing elements</span>
+nums.remove(<span class="nm">99</span>)            <span class="cm"># removes FIRST occurrence of value</span>
+popped = nums.pop()        <span class="cm"># removes & returns LAST element</span>
+popped2 = nums.pop(<span class="nm">0</span>)     <span class="cm"># removes & returns element at index 0</span>
+nums.clear()               <span class="cm"># removes ALL elements → []</span>
+
+<span class="cm"># Searching</span>
+data = [<span class="nm">10</span>, <span class="nm">20</span>, <span class="nm">30</span>, <span class="nm">20</span>, <span class="nm">40</span>]
+<span class="bi">print</span>(data.index(<span class="nm">20</span>))      <span class="cm"># 1 — first occurrence</span>
+<span class="bi">print</span>(data.count(<span class="nm">20</span>))      <span class="cm"># 2 — count of 20</span>
+<span class="bi">print</span>(<span class="nm">30</span> <span class="kw">in</span> data)          <span class="cm"># True</span>
+
+<span class="cm"># Reordering</span>
+data.reverse()             <span class="cm"># reverses in-place, returns None</span>
+data.sort()                <span class="cm"># sorts in-place, returns None</span>
+copy = data.copy()         <span class="cm"># shallow copy</span>
+
+<span class="cm"># Return values summary</span>
+<span class="bi">print</span>(data.append(<span class="nm">1</span>))      <span class="cm"># None  (in-place)</span>
+<span class="bi">print</span>(data.pop())          <span class="cm"># 1     (the removed element)</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>1<br>2<br>True<br>None<br>1
+                    </div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Returns</th>
+                            <th>Modifies List?</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>append(x)</code></td>
+                            <td><code>None</code></td>
+                            <td>✅ Yes</td>
+                            <td>Add x to end</td>
+                        </tr>
+                        <tr>
+                            <td><code>extend(iter)</code></td>
+                            <td><code>None</code></td>
+                            <td>✅ Yes</td>
+                            <td>Add all from iterable</td>
+                        </tr>
+                        <tr>
+                            <td><code>insert(i, x)</code></td>
+                            <td><code>None</code></td>
+                            <td>✅ Yes</td>
+                            <td>Insert x at index i</td>
+                        </tr>
+                        <tr>
+                            <td><code>remove(x)</code></td>
+                            <td><code>None</code></td>
+                            <td>✅ Yes</td>
+                            <td>Remove first x</td>
+                        </tr>
+                        <tr>
+                            <td><code>pop(i=-1)</code></td>
+                            <td>Element removed</td>
+                            <td>✅ Yes</td>
+                            <td>Remove & return item</td>
+                        </tr>
+                        <tr>
+                            <td><code>clear()</code></td>
+                            <td><code>None</code></td>
+                            <td>✅ Yes</td>
+                            <td>Empty the list</td>
+                        </tr>
+                        <tr>
+                            <td><code>sort()</code></td>
+                            <td><code>None</code></td>
+                            <td>✅ Yes</td>
+                            <td>Sort in-place</td>
+                        </tr>
+                        <tr>
+                            <td><code>reverse()</code></td>
+                            <td><code>None</code></td>
+                            <td>✅ Yes</td>
+                            <td>Reverse in-place</td>
+                        </tr>
+                        <tr>
+                            <td><code>copy()</code></td>
+                            <td>New list</td>
+                            <td>❌ No</td>
+                            <td>Shallow copy</td>
+                        </tr>
+                        <tr>
+                            <td><code>index(x)</code></td>
+                            <td>int (index)</td>
+                            <td>❌ No</td>
+                            <td>Find first index of x</td>
+                        </tr>
+                        <tr>
+                            <td><code>count(x)</code></td>
+                            <td>int</td>
+                            <td>❌ No</td>
+                            <td>Count occurrences of x</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="content-section" id="comprehensions">
+                <h2>4 · List Comprehensions</h2>
+                <p>A concise way to create lists. Syntax: <code>[expression for item in iterable if condition]</code>
+                </p>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · List Comprehensions</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="cm"># Squares — equivalent for loop would take 3 lines</span>
+squares = [x**<span class="nm">2</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">10</span>)]
+<span class="bi">print</span>(squares)  <span class="cm"># [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</span>
+
+<span class="cm"># With condition (filter)</span>
+evens = [x <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">20</span>) <span class="kw">if</span> x % <span class="nm">2</span> == <span class="nm">0</span>]
+<span class="bi">print</span>(evens)    <span class="cm"># [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]</span>
+
+<span class="cm"># String transformation</span>
+words = [<span class="st">"hello"</span>, <span class="st">"world"</span>, <span class="st">"python"</span>]
+upper = [w.upper() <span class="kw">for</span> w <span class="kw">in</span> words]
+<span class="bi">print</span>(upper)    <span class="cm"># ['HELLO', 'WORLD', 'PYTHON']</span>
+
+<span class="cm"># Nested — flatten 2D list</span>
+matrix = [[<span class="nm">1</span>,<span class="nm">2</span>,<span class="nm">3</span>],[<span class="nm">4</span>,<span class="nm">5</span>,<span class="nm">6</span>],[<span class="nm">7</span>,<span class="nm">8</span>,<span class="nm">9</span>]]
+flat = [x <span class="kw">for</span> row <span class="kw">in</span> matrix <span class="kw">for</span> x <span class="kw">in</span> row]
+<span class="bi">print</span>(flat)     <span class="cm"># [1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+
+<span class="cm"># Conditional expression (ternary)</span>
+labels = [<span class="st">"even"</span> <span class="kw">if</span> x%<span class="nm">2</span>==<span class="nm">0</span> <span class="kw">else</span> <span class="st">"odd"</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">6</span>)]
+<span class="bi">print</span>(labels)   <span class="cm"># ['even','odd','even','odd','even','odd']</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]<br>[0, 2, 4, 6, 8,
+                        10, 12, 14, 16, 18]<br>['HELLO', 'WORLD', 'PYTHON']<br>[1, 2, 3, 4, 5, 6, 7, 8, 9]<br>['even',
+                        'odd', 'even', 'odd', 'even', 'odd']
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="common-patterns">
+                <h2>5 · Common Patterns</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Useful List Patterns</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="cm"># Remove duplicates (preserve order)</span>
+nums = [<span class="nm">3</span>, <span class="nm">1</span>, <span class="nm">4</span>, <span class="nm">1</span>, <span class="nm">5</span>, <span class="nm">9</span>, <span class="nm">2</span>, <span class="nm">6</span>, <span class="nm">5</span>]
+unique = <span class="bi">list</span>(<span class="bi">dict</span>.fromkeys(nums))
+<span class="bi">print</span>(unique)    <span class="cm"># [3, 1, 4, 5, 9, 2, 6]</span>
+
+<span class="cm"># Enumerate — index + value together</span>
+fruits = [<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>]
+<span class="kw">for</span> i, fruit <span class="kw">in</span> <span class="bi">enumerate</span>(fruits, start=<span class="nm">1</span>):
+    <span class="bi">print</span>(<span class="st">f"<span class="kw">{</span>i<span class="kw">}</span>. <span class="kw">{</span>fruit<span class="kw">}</span>"</span>)
+<span class="cm"># 1. apple, 2. banana, 3. cherry</span>
+
+<span class="cm"># Zip — iterate over two lists in parallel</span>
+names  = [<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Carol"</span>]
+scores = [<span class="nm">89</span>, <span class="nm">76</span>, <span class="nm">93</span>]
+<span class="kw">for</span> name, score <span class="kw">in</span> <span class="bi">zip</span>(names, scores):
+    <span class="bi">print</span>(<span class="st">f"<span class="kw">{</span>name<span class="kw">}</span>: <span class="kw">{</span>score<span class="kw">}</span>"</span>)
+
+<span class="cm"># Sort by custom key</span>
+students = [(<span class="st">"Alice"</span>, <span class="nm">89</span>), (<span class="st">"Bob"</span>, <span class="nm">76</span>), (<span class="st">"Carol"</span>, <span class="nm">93</span>)]
+students.sort(key=<span class="kw">lambda</span> s: s[<span class="nm">1</span>], reverse=<span class="kw">True</span>)
+<span class="bi">print</span>(students)  <span class="cm"># [('Carol',93),('Alice',89),('Bob',76)]</span>
+
+<span class="cm"># Flatten with sum (trick)</span>
+nested = [[<span class="nm">1</span>,<span class="nm">2</span>],[<span class="nm">3</span>,<span class="nm">4</span>],[<span class="nm">5</span>]]
+flat = <span class="bi">sum</span>(nested, [])
+<span class="bi">print</span>(flat)     <span class="cm"># [1, 2, 3, 4, 5]</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>[3, 1, 4, 5, 9, 2, 6]<br>1. apple<br>2. banana<br>3.
+                        cherry<br>Alice: 89<br>Bob: 76<br>Carol: 93<br>[('Carol', 93), ('Alice', 89), ('Bob',
+                        76)]<br>[1, 2, 3, 4, 5]
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="page-nav">
+            <a href="strings.html"><span class="nav-direction">← Previous</span><span
+                    class="nav-topic">Strings</span></a>
+            <a href="tuples.html" class="next"><span class="nav-direction">Next →</span><span
+                    class="nav-topic">Tuples</span></a>
+        </div>
+        <footer class="footer">
+            <p>🐍 Python Learning Hub — Built from leading textbooks for deep understanding</p>
+        </footer>
+    </main>
+    <script src="../../js/main.js"></script>
+</body>
+
+</html>

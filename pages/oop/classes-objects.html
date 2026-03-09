@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes & Objects - Python Learning Hub</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../../index.html" class="logo">
+                <div class="logo-icon">🐍</div>
+                <div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete
+                        Reference</span></div>
+            </a>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+        <div class="search-box"><input type="text" id="searchInput" placeholder="🔍 Search topics..."
+                class="search-input"></div>
+        <div class="nav-items" id="navItems">
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐍 Python Fundamentals</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../python/introduction.html" class="nav-item">Introduction to Python</a>
+                    <a href="../python/variables-datatypes.html" class="nav-item">Variables & Data Types</a>
+                    <a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+                    <a href="../python/loops.html" class="nav-item">Loops</a>
+                    <a href="../python/functions.html" class="nav-item">Functions</a>
+                    <a href="../python/lists.html" class="nav-item">Lists</a>
+                    <a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+                    <a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+                    <a href="../python/modules.html" class="nav-item">Modules & Packages</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🏗️ OOP</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="classes-objects.html" class="nav-item active">Classes & Objects</a>
+                    <a href="inheritance.html" class="nav-item">Inheritance</a>
+                    <a href="polymorphism.html" class="nav-item">Polymorphism</a>
+                    <a href="encapsulation.html" class="nav-item">Encapsulation</a>
+                    <a href="magic-methods.html" class="nav-item">Magic Methods</a>
+                    <a href="decorators.html" class="nav-item">Decorators</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>⚡ Advanced Python</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../advanced/generators.html" class="nav-item">Generators & Iterators</a>
+                    <a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+                    <a href="../advanced/lambda.html" class="nav-item">Lambda & Functional</a>
+                    <a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+                    <a href="../advanced/async.html" class="nav-item">Async & Await</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🔢 NumPy</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../numpy/arrays.html" class="nav-item">Arrays & ndarray</a>
+                    <a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+                    <a href="../numpy/indexing.html" class="nav-item">Indexing & Slicing</a>
+                    <a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐼 Pandas</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../pandas/series-dataframe.html" class="nav-item">Series & DataFrame</a>
+                    <a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+                    <a href="../pandas/selection.html" class="nav-item">Selection & Filtering</a>
+                    <a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+                    <a href="../pandas/groupby.html" class="nav-item">GroupBy & Aggregation</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🤖 Machine Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+                    <a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+                    <a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+                    <a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🧠 Deep Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>📊 Data Analysis</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../data/exploratory.html" class="nav-item">EDA</a>
+                    <a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+                    <a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content" id="mainContent">
+        <header class="topbar">
+            <button class="mobile-toggle" id="mobileToggle">☰</button>
+            <div class="topbar-breadcrumb"><a href="../../index.html"
+                    style="color:var(--accent);text-decoration:none;">Home</a> → OOP → Classes & Objects</div>
+            <div class="topbar-progress"><span class="progress-text">Reading</span>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill" id="progressFill"></div>
+                </div><span id="progressPercent">0%</span>
+            </div>
+        </header>
+
+        <div class="page-content">
+            <div class="page-header">
+                <span class="topic-badge">🏗️ OOP</span>
+                <h1>Classes & Objects</h1>
+                <p class="page-intro">Object-Oriented Programming (OOP) organizes code around <strong>objects</strong> —
+                    bundles of data (attributes) and behavior (methods). A <strong>class</strong> is the blueprint; an
+                    <strong>object</strong> is an instance. Python is a fully object-oriented language — everything is
+                    an object, including integers, strings, and functions.</p>
+                <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+                    <span class="difficulty-badge intermediate">● Intermediate</span>
+                    <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">📖 <em>Python Programming
+                            (2024)</em></span>
+                </div>
+            </div>
+
+            <div class="toc-box">
+                <h4>📋 Table of Contents</h4>
+                <ol>
+                    <li><a href="#defining">Defining a Class</a></li>
+                    <li><a href="#attributes">Instance vs Class Attributes</a></li>
+                    <li><a href="#methods">Methods: instance, class, static</a></li>
+                    <li><a href="#properties">Properties (@property)</a></li>
+                    <li><a href="#dataclasses">dataclasses (Python 3.7+)</a></li>
+                    <li><a href="#repr">__repr__ and __str__</a></li>
+                </ol>
+            </div>
+
+            <section class="content-section" id="defining">
+                <h2>1 · Defining a Class</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Basic Class</span><button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="kw">class</span> <span class="cl">BankAccount</span>:
+    <span class="st">"""A simple bank account model."""</span>
+
+    bank_name = <span class="st">"PyBank"</span>  <span class="cm"># ← Class attribute (shared by all instances)</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, owner: <span class="bi">str</span>, balance: <span class="bi">float</span> = <span class="nm">0.0</span>):
+        <span class="cm"># self refers to the instance being created</span>
+        self.owner   = owner    <span class="cm"># ← Instance attribute</span>
+        self.balance = balance  <span class="cm"># ← Instance attribute</span>
+        self._transactions = []  <span class="cm"># ← "private" by convention</span>
+
+    <span class="kw">def</span> <span class="fn">deposit</span>(self, amount: <span class="bi">float</span>) -> <span class="kw">None</span>:
+        <span class="kw">if</span> amount <= <span class="nm">0</span>:
+            <span class="kw">raise</span> <span class="cl">ValueError</span>(<span class="st">"Deposit must be positive"</span>)
+        self.balance += amount
+        self._transactions.append((<span class="st">"deposit"</span>, amount))
+
+    <span class="kw">def</span> <span class="fn">withdraw</span>(self, amount: <span class="bi">float</span>) -> <span class="kw">None</span>:
+        <span class="kw">if</span> amount > self.balance:
+            <span class="kw">raise</span> <span class="cl">ValueError</span>(<span class="st">"Insufficient funds"</span>)
+        self.balance -= amount
+        self._transactions.append((<span class="st">"withdrawal"</span>, amount))
+
+    <span class="kw">def</span> <span class="fn">__repr__</span>(self) -> <span class="bi">str</span>:
+        <span class="kw">return</span> <span class="st">f"BankAccount(owner='{self.owner}', balance={self.balance:.2f})"</span>
+
+<span class="cm"># Create instances (objects)</span>
+alice = <span class="cl">BankAccount</span>(<span class="st">"Alice"</span>, <span class="nm">1000.0</span>)
+bob   = <span class="cl">BankAccount</span>(<span class="st">"Bob"</span>)             <span class="cm"># balance defaults to 0.0</span>
+
+alice.deposit(<span class="nm">500</span>)
+alice.withdraw(<span class="nm">200</span>)
+
+<span class="bi">print</span>(alice)          <span class="cm"># BankAccount(owner='Alice', balance=1300.00)</span>
+<span class="bi">print</span>(alice.balance)  <span class="cm"># 1300.0</span>
+<span class="bi">print</span>(<span class="cl">BankAccount</span>.bank_name)  <span class="cm"># PyBank  ← access class attribute</span>
+<span class="bi">print</span>(alice.bank_name)        <span class="cm"># PyBank  ← also works on instance</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>BankAccount(owner='Alice',
+                        balance=1300.00)<br>1300.0<br>PyBank<br>PyBank
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="attributes">
+                <h2>2 · Instance vs Class Attributes</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Instance Attribute</th>
+                            <th>Class Attribute</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Defined in</td>
+                            <td><code>__init__</code> with <code>self.x = ...</code></td>
+                            <td>Class body, outside methods</td>
+                        </tr>
+                        <tr>
+                            <td>Unique per instance?</td>
+                            <td>✅ Yes — each instance has its own</td>
+                            <td>❌ No — shared by ALL instances</td>
+                        </tr>
+                        <tr>
+                            <td>Access</td>
+                            <td><code>obj.attr</code></td>
+                            <td><code>ClassName.attr</code> or <code>obj.attr</code></td>
+                        </tr>
+                        <tr>
+                            <td>Use case</td>
+                            <td>State that varies (name, balance)</td>
+                            <td>Constants, counters, defaults</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Class vs Instance Attributes</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="kw">class</span> <span class="cl">Dog</span>:
+    species = <span class="st">"Canis familiaris"</span>  <span class="cm"># class attribute</span>
+    count   = <span class="nm">0</span>                   <span class="cm"># tracks total dogs created</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, name, breed):
+        self.name  = name    <span class="cm"># instance attribute</span>
+        self.breed = breed   <span class="cm"># instance attribute</span>
+        <span class="cl">Dog</span>.count += <span class="nm">1</span>      <span class="cm"># update class counter</span>
+
+fido  = <span class="cl">Dog</span>(<span class="st">"Fido"</span>, <span class="st">"Labrador"</span>)
+buddy = <span class="cl">Dog</span>(<span class="st">"Buddy"</span>, <span class="st">"Poodle"</span>)
+
+<span class="bi">print</span>(fido.species)   <span class="cm"># "Canis familiaris" (from class)</span>
+<span class="bi">print</span>(fido.name)      <span class="cm"># "Fido" (from instance)</span>
+<span class="bi">print</span>(<span class="cl">Dog</span>.count)      <span class="cm"># 2 — shared class attribute</span>
+<span class="bi">print</span>(fido.count)     <span class="cm"># 2 — also accessible via instance</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>Canis familiaris<br>Fido<br>2<br>2
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="methods">
+                <h2>3 · Three Types of Methods</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Instance, Class & Static Methods</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre
+                        class="code-block"><span class="kw">class</span> <span class="cl">Temperature</span>:
+    absolute_zero = -<span class="nm">273.15</span>   <span class="cm"># in Celsius</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, celsius):
+        self.celsius = celsius
+
+    <span class="cm"># ── Instance method — receives self ──────────────────</span>
+    <span class="kw">def</span> <span class="fn">to_fahrenheit</span>(self) -> <span class="bi">float</span>:
+        <span class="kw">return</span> (self.celsius * <span class="nm">9</span>/<span class="nm">5</span>) + <span class="nm">32</span>
+
+    <span class="cm"># ── Class method — receives cls, not self ─────────────</span>
+    @classmethod
+    <span class="kw">def</span> <span class="fn">from_fahrenheit</span>(cls, fahrenheit: <span class="bi">float</span>) -> <span class="st">"Temperature"</span>:
+        <span class="st">"""Alternative constructor."""</span>
+        celsius = (fahrenheit - <span class="nm">32</span>) * <span class="nm">5</span>/<span class="nm">9</span>
+        <span class="kw">return</span> cls(celsius)     <span class="cm"># creates a new instance</span>
+
+    <span class="cm"># ── Static method — no self or cls ────────────────────</span>
+    @staticmethod
+    <span class="kw">def</span> <span class="fn">is_hot</span>(celsius: <span class="bi">float</span>) -> <span class="bi">bool</span>:
+        <span class="st">"""No access to instance or class data."""</span>
+        <span class="kw">return</span> celsius > <span class="nm">30</span>
+
+<span class="cm"># Usage</span>
+t = <span class="cl">Temperature</span>(<span class="nm">100</span>)
+<span class="bi">print</span>(t.to_fahrenheit())       <span class="cm"># 212.0</span>
+
+t2 = <span class="cl">Temperature</span>.from_fahrenheit(<span class="nm">32</span>)
+<span class="bi">print</span>(t2.celsius)              <span class="cm"># 0.0</span>
+
+<span class="bi">print</span>(<span class="cl">Temperature</span>.is_hot(<span class="nm">35</span>))  <span class="cm"># True</span>
+<span class="bi">print</span>(<span class="cl">Temperature</span>.is_hot(<span class="nm">20</span>))  <span class="cm"># False</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>212.0<br>0.0<br>True<br>False
+                    </div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Method Type</th>
+                            <th>First Arg</th>
+                            <th>Decorator</th>
+                            <th>Can access</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Instance method</td>
+                            <td><code>self</code></td>
+                            <td>(none)</td>
+                            <td>Instance attrs + class attrs</td>
+                        </tr>
+                        <tr>
+                            <td>Class method</td>
+                            <td><code>cls</code></td>
+                            <td><code>@classmethod</code></td>
+                            <td>Class attrs only (not instance)</td>
+                        </tr>
+                        <tr>
+                            <td>Static method</td>
+                            <td>(none)</td>
+                            <td><code>@staticmethod</code></td>
+                            <td>Neither — like a plain function</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="content-section" id="properties">
+                <h2>4 · Properties (@property)</h2>
+                <p>Properties allow controlled access to attributes — add validation or computation without changing the
+                    calling interface.</p>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · @property Decorator</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="kw">class</span> <span class="cl">Circle</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, radius: <span class="bi">float</span>):
+        self._radius = radius   <span class="cm"># "private" by convention</span>
+
+    @property
+    <span class="kw">def</span> <span class="fn">radius</span>(self) -> <span class="bi">float</span>:
+        <span class="st">"""Getter — called when you ACCESS the property."""</span>
+        <span class="kw">return</span> self._radius
+
+    @radius.setter
+    <span class="kw">def</span> <span class="fn">radius</span>(self, value: <span class="bi">float</span>):
+        <span class="st">"""Setter — called when you ASSIGN the property."""</span>
+        <span class="kw">if</span> value < <span class="nm">0</span>:
+            <span class="kw">raise</span> <span class="cl">ValueError</span>(<span class="st">"Radius cannot be negative!"</span>)
+        self._radius = value
+
+    @property
+    <span class="kw">def</span> <span class="fn">area</span>(self) -> <span class="bi">float</span>:
+        <span class="st">"""Computed property — no setter needed."""</span>
+        <span class="kw">import</span> math
+        <span class="kw">return</span> math.pi * self._radius ** <span class="nm">2</span>
+
+c = <span class="cl">Circle</span>(<span class="nm">5</span>)
+<span class="bi">print</span>(c.radius)      <span class="cm"># 5  (calls getter)</span>
+<span class="bi">print</span>(c.area)        <span class="cm"># 78.54  (computed)</span>
+
+c.radius = <span class="nm">10</span>        <span class="cm"># calls setter — validated!</span>
+<span class="bi">print</span>(c.radius)      <span class="cm"># 10</span>
+
+c.radius = -<span class="nm">3</span>        <span class="cm"># raises ValueError!</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>5<br>78.53981633974483<br>10<br>ValueError: Radius
+                        cannot be negative!
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="dataclasses">
+                <h2>5 · dataclasses (Python 3.7+)</h2>
+                <p><code>@dataclass</code> automatically generates <code>__init__</code>, <code>__repr__</code>, and
+                    <code>__eq__</code> for you:</p>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · @dataclass</span><button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass, field
+<span class="kw">from</span> typing <span class="kw">import</span> List
+
+@dataclass
+<span class="kw">class</span> <span class="cl">Student</span>:
+    name: <span class="bi">str</span>
+    grade: <span class="bi">int</span>
+    scores: <span class="cl">List</span>[<span class="bi">float</span>] = field(default_factory=<span class="bi">list</span>)
+    gpa: <span class="bi">float</span> = <span class="nm">0.0</span>
+
+    <span class="kw">def</span> <span class="fn">average_score</span>(self) -> <span class="bi">float</span>:
+        <span class="kw">return</span> <span class="bi">sum</span>(self.scores) / <span class="bi">len</span>(self.scores) <span class="kw">if</span> self.scores <span class="kw">else</span> <span class="nm">0.0</span>
+
+<span class="cm"># __init__ auto-generated: Student(name, grade, scores=[], gpa=0.0)</span>
+s = <span class="cl">Student</span>(<span class="st">"Alice"</span>, <span class="nm">10</span>, scores=[<span class="nm">89</span>, <span class="nm">92</span>, <span class="nm">85</span>], gpa=<span class="nm">3.8</span>)
+<span class="bi">print</span>(s)     <span class="cm"># Student(name='Alice', grade=10, scores=[89,92,85], gpa=3.8)</span>
+<span class="bi">print</span>(s.average_score())   <span class="cm"># 88.67</span>
+
+<span class="cm"># Equality works out of the box!</span>
+s2 = <span class="cl">Student</span>(<span class="st">"Alice"</span>, <span class="nm">10</span>, scores=[<span class="nm">89</span>, <span class="nm">92</span>, <span class="nm">85</span>], gpa=<span class="nm">3.8</span>)
+<span class="bi">print</span>(s == s2)   <span class="cm"># True</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>Student(name='Alice', grade=10, scores=[89, 92, 85],
+                        gpa=3.8)<br>88.66666666666667<br>True
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="page-nav">
+            <a href="../python/modules.html"><span class="nav-direction">← Previous</span><span
+                    class="nav-topic">Modules & Packages</span></a>
+            <a href="inheritance.html" class="next"><span class="nav-direction">Next →</span><span
+                    class="nav-topic">Inheritance</span></a>
+        </div>
+        <footer class="footer">
+            <p>🐍 Python Learning Hub — Built from leading textbooks for deep understanding</p>
+        </footer>
+    </main>
+    <script src="../../js/main.js"></script>
+</body>
+
+</html>

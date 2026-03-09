@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Python - Python Learning Hub</title>
+    <meta name="description"
+        content="Complete introduction to Python - what it is, how it works, key features, and your first programs.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../../index.html" class="logo">
+                <div class="logo-icon">🐍</div>
+                <div class="logo-text">
+                    <span class="logo-title">PyTextbook</span>
+                    <span class="logo-sub">Complete Reference</span>
+                </div>
+            </a>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Search topics..." class="search-input">
+        </div>
+        <div class="nav-items" id="navItems">
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐍 Python Fundamentals</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="introduction.html" class="nav-item active">Introduction to Python</a>
+                    <a href="variables-datatypes.html" class="nav-item">Variables & Data Types</a>
+                    <a href="operators.html" class="nav-item">Operators</a>
+                    <a href="control-flow.html" class="nav-item">Control Flow</a>
+                    <a href="loops.html" class="nav-item">Loops</a>
+                    <a href="functions.html" class="nav-item">Functions</a>
+                    <a href="strings.html" class="nav-item">Strings</a>
+                    <a href="lists.html" class="nav-item">Lists</a>
+                    <a href="tuples.html" class="nav-item">Tuples</a>
+                    <a href="dictionaries.html" class="nav-item">Dictionaries</a>
+                    <a href="sets.html" class="nav-item">Sets</a>
+                    <a href="file-io.html" class="nav-item">File I/O</a>
+                    <a href="exceptions.html" class="nav-item">Exception Handling</a>
+                    <a href="modules.html" class="nav-item">Modules & Packages</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🏗️ OOP</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../oop/classes-objects.html" class="nav-item">Classes & Objects</a>
+                    <a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+                    <a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+                    <a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+                    <a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+                    <a href="../oop/decorators.html" class="nav-item">Decorators</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>⚡ Advanced Python</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../advanced/generators.html" class="nav-item">Generators & Iterators</a>
+                    <a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+                    <a href="../advanced/lambda.html" class="nav-item">Lambda & Functional</a>
+                    <a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+                    <a href="../advanced/async.html" class="nav-item">Async & Await</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🔢 NumPy</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../numpy/arrays.html" class="nav-item">Arrays & ndarray</a>
+                    <a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+                    <a href="../numpy/indexing.html" class="nav-item">Indexing & Slicing</a>
+                    <a href="../numpy/reshaping.html" class="nav-item">Reshaping & Stacking</a>
+                    <a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+                    <a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+                    <a href="../numpy/random.html" class="nav-item">Random Module</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐼 Pandas</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../pandas/series-dataframe.html" class="nav-item">Series & DataFrame</a>
+                    <a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+                    <a href="../pandas/selection.html" class="nav-item">Selection & Filtering</a>
+                    <a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+                    <a href="../pandas/groupby.html" class="nav-item">GroupBy & Aggregation</a>
+                    <a href="../pandas/merging.html" class="nav-item">Merging & Joining</a>
+                    <a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🤖 Machine Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+                    <a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+                    <a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+                    <a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+                    <a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+                    <a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+                    <a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+                    <a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+                    <a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🧠 Deep Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+                    <a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+                    <a href="../dl/cnn.html" class="nav-item">CNN</a>
+                    <a href="../dl/rnn-lstm.html" class="nav-item">RNN & LSTM</a>
+                    <a href="../dl/transformers.html" class="nav-item">Transformers</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>📊 Data Analysis</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+                    <a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+                    <a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+                    <a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+                    <a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" id="mainContent">
+        <header class="topbar">
+            <button class="mobile-toggle" id="mobileToggle">☰</button>
+            <div class="topbar-breadcrumb">
+                <a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a>
+                → Python Fundamentals → Introduction
+            </div>
+            <div class="topbar-progress">
+                <span class="progress-text">Reading</span>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill" id="progressFill"></div>
+                </div>
+                <span id="progressPercent">0%</span>
+            </div>
+        </header>
+
+        <div class="page-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <span class="topic-badge">🐍 Python Fundamentals</span>
+                <h1>Introduction to Python</h1>
+                <p class="page-intro">
+                    Python is a high-level, interpreted, general-purpose programming language.
+                    This chapter covers what Python is, why it's powerful, its key features,
+                    and how to write your very first programs — directly from leading textbooks.
+                </p>
+                <div style="display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap;">
+                    <span class="difficulty-badge beginner">● Beginner</span>
+                    <span style="font-size:0.8rem;color:var(--text-muted);align-self:center;">📖 Based on: <em>Python
+                            Programming (2024), Python for Data Analysis</em></span>
+                </div>
+            </div>
+
+            <!-- TOC -->
+            <div class="toc-box">
+                <h4>📋 Table of Contents</h4>
+                <ol>
+                    <li><a href="#what-is-python">What is Python?</a></li>
+                    <li><a href="#history">History & Evolution</a></li>
+                    <li><a href="#features">Key Features</a></li>
+                    <li><a href="#how-it-works">How Python Works (Interpreted)</a></li>
+                    <li><a href="#first-program">Your First Python Program</a></li>
+                    <li><a href="#python-zen">The Zen of Python</a></li>
+                    <li><a href="#use-cases">Real-World Applications</a></li>
+                    <li><a href="#installation">Installation & Setup</a></li>
+                </ol>
+            </div>
+
+            <!-- Section 1: What is Python -->
+            <section class="content-section" id="what-is-python">
+                <h2>1 · What is Python?</h2>
+                <p>
+                    Python is a <strong>high-level, interpreted, dynamically typed, general-purpose programming
+                        language</strong>.
+                    It was designed with an emphasis on code readability and the principle that there should be one —
+                    and
+                    preferably only one — obvious way to do something.
+                </p>
+                <p>
+                    The key distinction between Python and languages like C or Java is that Python code reads almost
+                    like
+                    plain English. Python handles memory management automatically, and its syntax is minimal and
+                    expressive.
+                </p>
+
+                <div class="callout note">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <strong>Textbook Definition</strong>
+                        <p>"Python is an interpreted language, which means it is not compiled directly to machine code
+                            but
+                            is instead run by another program (the Python interpreter). This makes development faster
+                            but
+                            typically slower at runtime than compiled languages." — <em>Python for Data Analysis, Wes
+                                McKinney</em></p>
+                    </div>
+                </div>
+
+                <h3>Python vs. Other Languages</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Python</th>
+                            <th>Java</th>
+                            <th>C++</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Typing</td>
+                            <td>Dynamic</td>
+                            <td>Static</td>
+                            <td>Static</td>
+                        </tr>
+                        <tr>
+                            <td>Compilation</td>
+                            <td>Interpreted</td>
+                            <td>Compiled (JVM bytecode)</td>
+                            <td>Compiled (native)</td>
+                        </tr>
+                        <tr>
+                            <td>Memory Management</td>
+                            <td>Automatic (GC)</td>
+                            <td>Automatic (GC)</td>
+                            <td>Manual</td>
+                        </tr>
+                        <tr>
+                            <td>Speed</td>
+                            <td>Moderate</td>
+                            <td>Fast</td>
+                            <td>Very Fast</td>
+                        </tr>
+                        <tr>
+                            <td>Readability</td>
+                            <td>⭐⭐⭐⭐⭐</td>
+                            <td>⭐⭐⭐</td>
+                            <td>⭐⭐</td>
+                        </tr>
+                        <tr>
+                            <td>Use Case</td>
+                            <td>Data Science, Web, AI</td>
+                            <td>Enterprise Apps</td>
+                            <td>Systems, Games</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Section 2: History -->
+            <section class="content-section" id="history">
+                <h2>2 · History & Evolution</h2>
+                <p>
+                    Python was created by <strong>Guido van Rossum</strong>, a Dutch programmer, as a successor
+                    to the ABC language. The name was inspired not by the snake, but by the British comedy series
+                    <em>Monty Python's Flying Circus</em>.
+                </p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Version</th>
+                            <th>Year</th>
+                            <th>Key Highlights</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>Python 1.0</code></td>
+                            <td>1994</td>
+                            <td>First release: lambda, map, filter, reduce</td>
+                        </tr>
+                        <tr>
+                            <td><code>Python 2.0</code></td>
+                            <td>2000</td>
+                            <td>List comprehensions, garbage collection</td>
+                        </tr>
+                        <tr>
+                            <td><code>Python 3.0</code></td>
+                            <td>2008</td>
+                            <td>Major redesign: print(), unicode, int division</td>
+                        </tr>
+                        <tr>
+                            <td><code>Python 3.10</code></td>
+                            <td>2021</td>
+                            <td>Structural pattern matching (match/case)</td>
+                        </tr>
+                        <tr>
+                            <td><code>Python 3.12</code></td>
+                            <td>2023</td>
+                            <td>Performance improvements, f-string improvements</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content">
+                        <strong>Python 2 is Dead</strong>
+                        <p>Python 2 reached end-of-life on January 1, 2020. All modern code should use Python 3.x.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Key Features -->
+            <section class="content-section" id="features">
+                <h2>3 · Key Features of Python</h2>
+                <ul>
+                    <li><strong>Interpreted:</strong> Code is executed line-by-line at runtime. No compilation step.
+                    </li>
+                    <li><strong>Dynamically Typed:</strong> Variable types are determined at runtime. <code>x = 5</code>
+                        is valid — no <code>int x = 5</code> needed.</li>
+                    <li><strong>Strongly Typed:</strong> Unlike JavaScript, Python won't silently convert types.
+                        <code>"5" + 5</code> raises a <code>TypeError</code>.</li>
+                    <li><strong>Object-Oriented:</strong> Everything in Python is an object — numbers, strings,
+                        functions.</li>
+                    <li><strong>Batteries Included:</strong> Huge standard library (os, json, datetime, http, etc.)</li>
+                    <li><strong>Cross-Platform:</strong> Runs on Windows, macOS, Linux without modification.</li>
+                    <li><strong>Garbage Collection:</strong> Memory managed automatically using reference counting +
+                        cyclic GC.</li>
+                    <li><strong>Multiple Paradigms:</strong> Supports procedural, object-oriented, and functional
+                        programming.</li>
+                </ul>
+            </section>
+
+            <!-- Section 4: How Python Works -->
+            <section class="content-section" id="how-it-works">
+                <h2>4 · How Python Works (Execution Model)</h2>
+                <p>
+                    When you run a Python script, several things happen under the hood:
+                </p>
+                <ol class="steps-list">
+                    <li><strong>Lexical Analysis (Tokenizing):</strong> The Python interpreter reads your source code
+                        and breaks it into tokens (keywords, identifiers, operators).</li>
+                    <li><strong>Parsing:</strong> Tokens are organized into an Abstract Syntax Tree (AST) — a tree
+                        representation of your code's structure.</li>
+                    <li><strong>Compilation to Bytecode:</strong> The AST is compiled to Python bytecode
+                        (<code>.pyc</code> files stored in <code>__pycache__/</code>).</li>
+                    <li><strong>Execution by CPython VM:</strong> The Python Virtual Machine (PVM) — typically CPython —
+                        reads and executes the bytecode instruction by instruction.</li>
+                </ol>
+
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang-badge">Python — Under the Hood</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="cm"># You can inspect Python bytecode with the `dis` module</span>
+<span class="kw">import</span> dis
+
+<span class="kw">def</span> <span class="fn">add</span>(a, b):
+    <span class="kw">return</span> a + b
+
+dis.dis(add)
+
+<span class="cm"># OUTPUT (bytecode instructions):</span>
+<span class="cm">#   2           0 LOAD_FAST                0 (a)</span>
+<span class="cm">#               2 LOAD_FAST                1 (b)</span>
+<span class="cm">#               4 BINARY_ADD</span>
+<span class="cm">#               6 RETURN_VALUE</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>
+                        2 0 LOAD_FAST 0 (a)<br>
+                        2 LOAD_FAST 1 (b)<br>
+                        4 BINARY_OP 0 (+)<br>
+                        6 RETURN_VALUE
+                    </div>
+                </div>
+
+                <div class="return-value-box">
+                    <div class="rv-label">🔁 How It Works</div>
+                    <p style="font-size:0.9rem;color:var(--purple);margin-top:0.5rem;">
+                        <code>dis.dis()</code> disassembles a function to show the bytecode Python actually runs.
+                        Each line is an instruction for the Python Virtual Machine. <code>LOAD_FAST</code> loads a
+                        local variable, <code>BINARY_ADD</code> pops two values and pushes the sum.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 5: First Program -->
+            <section class="content-section" id="first-program">
+                <h2>5 · Your First Python Programs</h2>
+                <p>Let's write the classic "Hello, World!" and explore what each part does:</p>
+
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang-badge">Python · hello_world.py</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre
+                        class="code-block"><span class="cm"># This is a comment — Python ignores it</span>
+<span class="bi">print</span>(<span class="st">"Hello, World!"</span>)                  <span class="cm"># Calls the built-in print() function</span>
+<span class="bi">print</span>(<span class="st">"Python version:"</span>, <span class="nm">3.12</span>)          <span class="cm"># Multiple arguments</span>
+<span class="bi">print</span>(<span class="st">"Sum of 5 + 3 ="</span>, <span class="nm">5</span> + <span class="nm">3</span>)         <span class="cm"># Expression inside print()</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>
+                        Hello, World!<br>
+                        Python version: 3.12<br>
+                        Sum of 5 + 3 = 8
+                    </div>
+                </div>
+
+                <div class="return-value-box">
+                    <div class="rv-label">🔁 Return Value of print()</div>
+                    <p style="font-size:0.9rem;color:var(--purple);margin-top:0.5rem;">
+                        <code>print()</code> always returns <code>None</code>. It is called purely for its <em>side
+                            effect</em>
+                        — writing text to the standard output stream (stdout). The return value is almost never used.
+                    </p>
+                    <code style="display:block;margin-top:0.5rem;">result = print("Hello")  →  result is None</code>
+                </div>
+
+                <h3>Basic Variable Assignment</h3>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang-badge">Python · variables_intro.py</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre
+                        class="code-block"><span class="cm"># Variables — no type declarations needed</span>
+name = <span class="st">"Alice"</span>            <span class="cm"># str</span>
+age = <span class="nm">25</span>                  <span class="cm"># int</span>
+height = <span class="nm">1.75</span>             <span class="cm"># float</span>
+is_student = <span class="kw">True</span>         <span class="cm"># bool</span>
+
+<span class="cm"># f-strings for formatted output (Python 3.6+)</span>
+<span class="bi">print</span>(<span class="st">f"Name: <span class="kw">{</span>name<span class="kw">}</span>, Age: <span class="kw">{</span>age<span class="kw">}</span>, Height: <span class="kw">{</span>height<span class="kw">}</span>m"</span>)
+
+<span class="cm"># Check the type of any variable</span>
+<span class="bi">print</span>(<span class="bi">type</span>(name))          <span class="cm"># &lt;class 'str'&gt;</span>
+<span class="bi">print</span>(<span class="bi">type</span>(age))           <span class="cm"># &lt;class 'int'&gt;</span>
+<span class="bi">print</span>(<span class="bi">type</span>(height))        <span class="cm"># &lt;class 'float'&gt;</span>
+<span class="bi">print</span>(<span class="bi">type</span>(is_student))    <span class="cm"># &lt;class 'bool'&gt;</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>
+                        Name: Alice, Age: 25, Height: 1.75m<br>
+                        &lt;class 'str'&gt;<br>
+                        &lt;class 'int'&gt;<br>
+                        &lt;class 'float'&gt;<br>
+                        &lt;class 'bool'&gt;
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Zen of Python -->
+            <section class="content-section" id="python-zen">
+                <h2>6 · The Zen of Python</h2>
+                <p>Run <code>import this</code> in Python to reveal the 20 guiding principles written by Tim Peters:</p>
+                <div class="callout important">
+                    <div class="callout-icon">🧘</div>
+                    <div class="callout-content">
+                        <strong>PEP 20 — The Zen of Python (excerpt)</strong>
+                        <ul style="margin-top:0.5rem;">
+                            <li>Beautiful is better than ugly.</li>
+                            <li>Explicit is better than implicit.</li>
+                            <li>Simple is better than complex.</li>
+                            <li>Readability counts.</li>
+                            <li>Errors should never pass silently.</li>
+                            <li>There should be one — and preferably only one — obvious way to do it.</li>
+                            <li>Now is better than never.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Use Cases -->
+            <section class="content-section" id="use-cases">
+                <h2>7 · Real-World Applications</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Domain</th>
+                            <th>Libraries/Tools</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>🤖 AI & Machine Learning</td>
+                            <td>scikit-learn, PyTorch, TensorFlow</td>
+                            <td>ChatGPT, Google Search</td>
+                        </tr>
+                        <tr>
+                            <td>📊 Data Science</td>
+                            <td>Pandas, NumPy, Matplotlib</td>
+                            <td>Jupyter Notebooks, Kaggle</td>
+                        </tr>
+                        <tr>
+                            <td>🌐 Web Development</td>
+                            <td>Django, Flask, FastAPI</td>
+                            <td>Instagram, Pinterest, Spotify</td>
+                        </tr>
+                        <tr>
+                            <td>🔬 Scientific Computing</td>
+                            <td>SciPy, SymPy</td>
+                            <td>NASA, CERN data analysis</td>
+                        </tr>
+                        <tr>
+                            <td>🤖 Automation/Scripting</td>
+                            <td>Selenium, PyAutoGUI</td>
+                            <td>Web scraping, testing</td>
+                        </tr>
+                        <tr>
+                            <td>🔒 Cybersecurity</td>
+                            <td>Scapy, requests</td>
+                            <td>Penetration testing, CTFs</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Section 8: Installation -->
+            <section class="content-section" id="installation">
+                <h2>8 · Installation & First Run</h2>
+                <h3>Installing Python</h3>
+                <ol>
+                    <li>Download Python from <strong>python.org/downloads</strong></li>
+                    <li>Run the installer — check <strong>"Add Python to PATH"</strong></li>
+                    <li>Verify installation in terminal:</li>
+                </ol>
+
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang-badge">Terminal / Shell</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block">python --version
+<span class="cm"># Python 3.12.0</span>
+
+python -c "print('Python works!')"
+<span class="cm"># Python works!</span>
+
+<span class="cm"># Launch interactive REPL</span>
+python
+<span class="cm"># >>> 2 + 2</span>
+<span class="cm"># 4</span></pre>
+                </div>
+
+                <div class="callout tip">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <strong>Use Virtual Environments</strong>
+                        <p>Always create a virtual environment for each project to avoid dependency conflicts:
+                            <code>python -m venv myenv</code> → <code>myenv\Scripts\activate</code> (Windows)
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Page Navigation -->
+        <div class="page-nav">
+            <a href="../../index.html">
+                <span class="nav-direction">← Previous</span>
+                <span class="nav-topic">Home</span>
+            </a>
+            <a href="variables-datatypes.html" class="next">
+                <span class="nav-direction">Next →</span>
+                <span class="nav-topic">Variables & Data Types</span>
+            </a>
+        </div>
+
+        <footer class="footer">
+            <p>🐍 Python Learning Hub — Built from leading textbooks for deep understanding</p>
+        </footer>
+    </main>
+
+    <script src="../../js/main.js"></script>
+</body>
+
+</html>

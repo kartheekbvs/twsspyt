@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strings - Python Learning Hub</title>
+<meta name="description" content="Strings - comprehensive textbook reference with code examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../../index.html" class="logo"><div class="logo-icon">&#x1F40D;</div><div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete Reference</span></div></a><button class="sidebar-toggle" id="sidebarToggle">&#x2630;</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="&#x1F50D; Search topics..." class="search-input"></div>
+<div class="nav-items" id="navItems">
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+</div></div></div>
+</nav>
+<main class="main-content" id="mainContent">
+<header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; Python Fundamentals &rarr; Strings</div>
+<div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
+</header>
+<div class="page-content">
+<div class="page-header">
+<span class="topic-badge">&#x1F40D; Python Fundamentals</span>
+<h1>Strings</h1>
+<p class="page-intro">Strings are immutable sequences of Unicode characters in Python. This chapter covers string creation, indexing, slicing, formatting (f-strings, .format(), %), and 40+ built-in string methods for powerful text processing.</p>
+<div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+<span class="difficulty-badge beginner">&#x25CF; Beginner</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python Programming (2024), Learning Python &mdash; Mark Lutz</em></span>
+</div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol><li><a href="#s1">Creating Strings</a></li><li><a href="#s2">Indexing &amp; Slicing</a></li><li><a href="#s3">String Formatting (f-strings)</a></li><li><a href="#s4">Common String Methods</a></li><li><a href="#s5">Escape Sequences &amp; Raw Strings</a></li><li><a href="#s6">Immutability Explained</a></li><li><a href="#s7">String Encoding (Unicode)</a></li></ol></div>
+<section class="content-section" id="s1"><h2>1 &middot; Creating Strings</h2>
+<p>Python strings can use single quotes, double quotes, or triple quotes for multi-line text. All produce the same <code>str</code> type.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Different ways to create strings</span>
+s1 = <span class="st">'Hello'</span>              <span class="cm"># single quotes</span>
+s2 = <span class="st">"World"</span>              <span class="cm"># double quotes</span>
+s3 = <span class="st">"""Multi
+line string"""</span>               <span class="cm"># triple quotes preserve newlines</span>
+s4 = <span class="st">r"C:\Users\name"</span>     <span class="cm"># raw string &mdash; backslashes literal</span>
+s5 = <span class="st">b"bytes"</span>              <span class="cm"># bytes literal (not str)</span>
+
+<span class="bi">print</span>(<span class="bi">type</span>(s1))    <span class="cm"># &lt;class 'str'&gt;</span>
+<span class="bi">print</span>(<span class="bi">len</span>(s2))     <span class="cm"># 5</span>
+<span class="bi">print</span>(s1 + <span class="st">" "</span> + s2)  <span class="cm"># Hello World (concatenation)</span>
+<span class="bi">print</span>(s2 * <span class="nm">3</span>)     <span class="cm"># WorldWorldWorld (repetition)</span>
+<span class="bi">print</span>(<span class="st">"Hello"</span> == <span class="st">'Hello'</span>)  <span class="cm"># True &mdash; same string</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>&lt;class 'str'&gt;<br>5<br>Hello World<br>WorldWorldWorld<br>True</div></div></section>
+
+<section class="content-section" id="s2"><h2>2 &middot; Indexing &amp; Slicing</h2>
+<p>Strings are sequences &mdash; each character has a 0-based index (negative indexes count from end).</p>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">s = <span class="st">"Python"</span>
+<span class="cm">#    P  y  t  h  o  n</span>
+<span class="cm">#    0  1  2  3  4  5   (forward)</span>
+<span class="cm">#   -6 -5 -4 -3 -2 -1   (backward)</span>
+
+<span class="bi">print</span>(s[<span class="nm">0</span>])      <span class="cm"># P</span>
+<span class="bi">print</span>(s[-<span class="nm">1</span>])     <span class="cm"># n</span>
+<span class="bi">print</span>(s[<span class="nm">1</span>:<span class="nm">4</span>])    <span class="cm"># yth  (start:stop, stop exclusive)</span>
+<span class="bi">print</span>(s[:<span class="nm">3</span>])     <span class="cm"># Pyt  (first 3)</span>
+<span class="bi">print</span>(s[<span class="nm">3</span>:])     <span class="cm"># hon  (from index 3 onward)</span>
+<span class="bi">print</span>(s[::<span class="nm">2</span>])    <span class="cm"># Pto  (every 2nd character)</span>
+<span class="bi">print</span>(s[::-<span class="nm">1</span>])   <span class="cm"># nohtyP  (reverse string)</span>
+
+<span class="cm"># Slicing never raises IndexError</span>
+<span class="bi">print</span>(s[<span class="nm">100</span>:])   <span class="cm"># '' (empty string, no error)</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>P &middot; n &middot; yth &middot; Pyt &middot; hon &middot; Pto &middot; nohtyP &middot; ''</div></div>
+<div class="callout note"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Textbook Insight</strong><p>"Slicing creates a <em>new</em> string object. The original is never modified because strings are immutable. The slice <code>s[i:j]</code> extracts characters from index <code>i</code> up to but not including <code>j</code>." &mdash; <em>Learning Python, Mark Lutz</em></p></div></div></section>
+
+<section class="content-section" id="s3"><h2>3 &middot; String Formatting</h2>
+<table class="data-table"><thead><tr><th>Method</th><th>Syntax</th><th>Version</th><th>Recommended</th></tr></thead><tbody>
+<tr><td>f-strings</td><td><code>f"Hello {name}"</code></td><td>3.6+</td><td><strong>Yes &#x2705;</strong></td></tr>
+<tr><td>.format()</td><td><code>"Hello {}".format(name)</code></td><td>2.7+</td><td>OK</td></tr>
+<tr><td>% operator</td><td><code>"Hello %s" % name</code></td><td>Legacy</td><td>Avoid</td></tr>
+</tbody></table>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; formatting.py</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">name, age, pi = <span class="st">"Alice"</span>, <span class="nm">30</span>, <span class="nm">3.14159</span>
+
+<span class="cm"># f-strings (best practice)</span>
+<span class="bi">print</span>(<span class="st">f"Name: {name}, Age: {age}"</span>)       <span class="cm"># Name: Alice, Age: 30</span>
+<span class="bi">print</span>(<span class="st">f"Pi = {pi:.2f}"</span>)                   <span class="cm"># Pi = 3.14</span>
+<span class="bi">print</span>(<span class="st">f"2^10 = {2**10}"</span>)                  <span class="cm"># 2^10 = 1024</span>
+<span class="bi">print</span>(<span class="st">f"{name!r}"</span>)                        <span class="cm"># 'Alice' (repr)</span>
+<span class="bi">print</span>(<span class="st">f"{age:05d}"</span>)                       <span class="cm"># 00030 (zero-padded)</span>
+<span class="bi">print</span>(<span class="st">f"{1_000_000:,.0f}"</span>)               <span class="cm"># 1,000,000</span>
+
+<span class="cm"># .format() method</span>
+<span class="bi">print</span>(<span class="st">"Hello, {}! Age: {}"</span>.format(name, age))
+<span class="bi">print</span>(<span class="st">"{0} + {0} = {1}"</span>.format(<span class="nm">5</span>, <span class="nm">10</span>))    <span class="cm"># 5 + 5 = 10</span>
+
+<span class="cm"># Alignment</span>
+<span class="bi">print</span>(<span class="st">f"{'left':<span><</span>20}"</span>)     <span class="cm"># left-aligned</span>
+<span class="bi">print</span>(<span class="st">f"{'center':^20}"</span>)   <span class="cm"># center-aligned</span>
+<span class="bi">print</span>(<span class="st">f"{'right':>20}"</span>)    <span class="cm"># right-aligned</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Name: Alice, Age: 30<br>Pi = 3.14<br>2^10 = 1024<br>'Alice'<br>00030<br>1,000,000</div></div></section>
+
+<section class="content-section" id="s4"><h2>4 &middot; Common String Methods</h2>
+<table class="data-table"><thead><tr><th>Method</th><th>Description</th><th>Returns</th></tr></thead><tbody>
+<tr><td><code>.upper()</code> / <code>.lower()</code></td><td>Convert case</td><td>New <code>str</code></td></tr>
+<tr><td><code>.strip()</code> / <code>.lstrip()</code> / <code>.rstrip()</code></td><td>Remove whitespace</td><td>New <code>str</code></td></tr>
+<tr><td><code>.split(sep)</code></td><td>Split into list</td><td><code>list[str]</code></td></tr>
+<tr><td><code>.join(iterable)</code></td><td>Join strings</td><td><code>str</code></td></tr>
+<tr><td><code>.replace(old, new)</code></td><td>Replace substring</td><td>New <code>str</code></td></tr>
+<tr><td><code>.find(sub)</code> / <code>.index(sub)</code></td><td>Find position</td><td><code>int</code> (-1 or ValueError)</td></tr>
+<tr><td><code>.startswith()</code> / <code>.endswith()</code></td><td>Check prefix/suffix</td><td><code>bool</code></td></tr>
+<tr><td><code>.count(sub)</code></td><td>Count occurrences</td><td><code>int</code></td></tr>
+<tr><td><code>.isdigit()</code> / <code>.isalpha()</code> / <code>.isalnum()</code></td><td>Character checks</td><td><code>bool</code></td></tr>
+<tr><td><code>.title()</code> / <code>.capitalize()</code> / <code>.swapcase()</code></td><td>Case variants</td><td>New <code>str</code></td></tr>
+<tr><td><code>.center(w)</code> / <code>.ljust(w)</code> / <code>.rjust(w)</code></td><td>Padding</td><td>New <code>str</code></td></tr>
+<tr><td><code>.zfill(w)</code></td><td>Zero-fill</td><td>New <code>str</code></td></tr>
+</tbody></table>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; methods.py</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">text = <span class="st">"  Hello, World!  "</span>
+<span class="bi">print</span>(text.strip())                  <span class="cm"># "Hello, World!"</span>
+<span class="bi">print</span>(text.strip().lower())          <span class="cm"># "hello, world!"</span>
+<span class="bi">print</span>(<span class="st">"python,java,c++"</span>.split(<span class="st">","</span>))  <span class="cm"># ['python','java','c++']</span>
+<span class="bi">print</span>(<span class="st">", "</span>.join([<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>]))   <span class="cm"># a, b, c</span>
+<span class="bi">print</span>(<span class="st">"banana"</span>.replace(<span class="st">"a"</span>,<span class="st">"o"</span>))   <span class="cm"># bonono</span>
+<span class="bi">print</span>(<span class="st">"hello"</span>.center(<span class="nm">11</span>,<span class="st">"-"</span>))       <span class="cm"># ---hello---</span>
+<span class="bi">print</span>(<span class="st">"banana"</span>.count(<span class="st">"a"</span>))          <span class="cm"># 3</span>
+<span class="bi">print</span>(<span class="st">"hello world"</span>.title())        <span class="cm"># Hello World</span>
+<span class="bi">print</span>(<span class="st">"42"</span>.zfill(<span class="nm">5</span>))                <span class="cm"># 00042</span>
+
+<span class="cm"># Chaining methods (returns new string each time)</span>
+result = <span class="st">"  HELLO world  "</span>.strip().lower().replace(<span class="st">"world"</span>,<span class="st">"python"</span>).title()
+<span class="bi">print</span>(result)  <span class="cm"># Hello Python</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Hello, World!<br>hello, world!<br>['python','java','c++']<br>a, b, c<br>bonono<br>---hello---<br>3<br>Hello World<br>00042<br>Hello Python</div></div></section>
+
+<section class="content-section" id="s5"><h2>5 &middot; Escape Sequences &amp; Raw Strings</h2>
+<table class="data-table"><thead><tr><th>Escape</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>\n</code></td><td>Newline</td></tr>
+<tr><td><code>\t</code></td><td>Tab</td></tr>
+<tr><td><code>\\</code></td><td>Literal backslash</td></tr>
+<tr><td><code>\'</code></td><td>Single quote</td></tr>
+<tr><td><code>\"</code></td><td>Double quote</td></tr>
+<tr><td><code>\0</code></td><td>Null character</td></tr>
+<tr><td><code>\u0041</code></td><td>Unicode character (A)</td></tr>
+</tbody></table>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="bi">print</span>(<span class="st">"Line1\nLine2"</span>)         <span class="cm"># Line1 (newline) Line2</span>
+<span class="bi">print</span>(<span class="st">"Col1\tCol2"</span>)           <span class="cm"># Col1    Col2 (tab)</span>
+<span class="bi">print</span>(<span class="st">"C:\\Users\\file"</span>)       <span class="cm"># C:\Users\file</span>
+
+<span class="cm"># Raw strings &mdash; backslashes are literal</span>
+<span class="bi">print</span>(<span class="st">r"C:\Users\file"</span>)       <span class="cm"># C:\Users\file (same!)</span>
+
+<span class="cm"># Great for regex patterns</span>
+<span class="kw">import</span> re
+pattern = <span class="st">r"\d{3}-\d{4}"</span>    <span class="cm"># no need to double backslashes</span>
+<span class="bi">print</span>(re.findall(pattern, <span class="st">"Call 555-1234"</span>))  <span class="cm"># ['555-1234']</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Line1<br>Line2<br>Col1&emsp;Col2<br>C:\Users\file<br>['555-1234']</div></div></section>
+
+<section class="content-section" id="s6"><h2>6 &middot; Immutability Explained</h2>
+<p>Strings cannot be changed in place. Every operation returns a <em>new</em> string object. This is why <code>s[0] = "X"</code> raises <code>TypeError</code>.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">s = <span class="st">"Hello"</span>
+<span class="cm"># s[0] = "J"  # TypeError!</span>
+
+<span class="cm"># Instead, create a new string</span>
+s = <span class="st">"J"</span> + s[<span class="nm">1</span>:]
+<span class="bi">print</span>(s)  <span class="cm"># Jello</span>
+
+<span class="cm"># Performance: use list + join for building strings</span>
+parts = []
+<span class="kw">for</span> i <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">5</span>):
+    parts.append(<span class="bi">str</span>(i))
+result = <span class="st">""</span>.join(parts)  <span class="cm"># "01234" &mdash; O(n) not O(n&sup2;)</span>
+<span class="bi">print</span>(result)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Jello<br>01234</div></div>
+<div class="callout tip"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Performance Tip</strong><p>Never build strings with <code>+=</code> in a loop &mdash; it creates a new string each iteration (O(n&sup2;)). Use <code>list.append()</code> then <code>"".join()</code> for O(n) performance.</p></div></div></section>
+
+<section class="content-section" id="s7"><h2>7 &middot; String Encoding (Unicode)</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Python 3 strings are Unicode by default</span>
+<span class="bi">print</span>(<span class="st">"&#x4F60;&#x597D;"</span>)          <span class="cm"># Chinese: Hello</span>
+<span class="bi">print</span>(<span class="st">"\u03C0"</span>)          <span class="cm"># &#x3C0; (pi)</span>
+<span class="bi">print</span>(<span class="bi">ord</span>(<span class="st">"A"</span>))          <span class="cm"># 65 (Unicode code point)</span>
+<span class="bi">print</span>(<span class="bi">chr</span>(<span class="nm">65</span>))           <span class="cm"># A</span>
+
+<span class="cm"># Encoding to bytes</span>
+text = <span class="st">"Hello &#x1F310;"</span>
+encoded = text.encode(<span class="st">"utf-8"</span>)   <span class="cm"># str &rarr; bytes</span>
+<span class="bi">print</span>(encoded)                     <span class="cm"># b'Hello \xf0\x9f\x8c\x90'</span>
+decoded = encoded.decode(<span class="st">"utf-8"</span>) <span class="cm"># bytes &rarr; str</span>
+<span class="bi">print</span>(decoded)                     <span class="cm"># Hello &#x1F310;</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>&#x4F60;&#x597D;<br>&#x3C0;<br>65<br>A<br>b'Hello ...'<br>Hello &#x1F310;</div></div></section>
+</div>
+<div class="page-nav">
+<a href="functions.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Functions</span></a>
+<a href="lists.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Lists</span></a>
+</div>
+<footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
+</main>
+<script src="../../js/main.js"></script>
+</body></html>

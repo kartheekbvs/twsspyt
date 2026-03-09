@@ -1,0 +1,26 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Downloads
+1XgzCNpREC0EuyDmt3xOeQAjsK4whupac/
+DL DL al is well/
+
+# OS files
+.DS_Store
+Thumbs.db

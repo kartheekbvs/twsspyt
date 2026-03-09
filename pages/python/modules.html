@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modules &amp; Packages - Python Learning Hub</title>
+<meta name="description" content="Modules &amp; Packages - comprehensive textbook reference with code examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../../index.html" class="logo"><div class="logo-icon">&#x1F40D;</div><div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete Reference</span></div></a><button class="sidebar-toggle" id="sidebarToggle">&#x2630;</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="&#x1F50D; Search topics..." class="search-input"></div>
+<div class="nav-items" id="navItems">
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+</div></div></div>
+</nav>
+<main class="main-content" id="mainContent">
+<header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; Python Fundamentals &rarr; Modules &amp; Packages</div>
+<div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
+</header>
+<div class="page-content">
+<div class="page-header">
+<span class="topic-badge">&#x1F40D; Python Fundamentals</span>
+<h1>Modules &amp; Packages</h1>
+<p class="page-intro">Modules are Python files containing functions, classes, and variables. Packages are directories of modules. This covers import mechanics, the module search path, __init__.py, __name__ == '__main__', and popular standard library modules.</p>
+<div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+<span class="difficulty-badge beginner">&#x25CF; Beginner</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python Programming (2024), Learning Python &mdash; Mark Lutz</em></span>
+</div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol><li><a href="#s1">What are Modules?</a></li><li><a href="#s2">Import Mechanics</a></li><li><a href="#s3">Packages</a></li><li><a href="#s4">Standard Library Highlights</a></li><li><a href="#s5">__name__ == "__main__"</a></li></ol></div>
+<section class="content-section" id="s1"><h2>1 &middot; What are Modules?</h2>
+<p>Any <code>.py</code> file is a module. When you import it, Python executes the file and makes its names available.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; mymodule.py</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># mymodule.py</span>
+PI = <span class="nm">3.14159</span>
+
+<span class="kw">def</span> <span class="fn">greet</span>(name):
+    <span class="kw">return</span> <span class="st">f"Hello, {name}!"</span>
+
+<span class="kw">class</span> <span class="cl">Calculator</span>:
+    <span class="kw">def</span> <span class="fn">add</span>(self, a, b):
+        <span class="kw">return</span> a + b</pre></div>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; main.py</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Different import styles</span>
+<span class="kw">import</span> mymodule
+<span class="bi">print</span>(mymodule.PI)                 <span class="cm"># 3.14159</span>
+<span class="bi">print</span>(mymodule.greet(<span class="st">"Alice"</span>))     <span class="cm"># Hello, Alice!</span>
+
+<span class="kw">from</span> mymodule <span class="kw">import</span> greet, PI
+<span class="bi">print</span>(greet(<span class="st">"Bob"</span>))               <span class="cm"># Hello, Bob!</span>
+
+<span class="kw">from</span> mymodule <span class="kw">import</span> Calculator <span class="kw">as</span> Calc
+c = Calc()
+<span class="bi">print</span>(c.add(<span class="nm">3</span>, <span class="nm">4</span>))               <span class="cm"># 7</span>
+
+<span class="cm"># import * (avoid in production code)</span>
+<span class="kw">from</span> mymodule <span class="kw">import</span> *</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>3.14159<br>Hello, Alice!<br>Hello, Bob!<br>7</div></div></section>
+
+<section class="content-section" id="s2"><h2>2 &middot; Import Mechanics</h2>
+<div class="callout note"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Module Search Path</strong><p>Python searches for modules in this order: 1) Current directory, 2) <code>PYTHONPATH</code> env var, 3) Standard library, 4) <code>site-packages</code> (pip-installed). Check with <code>sys.path</code>.</p></div></div>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> sys
+<span class="bi">print</span>(sys.path)    <span class="cm"># list of directories Python searches</span>
+
+<span class="cm"># Modules are cached after first import</span>
+<span class="cm"># Re-import does nothing unless you use:</span>
+<span class="kw">from</span> importlib <span class="kw">import</span> reload
+reload(mymodule)   <span class="cm"># forces re-execution</span>
+
+<span class="cm"># Check module location</span>
+<span class="bi">print</span>(mymodule.__file__)   <span class="cm"># /path/to/mymodule.py</span></pre></div></section>
+
+<section class="content-section" id="s3"><h2>3 &middot; Packages</h2>
+<p>A package is a directory with an <code>__init__.py</code> file (can be empty). It groups related modules.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Project Structure</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">mypackage/
+    __init__.py       # makes it a package
+    utils.py
+    models/
+        __init__.py
+        linear.py
+        tree.py</pre></div>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">from</span> mypackage.utils <span class="kw">import</span> helper_fn
+<span class="kw">from</span> mypackage.models.linear <span class="kw">import</span> LinearModel
+
+<span class="cm"># Relative imports (inside package)</span>
+<span class="kw">from</span> . <span class="kw">import</span> utils             <span class="cm"># current package</span>
+<span class="kw">from</span> ..models <span class="kw">import</span> linear     <span class="cm"># parent package</span></pre></div></section>
+
+<section class="content-section" id="s4"><h2>4 &middot; Standard Library Highlights</h2>
+<table class="data-table"><thead><tr><th>Module</th><th>Purpose</th><th>Key Functions</th></tr></thead><tbody>
+<tr><td><code>os</code></td><td>OS interface</td><td><code>os.getcwd()</code>, <code>os.listdir()</code></td></tr>
+<tr><td><code>sys</code></td><td>System config</td><td><code>sys.argv</code>, <code>sys.path</code></td></tr>
+<tr><td><code>math</code></td><td>Math functions</td><td><code>sqrt()</code>, <code>pi</code>, <code>ceil()</code></td></tr>
+<tr><td><code>datetime</code></td><td>Date/time</td><td><code>datetime.now()</code>, <code>timedelta</code></td></tr>
+<tr><td><code>json</code></td><td>JSON encoding</td><td><code>dumps()</code>, <code>loads()</code></td></tr>
+<tr><td><code>re</code></td><td>Regular expressions</td><td><code>findall()</code>, <code>sub()</code></td></tr>
+<tr><td><code>collections</code></td><td>Data structures</td><td><code>Counter</code>, <code>defaultdict</code>, <code>deque</code></td></tr>
+<tr><td><code>itertools</code></td><td>Iterator tools</td><td><code>chain()</code>, <code>combinations()</code></td></tr>
+<tr><td><code>functools</code></td><td>Higher-order functions</td><td><code>reduce()</code>, <code>lru_cache</code></td></tr>
+<tr><td><code>pathlib</code></td><td>Path handling</td><td><code>Path()</code>, <code>glob()</code></td></tr>
+</tbody></table></section>
+
+<section class="content-section" id="s5"><h2>5 &middot; __name__ == "__main__"</h2>
+<p>This guards code that should only run when the file is executed directly (not imported).</p>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; script.py</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">def</span> <span class="fn">main</span>():
+    <span class="bi">print</span>(<span class="st">"Running as main script"</span>)
+
+<span class="kw">if</span> __name__ == <span class="st">"__main__"</span>:
+    main()
+<span class="cm"># When imported: __name__ == "script" (module name)</span>
+<span class="cm"># When run directly: __name__ == "__main__"</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Running as main script</div></div>
+<div class="callout tip"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Best Practice</strong><p>Always wrap executable code in <code>if __name__ == "__main__":</code> so your module can be both imported and run as a script without side effects.</p></div></div></section>
+</div>
+<div class="page-nav">
+<a href="exceptions.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Exception Handling</span></a>
+<a href="../oop/classes-objects.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Classes &amp; Objects</span></a>
+</div>
+<footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
+</main>
+<script src="../../js/main.js"></script>
+</body></html>

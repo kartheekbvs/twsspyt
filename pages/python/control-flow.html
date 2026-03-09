@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Flow - Python Learning Hub</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../../index.html" class="logo">
+                <div class="logo-icon">🐍</div>
+                <div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete
+                        Reference</span></div>
+            </a>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+        <div class="search-box"><input type="text" id="searchInput" placeholder="🔍 Search topics..."
+                class="search-input"></div>
+        <div class="nav-items" id="navItems">
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐍 Python Fundamentals</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="introduction.html" class="nav-item">Introduction to Python</a>
+                    <a href="variables-datatypes.html" class="nav-item">Variables & Data Types</a>
+                    <a href="operators.html" class="nav-item">Operators</a>
+                    <a href="control-flow.html" class="nav-item active">Control Flow</a>
+                    <a href="loops.html" class="nav-item">Loops</a>
+                    <a href="functions.html" class="nav-item">Functions</a>
+                    <a href="strings.html" class="nav-item">Strings</a>
+                    <a href="lists.html" class="nav-item">Lists</a>
+                    <a href="tuples.html" class="nav-item">Tuples</a>
+                    <a href="dictionaries.html" class="nav-item">Dictionaries</a>
+                    <a href="sets.html" class="nav-item">Sets</a>
+                    <a href="file-io.html" class="nav-item">File I/O</a>
+                    <a href="exceptions.html" class="nav-item">Exception Handling</a>
+                    <a href="modules.html" class="nav-item">Modules & Packages</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🏗️ OOP</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../oop/classes-objects.html" class="nav-item">Classes & Objects</a>
+                    <a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+                    <a href="../oop/decorators.html" class="nav-item">Decorators</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>⚡ Advanced Python</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../advanced/generators.html" class="nav-item">Generators & Iterators</a>
+                    <a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+                    <a href="../advanced/lambda.html" class="nav-item">Lambda & Functional</a>
+                    <a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+                    <a href="../advanced/async.html" class="nav-item">Async & Await</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🔢 NumPy</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../numpy/arrays.html" class="nav-item">Arrays & ndarray</a>
+                    <a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+                    <a href="../numpy/indexing.html" class="nav-item">Indexing & Slicing</a>
+                    <a href="../numpy/reshaping.html" class="nav-item">Reshaping & Stacking</a>
+                    <a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+                    <a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+                    <a href="../numpy/random.html" class="nav-item">Random Module</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐼 Pandas</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../pandas/series-dataframe.html" class="nav-item">Series & DataFrame</a>
+                    <a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+                    <a href="../pandas/selection.html" class="nav-item">Selection & Filtering</a>
+                    <a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+                    <a href="../pandas/groupby.html" class="nav-item">GroupBy & Aggregation</a>
+                    <a href="../pandas/merging.html" class="nav-item">Merging & Joining</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🤖 Machine Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+                    <a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+                    <a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+                    <a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+                    <a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+                    <a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🧠 Deep Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+                    <a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+                    <a href="../dl/cnn.html" class="nav-item">CNN</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>📊 Data Analysis</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../data/exploratory.html" class="nav-item">EDA</a>
+                    <a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+                    <a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content" id="mainContent">
+        <header class="topbar">
+            <button class="mobile-toggle" id="mobileToggle">☰</button>
+            <div class="topbar-breadcrumb"><a href="../../index.html"
+                    style="color:var(--accent);text-decoration:none;">Home</a> → Python Fundamentals → Control Flow
+            </div>
+            <div class="topbar-progress"><span class="progress-text">Reading</span>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill" id="progressFill"></div>
+                </div><span id="progressPercent">0%</span>
+            </div>
+        </header>
+
+        <div class="page-content">
+            <div class="page-header">
+                <span class="topic-badge">🐍 Python Fundamentals</span>
+                <h1>Control Flow</h1>
+                <p class="page-intro">Control flow statements determine the order in which code executes. Python
+                    provides <code>if/elif/else</code> for conditional branching, <code>while</code> for indefinite
+                    loops, <code>for</code> for definite loops, and <code>match/case</code> for structural pattern
+                    matching (Python 3.10+).</p>
+                <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+                    <span class="difficulty-badge beginner">● Beginner</span>
+                    <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">📖 <em>Python Programming
+                            (2024)</em></span>
+                </div>
+            </div>
+
+            <div class="toc-box">
+                <h4>📋 Table of Contents</h4>
+                <ol>
+                    <li><a href="#if-else">if / elif / else</a></li>
+                    <li><a href="#truthy">Truthy & Falsy Values</a></li>
+                    <li><a href="#ternary">Ternary (Conditional) Expression</a></li>
+                    <li><a href="#match">match / case (Python 3.10+)</a></li>
+                    <li><a href="#short-circuit">Short-Circuit Evaluation</a></li>
+                </ol>
+            </div>
+
+            <section class="content-section" id="if-else">
+                <h2>1 · if / elif / else</h2>
+                <p>Python uses indentation (4 spaces) instead of curly braces to delimit code blocks.</p>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · if/elif/else</span><button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="cm"># Basic if/elif/else</span>
+score = <span class="nm">78</span>
+
+<span class="kw">if</span> score >= <span class="nm">90</span>:
+    grade = <span class="st">"A"</span>
+<span class="kw">elif</span> score >= <span class="nm">80</span>:
+    grade = <span class="st">"B"</span>
+<span class="kw">elif</span> score >= <span class="nm">70</span>:
+    grade = <span class="st">"C"</span>
+<span class="kw">elif</span> score >= <span class="nm">60</span>:
+    grade = <span class="st">"D"</span>
+<span class="kw">else</span>:
+    grade = <span class="st">"F"</span>
+
+<span class="bi">print</span>(<span class="st">f"Score <span class="kw">{</span>score<span class="kw">}</span> → Grade <span class="kw">{</span>grade<span class="kw">}</span>"</span>)  <span class="cm"># Score 78 → Grade C</span>
+
+<span class="cm"># Nested conditions</span>
+x, y = <span class="nm">10</span>, <span class="nm">20</span>
+<span class="kw">if</span> x > <span class="nm">5</span>:
+    <span class="kw">if</span> y > <span class="nm">15</span>:
+        <span class="bi">print</span>(<span class="st">"Both conditions met"</span>)
+
+<span class="cm"># Compound conditions</span>
+age  = <span class="nm">25</span>
+name = <span class="st">"Alice"</span>
+<span class="kw">if</span> age >= <span class="nm">18</span> <span class="kw">and</span> name != <span class="st">""</span>:
+    <span class="bi">print</span>(<span class="st">"Valid adult user"</span>)
+
+<span class="cm"># Chained comparisons (unique to Python!)</span>
+n = <span class="nm">15</span>
+<span class="kw">if</span> <span class="nm">10</span> < n < <span class="nm">20</span>:
+    <span class="bi">print</span>(<span class="st">"n is between 10 and 20"</span>)</pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>Score 78 → Grade C<br>Both conditions met<br>Valid adult
+                        user<br>n is between 10 and 20
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="truthy">
+                <h2>2 · Truthy & Falsy Values</h2>
+                <p>Python determines truth through the <code>bool()</code> function. These values are all
+                    <strong>falsy</strong>:</p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Value</th>
+                            <th>Type</th>
+                            <th>bool()</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>False</code></td>
+                            <td>bool</td>
+                            <td><code>False</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>None</code></td>
+                            <td>NoneType</td>
+                            <td><code>False</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>0</code>, <code>0.0</code>, <code>0j</code></td>
+                            <td>numeric</td>
+                            <td><code>False</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>""</code>, <code>''</code></td>
+                            <td>str</td>
+                            <td><code>False</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>[]</code>, <code>()</code>, <code>{}</code></td>
+                            <td>containers</td>
+                            <td><code>False</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>set()</code></td>
+                            <td>set</td>
+                            <td><code>False</code></td>
+                        </tr>
+                        <tr>
+                            <td>Everything else</td>
+                            <td>—</td>
+                            <td><code>True</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Truthiness</span><button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="cm"># Pythonic: check if list is non-empty</span>
+items = [<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>]
+<span class="kw">if</span> items:                      <span class="cm"># Much better than: if len(items) > 0</span>
+    <span class="bi">print</span>(<span class="st">"List has items"</span>)
+
+<span class="cm"># Check if string is non-empty</span>
+name = <span class="st">"Alice"</span>
+<span class="kw">if</span> name:
+    <span class="bi">print</span>(<span class="st">f"Hello, <span class="kw">{</span>name<span class="kw">}</span>"</span>)
+
+<span class="cm"># or shorthand for default values</span>
+user_input = <span class="st">""</span>
+value = user_input <span class="kw">or</span> <span class="st">"default"</span>
+<span class="bi">print</span>(value)   <span class="cm"># "default" (because "" is falsy)</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>List has items<br>Hello, Alice<br>default
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="ternary">
+                <h2>3 · Ternary Expression</h2>
+                <p>Python's single-line conditional: <code>value_if_true if condition else value_if_false</code></p>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Ternary Expressions</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="cm"># Classic ternary</span>
+age   = <span class="nm">20</span>
+label = <span class="st">"adult"</span> <span class="kw">if</span> age >= <span class="nm">18</span> <span class="kw">else</span> <span class="st">"minor"</span>
+<span class="bi">print</span>(label)    <span class="cm"># "adult"</span>
+
+<span class="cm"># In function return</span>
+<span class="kw">def</span> <span class="fn">abs_val</span>(x):
+    <span class="kw">return</span> x <span class="kw">if</span> x >= <span class="nm">0</span> <span class="kw">else</span> -x
+
+<span class="cm"># In comprehension</span>
+nums   = [<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>, <span class="nm">4</span>, <span class="nm">5</span>]
+labels = [<span class="st">"odd"</span> <span class="kw">if</span> n%<span class="nm">2</span> <span class="kw">else</span> <span class="st">"even"</span> <span class="kw">for</span> n <span class="kw">in</span> nums]
+<span class="bi">print</span>(labels)   <span class="cm"># ['odd', 'even', 'odd', 'even', 'odd']</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>adult<br>['odd', 'even', 'odd', 'even', 'odd']
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="match">
+                <h2>4 · match / case (Python 3.10+)</h2>
+                <p>Python's structural pattern matching — more powerful than a switch statement:</p>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python 3.10+ · match/case</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre
+                        class="code-block"><span class="cm"># Simple value matching</span>
+command = <span class="st">"quit"</span>
+
+<span class="kw">match</span> command:
+    <span class="kw">case</span> <span class="st">"quit"</span>:
+        <span class="bi">print</span>(<span class="st">"Quitting..."</span>)
+    <span class="kw">case</span> <span class="st">"hello"</span>:
+        <span class="bi">print</span>(<span class="st">"Hello!"</span>)
+    <span class="kw">case</span> _:          <span class="cm"># wildcard (default)</span>
+        <span class="bi">print</span>(<span class="st">"Unknown command"</span>)
+
+<span class="cm"># Pattern matching with types</span>
+<span class="kw">def</span> <span class="fn">describe</span>(value):
+    <span class="kw">match</span> value:
+        <span class="kw">case</span> <span class="bi">int</span>() <span class="kw">if</span> value > <span class="nm">0</span>:
+            <span class="kw">return</span> <span class="st">"positive integer"</span>
+        <span class="kw">case</span> <span class="bi">int</span>():
+            <span class="kw">return</span> <span class="st">"non-positive integer"</span>
+        <span class="kw">case</span> <span class="bi">str</span>():
+            <span class="kw">return</span> <span class="st">f"string of length <span class="kw">{</span><span class="bi">len</span>(value)<span class="kw">}</span>"</span>
+        <span class="kw">case</span> <span class="bi">list</span>():
+            <span class="kw">return</span> <span class="st">f"list with <span class="kw">{</span><span class="bi">len</span>(value)<span class="kw">}</span> elements"</span>
+        <span class="kw">case</span> _:
+            <span class="kw">return</span> <span class="st">"unknown type"</span>
+
+<span class="bi">print</span>(describe(<span class="nm">42</span>))       <span class="cm"># positive integer</span>
+<span class="bi">print</span>(describe(<span class="st">"hi"</span>))     <span class="cm"># string of length 2</span>
+<span class="bi">print</span>(describe([<span class="nm">1</span>,<span class="nm">2</span>,<span class="nm">3</span>]))  <span class="cm"># list with 3 elements</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>Quitting...<br>positive integer<br>string of length
+                        2<br>list with 3 elements
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="short-circuit">
+                <h2>5 · Short-Circuit Evaluation</h2>
+                <p>Python's <code>and</code> and <code>or</code> operators <strong>don't always evaluate both
+                        sides</strong>. They stop as soon as the result is determined.</p>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Short-Circuit</span><button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="cm"># and: stops at first False</span>
+<span class="cm"># Returns: first falsy value, OR last value if all truthy</span>
+<span class="bi">print</span>(<span class="nm">0</span> <span class="kw">and</span> <span class="nm">5</span>)        <span class="cm"># 0  (short-circuits at first falsy)</span>
+<span class="bi">print</span>(<span class="nm">3</span> <span class="kw">and</span> <span class="nm">5</span>)        <span class="cm"># 5  (all truthy → returns last)</span>
+
+<span class="cm"># or: stops at first True</span>
+<span class="cm"># Returns: first truthy value, OR last value if all falsy</span>
+<span class="bi">print</span>(<span class="nm">0</span> <span class="kw">or</span> <span class="nm">5</span>)         <span class="cm"># 5  (first is falsy → check next)</span>
+<span class="bi">print</span>(<span class="nm">3</span> <span class="kw">or</span> <span class="nm">5</span>)         <span class="cm"># 3  (first is truthy → short-circuits)</span>
+
+<span class="cm"># Practical use — safe default values</span>
+config = {}
+host  = config.get(<span class="st">"host"</span>) <span class="kw">or</span> <span class="st">"localhost"</span>
+<span class="bi">print</span>(host)   <span class="cm"># "localhost" (because None is falsy)</span>
+
+<span class="cm"># Safe attribute access</span>
+user = <span class="kw">None</span>
+name = user <span class="kw">and</span> user.name    <span class="cm"># Never calls user.name if user is None</span>
+<span class="bi">print</span>(name)   <span class="cm"># None (safe!)</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>0<br>5<br>5<br>3<br>localhost<br>None
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="page-nav">
+            <a href="operators.html"><span class="nav-direction">← Previous</span><span
+                    class="nav-topic">Operators</span></a>
+            <a href="loops.html" class="next"><span class="nav-direction">Next →</span><span
+                    class="nav-topic">Loops</span></a>
+        </div>
+        <footer class="footer">
+            <p>🐍 Python Learning Hub — Built from leading textbooks for deep understanding</p>
+        </footer>
+    </main>
+    <script src="../../js/main.js"></script>
+</body>
+
+</html>

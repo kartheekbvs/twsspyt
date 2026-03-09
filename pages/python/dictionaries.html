@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Dictionaries - Python Learning Hub</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../../index.html" class="logo">
+                <div class="logo-icon">🐍</div>
+                <div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete
+                        Reference</span></div>
+            </a>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+        <div class="search-box"><input type="text" id="searchInput" placeholder="🔍 Search topics..."
+                class="search-input"></div>
+        <div class="nav-items" id="navItems">
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐍 Python Fundamentals</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="introduction.html" class="nav-item">Introduction to Python</a>
+                    <a href="variables-datatypes.html" class="nav-item">Variables & Data Types</a>
+                    <a href="operators.html" class="nav-item">Operators</a>
+                    <a href="control-flow.html" class="nav-item">Control Flow</a>
+                    <a href="loops.html" class="nav-item">Loops</a>
+                    <a href="functions.html" class="nav-item">Functions</a>
+                    <a href="strings.html" class="nav-item">Strings</a>
+                    <a href="lists.html" class="nav-item">Lists</a>
+                    <a href="tuples.html" class="nav-item">Tuples</a>
+                    <a href="dictionaries.html" class="nav-item active">Dictionaries</a>
+                    <a href="sets.html" class="nav-item">Sets</a>
+                    <a href="file-io.html" class="nav-item">File I/O</a>
+                    <a href="exceptions.html" class="nav-item">Exception Handling</a>
+                    <a href="modules.html" class="nav-item">Modules & Packages</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🏗️ OOP</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../oop/classes-objects.html" class="nav-item">Classes & Objects</a>
+                    <a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>⚡ Advanced Python</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../advanced/generators.html" class="nav-item">Generators & Iterators</a>
+                    <a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+                    <a href="../advanced/lambda.html" class="nav-item">Lambda & Functional</a>
+                    <a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+                    <a href="../advanced/async.html" class="nav-item">Async & Await</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🔢 NumPy</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../numpy/arrays.html" class="nav-item">Arrays & ndarray</a>
+                    <a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+                    <a href="../numpy/indexing.html" class="nav-item">Indexing & Slicing</a>
+                    <a href="../numpy/reshaping.html" class="nav-item">Reshaping & Stacking</a>
+                    <a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+                    <a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+                    <a href="../numpy/random.html" class="nav-item">Random Module</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐼 Pandas</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../pandas/series-dataframe.html" class="nav-item">Series & DataFrame</a>
+                    <a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+                    <a href="../pandas/selection.html" class="nav-item">Selection & Filtering</a>
+                    <a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+                    <a href="../pandas/groupby.html" class="nav-item">GroupBy & Aggregation</a>
+                    <a href="../pandas/merging.html" class="nav-item">Merging & Joining</a>
+                    <a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🤖 Machine Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+                    <a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+                    <a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+                    <a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+                    <a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+                    <a href="../ml/svm.html" class="nav-item">SVM</a>
+                    <a href="../ml/knn.html" class="nav-item">KNN</a>
+                    <a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+                    <a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🧠 Deep Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+                    <a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+                    <a href="../dl/cnn.html" class="nav-item">CNN</a>
+                    <a href="../dl/rnn-lstm.html" class="nav-item">RNN & LSTM</a>
+                    <a href="../dl/transformers.html" class="nav-item">Transformers</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>📊 Data Analysis</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../data/exploratory.html" class="nav-item">EDA</a>
+                    <a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+                    <a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content" id="mainContent">
+        <header class="topbar">
+            <button class="mobile-toggle" id="mobileToggle">☰</button>
+            <div class="topbar-breadcrumb"><a href="../../index.html"
+                    style="color:var(--accent);text-decoration:none;">Home</a> → Python Fundamentals → Dictionaries
+            </div>
+            <div class="topbar-progress"><span class="progress-text">Reading</span>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill" id="progressFill"></div>
+                </div><span id="progressPercent">0%</span>
+            </div>
+        </header>
+
+        <div class="page-content">
+            <div class="page-header">
+                <span class="topic-badge">🐍 Python Fundamentals</span>
+                <h1>Dictionaries</h1>
+                <p class="page-intro">Dictionaries are Python's built-in hash map — key-value pairs that allow O(1)
+                    average lookup, insertion, and deletion. Since Python 3.7, dicts preserve insertion order. This
+                    chapter covers all methods, dict comprehensions, nesting, and the powerful <code>collections</code>
+                    module extras.</p>
+                <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+                    <span class="difficulty-badge beginner">● Beginner → Intermediate</span>
+                    <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">📖 <em>Python Programming
+                            (2024)</em></span>
+                </div>
+            </div>
+
+            <div class="toc-box">
+                <h4>📋 Table of Contents</h4>
+                <ol>
+                    <li><a href="#creating">Creating Dictionaries</a></li>
+                    <li><a href="#access">Accessing & Modifying</a></li>
+                    <li><a href="#methods">Dictionary Methods</a></li>
+                    <li><a href="#iteration">Iterating Dictionaries</a></li>
+                    <li><a href="#comprehensions">Dictionary Comprehensions</a></li>
+                    <li><a href="#nested">Nested Dictionaries</a></li>
+                    <li><a href="#collections">collections.defaultdict & Counter</a></li>
+                </ol>
+            </div>
+
+            <section class="content-section" id="creating">
+                <h2>1 · Creating Dictionaries</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Dict Creation</span><button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="cm"># Using curly braces</span>
+person = {
+    <span class="st">"name"</span>: <span class="st">"Alice"</span>,
+    <span class="st">"age"</span>: <span class="nm">25</span>,
+    <span class="st">"city"</span>: <span class="st">"New York"</span>
+}
+
+<span class="cm"># Using dict() constructor</span>
+config = <span class="bi">dict</span>(host=<span class="st">"localhost"</span>, port=<span class="nm">8080</span>, debug=<span class="kw">True</span>)
+
+<span class="cm"># Empty dict</span>
+d = {}
+d2 = <span class="bi">dict</span>()
+
+<span class="cm"># From list of key-value pairs</span>
+pairs = [(<span class="st">"a"</span>, <span class="nm">1</span>), (<span class="st">"b"</span>, <span class="nm">2</span>), (<span class="st">"c"</span>, <span class="nm">3</span>)]
+d3 = <span class="bi">dict</span>(pairs)
+
+<span class="cm"># From two lists using zip</span>
+keys   = [<span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span>]
+values = [<span class="nm">10</span>, <span class="nm">20</span>, <span class="nm">30</span>]
+d4 = <span class="bi">dict</span>(<span class="bi">zip</span>(keys, values))
+<span class="bi">print</span>(d4)  <span class="cm"># {'x': 10, 'y': 20, 'z': 30}</span>
+
+<span class="cm"># fromkeys — all same value</span>
+template = <span class="bi">dict</span>.fromkeys([<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>], <span class="nm">0</span>)
+<span class="bi">print</span>(template)  <span class="cm"># {'a': 0, 'b': 0, 'c': 0}</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>{'x': 10, 'y': 20, 'z': 30}<br>{'a': 0, 'b': 0, 'c': 0}
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="access">
+                <h2>2 · Accessing & Modifying</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Access & Modify</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre
+                        class="code-block">person = {<span class="st">"name"</span>: <span class="st">"Alice"</span>, <span class="st">"age"</span>: <span class="nm">25</span>, <span class="st">"city"</span>: <span class="st">"NY"</span>}
+
+<span class="cm"># Access by key</span>
+<span class="bi">print</span>(person[<span class="st">"name"</span>])       <span class="cm"># "Alice"  — KeyError if not found!</span>
+<span class="bi">print</span>(person.get(<span class="st">"age"</span>))    <span class="cm"># 25 — safe, returns None if missing</span>
+<span class="bi">print</span>(person.get(<span class="st">"email"</span>, <span class="st">"N/A"</span>))  <span class="cm"># "N/A" — default value</span>
+
+<span class="cm"># Modify / Add</span>
+person[<span class="st">"age"</span>] = <span class="nm">26</span>           <span class="cm"># update existing</span>
+person[<span class="st">"email"</span>] = <span class="st">"a@b.com"</span> <span class="cm"># add new key</span>
+
+<span class="cm"># Delete</span>
+<span class="kw">del</span> person[<span class="st">"city"</span>]           <span class="cm"># raises KeyError if not found</span>
+popped = person.pop(<span class="st">"email"</span>) <span class="cm"># removes & returns value</span>
+<span class="bi">print</span>(popped)                 <span class="cm"># "a@b.com"</span>
+
+<span class="cm"># Merge dicts (Python 3.9+)</span>
+d1 = {<span class="st">"a"</span>: <span class="nm">1</span>, <span class="st">"b"</span>: <span class="nm">2</span>}
+d2 = {<span class="st">"b"</span>: <span class="nm">99</span>, <span class="st">"c"</span>: <span class="nm">3</span>}
+merged = d1 | d2              <span class="cm"># {'a':1, 'b':99, 'c':3} — d2 wins</span>
+d1 |= d2                      <span class="cm"># update d1 in-place</span>
+
+<span class="cm"># Check membership (only checks keys)</span>
+<span class="bi">print</span>(<span class="st">"name"</span> <span class="kw">in</span> person)      <span class="cm"># True</span>
+<span class="bi">print</span>(<span class="st">"Alice"</span> <span class="kw">in</span> person)     <span class="cm"># False (values not checked!)</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>Alice<br>25<br>N/A<br>a@b.com<br>True<br>False
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="methods">
+                <h2>3 · Dictionary Methods</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Returns</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>d.get(k, default)</code></td>
+                            <td>value or default</td>
+                            <td>Safe access (no KeyError)</td>
+                        </tr>
+                        <tr>
+                            <td><code>d.keys()</code></td>
+                            <td>dict_keys view</td>
+                            <td>All keys (live view)</td>
+                        </tr>
+                        <tr>
+                            <td><code>d.values()</code></td>
+                            <td>dict_values view</td>
+                            <td>All values (live view)</td>
+                        </tr>
+                        <tr>
+                            <td><code>d.items()</code></td>
+                            <td>dict_items view</td>
+                            <td>All (key, value) pairs</td>
+                        </tr>
+                        <tr>
+                            <td><code>d.pop(k)</code></td>
+                            <td>value</td>
+                            <td>Remove & return value</td>
+                        </tr>
+                        <tr>
+                            <td><code>d.popitem()</code></td>
+                            <td>(key, value)</td>
+                            <td>Remove & return last pair</td>
+                        </tr>
+                        <tr>
+                            <td><code>d.update(d2)</code></td>
+                            <td>None</td>
+                            <td>Merge d2 into d</td>
+                        </tr>
+                        <tr>
+                            <td><code>d.setdefault(k, v)</code></td>
+                            <td>value</td>
+                            <td>Get key; set to v if missing</td>
+                        </tr>
+                        <tr>
+                            <td><code>d.copy()</code></td>
+                            <td>dict</td>
+                            <td>Shallow copy</td>
+                        </tr>
+                        <tr>
+                            <td><code>d.clear()</code></td>
+                            <td>None</td>
+                            <td>Remove all items</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="content-section" id="iteration">
+                <h2>4 · Iterating Dictionaries</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Dict Iteration</span><button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block">scores = {<span class="st">"Alice"</span>: <span class="nm">89</span>, <span class="st">"Bob"</span>: <span class="nm">76</span>, <span class="st">"Carol"</span>: <span class="nm">93</span>}
+
+<span class="cm"># Iterate keys (default)</span>
+<span class="kw">for</span> name <span class="kw">in</span> scores:
+    <span class="bi">print</span>(name)            <span class="cm"># Alice, Bob, Carol</span>
+
+<span class="cm"># Iterate values</span>
+<span class="kw">for</span> score <span class="kw">in</span> scores.values():
+    <span class="bi">print</span>(score)           <span class="cm"># 89, 76, 93</span>
+
+<span class="cm"># Iterate key-value pairs (MOST COMMON)</span>
+<span class="kw">for</span> name, score <span class="kw">in</span> scores.items():
+    <span class="bi">print</span>(<span class="st">f"<span class="kw">{</span>name<span class="kw">}</span>: <span class="kw">{</span>score<span class="kw">}</span>"</span>)
+
+<span class="cm"># Sorted by key</span>
+<span class="kw">for</span> name <span class="kw">in</span> <span class="bi">sorted</span>(scores):
+    <span class="bi">print</span>(name, scores[name])
+
+<span class="cm"># Sorted by value</span>
+<span class="kw">for</span> name, score <span class="kw">in</span> <span class="bi">sorted</span>(scores.items(), key=<span class="kw">lambda</span> x: x[<span class="nm">1</span>]):
+    <span class="bi">print</span>(name, score)</pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>Alice: 89<br>Bob: 76<br>Carol: 93
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="comprehensions">
+                <h2>5 · Dictionary Comprehensions</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Dict Comprehensions</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="cm"># {key_expr: value_expr for item in iterable}</span>
+
+<span class="cm"># Squares dict</span>
+squares = {x: x**<span class="nm">2</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">6</span>)}
+<span class="bi">print</span>(squares)  <span class="cm"># {0:0, 1:1, 2:4, 3:9, 4:16, 5:25}</span>
+
+<span class="cm"># Filter + transform</span>
+scores = {<span class="st">"Alice"</span>:<span class="nm">89</span>, <span class="st">"Bob"</span>:<span class="nm">55</span>, <span class="st">"Carol"</span>:<span class="nm">93</span>, <span class="st">"Dave"</span>:<span class="nm">40</span>}
+passed = {name: score <span class="kw">for</span> name, score <span class="kw">in</span> scores.items() <span class="kw">if</span> score >= <span class="nm">60</span>}
+<span class="bi">print</span>(passed)   <span class="cm"># {'Alice': 89, 'Carol': 93}</span>
+
+<span class="cm"># Invert a dict (swap keys and values)</span>
+inverted = {v: k <span class="kw">for</span> k, v <span class="kw">in</span> scores.items()}
+<span class="bi">print</span>(inverted) <span class="cm"># {89:'Alice', 55:'Bob', 93:'Carol', 40:'Dave'}</span>
+
+<span class="cm"># Word frequency counter</span>
+words = [<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"apple"</span>, <span class="st">"cherry"</span>, <span class="st">"banana"</span>, <span class="st">"apple"</span>]
+freq  = {word: words.count(word) <span class="kw">for</span> word <span class="kw">in</span> <span class="bi">set</span>(words)}
+<span class="bi">print</span>(freq)     <span class="cm"># {'apple':3, 'banana':2, 'cherry':1}</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>{0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25}<br>{'Alice': 89,
+                        'Carol': 93}<br>{'apple': 3, 'banana': 2, 'cherry': 1}
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="collections">
+                <h2>6 · collections.defaultdict & Counter</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · collections module</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="kw">from</span> collections <span class="kw">import</span> defaultdict, Counter, OrderedDict
+
+<span class="cm"># defaultdict — auto-creates missing keys with a default</span>
+word_groups = defaultdict(<span class="bi">list</span>)
+words = [(<span class="st">"a"</span>, <span class="st">"apple"</span>), (<span class="st">"b"</span>, <span class="st">"banana"</span>), (<span class="st">"a"</span>, <span class="st">"avocado"</span>)]
+<span class="kw">for</span> letter, word <span class="kw">in</span> words:
+    word_groups[letter].append(word)   <span class="cm"># No KeyError!</span>
+<span class="bi">print</span>(<span class="bi">dict</span>(word_groups))
+<span class="cm"># {'a': ['apple', 'avocado'], 'b': ['banana']}</span>
+
+<span class="cm"># Counter — count elements in any iterable</span>
+text = <span class="st">"hello world"</span>
+char_count = <span class="cl">Counter</span>(text)
+<span class="bi">print</span>(char_count.most_common(<span class="nm">3</span>))   <span class="cm"># [('l', 3), ('o', 2), ('h', 1)]</span>
+
+words = [<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"apple"</span>, <span class="st">"cherry"</span>, <span class="st">"apple"</span>]
+c = <span class="cl">Counter</span>(words)
+<span class="bi">print</span>(c[<span class="st">"apple"</span>])       <span class="cm"># 3</span>
+<span class="bi">print</span>(c.most_common(<span class="nm">1</span>)) <span class="cm"># [('apple', 3)]</span>
+
+<span class="cm"># Counter arithmetic</span>
+c1 = <span class="cl">Counter</span>({<span class="st">"a"</span>: <span class="nm">3</span>, <span class="st">"b"</span>: <span class="nm">2</span>})
+c2 = <span class="cl">Counter</span>({<span class="st">"a"</span>: <span class="nm">1</span>, <span class="st">"c"</span>: <span class="nm">4</span>})
+<span class="bi">print</span>(c1 + c2)           <span class="cm"># Counter({'c':4,'a':4,'b':2})</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>{'a': ['apple', 'avocado'], 'b': ['banana']}<br>[('l',
+                        3), ('o', 2), ('h', 1)]<br>3<br>[('apple', 3)]<br>Counter({'c': 4, 'a': 4, 'b': 2})
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="page-nav">
+            <a href="tuples.html"><span class="nav-direction">← Previous</span><span class="nav-topic">Tuples</span></a>
+            <a href="sets.html" class="next"><span class="nav-direction">Next →</span><span
+                    class="nav-topic">Sets</span></a>
+        </div>
+        <footer class="footer">
+            <p>🐍 Python Learning Hub — Built from leading textbooks for deep understanding</p>
+        </footer>
+    </main>
+    <script src="../../js/main.js"></script>
+</body>
+
+</html>

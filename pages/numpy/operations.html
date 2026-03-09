@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Array Operations - Python Learning Hub</title>
+<meta name="description" content="Array Operations - comprehensive textbook reference with code examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../../index.html" class="logo"><div class="logo-icon">&#x1F40D;</div><div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete Reference</span></div></a><button class="sidebar-toggle" id="sidebarToggle">&#x2630;</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="&#x1F50D; Search topics..." class="search-input"></div>
+<div class="nav-items" id="navItems">
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+</div></div></div>
+</nav>
+<main class="main-content" id="mainContent">
+<header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; NumPy &rarr; Array Operations</div>
+<div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
+</header>
+<div class="page-content">
+<div class="page-header">
+<span class="topic-badge">&#x1F522; NumPy</span>
+<h1>Array Operations</h1>
+<p class="page-intro">NumPy operations are vectorized &mdash; they apply element-wise using compiled C without Python loops, making them 10-100x faster. Covers arithmetic operations, universal functions (ufuncs), comparison operations, and logical operations (any, all, where, isnan).</p>
+<div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+<span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>NumPy User Guide, Python for Data Analysis &mdash; Wes McKinney</em></span>
+</div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
+<li><a href="#s1">Element-wise Arithmetic</a></li>
+<li><a href="#s2">Universal Functions (ufuncs)</a></li>
+<li><a href="#s3">Broadcasting</a></li>
+<li><a href="#s4">Comparison Operations</a></li>
+<li><a href="#s5">Logical Operations</a></li>
+<li><a href="#s6">Aggregation &amp; Reduction</a></li>
+</ol></div>
+
+<section class="content-section" id="s1"><h2>1 &middot; Element-wise Arithmetic</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+a = np.array([<span class="nm">10</span>, <span class="nm">20</span>, <span class="nm">30</span>, <span class="nm">40</span>])
+b = np.array([<span class="nm">1</span>,  <span class="nm">2</span>,  <span class="nm">3</span>,  <span class="nm">4</span>])
+
+<span class="cm"># Addition</span>
+<span class="bi">print</span>(a + b)         <span class="cm"># [11 22 33 44]</span>
+<span class="bi">print</span>(np.add(a, b))  <span class="cm"># same</span>
+
+<span class="cm"># Subtraction</span>
+<span class="bi">print</span>(a - b)              <span class="cm"># [9 18 27 36]</span>
+<span class="bi">print</span>(np.subtract(a, b))  <span class="cm"># same</span>
+
+<span class="cm"># Multiplication</span>
+<span class="bi">print</span>(a * b)              <span class="cm"># [10 40 90 160] (element-wise, NOT matrix!)</span>
+<span class="bi">print</span>(np.multiply(a, b))  <span class="cm"># same</span>
+
+<span class="cm"># Division</span>
+<span class="bi">print</span>(a / b)              <span class="cm"># [10. 10. 10. 10.]</span>
+<span class="bi">print</span>(a // b)             <span class="cm"># [10 10 10 10] (floor division)</span>
+<span class="bi">print</span>(np.divide(a, b))    <span class="cm"># true division</span>
+
+<span class="cm"># Power</span>
+<span class="bi">print</span>(b ** <span class="nm">2</span>)             <span class="cm"># [1 4 9 16]</span>
+<span class="bi">print</span>(np.power(b, <span class="nm">3</span>))     <span class="cm"># [1 8 27 64]</span>
+
+<span class="cm"># Modulus</span>
+<span class="bi">print</span>(a % <span class="nm">3</span>)              <span class="cm"># [1 2 0 1]</span>
+<span class="bi">print</span>(np.mod(a, <span class="nm">7</span>))       <span class="cm"># [3 6 2 5]</span>
+
+<span class="cm"># Scalar operations (broadcast scalar to all elements)</span>
+<span class="bi">print</span>(a + <span class="nm">100</span>)   <span class="cm"># [110 120 130 140]</span>
+<span class="bi">print</span>(a * <span class="nm">0.5</span>)   <span class="cm"># [5. 10. 15. 20.]</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[11 22 33 44]<br>[10 40 90 160]<br>[10. 10. 10. 10.]<br>[1 4 9 16]<br>[1 2 0 1]</div></div></section>
+
+<section class="content-section" id="s2"><h2>2 &middot; Universal Functions (ufuncs)</h2>
+<p>Ufuncs are vectorized wrappers for element-wise operations, implemented in compiled C for speed.</p>
+<table class="data-table"><thead><tr><th>Category</th><th>Functions</th></tr></thead><tbody>
+<tr><td><strong>Arithmetic</strong></td><td><code>np.add, subtract, multiply, divide, power, mod, remainder</code></td></tr>
+<tr><td><strong>Trigonometric</strong></td><td><code>np.sin, cos, tan, arcsin, arccos, arctan, arctan2</code></td></tr>
+<tr><td><strong>Exponential</strong></td><td><code>np.exp, exp2, log, log2, log10, expm1, log1p</code></td></tr>
+<tr><td><strong>Power</strong></td><td><code>np.sqrt, square, cbrt, reciprocal</code></td></tr>
+<tr><td><strong>Absolute</strong></td><td><code>np.abs, fabs, sign, negative</code></td></tr>
+<tr><td><strong>Rounding</strong></td><td><code>np.round, floor, ceil, trunc, rint</code></td></tr>
+<tr><td><strong>Hyperbolic</strong></td><td><code>np.sinh, cosh, tanh, arcsinh</code></td></tr>
+</tbody></table>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">x = np.array([<span class="nm">0</span>, np.pi/<span class="nm">6</span>, np.pi/<span class="nm">4</span>, np.pi/<span class="nm">3</span>, np.pi/<span class="nm">2</span>])
+
+<span class="cm"># Trigonometric</span>
+<span class="bi">print</span>(np.sin(x).round(<span class="nm">3</span>))  <span class="cm"># [0.  0.5  0.707 0.866 1.]</span>
+<span class="bi">print</span>(np.cos(x).round(<span class="nm">3</span>))  <span class="cm"># [1.  0.866 0.707 0.5  0.]</span>
+
+<span class="cm"># Exponential &amp; Logarithmic</span>
+<span class="bi">print</span>(np.exp([<span class="nm">0</span>, <span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>]))     <span class="cm"># [1.  2.718 7.389 20.086]</span>
+<span class="bi">print</span>(np.log([<span class="nm">1</span>, np.e, np.e**<span class="nm">2</span>]))  <span class="cm"># [0. 1. 2.]  (natural log)</span>
+<span class="bi">print</span>(np.log10([<span class="nm">1</span>, <span class="nm">10</span>, <span class="nm">100</span>]))     <span class="cm"># [0. 1. 2.]</span>
+<span class="bi">print</span>(np.log2([<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">4</span>, <span class="nm">8</span>]))      <span class="cm"># [0. 1. 2. 3.]</span>
+
+<span class="cm"># Power &amp; Root</span>
+<span class="bi">print</span>(np.sqrt([<span class="nm">4</span>, <span class="nm">9</span>, <span class="nm">16</span>, <span class="nm">25</span>]))  <span class="cm"># [2. 3. 4. 5.]</span>
+<span class="bi">print</span>(np.cbrt([<span class="nm">8</span>, <span class="nm">27</span>, <span class="nm">64</span>]))      <span class="cm"># [2. 3. 4.]  (cube root)</span>
+<span class="bi">print</span>(np.square([<span class="nm">1</span>,<span class="nm">2</span>,<span class="nm">3</span>,<span class="nm">4</span>]))      <span class="cm"># [1 4 9 16]</span>
+
+<span class="cm"># Rounding</span>
+vals = np.array([<span class="nm">1.23</span>, <span class="nm">2.78</span>, -<span class="nm">3.45</span>, <span class="nm">4.50</span>])
+<span class="bi">print</span>(np.round(vals, <span class="nm">1</span>))    <span class="cm"># [1.2, 2.8, -3.4, 4.5]</span>
+<span class="bi">print</span>(np.floor(vals))       <span class="cm"># [1., 2., -4., 4.]</span>
+<span class="bi">print</span>(np.ceil(vals))        <span class="cm"># [2., 3., -3., 5.]</span>
+<span class="bi">print</span>(np.trunc(vals))       <span class="cm"># [1., 2., -3., 4.]  (towards zero)</span>
+
+<span class="cm"># Clip (clamp values)</span>
+<span class="bi">print</span>(np.clip(vals, -<span class="nm">2</span>, <span class="nm">3</span>))  <span class="cm"># [1.23, 2.78, -2., 3.]</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[0. 0.5 0.707 0.866 1.]<br>[1. 2.718 7.389 20.086]<br>[2. 3. 4. 5.]<br>[1.2 2.8 -3.4 4.5]</div></div></section>
+
+<section class="content-section" id="s3"><h2>3 &middot; Broadcasting</h2>
+<p>Broadcasting automatically expands arrays with different shapes so element-wise operations can proceed.</p>
+<div class="callout note"><div class="callout-icon">&#x1F4D0;</div><div class="callout-content"><strong>Broadcasting Rules</strong>
+<ol>
+<li>If arrays differ in ndim, the smaller array is padded with 1s on the left.</li>
+<li>Arrays with size 1 along an axis are stretched to match the other array.</li>
+<li>If sizes disagree and neither is 1, raise an error.</li>
+</ol></div></div>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Scalar broadcast</span>
+a = np.array([<span class="nm">1</span>,<span class="nm">2</span>,<span class="nm">3</span>])
+<span class="bi">print</span>(a * <span class="nm">10</span>)    <span class="cm"># [10 20 30] &mdash; 10 broadcast to [10,10,10]</span>
+
+<span class="cm"># 1D + 2D broadcast</span>
+M = np.array([[<span class="nm">1</span>,<span class="nm">2</span>,<span class="nm">3</span>],[<span class="nm">4</span>,<span class="nm">5</span>,<span class="nm">6</span>]])  <span class="cm"># (2,3)</span>
+v = np.array([<span class="nm">10</span>,<span class="nm">20</span>,<span class="nm">30</span>])          <span class="cm"># (3,) &rarr; broadcast to (2,3)</span>
+<span class="bi">print</span>(M + v)
+<span class="cm"># [[11 22 33]</span>
+<span class="cm">#  [14 25 36]]</span>
+
+<span class="cm"># Column vector broadcast</span>
+col = np.array([[<span class="nm">100</span>],[<span class="nm">200</span>]])     <span class="cm"># (2,1) &rarr; broadcast to (2,3)</span>
+<span class="bi">print</span>(M + col)
+<span class="cm"># [[101 102 103]</span>
+<span class="cm">#  [204 205 206]]</span>
+
+<span class="cm"># Centering data (subtract column means)</span>
+data = np.array([[<span class="nm">1</span>,<span class="nm">10</span>,<span class="nm">100</span>],[<span class="nm">2</span>,<span class="nm">20</span>,<span class="nm">200</span>],[<span class="nm">3</span>,<span class="nm">30</span>,<span class="nm">300</span>]])
+centered = data - data.mean(axis=<span class="nm">0</span>)
+<span class="bi">print</span>(centered)
+<span class="cm"># [[-1. -10. -100.]</span>
+<span class="cm">#  [ 0.   0.    0.]</span>
+<span class="cm">#  [ 1.  10.  100.]]</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[[11 22 33]<br> [14 25 36]]<br>[[101 102 103]<br> [204 205 206]]</div></div></section>
+
+<section class="content-section" id="s4"><h2>4 &middot; Comparison Operations</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">a = np.array([<span class="nm">1</span>, <span class="nm">5</span>, <span class="nm">3</span>, <span class="nm">8</span>, <span class="nm">2</span>])
+b = np.array([<span class="nm">2</span>, <span class="nm">5</span>, <span class="nm">1</span>, <span class="nm">7</span>, <span class="nm">3</span>])
+
+<span class="bi">print</span>(a > b)           <span class="cm"># [False False  True  True False]</span>
+<span class="bi">print</span>(a == b)          <span class="cm"># [False  True False False False]</span>
+<span class="bi">print</span>(a >= b)          <span class="cm"># [False  True  True  True False]</span>
+<span class="bi">print</span>(np.greater(a,b)) <span class="cm"># same as a > b</span>
+<span class="bi">print</span>(np.equal(a,b))   <span class="cm"># same as a == b</span>
+
+<span class="cm"># Float comparison (NEVER use == for floats!)</span>
+x = np.array([<span class="nm">0.1</span> + <span class="nm">0.2</span>])
+<span class="bi">print</span>(x == <span class="nm">0.3</span>)               <span class="cm"># [False] &mdash; floating point error!</span>
+<span class="bi">print</span>(np.isclose(x, <span class="nm">0.3</span>))     <span class="cm"># [True]  &mdash; correct!</span>
+<span class="bi">print</span>(np.allclose(x, [<span class="nm">0.3</span>]))  <span class="cm"># True</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[False False True True False]<br>[False True False False False]<br>[False] &middot; [True]</div></div></section>
+
+<section class="content-section" id="s5"><h2>5 &middot; Logical Operations</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">a = np.array([<span class="nm">1</span>, <span class="nm">0</span>, <span class="nm">3</span>, <span class="nm">0</span>, <span class="nm">5</span>])
+b = np.array([<span class="nm">0</span>, <span class="nm">2</span>, <span class="nm">3</span>, <span class="nm">0</span>, <span class="nm">0</span>])
+
+<span class="cm"># np.any() &mdash; True if ANY element is True/nonzero</span>
+<span class="bi">print</span>(np.any(a > <span class="nm">4</span>))      <span class="cm"># True (5 > 4)</span>
+<span class="bi">print</span>(np.any(a > <span class="nm">10</span>))     <span class="cm"># False</span>
+
+<span class="cm"># np.all() &mdash; True if ALL elements are True/nonzero</span>
+<span class="bi">print</span>(np.all(a > <span class="nm">0</span>))      <span class="cm"># False (has zeros)</span>
+<span class="bi">print</span>(np.all(a >= <span class="nm">0</span>))     <span class="cm"># True</span>
+
+<span class="cm"># np.where(condition, x, y) &mdash; conditional selection</span>
+result = np.where(a > <span class="nm">0</span>, <span class="st">"positive"</span>, <span class="st">"zero"</span>)
+<span class="bi">print</span>(result)  <span class="cm"># ['positive' 'zero' 'positive' 'zero' 'positive']</span>
+
+<span class="cm"># np.where(condition) &mdash; returns indices where True</span>
+idx = np.where(a > <span class="nm">0</span>)
+<span class="bi">print</span>(idx)     <span class="cm"># (array([0, 2, 4]),)</span>
+
+<span class="cm"># Logical functions</span>
+<span class="bi">print</span>(np.logical_and(a > <span class="nm">0</span>, a < <span class="nm">4</span>))  <span class="cm"># [True False True False False]</span>
+<span class="bi">print</span>(np.logical_or(a > <span class="nm">0</span>, b > <span class="nm">0</span>))   <span class="cm"># [True True True False True]</span>
+<span class="bi">print</span>(np.logical_not(a > <span class="nm">0</span>))          <span class="cm"># [False True False True False]</span>
+
+<span class="cm"># NaN checking</span>
+data = np.array([<span class="nm">1.0</span>, np.nan, <span class="nm">3.0</span>, np.nan, <span class="nm">5.0</span>])
+<span class="bi">print</span>(np.isnan(data))       <span class="cm"># [False True False True False]</span>
+<span class="bi">print</span>(np.isinf([<span class="nm">1</span>, np.inf, -np.inf]))  <span class="cm"># [False True True]</span>
+<span class="bi">print</span>(np.isfinite(data))    <span class="cm"># [True False True False True]</span>
+
+<span class="cm"># Count non-NaN values</span>
+<span class="bi">print</span>(np.count_nonzero(~np.isnan(data)))  <span class="cm"># 3</span>
+<span class="bi">print</span>(np.nanmean(data))                    <span class="cm"># 3.0 (ignores NaN)</span>
+<span class="bi">print</span>(np.nansum(data))                     <span class="cm"># 9.0</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>True &middot; False &middot; False &middot; True<br>['positive' 'zero' 'positive' 'zero' 'positive']<br>[True False True False False]<br>[False True False True False]<br>3 &middot; 3.0 &middot; 9.0</div></div></section>
+
+<section class="content-section" id="s6"><h2>6 &middot; Aggregation &amp; Reduction</h2>
+<table class="data-table"><thead><tr><th>Function</th><th>Description</th><th>axis=0</th><th>axis=1</th></tr></thead><tbody>
+<tr><td><code>np.sum()</code></td><td>Sum of elements</td><td>Column sums</td><td>Row sums</td></tr>
+<tr><td><code>np.mean()</code></td><td>Arithmetic mean</td><td>Column means</td><td>Row means</td></tr>
+<tr><td><code>np.median()</code></td><td>Median value</td><td>Per column</td><td>Per row</td></tr>
+<tr><td><code>np.std()</code></td><td>Standard deviation</td><td>Per column</td><td>Per row</td></tr>
+<tr><td><code>np.var()</code></td><td>Variance</td><td>Per column</td><td>Per row</td></tr>
+<tr><td><code>np.min/max()</code></td><td>Min/Max values</td><td>Column</td><td>Row</td></tr>
+<tr><td><code>np.argmin/argmax()</code></td><td>Index of min/max</td><td>Column</td><td>Row</td></tr>
+<tr><td><code>np.cumsum()</code></td><td>Cumulative sum</td><td>Along axis</td><td>Along axis</td></tr>
+<tr><td><code>np.cumprod()</code></td><td>Cumulative product</td><td>Along axis</td><td>Along axis</td></tr>
+<tr><td><code>np.percentile()</code></td><td>Nth percentile</td><td>Per column</td><td>Per row</td></tr>
+</tbody></table>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">M = np.array([[<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>],
+              [<span class="nm">4</span>, <span class="nm">5</span>, <span class="nm">6</span>],
+              [<span class="nm">7</span>, <span class="nm">8</span>, <span class="nm">9</span>]])
+
+<span class="bi">print</span>(<span class="st">f"Total sum:  {M.sum()}"</span>)          <span class="cm"># 45</span>
+<span class="bi">print</span>(<span class="st">f"Col sums:   {M.sum(axis=0)}"</span>)    <span class="cm"># [12 15 18]</span>
+<span class="bi">print</span>(<span class="st">f"Row sums:   {M.sum(axis=1)}"</span>)    <span class="cm"># [6 15 24]</span>
+<span class="bi">print</span>(<span class="st">f"Mean:       {M.mean():.2f}"</span>)      <span class="cm"># 5.00</span>
+<span class="bi">print</span>(<span class="st">f"Col means:  {M.mean(axis=0)}"</span>)   <span class="cm"># [4. 5. 6.]</span>
+<span class="bi">print</span>(<span class="st">f"Std:        {M.std():.4f}"</span>)       <span class="cm"># 2.5820</span>
+<span class="bi">print</span>(<span class="st">f"Min:        {M.min()}"</span>)            <span class="cm"># 1</span>
+<span class="bi">print</span>(<span class="st">f"Max:        {M.max()}"</span>)            <span class="cm"># 9</span>
+<span class="bi">print</span>(<span class="st">f"ArgMax:     {M.argmax()}"</span>)         <span class="cm"># 8 (flat index)</span>
+<span class="bi">print</span>(<span class="st">f"ArgMax cols:{M.argmax(axis=0)}"</span>)  <span class="cm"># [2 2 2]</span>
+
+<span class="cm"># Cumulative</span>
+<span class="bi">print</span>(<span class="st">f"Cumsum: {np.cumsum([1,2,3,4,5])}"</span>)   <span class="cm"># [1 3 6 10 15]</span>
+<span class="bi">print</span>(<span class="st">f"Cumprod:{np.cumprod([1,2,3,4,5])}"</span>)  <span class="cm"># [1 2 6 24 120]</span>
+
+<span class="cm"># Percentiles &amp; quantiles</span>
+data = np.array([<span class="nm">2</span>, <span class="nm">5</span>, <span class="nm">8</span>, <span class="nm">12</span>, <span class="nm">15</span>, <span class="nm">20</span>, <span class="nm">25</span>])
+<span class="bi">print</span>(<span class="st">f"25th percentile: {np.percentile(data, 25)}"</span>)  <span class="cm"># 6.5</span>
+<span class="bi">print</span>(<span class="st">f"75th percentile: {np.percentile(data, 75)}"</span>)  <span class="cm"># 17.5</span>
+<span class="bi">print</span>(<span class="st">f"Median:          {np.median(data)}"</span>)          <span class="cm"># 12.0</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Total sum: 45 &middot; Col sums: [12 15 18] &middot; Row sums: [6 15 24]<br>Mean: 5.00 &middot; Std: 2.5820<br>Cumsum: [1 3 6 10 15]<br>25th%: 6.5 &middot; 75th%: 17.5 &middot; Median: 12.0</div></div></section>
+</div>
+<div class="page-nav">
+<a href="indexing.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Indexing &amp; Slicing</span></a>
+<a href="reshaping.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Reshaping &amp; Stacking</span></a>
+</div>
+<footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
+</main>
+<script src="../../js/main.js"></script>
+</body></html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Functions - Python Learning Hub</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../../index.html" class="logo">
+                <div class="logo-icon">🐍</div>
+                <div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete
+                        Reference</span></div>
+            </a>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+        <div class="search-box"><input type="text" id="searchInput" placeholder="🔍 Search topics..."
+                class="search-input"></div>
+        <div class="nav-items" id="navItems">
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐍 Python Fundamentals</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="introduction.html" class="nav-item">Introduction to Python</a>
+                    <a href="variables-datatypes.html" class="nav-item">Variables & Data Types</a>
+                    <a href="operators.html" class="nav-item">Operators</a>
+                    <a href="control-flow.html" class="nav-item">Control Flow</a>
+                    <a href="loops.html" class="nav-item">Loops</a>
+                    <a href="functions.html" class="nav-item active">Functions</a>
+                    <a href="strings.html" class="nav-item">Strings</a>
+                    <a href="lists.html" class="nav-item">Lists</a>
+                    <a href="tuples.html" class="nav-item">Tuples</a>
+                    <a href="dictionaries.html" class="nav-item">Dictionaries</a>
+                    <a href="sets.html" class="nav-item">Sets</a>
+                    <a href="file-io.html" class="nav-item">File I/O</a>
+                    <a href="exceptions.html" class="nav-item">Exception Handling</a>
+                    <a href="modules.html" class="nav-item">Modules & Packages</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🏗️ OOP</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../oop/classes-objects.html" class="nav-item">Classes & Objects</a>
+                    <a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+                    <a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+                    <a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+                    <a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+                    <a href="../oop/decorators.html" class="nav-item">Decorators</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>⚡ Advanced Python</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../advanced/generators.html" class="nav-item">Generators & Iterators</a>
+                    <a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+                    <a href="../advanced/lambda.html" class="nav-item">Lambda & Functional</a>
+                    <a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+                    <a href="../advanced/async.html" class="nav-item">Async & Await</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🔢 NumPy</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../numpy/arrays.html" class="nav-item">Arrays & ndarray</a>
+                    <a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+                    <a href="../numpy/indexing.html" class="nav-item">Indexing & Slicing</a>
+                    <a href="../numpy/reshaping.html" class="nav-item">Reshaping & Stacking</a>
+                    <a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+                    <a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+                    <a href="../numpy/random.html" class="nav-item">Random Module</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🐼 Pandas</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../pandas/series-dataframe.html" class="nav-item">Series & DataFrame</a>
+                    <a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+                    <a href="../pandas/selection.html" class="nav-item">Selection & Filtering</a>
+                    <a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+                    <a href="../pandas/groupby.html" class="nav-item">GroupBy & Aggregation</a>
+                    <a href="../pandas/merging.html" class="nav-item">Merging & Joining</a>
+                    <a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🤖 Machine Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+                    <a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+                    <a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+                    <a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+                    <a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+                    <a href="../ml/svm.html" class="nav-item">SVM</a>
+                    <a href="../ml/knn.html" class="nav-item">KNN</a>
+                    <a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+                    <a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>🧠 Deep Learning</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+                    <a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+                    <a href="../dl/cnn.html" class="nav-item">CNN</a>
+                    <a href="../dl/rnn-lstm.html" class="nav-item">RNN & LSTM</a>
+                    <a href="../dl/transformers.html" class="nav-item">Transformers</a>
+                </div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-header" onclick="toggleSection(this)"><span>📊 Data Analysis</span><span
+                        class="chevron">▼</span></div>
+                <div class="nav-section-items">
+                    <a href="../data/exploratory.html" class="nav-item">EDA</a>
+                    <a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+                    <a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+                    <a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+                    <a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content" id="mainContent">
+        <header class="topbar">
+            <button class="mobile-toggle" id="mobileToggle">☰</button>
+            <div class="topbar-breadcrumb"><a href="../../index.html"
+                    style="color:var(--accent);text-decoration:none;">Home</a> → Python Fundamentals → Functions</div>
+            <div class="topbar-progress"><span class="progress-text">Reading</span>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill" id="progressFill"></div>
+                </div><span id="progressPercent">0%</span>
+            </div>
+        </header>
+
+        <div class="page-content">
+            <div class="page-header">
+                <span class="topic-badge">🐍 Python Fundamentals</span>
+                <h1>Functions</h1>
+                <p class="page-intro">Functions are reusable, named blocks of code that perform a specific task. They
+                    are the primary way to organize code in Python. This chapter covers defining functions, parameters
+                    (positional, keyword, *args, **kwargs), return values, scope, closures, and best practices.</p>
+                <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+                    <span class="difficulty-badge beginner">● Beginner → Intermediate</span>
+                    <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">📖 <em>Python Programming
+                            (2024)</em></span>
+                </div>
+            </div>
+
+            <div class="toc-box">
+                <h4>📋 Table of Contents</h4>
+                <ol>
+                    <li><a href="#defining">Defining & Calling Functions</a></li>
+                    <li><a href="#parameters">Parameter Types (pos, kw, *args, **kwargs)</a></li>
+                    <li><a href="#return">Return Values</a></li>
+                    <li><a href="#scope">Scope: LEGB Rule</a></li>
+                    <li><a href="#closures">Closures</a></li>
+                    <li><a href="#recursion">Recursion</a></li>
+                    <li><a href="#type-hints">Type Hints & Docstrings</a></li>
+                </ol>
+            </div>
+
+            <section class="content-section" id="defining">
+                <h2>1 · Defining & Calling Functions</h2>
+                <p>Use the <code>def</code> keyword to define a function. The function body is indented.</p>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Basic Functions</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre
+                        class="code-block"><span class="cm"># Basic function definition</span>
+<span class="kw">def</span> <span class="fn">greet</span>(name):
+    <span class="st">"""Return a greeting string."""</span>   <span class="cm"># Docstring</span>
+    <span class="kw">return</span> <span class="st">f"Hello, <span class="kw">{</span>name<span class="kw">}</span>!"</span>
+
+result = greet(<span class="st">"Alice"</span>)
+<span class="bi">print</span>(result)           <span class="cm"># Hello, Alice!</span>
+
+<span class="cm"># Function with no return → returns None</span>
+<span class="kw">def</span> <span class="fn">say_hi</span>():
+    <span class="bi">print</span>(<span class="st">"Hi there!"</span>)
+
+val = say_hi()          <span class="cm"># Hi there!</span>
+<span class="bi">print</span>(val)              <span class="cm"># None</span>
+
+<span class="cm"># Multiple return values → actually returns a tuple</span>
+<span class="kw">def</span> <span class="fn">min_max</span>(numbers):
+    <span class="kw">return</span> <span class="bi">min</span>(numbers), <span class="bi">max</span>(numbers)
+
+lo, hi = min_max([<span class="nm">3</span>, <span class="nm">1</span>, <span class="nm">7</span>, <span class="nm">4</span>])
+<span class="bi">print</span>(lo, hi)           <span class="cm"># 1 7</span>
+<span class="bi">print</span>(<span class="bi">type</span>(min_max([<span class="nm">1</span>,<span class="nm">2</span>])))  <span class="cm"># &lt;class 'tuple'&gt;</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>Hello, Alice!<br>Hi there!<br>None<br>1 7<br>&lt;class
+                        'tuple'&gt;
+                    </div>
+                </div>
+                <div class="return-value-box">
+                    <div class="rv-label">🔁 Return Value Rules</div>
+                    <p style="font-size:.9rem;color:var(--purple);margin-top:.5rem;">A function that executes a bare
+                        <code>return</code> or falls off the end returns <code>None</code>. Multiple values separated by
+                        commas are automatically packed into a <code>tuple</code>.</p>
+                </div>
+            </section>
+
+            <section class="content-section" id="parameters">
+                <h2>2 · Parameter Types</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · All Parameter Types</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="cm"># ── 1. Positional Parameters ─────────────────────────────</span>
+<span class="kw">def</span> <span class="fn">power</span>(base, exponent):
+    <span class="kw">return</span> base ** exponent
+
+<span class="bi">print</span>(power(<span class="nm">2</span>, <span class="nm">10</span>))          <span class="cm"># 1024</span>
+
+<span class="cm"># ── 2. Default Parameters ─────────────────────────────────</span>
+<span class="kw">def</span> <span class="fn">greet</span>(name, greeting=<span class="st">"Hello"</span>):
+    <span class="kw">return</span> <span class="st">f"<span class="kw">{</span>greeting<span class="kw">}</span>, <span class="kw">{</span>name<span class="kw">}</span>!"</span>
+
+<span class="bi">print</span>(greet(<span class="st">"Bob"</span>))            <span class="cm"># Hello, Bob!</span>
+<span class="bi">print</span>(greet(<span class="st">"Bob"</span>, <span class="st">"Hey"</span>))     <span class="cm"># Hey, Bob!</span>
+
+<span class="cm"># ── 3. *args — Variable Positional Arguments ──────────────</span>
+<span class="kw">def</span> <span class="fn">add_all</span>(*numbers):
+    <span class="cm"># *numbers is a tuple of all positional args</span>
+    <span class="kw">return</span> <span class="bi">sum</span>(numbers)
+
+<span class="bi">print</span>(add_all(<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>))        <span class="cm"># 6</span>
+<span class="bi">print</span>(add_all(<span class="nm">10</span>, <span class="nm">20</span>, <span class="nm">30</span>, <span class="nm">40</span>)) <span class="cm"># 100</span>
+
+<span class="cm"># ── 4. **kwargs — Variable Keyword Arguments ──────────────</span>
+<span class="kw">def</span> <span class="fn">build_profile</span>(**details):
+    <span class="cm"># **details is a dict of keyword args</span>
+    <span class="kw">return</span> details
+
+profile = build_profile(name=<span class="st">"Alice"</span>, age=<span class="nm">25</span>, city=<span class="st">"NY"</span>)
+<span class="bi">print</span>(profile)
+<span class="cm"># {'name': 'Alice', 'age': 25, 'city': 'NY'}</span>
+
+<span class="cm"># ── 5. Keyword-only parameters (after *) ──────────────────</span>
+<span class="kw">def</span> <span class="fn">send_email</span>(to, *, subject, body):
+    <span class="cm"># subject and body MUST be passed as keywords</span>
+    <span class="bi">print</span>(<span class="st">f"To: <span class="kw">{</span>to<span class="kw">}</span> | Subject: <span class="kw">{</span>subject<span class="kw">}</span>"</span>)
+
+send_email(<span class="st">"a@b.com"</span>, subject=<span class="st">"Hi"</span>, body=<span class="st">"Hello!"</span>)
+
+<span class="cm"># ── 6. Full Signature ─────────────────────────────────────</span>
+<span class="kw">def</span> <span class="fn">full_example</span>(pos1, pos2, /, normal, *, kw_only, **kwargs):
+    <span class="cm"># pos1, pos2: positional ONLY (cannot use keyword)</span>
+    <span class="cm"># normal: positional or keyword</span>
+    <span class="cm"># kw_only: keyword ONLY</span>
+    <span class="bi">print</span>(pos1, pos2, normal, kw_only, kwargs)</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>1024<br>Hello, Bob!<br>Hey, Bob!<br>6<br>100<br>{'name':
+                        'Alice', 'age': 25, 'city': 'NY'}<br>To: a@b.com | Subject: Hi
+                    </div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Syntax</th>
+                            <th>Receives</th>
+                            <th>Example Call</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Positional</td>
+                            <td><code>def f(a, b)</code></td>
+                            <td>Required, by position</td>
+                            <td><code>f(1, 2)</code></td>
+                        </tr>
+                        <tr>
+                            <td>Default</td>
+                            <td><code>def f(a, b=10)</code></td>
+                            <td>Optional, has fallback</td>
+                            <td><code>f(1)</code> or <code>f(1, 5)</code></td>
+                        </tr>
+                        <tr>
+                            <td>*args</td>
+                            <td><code>def f(*args)</code></td>
+                            <td>Tuple of extra positionals</td>
+                            <td><code>f(1, 2, 3)</code></td>
+                        </tr>
+                        <tr>
+                            <td>**kwargs</td>
+                            <td><code>def f(**kw)</code></td>
+                            <td>Dict of extra keywords</td>
+                            <td><code>f(x=1, y=2)</code></td>
+                        </tr>
+                        <tr>
+                            <td>Keyword-only</td>
+                            <td><code>def f(*, kw)</code></td>
+                            <td>Must be passed by name</td>
+                            <td><code>f(kw=5)</code></td>
+                        </tr>
+                        <tr>
+                            <td>Positional-only</td>
+                            <td><code>def f(a, b, /)</code></td>
+                            <td>Must be positional</td>
+                            <td><code>f(1, 2)</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content"><strong>Mutable Default Argument Trap</strong>
+                        <p>Never use mutable defaults like <code>def f(lst=[])</code> — the list is shared across all
+                            calls! Use <code>def f(lst=None): if lst is None: lst = []</code> instead.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="scope">
+                <h2>3 · Scope: The LEGB Rule</h2>
+                <p>Python resolves variable names by searching scopes in this order: <strong>L</strong>ocal →
+                    <strong>E</strong>nclosing → <strong>G</strong>lobal → <strong>B</strong>uilt-in.</p>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · LEGB Scope</span><button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block">x = <span class="st">"global"</span>          <span class="cm"># G — global scope</span>
+
+<span class="kw">def</span> <span class="fn">outer</span>():
+    x = <span class="st">"enclosing"</span>    <span class="cm"># E — enclosing scope</span>
+
+    <span class="kw">def</span> <span class="fn">inner</span>():
+        x = <span class="st">"local"</span>    <span class="cm"># L — local scope</span>
+        <span class="bi">print</span>(x)        <span class="cm"># "local" — L wins</span>
+
+    inner()
+    <span class="bi">print</span>(x)            <span class="cm"># "enclosing"</span>
+
+outer()
+<span class="bi">print</span>(x)                <span class="cm"># "global"</span>
+
+<span class="cm"># global keyword: modify a global from inside a function</span>
+count = <span class="nm">0</span>
+<span class="kw">def</span> <span class="fn">increment</span>():
+    <span class="kw">global</span> count
+    count += <span class="nm">1</span>
+
+increment()
+<span class="bi">print</span>(count)            <span class="cm"># 1</span>
+
+<span class="cm"># nonlocal keyword: modify enclosing scope variable</span>
+<span class="kw">def</span> <span class="fn">counter</span>():
+    n = <span class="nm">0</span>
+    <span class="kw">def</span> <span class="fn">increment</span>():
+        <span class="kw">nonlocal</span> n
+        n += <span class="nm">1</span>
+        <span class="kw">return</span> n
+    <span class="kw">return</span> increment
+
+c = counter()
+<span class="bi">print</span>(c(), c(), c())    <span class="cm"># 1 2 3  ← closure!</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>local<br>enclosing<br>global<br>1<br>1 2 3
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="closures">
+                <h2>4 · Closures</h2>
+                <p>A closure is a function that <strong>remembers the variables from its enclosing scope</strong> even
+                    after the outer function has finished executing.</p>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Closures</span><button class="copy-btn">Copy</button>
+                    </div>
+                    <pre
+                        class="code-block"><span class="kw">def</span> <span class="fn">make_multiplier</span>(factor):
+    <span class="st">"""Returns a closure that multiplies by factor."""</span>
+    <span class="kw">def</span> <span class="fn">multiply</span>(x):
+        <span class="kw">return</span> x * factor   <span class="cm"># 'factor' is captured from outer scope</span>
+    <span class="kw">return</span> multiply         <span class="cm"># Returns the function, NOT the result</span>
+
+double = make_multiplier(<span class="nm">2</span>)
+triple = make_multiplier(<span class="nm">3</span>)
+
+<span class="bi">print</span>(double(<span class="nm">5</span>))    <span class="cm"># 10</span>
+<span class="bi">print</span>(triple(<span class="nm">5</span>))    <span class="cm"># 15</span>
+<span class="bi">print</span>(double(<span class="nm">10</span>))   <span class="cm"># 20</span>
+
+<span class="cm"># Inspect closure variables</span>
+<span class="bi">print</span>(double.__closure__[<span class="nm">0</span>].cell_contents)  <span class="cm"># 2</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>10<br>15<br>20<br>2
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="recursion">
+                <h2>5 · Recursion</h2>
+                <p>A function that calls itself. Every recursive function needs a <strong>base case</strong> (stopping
+                    condition) and a <strong>recursive case</strong>.</p>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Recursion Examples</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="cm"># Factorial: n! = n × (n-1)!</span>
+<span class="kw">def</span> <span class="fn">factorial</span>(n):
+    <span class="kw">if</span> n <= <span class="nm">1</span>:             <span class="cm"># BASE CASE</span>
+        <span class="kw">return</span> <span class="nm">1</span>
+    <span class="kw">return</span> n * factorial(n - <span class="nm">1</span>)  <span class="cm"># RECURSIVE CASE</span>
+
+<span class="bi">print</span>(factorial(<span class="nm">5</span>))    <span class="cm"># 120  (5 × 4 × 3 × 2 × 1)</span>
+
+<span class="cm"># Fibonacci: fib(n) = fib(n-1) + fib(n-2)</span>
+<span class="kw">def</span> <span class="fn">fib</span>(n, memo={}):
+    <span class="kw">if</span> n <span class="kw">in</span> memo: <span class="kw">return</span> memo[n]
+    <span class="kw">if</span> n <= <span class="nm">1</span>: <span class="kw">return</span> n
+    memo[n] = fib(n-<span class="nm">1</span>, memo) + fib(n-<span class="nm">2</span>, memo)
+    <span class="kw">return</span> memo[n]
+
+<span class="bi">print</span>([fib(i) <span class="kw">for</span> i <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">10</span>)])
+<span class="cm"># [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>120<br>[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="type-hints">
+                <h2>6 · Type Hints & Docstrings</h2>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div><span
+                            class="code-lang-badge">Python · Modern Function Style</span><button
+                            class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-block"><span class="kw">from</span> typing <span class="kw">import</span> Union, Optional, List
+
+<span class="kw">def</span> <span class="fn">calculate_bmi</span>(weight_kg: <span class="bi">float</span>, height_m: <span class="bi">float</span>) -> <span class="bi">float</span>:
+    <span class="st">"""Calculate Body Mass Index (BMI).
+
+    Args:
+        weight_kg: Weight in kilograms.
+        height_m: Height in meters.
+
+    Returns:
+        BMI value (float), rounded to 2 decimal places.
+
+    Raises:
+        ValueError: If height is zero or negative.
+    """</span>
+    <span class="kw">if</span> height_m <= <span class="nm">0</span>:
+        <span class="kw">raise</span> <span class="cl">ValueError</span>(<span class="st">"Height must be positive."</span>)
+    <span class="kw">return</span> <span class="bi">round</span>(weight_kg / (height_m ** <span class="nm">2</span>), <span class="nm">2</span>)
+
+bmi = calculate_bmi(<span class="nm">70</span>, <span class="nm">1.75</span>)
+<span class="bi">print</span>(bmi)  <span class="cm"># 22.86</span>
+
+<span class="cm"># Optional parameters with Union</span>
+<span class="kw">def</span> <span class="fn">parse_value</span>(value: Union[<span class="bi">str</span>, <span class="bi">int</span>]) -> Optional[<span class="bi">int</span>]:
+    <span class="kw">try</span>:
+        <span class="kw">return</span> <span class="bi">int</span>(value)
+    <span class="kw">except</span> <span class="cl">ValueError</span>:
+        <span class="kw">return</span> <span class="kw">None</span></pre>
+                    <div class="output-block">
+                        <div class="output-label">▶ Output</div>22.86
+                    </div>
+                </div>
+                <div class="callout tip">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content"><strong>Type hints don't enforce types at runtime</strong>
+                        <p>They are documentation for you and tools (mypy, IDEs). Python itself does NOT check types at
+                            runtime. Use <code>mypy</code> for static type checking.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="page-nav">
+            <a href="loops.html"><span class="nav-direction">← Previous</span><span class="nav-topic">Loops</span></a>
+            <a href="strings.html" class="next"><span class="nav-direction">Next →</span><span
+                    class="nav-topic">Strings</span></a>
+        </div>
+        <footer class="footer">
+            <p>🐍 Python Learning Hub — Built from leading textbooks for deep understanding</p>
+        </footer>
+    </main>
+    <script src="../../js/main.js"></script>
+</body>
+
+</html>

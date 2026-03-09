@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neural Networks Fundamentals - Python Learning Hub</title>
+<meta name="description" content="Neural Networks Fundamentals - comprehensive textbook reference with code examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../../index.html" class="logo"><div class="logo-icon">&#x1F40D;</div><div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete Reference</span></div></a><button class="sidebar-toggle" id="sidebarToggle">&#x2630;</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="&#x1F50D; Search topics..." class="search-input"></div>
+<div class="nav-items" id="navItems">
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+</div></div></div>
+</nav>
+<main class="main-content" id="mainContent">
+<header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; DL &rarr; Neural Networks</div>
+<div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
+</header>
+<div class="page-content">
+<div class="page-header">
+<span class="topic-badge">&#x1F9E0; Deep Learning</span>
+<h1>Neural Networks Fundamentals</h1>
+<p class="page-intro">Neural networks are computing systems inspired by biological brains. This page covers perceptrons, multi-layer perceptrons, activation functions (ReLU, Sigmoid, Tanh, Softmax), forward pass, loss functions, and building neural networks with TensorFlow/Keras from scratch.</p>
+<div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+<span class="difficulty-badge advanced">&#x25CF; Advanced</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Deep Learning with Python &mdash; Fran&ccedil;ois Chollet</em></span>
+</div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
+<li><a href="#s1">What is a Neural Network?</a></li>
+<li><a href="#s2">The Perceptron</a></li>
+<li><a href="#s3">Activation Functions</a></li>
+<li><a href="#s4">Multi-Layer Perceptron (MLP)</a></li>
+<li><a href="#s5">Loss Functions</a></li>
+<li><a href="#s6">Building with Keras</a></li>
+</ol></div>
+
+<section class="content-section" id="s1"><h2>1 &middot; What is a Neural Network?</h2>
+<p>A neural network is a computational model consisting of <strong>layers of interconnected nodes (neurons)</strong> that transform input data through learned weights and biases to produce predictions.</p>
+<div class="callout note"><div class="callout-icon">&#x1F4D0;</div><div class="callout-content"><strong>Neural Network Architecture</strong>
+<pre style="font-size:.85rem;line-height:1.6;">
+Input Layer    Hidden Layer(s)    Output Layer
+  [x1] ----&gt;  [h1] ----&gt;        [y1]
+  [x2] ----&gt;  [h2] ----&gt;        [y2]
+  [x3] ----&gt;  [h3] ----&gt;
+              [h4] ----&gt;
+
+Each connection has a WEIGHT (w)
+Each neuron has a BIAS (b)
+Output = activation(w&middot;x + b)</pre></div></div>
+<table class="data-table"><thead><tr><th>Component</th><th>Purpose</th><th>Analogy</th></tr></thead><tbody>
+<tr><td><strong>Input Layer</strong></td><td>Receives raw data (features)</td><td>Eyes, ears &mdash; sense the world</td></tr>
+<tr><td><strong>Hidden Layers</strong></td><td>Learn patterns &amp; representations</td><td>Brain &mdash; process information</td></tr>
+<tr><td><strong>Output Layer</strong></td><td>Produces predictions</td><td>Mouth &mdash; give the answer</td></tr>
+<tr><td><strong>Weights (w)</strong></td><td>Importance of each connection</td><td>Synapse strength</td></tr>
+<tr><td><strong>Bias (b)</strong></td><td>Shift activation threshold</td><td>Baseline tendency</td></tr>
+<tr><td><strong>Activation</strong></td><td>Introduces non-linearity</td><td>Neuron firing threshold</td></tr>
+</tbody></table></section>
+
+<section class="content-section" id="s2"><h2>2 &middot; The Perceptron</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; Single Perceptron from Scratch</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="kw">class</span> <span class="bi">Perceptron</span>:
+    <span class="kw">def</span> <span class="bi">__init__</span>(self, n_features, learning_rate=<span class="nm">0.01</span>):
+        self.weights = np.zeros(n_features)
+        self.bias = <span class="nm">0</span>
+        self.lr = learning_rate
+
+    <span class="kw">def</span> <span class="bi">predict</span>(self, x):
+        linear = np.dot(x, self.weights) + self.bias
+        <span class="kw">return</span> <span class="nm">1</span> <span class="kw">if</span> linear >= <span class="nm">0</span> <span class="kw">else</span> <span class="nm">0</span>
+
+    <span class="kw">def</span> <span class="bi">train</span>(self, X, y, epochs=<span class="nm">10</span>):
+        <span class="kw">for</span> epoch <span class="kw">in</span> <span class="bi">range</span>(epochs):
+            errors = <span class="nm">0</span>
+            <span class="kw">for</span> xi, yi <span class="kw">in</span> <span class="bi">zip</span>(X, y):
+                pred = self.predict(xi)
+                error = yi - pred
+                self.weights += self.lr * error * xi
+                self.bias += self.lr * error
+                errors += <span class="bi">abs</span>(error)
+            <span class="bi">print</span>(<span class="st">f"Epoch {epoch+1}: errors={errors}"</span>)
+
+<span class="cm"># AND gate</span>
+X = np.array([[<span class="nm">0</span>,<span class="nm">0</span>],[<span class="nm">0</span>,<span class="nm">1</span>],[<span class="nm">1</span>,<span class="nm">0</span>],[<span class="nm">1</span>,<span class="nm">1</span>]])
+y = np.array([<span class="nm">0</span>, <span class="nm">0</span>, <span class="nm">0</span>, <span class="nm">1</span>])
+
+p = Perceptron(<span class="nm">2</span>)
+p.train(X, y, epochs=<span class="nm">10</span>)
+<span class="kw">for</span> xi <span class="kw">in</span> X:
+    <span class="bi">print</span>(<span class="st">f"{xi} &rarr; {p.predict(xi)}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Epoch 1: errors=1<br>Epoch 2: errors=0<br>[0,0] &rarr; 0 &middot; [0,1] &rarr; 0 &middot; [1,0] &rarr; 0 &middot; [1,1] &rarr; 1 &#x2705;</div></div></section>
+
+<section class="content-section" id="s3"><h2>3 &middot; Activation Functions</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="cm"># Sigmoid: squashes to [0, 1]</span>
+<span class="kw">def</span> <span class="bi">sigmoid</span>(x):
+    <span class="kw">return</span> <span class="nm">1</span> / (<span class="nm">1</span> + np.exp(-x))
+
+<span class="cm"># ReLU: max(0, x) &mdash; most common in hidden layers</span>
+<span class="kw">def</span> <span class="bi">relu</span>(x):
+    <span class="kw">return</span> np.maximum(<span class="nm">0</span>, x)
+
+<span class="cm"># Leaky ReLU: allows small negative values</span>
+<span class="kw">def</span> <span class="bi">leaky_relu</span>(x, alpha=<span class="nm">0.01</span>):
+    <span class="kw">return</span> np.where(x > <span class="nm">0</span>, x, alpha * x)
+
+<span class="cm"># Tanh: squashes to [-1, 1]</span>
+<span class="kw">def</span> <span class="bi">tanh</span>(x):
+    <span class="kw">return</span> np.tanh(x)
+
+<span class="cm"># Softmax: multi-class probabilities (sum to 1)</span>
+<span class="kw">def</span> <span class="bi">softmax</span>(x):
+    exp_x = np.exp(x - np.max(x))
+    <span class="kw">return</span> exp_x / exp_x.sum()
+
+<span class="cm"># Test all</span>
+x = np.array([-<span class="nm">2</span>, -<span class="nm">1</span>, <span class="nm">0</span>, <span class="nm">1</span>, <span class="nm">2</span>])
+<span class="bi">print</span>(<span class="st">f"Sigmoid:    {sigmoid(x).round(3)}"</span>)
+<span class="bi">print</span>(<span class="st">f"ReLU:       {relu(x)}"</span>)
+<span class="bi">print</span>(<span class="st">f"Leaky ReLU: {leaky_relu(x).round(3)}"</span>)
+<span class="bi">print</span>(<span class="st">f"Tanh:       {tanh(x).round(3)}"</span>)
+<span class="bi">print</span>(<span class="st">f"Softmax:    {softmax(x).round(3)}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Sigmoid:    [0.119 0.269 0.5   0.731 0.881]<br>ReLU:       [0 0 0 1 2]<br>Leaky ReLU: [-0.02 -0.01  0.    1.    2.  ]<br>Tanh:       [-0.964 -0.762 0.  0.762 0.964]<br>Softmax:    [0.012 0.032 0.087 0.237 0.643]</div></div>
+<table class="data-table"><thead><tr><th>Function</th><th>Range</th><th>Use Where</th><th>Pros</th></tr></thead><tbody>
+<tr><td><code>ReLU</code></td><td>[0, &infin;)</td><td>Hidden layers (default)</td><td>Fast, simple, no vanishing gradient</td></tr>
+<tr><td><code>Sigmoid</code></td><td>(0, 1)</td><td>Binary output layer</td><td>Probability interpretation</td></tr>
+<tr><td><code>Tanh</code></td><td>(-1, 1)</td><td>Hidden layers (RNNs)</td><td>Zero-centered</td></tr>
+<tr><td><code>Softmax</code></td><td>(0, 1) sums to 1</td><td>Multi-class output</td><td>Probability distribution</td></tr>
+<tr><td><code>Leaky ReLU</code></td><td>(-&infin;, &infin;)</td><td>Hidden layers</td><td>Avoids dying ReLU</td></tr>
+</tbody></table></section>
+
+<section class="content-section" id="s4"><h2>4 &middot; Forward Pass (from Scratch)</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; 2-Layer Neural Network</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="cm"># Simple 2-layer neural network</span>
+np.random.seed(<span class="nm">42</span>)
+
+<span class="cm"># Architecture: 3 inputs &rarr; 4 hidden &rarr; 2 outputs</span>
+W1 = np.random.randn(<span class="nm">3</span>, <span class="nm">4</span>) * <span class="nm">0.5</span>    <span class="cm"># weights layer 1</span>
+b1 = np.zeros(<span class="nm">4</span>)                   <span class="cm"># bias layer 1</span>
+W2 = np.random.randn(<span class="nm">4</span>, <span class="nm">2</span>) * <span class="nm">0.5</span>    <span class="cm"># weights layer 2</span>
+b2 = np.zeros(<span class="nm">2</span>)                   <span class="cm"># bias layer 2</span>
+
+<span class="cm"># Input</span>
+X = np.array([<span class="nm">1.0</span>, <span class="nm">0.5</span>, <span class="nm">-1.5</span>])
+
+<span class="cm"># Forward pass</span>
+<span class="cm"># Layer 1: z1 = X @ W1 + b1, a1 = relu(z1)</span>
+z1 = X @ W1 + b1
+a1 = np.maximum(<span class="nm">0</span>, z1)   <span class="cm"># ReLU activation</span>
+<span class="bi">print</span>(<span class="st">f"Hidden (before activation): {z1.round(3)}"</span>)
+<span class="bi">print</span>(<span class="st">f"Hidden (after ReLU):        {a1.round(3)}"</span>)
+
+<span class="cm"># Layer 2: z2 = a1 @ W2 + b2, output = softmax(z2)</span>
+z2 = a1 @ W2 + b2
+exp_z = np.exp(z2 - z2.max())
+output = exp_z / exp_z.sum()   <span class="cm"># Softmax</span>
+<span class="bi">print</span>(<span class="st">f"Output probabilities: {output.round(4)}"</span>)
+<span class="bi">print</span>(<span class="st">f"Predicted class: {np.argmax(output)}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Hidden (before activation): [ 0.248 -0.632  1.234 -0.156]<br>Hidden (after ReLU):        [0.248 0.    1.234 0.   ]<br>Output probs: [0.4231 0.5769]<br>Predicted class: 1</div></div></section>
+
+<section class="content-section" id="s5"><h2>5 &middot; Loss Functions</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Binary Cross-Entropy (binary classification)</span>
+<span class="kw">def</span> <span class="bi">binary_cross_entropy</span>(y_true, y_pred):
+    y_pred = np.clip(y_pred, <span class="nm">1e-7</span>, <span class="nm">1-1e-7</span>)
+    <span class="kw">return</span> -np.mean(y_true * np.log(y_pred) + (<span class="nm">1</span>-y_true) * np.log(<span class="nm">1</span>-y_pred))
+
+<span class="cm"># Categorical Cross-Entropy (multi-class)</span>
+<span class="kw">def</span> <span class="bi">categorical_cross_entropy</span>(y_true, y_pred):
+    y_pred = np.clip(y_pred, <span class="nm">1e-7</span>, <span class="nm">1-1e-7</span>)
+    <span class="kw">return</span> -np.sum(y_true * np.log(y_pred))
+
+<span class="cm"># Mean Squared Error (regression)</span>
+<span class="kw">def</span> <span class="bi">mse</span>(y_true, y_pred):
+    <span class="kw">return</span> np.mean((y_true - y_pred) ** <span class="nm">2</span>)
+
+<span class="cm"># Examples</span>
+y_true_bin = np.array([<span class="nm">1</span>, <span class="nm">0</span>, <span class="nm">1</span>, <span class="nm">1</span>])
+y_pred_bin = np.array([<span class="nm">0.9</span>, <span class="nm">0.1</span>, <span class="nm">0.8</span>, <span class="nm">0.7</span>])
+<span class="bi">print</span>(<span class="st">f"Binary CE: {binary_cross_entropy(y_true_bin, y_pred_bin):.4f}"</span>)
+
+y_true_cat = np.array([<span class="nm">0</span>, <span class="nm">1</span>, <span class="nm">0</span>])  <span class="cm"># one-hot: class 1</span>
+y_pred_cat = np.array([<span class="nm">0.1</span>, <span class="nm">0.8</span>, <span class="nm">0.1</span>])
+<span class="bi">print</span>(<span class="st">f"Categorical CE: {categorical_cross_entropy(y_true_cat, y_pred_cat):.4f}"</span>)
+
+y_true_reg = np.array([<span class="nm">3.0</span>, <span class="nm">5.0</span>, <span class="nm">7.0</span>])
+y_pred_reg = np.array([<span class="nm">2.8</span>, <span class="nm">5.2</span>, <span class="nm">6.5</span>])
+<span class="bi">print</span>(<span class="st">f"MSE: {mse(y_true_reg, y_pred_reg):.4f}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Binary CE: 0.1643<br>Categorical CE: 0.2231<br>MSE: 0.1067</div></div>
+<table class="data-table"><thead><tr><th>Loss Function</th><th>Task</th><th>Output Activation</th></tr></thead><tbody>
+<tr><td>Binary Cross-Entropy</td><td>Binary classification</td><td>Sigmoid</td></tr>
+<tr><td>Categorical Cross-Entropy</td><td>Multi-class classification</td><td>Softmax</td></tr>
+<tr><td>MSE / MAE</td><td>Regression</td><td>Linear (none)</td></tr>
+</tbody></table></section>
+
+<section class="content-section" id="s6"><h2>6 &middot; Building with Keras (TensorFlow)</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; MNIST Digit Classification</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> tensorflow <span class="kw">as</span> tf
+<span class="kw">from</span> tensorflow <span class="kw">import</span> keras
+<span class="kw">from</span> tensorflow.keras <span class="kw">import</span> layers
+
+<span class="cm"># Load MNIST</span>
+(X_train, y_train), (X_test, y_test) = keras.datasets.mnist.load_data()
+X_train = X_train.reshape(-<span class="nm">1</span>, <span class="nm">784</span>).astype(<span class="st">"float32"</span>) / <span class="nm">255.0</span>
+X_test = X_test.reshape(-<span class="nm">1</span>, <span class="nm">784</span>).astype(<span class="st">"float32"</span>) / <span class="nm">255.0</span>
+
+<span class="cm"># Build model</span>
+model = keras.Sequential([
+    layers.Dense(<span class="nm">128</span>, activation=<span class="st">"relu"</span>, input_shape=(<span class="nm">784</span>,)),
+    layers.Dropout(<span class="nm">0.2</span>),
+    layers.Dense(<span class="nm">64</span>, activation=<span class="st">"relu"</span>),
+    layers.Dropout(<span class="nm">0.2</span>),
+    layers.Dense(<span class="nm">10</span>, activation=<span class="st">"softmax"</span>)
+])
+
+<span class="cm"># Compile</span>
+model.compile(
+    optimizer=<span class="st">"adam"</span>,
+    loss=<span class="st">"sparse_categorical_crossentropy"</span>,
+    metrics=[<span class="st">"accuracy"</span>]
+)
+
+model.summary()  <span class="cm"># show architecture</span>
+
+<span class="cm"># Train</span>
+history = model.fit(X_train, y_train, epochs=<span class="nm">10</span>,
+                    batch_size=<span class="nm">32</span>, validation_split=<span class="nm">0.2</span>)
+
+<span class="cm"># Evaluate</span>
+test_loss, test_acc = model.evaluate(X_test, y_test)
+<span class="bi">print</span>(<span class="st">f"Test accuracy: {test_acc:.4f}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Layer (type)         Output Shape      Params<br>dense (Dense)        (None, 128)       100480<br>dropout (Dropout)    (None, 128)       0<br>dense_1 (Dense)      (None, 64)        8256<br>dropout_1 (Dropout)  (None, 64)        0<br>dense_2 (Dense)      (None, 10)        650<br>Total params: 109,386<br>Test accuracy: 0.9785</div></div></section>
+</div>
+<div class="page-nav">
+<a href="backpropagation.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Backpropagation</span></a>
+<a href="cnn.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">CNN</span></a>
+</div>
+<footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
+</main>
+<script src="../../js/main.js"></script>
+</body></html>

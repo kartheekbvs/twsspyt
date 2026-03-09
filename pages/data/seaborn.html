@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seaborn Visualization - Python Learning Hub</title>
+<meta name="description" content="Seaborn Visualization - comprehensive textbook reference with code examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../../index.html" class="logo"><div class="logo-icon">&#x1F40D;</div><div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete Reference</span></div></a><button class="sidebar-toggle" id="sidebarToggle">&#x2630;</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="&#x1F50D; Search topics..." class="search-input"></div>
+<div class="nav-items" id="navItems">
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+</div></div></div>
+</nav>
+<main class="main-content" id="mainContent">
+<header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; Data &rarr; Seaborn</div>
+<div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
+</header>
+<div class="page-content">
+<div class="page-header">
+<span class="topic-badge">&#x1F4CA; Data Analysis</span>
+<h1>Seaborn Visualization</h1>
+<p class="page-intro">Seaborn is a statistical visualization library built on Matplotlib. It provides beautiful, informative plots with minimal code. Covers relational, categorical, distribution, matrix, and regression plots with multiple real-world examples.</p>
+<div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+<span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python Data Science Handbook &mdash; Jake VanderPlas</em></span>
+</div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
+<li><a href="#s1">Setup &amp; Themes</a></li>
+<li><a href="#s2">Distribution Plots</a></li>
+<li><a href="#s3">Categorical Plots</a></li>
+<li><a href="#s4">Relational Plots</a></li>
+<li><a href="#s5">Matrix Plots (Heatmap)</a></li>
+<li><a href="#s6">Pair Plots &amp; Joint Plots</a></li>
+</ol></div>
+
+<section class="content-section" id="s1"><h2>1 &middot; Setup &amp; Themes</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> seaborn <span class="kw">as</span> sns
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+
+<span class="cm"># Set theme</span>
+sns.set_theme(style=<span class="st">"whitegrid"</span>)  <span class="cm"># darkgrid, white, dark, ticks</span>
+sns.set_palette(<span class="st">"husl"</span>)            <span class="cm"># deep, muted, bright, pastel, husl</span>
+sns.set_context(<span class="st">"notebook"</span>)        <span class="cm"># paper, talk, poster</span>
+
+<span class="cm"># Built-in datasets</span>
+tips = sns.load_dataset(<span class="st">"tips"</span>)
+iris = sns.load_dataset(<span class="st">"iris"</span>)
+penguins = sns.load_dataset(<span class="st">"penguins"</span>)
+<span class="bi">print</span>(tips.head())</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>   total_bill   tip   sex smoker  day   time  size<br>0       16.99  1.01  Female  No  Sun  Dinner   2<br>1       10.34  1.66    Male  No  Sun  Dinner   3</div></div></section>
+
+<section class="content-section" id="s2"><h2>2 &middot; Distribution Plots</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; histplot, kdeplot, rugplot</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">fig, axes = plt.subplots(<span class="nm">2</span>, <span class="nm">2</span>, figsize=(<span class="nm">12</span>, <span class="nm">10</span>))
+
+<span class="cm"># Histogram with KDE</span>
+sns.histplot(tips[<span class="st">"total_bill"</span>], kde=<span class="kw">True</span>, bins=<span class="nm">20</span>, ax=axes[<span class="nm">0</span>,<span class="nm">0</span>], color=<span class="st">"steelblue"</span>)
+axes[<span class="nm">0</span>,<span class="nm">0</span>].set_title(<span class="st">"Histogram + KDE"</span>)
+
+<span class="cm"># KDE plot by group</span>
+sns.kdeplot(data=tips, x=<span class="st">"total_bill"</span>, hue=<span class="st">"time"</span>, ax=axes[<span class="nm">0</span>,<span class="nm">1</span>], fill=<span class="kw">True</span>)
+axes[<span class="nm">0</span>,<span class="nm">1</span>].set_title(<span class="st">"KDE by Meal Time"</span>)
+
+<span class="cm"># ECDF (Empirical Cumulative Distribution)</span>
+sns.ecdfplot(data=tips, x=<span class="st">"total_bill"</span>, hue=<span class="st">"sex"</span>, ax=axes[<span class="nm">1</span>,<span class="nm">0</span>])
+axes[<span class="nm">1</span>,<span class="nm">0</span>].set_title(<span class="st">"ECDF"</span>)
+
+<span class="cm"># Rug plot (1D scatter)</span>
+sns.histplot(tips[<span class="st">"tip"</span>], kde=<span class="kw">True</span>, ax=axes[<span class="nm">1</span>,<span class="nm">1</span>])
+sns.rugplot(tips[<span class="st">"tip"</span>], ax=axes[<span class="nm">1</span>,<span class="nm">1</span>], color=<span class="st">"red"</span>)
+axes[<span class="nm">1</span>,<span class="nm">1</span>].set_title(<span class="st">"Histogram + Rug"</span>)
+
+plt.suptitle(<span class="st">"Distribution Plots"</span>, fontsize=<span class="nm">16</span>)
+plt.tight_layout()
+plt.show()</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[2&times;2 grid: histogram+KDE, grouped KDE, ECDF, rugplot]</div></div></section>
+
+<section class="content-section" id="s3"><h2>3 &middot; Categorical Plots</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; box, violin, swarm, bar, count</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">fig, axes = plt.subplots(<span class="nm">2</span>, <span class="nm">3</span>, figsize=(<span class="nm">18</span>, <span class="nm">10</span>))
+
+<span class="cm"># Box plot</span>
+sns.boxplot(data=tips, x=<span class="st">"day"</span>, y=<span class="st">"total_bill"</span>, hue=<span class="st">"sex"</span>, ax=axes[<span class="nm">0</span>,<span class="nm">0</span>])
+axes[<span class="nm">0</span>,<span class="nm">0</span>].set_title(<span class="st">"Box Plot"</span>)
+
+<span class="cm"># Violin plot (box + kernel density)</span>
+sns.violinplot(data=tips, x=<span class="st">"day"</span>, y=<span class="st">"total_bill"</span>, hue=<span class="st">"sex"</span>,
+               split=<span class="kw">True</span>, ax=axes[<span class="nm">0</span>,<span class="nm">1</span>])
+axes[<span class="nm">0</span>,<span class="nm">1</span>].set_title(<span class="st">"Violin Plot"</span>)
+
+<span class="cm"># Swarm plot (actual data points)</span>
+sns.swarmplot(data=tips, x=<span class="st">"day"</span>, y=<span class="st">"total_bill"</span>, hue=<span class="st">"sex"</span>,
+              ax=axes[<span class="nm">0</span>,<span class="nm">2</span>], size=<span class="nm">3</span>)
+axes[<span class="nm">0</span>,<span class="nm">2</span>].set_title(<span class="st">"Swarm Plot"</span>)
+
+<span class="cm"># Bar plot (with confidence interval)</span>
+sns.barplot(data=tips, x=<span class="st">"day"</span>, y=<span class="st">"total_bill"</span>, hue=<span class="st">"sex"</span>,
+            ax=axes[<span class="nm">1</span>,<span class="nm">0</span>], ci=<span class="nm">95</span>)
+axes[<span class="nm">1</span>,<span class="nm">0</span>].set_title(<span class="st">"Bar Plot (mean + CI)"</span>)
+
+<span class="cm"># Count plot</span>
+sns.countplot(data=tips, x=<span class="st">"day"</span>, hue=<span class="st">"time"</span>, ax=axes[<span class="nm">1</span>,<span class="nm">1</span>])
+axes[<span class="nm">1</span>,<span class="nm">1</span>].set_title(<span class="st">"Count Plot"</span>)
+
+<span class="cm"># Strip plot (jittered scatter)</span>
+sns.stripplot(data=tips, x=<span class="st">"day"</span>, y=<span class="st">"tip"</span>, hue=<span class="st">"sex"</span>,
+              ax=axes[<span class="nm">1</span>,<span class="nm">2</span>], jitter=<span class="kw">True</span>, alpha=<span class="nm">0.6</span>)
+axes[<span class="nm">1</span>,<span class="nm">2</span>].set_title(<span class="st">"Strip Plot"</span>)
+
+plt.suptitle(<span class="st">"Categorical Plots"</span>, fontsize=<span class="nm">16</span>)
+plt.tight_layout()
+plt.show()</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[2&times;3 grid: box, violin, swarm, bar, count, strip plots]</div></div></section>
+
+<section class="content-section" id="s4"><h2>4 &middot; Relational Plots</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; scatterplot, lineplot, relplot</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">fig, axes = plt.subplots(<span class="nm">1</span>, <span class="nm">3</span>, figsize=(<span class="nm">18</span>, <span class="nm">5</span>))
+
+<span class="cm"># Scatter with regression line</span>
+sns.regplot(data=tips, x=<span class="st">"total_bill"</span>, y=<span class="st">"tip"</span>, ax=axes[<span class="nm">0</span>],
+            scatter_kws={<span class="st">"alpha"</span>:<span class="nm">0.5</span>})
+axes[<span class="nm">0</span>].set_title(<span class="st">"Scatter + Regression"</span>)
+
+<span class="cm"># Scatter colored by category</span>
+sns.scatterplot(data=tips, x=<span class="st">"total_bill"</span>, y=<span class="st">"tip"</span>,
+                hue=<span class="st">"time"</span>, size=<span class="st">"size"</span>, ax=axes[<span class="nm">1</span>])
+axes[<span class="nm">1</span>].set_title(<span class="st">"Multi-dim Scatter"</span>)
+
+<span class="cm"># Line plot (with CI)</span>
+fmri = sns.load_dataset(<span class="st">"fmri"</span>)
+sns.lineplot(data=fmri, x=<span class="st">"timepoint"</span>, y=<span class="st">"signal"</span>,
+             hue=<span class="st">"event"</span>, style=<span class="st">"region"</span>, ax=axes[<span class="nm">2</span>])
+axes[<span class="nm">2</span>].set_title(<span class="st">"Line Plot (mean + CI)"</span>)
+
+plt.tight_layout()
+plt.show()
+
+<span class="cm"># FacetGrid with relplot</span>
+g = sns.relplot(data=tips, x=<span class="st">"total_bill"</span>, y=<span class="st">"tip"</span>,
+                col=<span class="st">"time"</span>, hue=<span class="st">"smoker"</span>, style=<span class="st">"smoker"</span>,
+                kind=<span class="st">"scatter"</span>, height=<span class="nm">4</span>)
+g.fig.suptitle(<span class="st">"Faceted Scatter"</span>, y=<span class="nm">1.02</span>)
+plt.show()</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[3 panels: regression scatter, multi-dim scatter, line plot with CI]</div></div></section>
+
+<section class="content-section" id="s5"><h2>5 &middot; Matrix Plots (Heatmap)</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Correlation heatmap</span>
+corr = tips.select_dtypes(include=<span class="st">"number"</span>).corr()
+
+plt.figure(figsize=(<span class="nm">8</span>, <span class="nm">6</span>))
+sns.heatmap(corr, annot=<span class="kw">True</span>, cmap=<span class="st">"coolwarm"</span>, center=<span class="nm">0</span>,
+            fmt=<span class="st">".2f"</span>, square=<span class="kw">True</span>, linewidths=<span class="nm">0.5</span>,
+            vmin=-<span class="nm">1</span>, vmax=<span class="nm">1</span>)
+plt.title(<span class="st">"Correlation Heatmap"</span>)
+plt.show()
+
+<span class="cm"># Cluster map (hierarchical clustering + heatmap)</span>
+sns.clustermap(corr, annot=<span class="kw">True</span>, cmap=<span class="st">"viridis"</span>, figsize=(<span class="nm">6</span>,<span class="nm">6</span>))
+plt.show()</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[Annotated heatmap with warm/cool colors for positive/negative correlations]</div></div></section>
+
+<section class="content-section" id="s6"><h2>6 &middot; Pair Plots &amp; Joint Plots</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Pair plot: all pairwise relationships</span>
+sns.pairplot(iris, hue=<span class="st">"species"</span>, diag_kind=<span class="st">"kde"</span>,
+             plot_kws={<span class="st">"alpha"</span>: <span class="nm">0.6</span>})
+plt.suptitle(<span class="st">"Iris Pair Plot"</span>, y=<span class="nm">1.02</span>)
+plt.show()
+
+<span class="cm"># Joint plot: 2 variables with marginal distributions</span>
+g = sns.jointplot(data=tips, x=<span class="st">"total_bill"</span>, y=<span class="st">"tip"</span>,
+                  kind=<span class="st">"hex"</span>, color=<span class="st">"#4ECDC4"</span>)
+<span class="cm"># kind options: "scatter", "kde", "hist", "hex", "reg", "resid"</span>
+plt.show()
+
+<span class="cm"># Joint plot with KDE</span>
+g = sns.jointplot(data=tips, x=<span class="st">"total_bill"</span>, y=<span class="st">"tip"</span>,
+                  kind=<span class="st">"kde"</span>, fill=<span class="kw">True</span>, cmap=<span class="st">"Blues"</span>)
+plt.show()</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[Pair plot: 4&times;4 grid of Iris species colored in 3 colors]<br>[Joint plot: scatter + marginal histograms]</div></div></section>
+</div>
+<div class="page-nav">
+<a href="matplotlib.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Matplotlib</span></a>
+<a href="feature-engineering.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Feature Engineering</span></a>
+</div>
+<footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
+</main>
+<script src="../../js/main.js"></script>
+</body></html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math &amp; Statistical Functions - Python Learning Hub</title>
+<meta name="description" content="Math &amp; Statistical Functions - comprehensive textbook reference with code examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../../index.html" class="logo"><div class="logo-icon">&#x1F40D;</div><div class="logo-text"><span class="logo-title">PyTextbook</span><span class="logo-sub">Complete Reference</span></div></a><button class="sidebar-toggle" id="sidebarToggle">&#x2630;</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="&#x1F50D; Search topics..." class="search-input"></div>
+<div class="nav-items" id="navItems">
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../python/introduction.html" class="nav-item">Introduction</a>
+<a href="../python/variables-datatypes.html" class="nav-item">Variables &amp; Data Types</a>
+<a href="../python/operators.html" class="nav-item">Operators</a>
+<a href="../python/control-flow.html" class="nav-item">Control Flow</a>
+<a href="../python/loops.html" class="nav-item">Loops</a>
+<a href="../python/functions.html" class="nav-item">Functions</a>
+<a href="../python/strings.html" class="nav-item">Strings</a>
+<a href="../python/lists.html" class="nav-item">Lists</a>
+<a href="../python/tuples.html" class="nav-item">Tuples</a>
+<a href="../python/dictionaries.html" class="nav-item">Dictionaries</a>
+<a href="../python/sets.html" class="nav-item">Sets</a>
+<a href="../python/file-io.html" class="nav-item">File I/O</a>
+<a href="../python/exceptions.html" class="nav-item">Exception Handling</a>
+<a href="../python/modules.html" class="nav-item">Modules &amp; Packages</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F3D7;&#xFE0F; OOP</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../oop/classes-objects.html" class="nav-item">Classes &amp; Objects</a>
+<a href="../oop/inheritance.html" class="nav-item">Inheritance</a>
+<a href="../oop/polymorphism.html" class="nav-item">Polymorphism</a>
+<a href="../oop/encapsulation.html" class="nav-item">Encapsulation</a>
+<a href="../oop/magic-methods.html" class="nav-item">Magic Methods</a>
+<a href="../oop/decorators.html" class="nav-item">Decorators</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x26A1; Advanced Python</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../advanced/generators.html" class="nav-item">Generators &amp; Iterators</a>
+<a href="../advanced/comprehensions.html" class="nav-item">Comprehensions</a>
+<a href="../advanced/lambda.html" class="nav-item">Lambda &amp; Functional</a>
+<a href="../advanced/context-managers.html" class="nav-item">Context Managers</a>
+<a href="../advanced/async.html" class="nav-item">Async &amp; Await</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F522; NumPy</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../numpy/arrays.html" class="nav-item">Arrays &amp; ndarray</a>
+<a href="../numpy/operations.html" class="nav-item">Array Operations</a>
+<a href="../numpy/indexing.html" class="nav-item">Indexing &amp; Slicing</a>
+<a href="../numpy/reshaping.html" class="nav-item">Reshaping &amp; Stacking</a>
+<a href="../numpy/math-functions.html" class="nav-item">Math Functions</a>
+<a href="../numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
+<a href="../numpy/random.html" class="nav-item">Random Module</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../pandas/series-dataframe.html" class="nav-item">Series &amp; DataFrame</a>
+<a href="../pandas/reading-data.html" class="nav-item">Reading Data</a>
+<a href="../pandas/selection.html" class="nav-item">Selection &amp; Filtering</a>
+<a href="../pandas/cleaning.html" class="nav-item">Data Cleaning</a>
+<a href="../pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
+<a href="../pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
+<a href="../pandas/visualization.html" class="nav-item">Visualization</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../ml/intro-ml.html" class="nav-item">Introduction to ML</a>
+<a href="../ml/linear-regression.html" class="nav-item">Linear Regression</a>
+<a href="../ml/logistic-regression.html" class="nav-item">Logistic Regression</a>
+<a href="../ml/decision-trees.html" class="nav-item">Decision Trees</a>
+<a href="../ml/random-forest.html" class="nav-item">Random Forest</a>
+<a href="../ml/svm.html" class="nav-item">Support Vector Machine</a>
+<a href="../ml/knn.html" class="nav-item">K-Nearest Neighbors</a>
+<a href="../ml/clustering.html" class="nav-item">K-Means Clustering</a>
+<a href="../ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../dl/neural-networks.html" class="nav-item">Neural Networks</a>
+<a href="../dl/backpropagation.html" class="nav-item">Backpropagation</a>
+<a href="../dl/cnn.html" class="nav-item">CNN</a>
+<a href="../dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
+<a href="../dl/transformers.html" class="nav-item">Transformers</a>
+</div></div>
+<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
+<div class="nav-section-items">
+<a href="../data/exploratory.html" class="nav-item">Exploratory Data Analysis</a>
+<a href="../data/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="../data/feature-engineering.html" class="nav-item">Feature Engineering</a>
+<a href="../data/matplotlib.html" class="nav-item">Matplotlib</a>
+<a href="../data/seaborn.html" class="nav-item">Seaborn</a>
+</div></div></div>
+</nav>
+<main class="main-content" id="mainContent">
+<header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; NumPy &rarr; Math &amp; Stats</div>
+<div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
+</header>
+<div class="page-content">
+<div class="page-header">
+<span class="topic-badge">&#x1F522; NumPy</span>
+<h1>Math &amp; Statistical Functions</h1>
+<p class="page-intro">NumPy provides optimized statistical functions (mean, median, std, var, percentile, corrcoef), sorting/searching (sort, argsort, partition, unique, searchsorted), and comprehensive mathematical ufuncs for scientific computing.</p>
+<div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+<span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>NumPy User Guide, Python for Data Analysis &mdash; Wes McKinney</em></span>
+</div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
+<li><a href="#s1">Statistical Functions</a></li>
+<li><a href="#s2">Correlation &amp; Covariance</a></li>
+<li><a href="#s3">Sorting</a></li>
+<li><a href="#s4">Searching &amp; Counting</a></li>
+<li><a href="#s5">Set Operations</a></li>
+</ol></div>
+
+<section class="content-section" id="s1"><h2>1 &middot; Statistical Functions</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+data = np.array([<span class="nm">14</span>, <span class="nm">18</span>, <span class="nm">11</span>, <span class="nm">13</span>, <span class="nm">16</span>, <span class="nm">15</span>, <span class="nm">12</span>, <span class="nm">17</span>, <span class="nm">19</span>, <span class="nm">10</span>])
+
+<span class="cm"># np.sum() &mdash; sum of elements</span>
+<span class="bi">print</span>(<span class="st">f"Sum:     {np.sum(data)}"</span>)         <span class="cm"># 145</span>
+
+<span class="cm"># np.mean() &mdash; arithmetic mean</span>
+<span class="bi">print</span>(<span class="st">f"Mean:    {np.mean(data):.2f}"</span>)     <span class="cm"># 14.50</span>
+
+<span class="cm"># np.median() &mdash; middle value (sorted)</span>
+<span class="bi">print</span>(<span class="st">f"Median:  {np.median(data):.2f}"</span>)   <span class="cm"># 14.50</span>
+
+<span class="cm"># np.std() &mdash; standard deviation</span>
+<span class="bi">print</span>(<span class="st">f"Std:     {np.std(data):.4f}"</span>)      <span class="cm"># 2.8723</span>
+<span class="bi">print</span>(<span class="st">f"Std(ddof=1): {np.std(data,ddof=1):.4f}"</span>)  <span class="cm"># sample std</span>
+
+<span class="cm"># np.var() &mdash; variance</span>
+<span class="bi">print</span>(<span class="st">f"Var:     {np.var(data):.4f}"</span>)      <span class="cm"># 8.2500</span>
+
+<span class="cm"># np.min(), np.max()</span>
+<span class="bi">print</span>(<span class="st">f"Min:     {np.min(data)}"</span>)          <span class="cm"># 10</span>
+<span class="bi">print</span>(<span class="st">f"Max:     {np.max(data)}"</span>)          <span class="cm"># 19</span>
+<span class="bi">print</span>(<span class="st">f"Range:   {np.ptp(data)}"</span>)          <span class="cm"># 9 (peak-to-peak)</span>
+
+<span class="cm"># np.argmin(), np.argmax()</span>
+<span class="bi">print</span>(<span class="st">f"ArgMin:  {np.argmin(data)}"</span>)       <span class="cm"># 9 (index of 10)</span>
+<span class="bi">print</span>(<span class="st">f"ArgMax:  {np.argmax(data)}"</span>)       <span class="cm"># 8 (index of 19)</span>
+
+<span class="cm"># Percentiles &amp; quantiles</span>
+<span class="bi">print</span>(<span class="st">f"25th:    {np.percentile(data, 25)}"</span>)   <span class="cm"># 12.25</span>
+<span class="bi">print</span>(<span class="st">f"50th:    {np.percentile(data, 50)}"</span>)   <span class="cm"># 14.50</span>
+<span class="bi">print</span>(<span class="st">f"75th:    {np.percentile(data, 75)}"</span>)   <span class="cm"># 16.75</span>
+<span class="bi">print</span>(<span class="st">f"IQR:     {np.percentile(data,75)-np.percentile(data,25)}"</span>)
+
+<span class="cm"># 2D: axis parameter</span>
+M = np.array([[<span class="nm">1</span>,<span class="nm">2</span>,<span class="nm">3</span>],[<span class="nm">4</span>,<span class="nm">5</span>,<span class="nm">6</span>],[<span class="nm">7</span>,<span class="nm">8</span>,<span class="nm">9</span>]])
+<span class="bi">print</span>(<span class="st">f"Col means: {M.mean(axis=0)}"</span>)  <span class="cm"># [4. 5. 6.]</span>
+<span class="bi">print</span>(<span class="st">f"Row means: {M.mean(axis=1)}"</span>)  <span class="cm"># [2. 5. 8.]</span>
+<span class="bi">print</span>(<span class="st">f"Col stds:  {M.std(axis=0)}"</span>)   <span class="cm"># [2.449 2.449 2.449]</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Sum: 145 &middot; Mean: 14.50 &middot; Median: 14.50<br>Std: 2.8723 &middot; Var: 8.2500<br>Min: 10 &middot; Max: 19<br>25th: 12.25 &middot; 75th: 16.75<br>Col means: [4. 5. 6.] &middot; Row means: [2. 5. 8.]</div></div></section>
+
+<section class="content-section" id="s2"><h2>2 &middot; Correlation &amp; Covariance</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># Correlation coefficient matrix</span>
+x = np.array([<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>, <span class="nm">4</span>, <span class="nm">5</span>])
+y = np.array([<span class="nm">2</span>, <span class="nm">4</span>, <span class="nm">5</span>, <span class="nm">4</span>, <span class="nm">5</span>])
+
+corr = np.corrcoef(x, y)
+<span class="bi">print</span>(<span class="st">f"Correlation matrix:\n{corr.round(4)}"</span>)
+<span class="bi">print</span>(<span class="st">f"r = {corr[0,1]:.4f}"</span>)   <span class="cm"># Pearson r</span>
+
+<span class="cm"># Covariance matrix</span>
+cov = np.cov(x, y)
+<span class="bi">print</span>(<span class="st">f"Covariance matrix:\n{cov.round(4)}"</span>)
+
+<span class="cm"># Histogram</span>
+data = np.random.randn(<span class="nm">1000</span>)
+counts, edges = np.histogram(data, bins=<span class="nm">10</span>)
+<span class="bi">print</span>(<span class="st">f"Bin counts: {counts}"</span>)
+<span class="bi">print</span>(<span class="st">f"Bin edges: {edges.round(2)}"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>r = 0.8321<br>Covariance: [[2.5 1.75] [1.75 1.3]]</div></div></section>
+
+<section class="content-section" id="s3"><h2>3 &middot; Sorting</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># np.sort() &mdash; returns sorted COPY</span>
+a = np.array([<span class="nm">5</span>, <span class="nm">2</span>, <span class="nm">8</span>, <span class="nm">1</span>, <span class="nm">9</span>, <span class="nm">3</span>])
+<span class="bi">print</span>(np.sort(a))      <span class="cm"># [1 2 3 5 8 9]</span>
+<span class="bi">print</span>(a)               <span class="cm"># [5 2 8 1 9 3] (unchanged)</span>
+
+<span class="cm"># a.sort() &mdash; sorts IN-PLACE</span>
+a.sort()
+<span class="bi">print</span>(a)               <span class="cm"># [1 2 3 5 8 9]</span>
+
+<span class="cm"># Reverse sort</span>
+<span class="bi">print</span>(np.sort(a)[::-<span class="nm">1</span>])  <span class="cm"># [9 8 5 3 2 1]</span>
+
+<span class="cm"># np.argsort() &mdash; indices that would sort the array</span>
+a = np.array([<span class="nm">30</span>, <span class="nm">10</span>, <span class="nm">50</span>, <span class="nm">20</span>])
+idx = np.argsort(a)
+<span class="bi">print</span>(idx)          <span class="cm"># [1 3 0 2]</span>
+<span class="bi">print</span>(a[idx])       <span class="cm"># [10 20 30 50] (sorted via indices)</span>
+
+<span class="cm"># Sort 2D array</span>
+M = np.array([[<span class="nm">3</span>,<span class="nm">1</span>,<span class="nm">2</span>],[<span class="nm">6</span>,<span class="nm">4</span>,<span class="nm">5</span>]])
+<span class="bi">print</span>(np.sort(M, axis=<span class="nm">1</span>))  <span class="cm"># sort each row</span>
+<span class="bi">print</span>(np.sort(M, axis=<span class="nm">0</span>))  <span class="cm"># sort each column</span>
+
+<span class="cm"># np.partition() &mdash; partial sort (faster for top-k)</span>
+a = np.array([<span class="nm">7</span>, <span class="nm">2</span>, <span class="nm">9</span>, <span class="nm">1</span>, <span class="nm">5</span>, <span class="nm">8</span>, <span class="nm">3</span>])
+<span class="bi">print</span>(np.partition(a, <span class="nm">3</span>))  <span class="cm"># 3 smallest on left, rest unsorted</span>
+<span class="bi">print</span>(np.partition(a, -<span class="nm">3</span>)) <span class="cm"># 3 largest on right</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[1 2 3 5 8 9]<br>argsort: [1 3 0 2]<br>sort rows: [[1 2 3] [4 5 6]]</div></div></section>
+
+<section class="content-section" id="s4"><h2>4 &middot; Searching &amp; Counting</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="cm"># np.unique() &mdash; sorted unique values</span>
+a = np.array([<span class="nm">3</span>, <span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>, <span class="nm">1</span>, <span class="nm">4</span>, <span class="nm">2</span>, <span class="nm">1</span>])
+uniq, counts = np.unique(a, return_counts=<span class="kw">True</span>)
+<span class="bi">print</span>(<span class="st">f"Unique: {uniq}"</span>)     <span class="cm"># [1 2 3 4]</span>
+<span class="bi">print</span>(<span class="st">f"Counts: {counts}"</span>)   <span class="cm"># [3 2 2 1]</span>
+
+<span class="cm"># Return first occurrence indices</span>
+uniq, idx = np.unique(a, return_index=<span class="kw">True</span>)
+<span class="bi">print</span>(<span class="st">f"First at: {idx}"</span>)  <span class="cm"># [1 2 0 5]</span>
+
+<span class="cm"># np.searchsorted() &mdash; binary search in sorted array</span>
+sorted_arr = np.array([<span class="nm">1</span>, <span class="nm">3</span>, <span class="nm">5</span>, <span class="nm">7</span>, <span class="nm">9</span>])
+<span class="bi">print</span>(np.searchsorted(sorted_arr, <span class="nm">4</span>))    <span class="cm"># 2 (insert at index 2)</span>
+<span class="bi">print</span>(np.searchsorted(sorted_arr, [<span class="nm">2</span>,<span class="nm">6</span>,<span class="nm">8</span>]))  <span class="cm"># [1 3 4]</span>
+
+<span class="cm"># np.where() &mdash; indices where condition is True</span>
+a = np.array([<span class="nm">10</span>, <span class="nm">25</span>, <span class="nm">5</span>, <span class="nm">30</span>, <span class="nm">15</span>])
+<span class="bi">print</span>(np.where(a > <span class="nm">20</span>))     <span class="cm"># (array([1, 3]),)</span>
+<span class="bi">print</span>(np.nonzero(a > <span class="nm">20</span>))   <span class="cm"># same result</span>
+
+<span class="cm"># np.extract() &mdash; extract elements matching condition</span>
+<span class="bi">print</span>(np.extract(a > <span class="nm">20</span>, a))  <span class="cm"># [25 30]</span>
+
+<span class="cm"># Count</span>
+<span class="bi">print</span>(np.count_nonzero(a > <span class="nm">10</span>))  <span class="cm"># 3</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Unique: [1 2 3 4] &middot; Counts: [3 2 2 1]<br>searchsorted(4): 2<br>where > 20: [1 3]<br>count > 10: 3</div></div></section>
+
+<section class="content-section" id="s5"><h2>5 &middot; Set Operations</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">a = np.array([<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>, <span class="nm">4</span>, <span class="nm">5</span>])
+b = np.array([<span class="nm">3</span>, <span class="nm">4</span>, <span class="nm">5</span>, <span class="nm">6</span>, <span class="nm">7</span>])
+
+<span class="bi">print</span>(np.intersect1d(a, b))      <span class="cm"># [3 4 5]</span>
+<span class="bi">print</span>(np.union1d(a, b))          <span class="cm"># [1 2 3 4 5 6 7]</span>
+<span class="bi">print</span>(np.setdiff1d(a, b))        <span class="cm"># [1 2] (in a but not b)</span>
+<span class="bi">print</span>(np.setxor1d(a, b))         <span class="cm"># [1 2 6 7] (in either but not both)</span>
+<span class="bi">print</span>(np.in1d(a, b))             <span class="cm"># [F F T T T]</span>
+<span class="bi">print</span>(np.isin(a, [<span class="nm">2</span>,<span class="nm">4</span>]))        <span class="cm"># [F T F T F]</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>intersect: [3 4 5] &middot; union: [1 2 3 4 5 6 7]<br>setdiff: [1 2] &middot; setxor: [1 2 6 7]</div></div></section>
+</div>
+<div class="page-nav">
+<a href="reshaping.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Reshaping &amp; Stacking</span></a>
+<a href="linear-algebra.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Linear Algebra</span></a>
+</div>
+<footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
+</main>
+<script src="../../js/main.js"></script>
+</body></html>
