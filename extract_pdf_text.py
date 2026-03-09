@@ -10,7 +10,7 @@ def extract_text_from_pdf(pdf_path, output_txt):
             f.write(page.get_text())
     doc.close()
 
-pdf_dir = r"C:\Users\DELL\.gemini\antigravity\scratch\python-textbook-site\DL DL al is well"
+pdf_dir = r".\DL DL al is well"
 pdf_files = [f for f in os.listdir(pdf_dir) if f.endswith(".pdf")]
 
 for pdf in pdf_files:

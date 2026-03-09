@@ -1,7 +1,7 @@
 
 import os, json
 
-BASE = r"C:\Users\DELL\.gemini\antigravity\scratch\python-textbook-site\pages"
+BASE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pages")
 
 NAV = '''<div class="nav-items" id="navItems">
 <div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F40D; Python Fundamentals</span><span class="chevron">&#x25BC;</span></div>

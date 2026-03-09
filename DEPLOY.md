@@ -7,14 +7,15 @@ Your Python Learning Hub is ready to be deployed to Cloudflare Pages.
 When setting up your project in the Cloudflare Pages dashboard:
 
 1.  **Framework preset**: `None`
-2.  **Build command**: `echo "Static Site - No Build Required"`
+2.  **Build command**: `python build.py`
 3.  **Build output directory**: `/` (The root directory)
 4.  **Root directory**: `/`
 
-## 🚀 Automated Build (Optional)
+## 🚀 Automated Build (Recommended)
 
-If you ever want to regenerate the site automatically on push, you can use the following settings:
+To ensure the site regenerates correctly on Linux (Cloudflare):
 
-- **Build command**: `pip install PyMuPDF && python generate_pages.ps1` (Note: Cloudflare Pages supports Python, but you'd need to ensure all scripts are compatible with the environment).
+- **Build command**: `pip install -r requirements.txt && python build.py`
+- **Build output directory**: `/`
 
-For now, since all 64 pages (including the new Resources) are pre-generated and pushed to GitHub, simply setting the **Build output directory** to `/` will work perfectly.
+This configuration replaces the previous PowerShell instructions and is fully compatible with Cloudflare's Linux environment.

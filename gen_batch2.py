@@ -1,5 +1,5 @@
 
-import sys; sys.path.insert(0, r"C:\Users\DELL\.gemini\antigravity\scratch\python-textbook-site")
+import sys, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_template import make_page
 
 # sets.html

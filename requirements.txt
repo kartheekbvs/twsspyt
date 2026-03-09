@@ -1,0 +1,12 @@
+PyMuPDF
+aiohttp
+requests
+scikit-learn
+pandas
+numpy
+matplotlib
+seaborn
+tensorflow
+keras
+transformers
+scipy

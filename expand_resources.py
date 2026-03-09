@@ -1,4 +1,4 @@
-import sys; sys.path.insert(0, r"C:\Users\DELL\.gemini\antigravity\scratch\python-textbook-site")
+import sys, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_template import make_page
 
 # PYTHON PROGRAMS (from Drive PDF)
@@ -56,7 +56,7 @@ make_page("resources/python-programs.html", "140+ Basic Python Programs", "Pract
 "Basic Python Programs (Drive Resource)", programs_body, ("../index.html", "Home"), ("../index.html", "Home"))
 
 # UPDATING Gen Template to include Resources in NAV
-with open(r"C:\Users\DELL\.gemini\antigravity\scratch\python-textbook-site\gen_template.py", "r", encoding="utf-8") as f:
+with open(r".\gen_template.py", "r", encoding="utf-8") as f:
     content = f.read()
 
 resource_nav = '''<div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4DA; Resources</span><span class="chevron">&#x25BC;</span></div>
@@ -66,7 +66,7 @@ resource_nav = '''<div class="nav-section"><div class="nav-section-header" oncli
 
 if 'Resources' not in content:
     content = content.replace('</div></div></div>', resource_nav + '</div></div></div>')
-    with open(r"C:\Users\DELL\.gemini\antigravity\scratch\python-textbook-site\gen_template.py", "w", encoding="utf-8") as f:
+    with open(r".\gen_template.py", "w", encoding="utf-8") as f:
         f.write(content)
 
 print("Resources page created and template updated!")
