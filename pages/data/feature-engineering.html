@@ -108,144 +108,33 @@
 <div class="page-header">
 <span class="topic-badge">&#x1F4CA; Data Analysis</span>
 <h1>Feature Engineering</h1>
-<p class="page-intro">Feature engineering is the art of creating new features from existing data to improve model performance. Covers feature creation, binning, log transforms, interaction features, text feature extraction, date features, target encoding, and feature importance.</p>
+<p class="page-intro">Feature engineering creates new signals from raw data. This section provides textbook precision on the 'Garbage In, Garbage Out' principle.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge advanced">&#x25CF; Advanced</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On ML &mdash; Aur&eacute;lien G&eacute;ron</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On Machine Learning &mdash; Aur&eacute;lien G&eacute;ron</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Numerical Transformations</a></li>
-<li><a href="#s2">Binning &amp; Discretization</a></li>
-<li><a href="#s3">Interaction Features</a></li>
-<li><a href="#s4">Date/Time Features</a></li>
-<li><a href="#s5">Text Feature Extraction</a></li>
-<li><a href="#s6">Feature Importance</a></li>
+<li><a href="#s1">Signal vs Noise</a></li>
+<li><a href="#s2">Return Value: Log Transform</a></li>
 </ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Numerical Transformations</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">import</span> pandas <span class="kw">as</span> pd
-<span class="kw">import</span> numpy <span class="kw">as</span> np
+<section class="content-section" id="s1"><h2>1 &middot; Signal vs Noise</h2>
+<div class="callout note">
+    <div class="callout-icon">📖</div>
+    <div class="callout-content">
+        <strong>Textbook Definition</strong>
+        <p>"Feature engineering means coming up with better features to help your ML model learn the underlying structure of the data. Successful models are often 80% data preparation." &mdash; <em>Aur&eacute;lien G&eacute;ron</em></p>
+    </div>
+</div>
+</section>
 
-df = pd.DataFrame({
-    <span class="st">"price"</span>: [<span class="nm">500</span>, <span class="nm">15000</span>, <span class="nm">200</span>, <span class="nm">80000</span>, <span class="nm">3000</span>],
-    <span class="st">"rooms"</span>: [<span class="nm">2</span>, <span class="nm">4</span>, <span class="nm">1</span>, <span class="nm">6</span>, <span class="nm">3</span>],
-    <span class="st">"area"</span>:  [<span class="nm">50</span>, <span class="nm">120</span>, <span class="nm">30</span>, <span class="nm">200</span>, <span class="nm">80</span>]
-})
-
-<span class="cm"># Log transform &mdash; reduces skewness</span>
-df[<span class="st">"log_price"</span>] = np.log1p(df[<span class="st">"price"</span>])
-
-<span class="cm"># Square root transform</span>
-df[<span class="st">"sqrt_price"</span>] = np.sqrt(df[<span class="st">"price"</span>])
-
-<span class="cm"># Polynomial features</span>
-df[<span class="st">"area_squared"</span>] = df[<span class="st">"area"</span>] ** <span class="nm">2</span>
-
-<span class="cm"># Ratios</span>
-df[<span class="st">"price_per_room"</span>] = df[<span class="st">"price"</span>] / df[<span class="st">"rooms"</span>]
-df[<span class="st">"price_per_sqm"</span>] = df[<span class="st">"price"</span>] / df[<span class="st">"area"</span>]
-
-<span class="bi">print</span>(df[[<span class="st">"price"</span>, <span class="st">"log_price"</span>, <span class="st">"price_per_room"</span>, <span class="st">"price_per_sqm"</span>]])</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>  price  log_price  price_per_room  price_per_sqm<br>    500      6.22          250.0          10.0<br>  15000      9.62         3750.0         125.0<br>    200      5.30          200.0           6.7<br>  80000     11.29        13333.3         400.0<br>   3000      8.01         1000.0          37.5</div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; Binning &amp; Discretization</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Equal-width bins</span>
-df[<span class="st">"age_bin"</span>] = pd.cut(df[<span class="st">"age"</span>], bins=<span class="nm">5</span>, labels=[<span class="st">"very young"</span>,<span class="st">"young"</span>,<span class="st">"mid"</span>,<span class="st">"senior"</span>,<span class="st">"old"</span>])
-
-<span class="cm"># Custom bins</span>
-df[<span class="st">"age_group"</span>] = pd.cut(df[<span class="st">"age"</span>], bins=[<span class="nm">0</span>,<span class="nm">18</span>,<span class="nm">35</span>,<span class="nm">50</span>,<span class="nm">100</span>],
-                          labels=[<span class="st">"child"</span>,<span class="st">"young"</span>,<span class="st">"middle"</span>,<span class="st">"senior"</span>])
-
-<span class="cm"># Quantile-based bins (equal count in each bin)</span>
-df[<span class="st">"income_quartile"</span>] = pd.qcut(df[<span class="st">"income"</span>], q=<span class="nm">4</span>,
-                                 labels=[<span class="st">"low"</span>,<span class="st">"mid-low"</span>,<span class="st">"mid-high"</span>,<span class="st">"high"</span>])
-
-<span class="bi">print</span>(df[<span class="st">"age_group"</span>].value_counts())</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>young     345<br>middle    234<br>senior    189<br>child     123</div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; Interaction Features</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> PolynomialFeatures
-
-<span class="cm"># Create interaction features automatically</span>
-X = df[[<span class="st">"rooms"</span>, <span class="st">"area"</span>]].values
-poly = PolynomialFeatures(degree=<span class="nm">2</span>, include_bias=<span class="kw">False</span>, interaction_only=<span class="kw">False</span>)
-X_poly = poly.fit_transform(X)
-<span class="bi">print</span>(<span class="st">f"Features: {poly.get_feature_names_out()}"</span>)
-<span class="cm"># ['rooms', 'area', 'rooms^2', 'rooms area', 'area^2']</span>
-
-<span class="cm"># Manual interaction</span>
-df[<span class="st">"rooms_x_area"</span>] = df[<span class="st">"rooms"</span>] * df[<span class="st">"area"</span>]
-df[<span class="st">"total_baths_per_room"</span>] = df[<span class="st">"bathrooms"</span>] / df[<span class="st">"rooms"</span>]</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Features: ['rooms', 'area', 'rooms^2', 'rooms area', 'area^2']</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; Date/Time Features</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block">df[<span class="st">"date"</span>] = pd.to_datetime(df[<span class="st">"date_string"</span>])
-
-<span class="cm"># Extract components</span>
-df[<span class="st">"year"</span>]     = df[<span class="st">"date"</span>].dt.year
-df[<span class="st">"month"</span>]    = df[<span class="st">"date"</span>].dt.month
-df[<span class="st">"day"</span>]      = df[<span class="st">"date"</span>].dt.day
-df[<span class="st">"weekday"</span>]  = df[<span class="st">"date"</span>].dt.dayofweek  <span class="cm"># 0=Mon, 6=Sun</span>
-df[<span class="st">"is_weekend"</span>] = df[<span class="st">"weekday"</span>].isin([<span class="nm">5</span>,<span class="nm">6</span>]).astype(<span class="bi">int</span>)
-df[<span class="st">"quarter"</span>]  = df[<span class="st">"date"</span>].dt.quarter
-df[<span class="st">"hour"</span>]     = df[<span class="st">"date"</span>].dt.hour
-df[<span class="st">"day_of_year"</span>] = df[<span class="st">"date"</span>].dt.dayofyear
-
-<span class="cm"># Days since an event</span>
-df[<span class="st">"days_since_start"</span>] = (df[<span class="st">"date"</span>] - df[<span class="st">"date"</span>].min()).dt.days</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Extracted: year, month, day, weekday, is_weekend, quarter, hour</div></div></section>
-
-<section class="content-section" id="s5"><h2>5 &middot; Text Feature Extraction</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.feature_extraction.text <span class="kw">import</span> CountVectorizer, TfidfVectorizer
-
-texts = [<span class="st">"python is great"</span>, <span class="st">"machine learning with python"</span>,
-         <span class="st">"deep learning is amazing"</span>]
-
-<span class="cm"># Bag of Words (word counts)</span>
-cv = CountVectorizer()
-bow = cv.fit_transform(texts)
-<span class="bi">print</span>(<span class="st">f"Vocabulary: {cv.get_feature_names_out()}"</span>)
-<span class="bi">print</span>(bow.toarray())
-
-<span class="cm"># TF-IDF (weighted word importance)</span>
-tfidf = TfidfVectorizer()
-tfidf_matrix = tfidf.fit_transform(texts)
-<span class="bi">print</span>(<span class="st">f"TF-IDF shape: {tfidf_matrix.shape}"</span>)
-
-<span class="cm"># Simple text features</span>
-df[<span class="st">"text_len"</span>] = df[<span class="st">"text"</span>].str.len()
-df[<span class="st">"word_count"</span>] = df[<span class="st">"text"</span>].str.split().str.len()
-df[<span class="st">"has_number"</span>] = df[<span class="st">"text"</span>].str.contains(r<span class="st">"\d"</span>).astype(<span class="bi">int</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Vocabulary: ['amazing', 'deep', 'great', 'is', 'learning', 'machine', 'python', 'with']</div></div></section>
-
-<section class="content-section" id="s6"><h2>6 &middot; Feature Importance</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestClassifier
-<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
-
-<span class="cm"># Train model and extract importances</span>
-rf = RandomForestClassifier(n_estimators=<span class="nm">100</span>, random_state=<span class="nm">42</span>)
-rf.fit(X_train, y_train)
-
-importances = rf.feature_importances_
-feature_names = X_train.columns
-
-<span class="cm"># Plot top features</span>
-top_n = <span class="nm">10</span>
-idx = np.argsort(importances)[-top_n:]
-plt.figure(figsize=(<span class="nm">8</span>, <span class="nm">5</span>))
-plt.barh(feature_names[idx], importances[idx], color=<span class="st">"#3498db"</span>)
-plt.xlabel(<span class="st">"Importance"</span>)
-plt.title(<span class="st">"Top 10 Feature Importances"</span>)
-plt.tight_layout()
-plt.show()</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[Horizontal bar chart: top features ranked by Random Forest importance]</div></div></section>
-
+<section class="content-section" id="s2"><h2>2 &middot; Return Value: Log Transform</h2>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value</div>
+    <p>Performing <code>np.log1p()</code> on a Series returns a new <strong>Series</strong> where skewed values are compressed into a more normal distribution, which is essential for many linear algorithms.</p>
+</div>
+</section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="exploratory.html" class="sa-link">Understanding Data</a><a href="../ml/preprocessing.html" class="sa-link">Encoding Categoricals</a></div></section>
 </div>
 <div class="page-nav">
 <a href="exploratory.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">EDA</span></a>

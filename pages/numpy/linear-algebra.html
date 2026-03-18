@@ -108,185 +108,61 @@
 <div class="page-header">
 <span class="topic-badge">&#x1F522; NumPy</span>
 <h1>Linear Algebra</h1>
-<p class="page-intro">NumPy&#39;s linalg module provides optimized linear algebra operations: dot products, matrix multiplication, determinants, inverses, eigenvalues, SVD, solving linear systems, and matrix rank. These are the mathematical foundations for machine learning and deep learning.</p>
+<p class="page-intro">NumPy's linalg module provides optimized linear algebra operations: matrix multiplication, determinants, eigenvalues, SVD, solving linear systems. These are foundations for machine learning and deep learning.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge advanced">&#x25CF; Advanced</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>NumPy User Guide, Deep Learning &mdash; Ian Goodfellow</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>numpy-user manual, Deep Learning &mdash; Ian Goodfellow</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Vector Operations &amp; Dot Product</a></li>
-<li><a href="#s2">Matrix Multiplication</a></li>
-<li><a href="#s3">Determinant, Inverse &amp; Rank</a></li>
-<li><a href="#s4">Eigenvalues &amp; Eigenvectors</a></li>
-<li><a href="#s5">Singular Value Decomposition (SVD)</a></li>
-<li><a href="#s6">Solving Linear Systems</a></li>
-</ol></div>
-
-<section class="content-section" id="s1"><h2>1 &middot; Vector Operations &amp; Dot Product</h2>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol><li><a href="#s1">Matrix Multiplication</a></li><li><a href="#s2">Determinant &amp; Inverse</a></li><li><a href="#s3">Eigenvalues &amp; SVD</a></li><li><a href="#s4">Solving Linear Systems</a></li></ol></div>
+<section class="content-section" id="s1"><h2>1 &middot; Matrix Multiplication</h2>
 <div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
 <pre class="code-block"><span class="kw">import</span> numpy <span class="kw">as</span> np
-
-u = np.array([<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>])
-v = np.array([<span class="nm">4</span>, <span class="nm">5</span>, <span class="nm">6</span>])
-
-<span class="cm"># Dot product: sum of element-wise products</span>
-<span class="bi">print</span>(np.dot(u, v))          <span class="cm"># 32 (1*4 + 2*5 + 3*6)</span>
-<span class="bi">print</span>(u @ v)                 <span class="cm"># 32 (@ operator)</span>
-<span class="bi">print</span>(np.inner(u, v))        <span class="cm"># 32 (same for 1D)</span>
-
-<span class="cm"># Cross product (3D vectors only)</span>
-<span class="bi">print</span>(np.cross(u, v))        <span class="cm"># [-3  6 -3]</span>
-
-<span class="cm"># Vector norm (magnitude)</span>
-<span class="bi">print</span>(np.linalg.norm(u))             <span class="cm"># 3.7417 (L2 norm)</span>
-<span class="bi">print</span>(np.linalg.norm(u, ord=<span class="nm">1</span>))      <span class="cm"># 6 (L1 norm)</span>
-<span class="bi">print</span>(np.linalg.norm(u, ord=np.inf)) <span class="cm"># 3 (max norm)</span>
-
-<span class="cm"># Outer product: u &#x2297; v</span>
-<span class="bi">print</span>(np.outer(u, v))
-<span class="cm"># [[ 4  5  6]</span>
-<span class="cm">#  [ 8 10 12]</span>
-<span class="cm">#  [12 15 18]]</span>
-
-<span class="cm"># Normalize a vector</span>
-u_hat = u / np.linalg.norm(u)
-<span class="bi">print</span>(<span class="st">f"Unit vector: {u_hat.round(4)}"</span>)
-<span class="bi">print</span>(<span class="st">f"Magnitude:   {np.linalg.norm(u_hat):.4f}"</span>)  <span class="cm"># 1.0</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Dot: 32 &middot; Cross: [-3 6 -3] &middot; Norm: 3.7417<br>Outer: [[4 5 6] [8 10 12] [12 15 18]]</div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; Matrix Multiplication</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block">A = np.array([[<span class="nm">1</span>,<span class="nm">2</span>],[<span class="nm">3</span>,<span class="nm">4</span>]])
+A = np.array([[<span class="nm">1</span>,<span class="nm">2</span>],[<span class="nm">3</span>,<span class="nm">4</span>]])
 B = np.array([[<span class="nm">5</span>,<span class="nm">6</span>],[<span class="nm">7</span>,<span class="nm">8</span>]])
 
-<span class="cm"># Matrix multiplication (@ operator &mdash; recommended)</span>
-<span class="bi">print</span>(A @ B)
-<span class="cm"># [[19 22]</span>
-<span class="cm">#  [43 50]]</span>
+<span class="bi">print</span>(A @ B)          <span class="cm"># matrix multiply (recommended)</span>
+<span class="bi">print</span>(np.dot(A, B))   <span class="cm"># same as @</span>
+<span class="bi">print</span>(A * B)          <span class="cm"># element-wise (NOT matrix mul!)</span>
 
-<span class="cm"># np.matmul() &mdash; same as @</span>
-<span class="bi">print</span>(np.matmul(A, B))
-
-<span class="cm"># np.dot() &mdash; also works for matrix mul</span>
-<span class="bi">print</span>(np.dot(A, B))
-
-<span class="cm"># &#x26A0;&#xFE0F; COMMON MISTAKE: * is element-wise, NOT matrix mul!</span>
-<span class="bi">print</span>(A * B)  <span class="cm"># [[5,12],[21,32]] &mdash; element-wise!</span>
-
-<span class="cm"># Matrix-vector multiplication</span>
 v = np.array([<span class="nm">1</span>, <span class="nm">2</span>])
-<span class="bi">print</span>(A @ v)     <span class="cm"># [5, 11]</span>
+<span class="bi">print</span>(A @ v)          <span class="cm"># [5, 11] matrix-vector</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>[[19 22]<br> [43 50]]<br>[5 11]</div></div></section>
 
-<span class="cm"># Matrix power</span>
-<span class="bi">print</span>(np.linalg.matrix_power(A, <span class="nm">2</span>))  <span class="cm"># A @ A</span>
-<span class="bi">print</span>(np.linalg.matrix_power(A, <span class="nm">3</span>))  <span class="cm"># A @ A @ A</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[[19 22]<br> [43 50]]<br>A @ v: [5 11]</div></div>
-<div class="callout warning"><div class="callout-icon">&#x26A0;&#xFE0F;</div><div class="callout-content"><strong>Critical Distinction</strong><p><code>A * B</code> = element-wise product (Hadamard). <code>A @ B</code> = matrix multiplication. This is the #1 source of linear algebra bugs in NumPy.</p></div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; Determinant, Inverse &amp; Rank</h2>
+<section class="content-section" id="s2"><h2>2 &middot; Determinant &amp; Inverse</h2>
 <div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
 <pre class="code-block">A = np.array([[<span class="nm">1</span>,<span class="nm">2</span>],[<span class="nm">3</span>,<span class="nm">4</span>]])
+<span class="bi">print</span>(np.linalg.det(A))       <span class="cm"># -2.0</span>
+<span class="bi">print</span>(np.linalg.inv(A))       <span class="cm"># [[-2, 1],[1.5,-0.5]]</span>
+<span class="bi">print</span>(A @ np.linalg.inv(A))   <span class="cm"># identity (verify)</span>
+<span class="bi">print</span>(np.linalg.matrix_rank(A))  <span class="cm"># 2</span>
+<span class="bi">print</span>(np.trace(A))            <span class="cm"># 5 (sum of diagonal)</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>-2.0<br>[[-2. 1.] [1.5 -0.5]]<br>2 &middot; 5</div></div></section>
 
-<span class="cm"># Determinant</span>
-det = np.linalg.det(A)
-<span class="bi">print</span>(<span class="st">f"det(A) = {det:.1f}"</span>)  <span class="cm"># -2.0</span>
-
-<span class="cm"># Inverse (only if det &ne; 0)</span>
-A_inv = np.linalg.inv(A)
-<span class="bi">print</span>(<span class="st">f"A&sup;-&sup1; =\n{A_inv}"</span>)
-<span class="cm"># [[-2.   1. ]</span>
-<span class="cm">#  [ 1.5 -0.5]]</span>
-
-<span class="cm"># Verify: A @ A&sup;-&sup1; should be identity</span>
-<span class="bi">print</span>(np.allclose(A @ A_inv, np.eye(<span class="nm">2</span>)))  <span class="cm"># True</span>
-
-<span class="cm"># Matrix rank</span>
-<span class="bi">print</span>(<span class="st">f"rank(A) = {np.linalg.matrix_rank(A)}"</span>)  <span class="cm"># 2</span>
-
-<span class="cm"># Rank-deficient matrix</span>
-B = np.array([[<span class="nm">1</span>,<span class="nm">2</span>],[<span class="nm">2</span>,<span class="nm">4</span>]])  <span class="cm"># row 2 = 2 * row 1</span>
-<span class="bi">print</span>(<span class="st">f"rank(B) = {np.linalg.matrix_rank(B)}"</span>)  <span class="cm"># 1</span>
-<span class="bi">print</span>(<span class="st">f"det(B) = {np.linalg.det(B):.1f}"</span>)       <span class="cm"># 0.0 (singular!)</span>
-
-<span class="cm"># Trace (sum of diagonal)</span>
-<span class="bi">print</span>(<span class="st">f"trace(A) = {np.trace(A)}"</span>)  <span class="cm"># 5 (1 + 4)</span>
-
-<span class="cm"># Condition number (sensitivity to perturbation)</span>
-<span class="bi">print</span>(<span class="st">f"cond(A) = {np.linalg.cond(A):.2f}"</span>)  <span class="cm"># 14.93</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>det(A) = -2.0<br>A&sup;-&sup1; = [[-2. 1.] [1.5 -0.5]]<br>rank(A) = 2 &middot; rank(B) = 1<br>trace(A) = 5 &middot; cond(A) = 14.93</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; Eigenvalues &amp; Eigenvectors</h2>
+<section class="content-section" id="s3"><h2>3 &middot; Eigenvalues &amp; SVD</h2>
 <div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Eigendecomposition: Av = &lambda;v</span>
-A = np.array([[<span class="nm">4</span>, <span class="nm">2</span>], [<span class="nm">1</span>, <span class="nm">3</span>]])
+<pre class="code-block"><span class="cm"># Eigendecomposition</span>
+vals, vecs = np.linalg.eig(A)
+<span class="bi">print</span>(<span class="st">f"Eigenvalues: {vals}"</span>)   <span class="cm"># [-0.372, 5.372]</span>
+<span class="bi">print</span>(<span class="st">f"Eigenvectors:\n{vecs}"</span>)
 
-eigenvalues, eigenvectors = np.linalg.eig(A)
-<span class="bi">print</span>(<span class="st">f"Eigenvalues:  {eigenvalues}"</span>)    <span class="cm"># [5. 2.]</span>
-<span class="bi">print</span>(<span class="st">f"Eigenvectors:\n{eigenvectors}"</span>)
-
-<span class="cm"># Verify: Av = &lambda;v for each eigenvalue</span>
-<span class="kw">for</span> i <span class="kw">in</span> <span class="bi">range</span>(<span class="bi">len</span>(eigenvalues)):
-    v = eigenvectors[:, i]
-    lam = eigenvalues[i]
-    <span class="bi">print</span>(<span class="st">f"A @ v{i} = {(A @ v).round(4)}"</span>)
-    <span class="bi">print</span>(<span class="st">f"&lambda;{i} * v{i} = {(lam * v).round(4)}"</span>)
-    <span class="bi">print</span>(<span class="st">f"Match: {np.allclose(A @ v, lam * v)}"</span>)
-
-<span class="cm"># For symmetric matrices (real eigenvalues)</span>
-S = np.array([[<span class="nm">2</span>,<span class="nm">1</span>],[<span class="nm">1</span>,<span class="nm">3</span>]])
-vals, vecs = np.linalg.eigh(S)  <span class="cm"># eigh = symmetric</span>
-<span class="bi">print</span>(<span class="st">f"Symmetric eigenvalues: {vals}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Eigenvalues: [5. 2.]<br>Match: True (for both)</div></div>
-<div class="callout note"><div class="callout-icon">&#x1F4D0;</div><div class="callout-content"><strong>ML Application</strong><p>Eigendecomposition is the mathematical foundation of <strong>PCA</strong> (Principal Component Analysis). The eigenvectors of the covariance matrix define the principal components, and eigenvalues indicate the variance explained.</p></div></div></section>
-
-<section class="content-section" id="s5"><h2>5 &middot; Singular Value Decomposition (SVD)</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># SVD: M = U &middot; &Sigma; &middot; V&sup;T</span>
-M = np.array([[<span class="nm">1</span>,<span class="nm">2</span>],[<span class="nm">3</span>,<span class="nm">4</span>],[<span class="nm">5</span>,<span class="nm">6</span>]])  <span class="cm"># 3x2 matrix</span>
-
+<span class="cm"># SVD (used in PCA, recommendation systems)</span>
+M = np.array([[<span class="nm">1</span>,<span class="nm">2</span>],[<span class="nm">3</span>,<span class="nm">4</span>],[<span class="nm">5</span>,<span class="nm">6</span>]])
 U, S, Vt = np.linalg.svd(M, full_matrices=<span class="kw">False</span>)
-<span class="bi">print</span>(<span class="st">f"U  shape: {U.shape}"</span>)   <span class="cm"># (3, 2)</span>
-<span class="bi">print</span>(<span class="st">f"S  (singular values): {S.round(4)}"</span>)  <span class="cm"># [9.5255, 0.5143]</span>
-<span class="bi">print</span>(<span class="st">f"Vt shape: {Vt.shape}"</span>)  <span class="cm"># (2, 2)</span>
+<span class="bi">print</span>(<span class="st">f"U shape: {U.shape}"</span>)    <span class="cm"># (3,2)</span>
+<span class="bi">print</span>(<span class="st">f"S: {S}"</span>)                <span class="cm"># singular values</span>
+<span class="bi">print</span>(<span class="st">f"Vt shape: {Vt.shape}"</span>)  <span class="cm"># (2,2)</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Eigenvalues: [-0.372 5.372]</div></div></section>
 
-<span class="cm"># Reconstruct original matrix</span>
-M_reconstructed = U @ np.diag(S) @ Vt
-<span class="bi">print</span>(np.allclose(M, M_reconstructed))  <span class="cm"># True</span>
-
-<span class="cm"># Low-rank approximation (keep top-k singular values)</span>
-k = <span class="nm">1</span>
-M_approx = U[:,:k] @ np.diag(S[:k]) @ Vt[:k,:]
-<span class="bi">print</span>(<span class="st">f"Rank-1 approx:\n{M_approx.round(2)}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>S: [9.5255 0.5143]<br>Reconstruction matches: True</div></div></section>
-
-<section class="content-section" id="s6"><h2>6 &middot; Solving Linear Systems</h2>
+<section class="content-section" id="s4"><h2>4 &middot; Solving Linear Systems</h2>
 <div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
 <pre class="code-block"><span class="cm"># Solve Ax = b</span>
-<span class="cm"># 2x + y = 11</span>
-<span class="cm"># 5x + 7y = 13</span>
-A = np.array([[<span class="nm">2</span>, <span class="nm">1</span>], [<span class="nm">5</span>, <span class="nm">7</span>]])
+A = np.array([[<span class="nm">2</span>,<span class="nm">1</span>],[<span class="nm">5</span>,<span class="nm">7</span>]])
 b = np.array([<span class="nm">11</span>, <span class="nm">13</span>])
 
 x = np.linalg.solve(A, b)
-<span class="bi">print</span>(<span class="st">f"Solution: x={x[0]:.3f}, y={x[1]:.3f}"</span>)
-
-<span class="cm"># Verify</span>
-<span class="bi">print</span>(<span class="st">f"Check: {np.allclose(A @ x, b)}"</span>)  <span class="cm"># True</span>
-
-<span class="cm"># Least squares (overdetermined systems)</span>
-<span class="cm"># More equations than unknowns</span>
-A = np.array([[<span class="nm">1</span>,<span class="nm">1</span>],[<span class="nm">1</span>,<span class="nm">2</span>],[<span class="nm">1</span>,<span class="nm">3</span>]])
-b = np.array([<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">2</span>])
-x, residuals, rank, sv = np.linalg.lstsq(A, b, rcond=<span class="kw">None</span>)
-<span class="bi">print</span>(<span class="st">f"Least squares solution: {x.round(4)}"</span>)
-<span class="bi">print</span>(<span class="st">f"Residuals: {residuals.round(4)}"</span>)
-
-<span class="cm"># Cholesky decomposition (for positive definite matrices)</span>
-P = np.array([[<span class="nm">4</span>,<span class="nm">2</span>],[<span class="nm">2</span>,<span class="nm">3</span>]])
-L = np.linalg.cholesky(P)
-<span class="bi">print</span>(<span class="st">f"Cholesky L:\n{L.round(4)}"</span>)
-<span class="bi">print</span>(np.allclose(L @ L.T, P))  <span class="cm"># True</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Solution: x=7.111, y=-3.222<br>Check: True<br>Least squares: [0.6667 0.5]</div></div></section>
+<span class="bi">print</span>(<span class="st">f"Solution: {x}"</span>)  <span class="cm"># [7.111, -3.222]</span>
+<span class="bi">print</span>(np.allclose(A @ x, b))  <span class="cm"># True (verify)</span></pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Solution: [ 7.111 -3.222]<br>True</div></div></section>
 
 </div>
 <div class="page-nav">

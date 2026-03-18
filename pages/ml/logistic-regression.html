@@ -108,125 +108,33 @@
 <div class="page-header">
 <span class="topic-badge">&#x1F916; Machine Learning</span>
 <h1>Logistic Regression</h1>
-<p class="page-intro">Logistic Regression is a classification algorithm that predicts probabilities using the sigmoid function. Covers binary/multiclass classification, regularization (C parameter), class weights for imbalanced datasets, and decision boundaries.</p>
+<p class="page-intro">Logistic Regression is a classifier that estimates probabilities. This section provides textbook precision on the sigmoid function and decision logic.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On ML &mdash; Aur&eacute;lien G&eacute;ron</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On Machine Learning &mdash; Aur&eacute;lien G&eacute;ron</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Binary Classification</a></li>
-<li><a href="#s2">Multiclass Classification</a></li>
-<li><a href="#s3">Imbalanced Classes</a></li>
-<li><a href="#s4">Classification Metrics</a></li>
+<li><a href="#s1">Estimating Probabilities</a></li>
+<li><a href="#s2">Return Value: predict_proba()</a></li>
 </ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Binary Classification</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LogisticRegression
-<span class="kw">from</span> sklearn.datasets <span class="kw">import</span> load_breast_cancer
-<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
-<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler
-<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> (
-    accuracy_score, precision_score, recall_score, f1_score,
-    confusion_matrix, classification_report
-)
+<section class="content-section" id="s1"><h2>1 &middot; Estimating Probabilities</h2>
+<div class="callout note">
+    <div class="callout-icon">📖</div>
+    <div class="callout-content">
+        <strong>Textbook Definition</strong>
+        <p>"Just like Linear Regression, a Logistic Regression model computes a weighted sum of input features, but it outputs the <em>logistic</em> (or sigmoid) of this result." &mdash; <em>Aur&eacute;lien G&eacute;ron</em></p>
+    </div>
+</div>
+</section>
 
-<span class="cm"># Load &amp; prepare</span>
-X, y = load_breast_cancer(return_X_y=<span class="kw">True</span>)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="nm">0.2</span>, stratify=y, random_state=<span class="nm">42</span>)
-
-scaler = StandardScaler()
-X_train_s = scaler.fit_transform(X_train)
-X_test_s = scaler.transform(X_test)
-
-<span class="cm"># Train</span>
-model = LogisticRegression(max_iter=<span class="nm">5000</span>, C=<span class="nm">1.0</span>)
-model.fit(X_train_s, y_train)
-y_pred = model.predict(X_test_s)
-
-<span class="cm"># Probabilities</span>
-y_proba = model.predict_proba(X_test_s)
-<span class="bi">print</span>(<span class="st">f"Sample probs: {y_proba[0].round(4)}"</span>)  <span class="cm"># [P(0), P(1)]</span>
-
-<span class="cm"># Metrics</span>
-<span class="bi">print</span>(<span class="st">f"Accuracy:  {accuracy_score(y_test, y_pred):.4f}"</span>)
-<span class="bi">print</span>(<span class="st">f"Precision: {precision_score(y_test, y_pred):.4f}"</span>)
-<span class="bi">print</span>(<span class="st">f"Recall:    {recall_score(y_test, y_pred):.4f}"</span>)
-<span class="bi">print</span>(<span class="st">f"F1 Score:  {f1_score(y_test, y_pred):.4f}"</span>)
-<span class="bi">print</span>(<span class="st">f"\nConfusion Matrix:\n{confusion_matrix(y_test, y_pred)}"</span>)
-<span class="bi">print</span>(<span class="st">f"\n{classification_report(y_test, y_pred)}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Accuracy: 0.9737 &middot; Precision: 0.9714 &middot; Recall: 0.9859<br>Confusion Matrix: [[42 1] [1 70]]</div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; Multiclass Classification</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.datasets <span class="kw">import</span> load_iris
-
-X, y = load_iris(return_X_y=<span class="kw">True</span>)
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=<span class="nm">42</span>)
-
-<span class="cm"># multi_class="multinomial" for softmax (default in newer sklearn)</span>
-model = LogisticRegression(multi_class=<span class="st">"multinomial"</span>, max_iter=<span class="nm">5000</span>)
-model.fit(X_train, y_train)
-
-y_pred = model.predict(X_test)
-<span class="bi">print</span>(<span class="st">f"Accuracy: {model.score(X_test, y_test):.4f}"</span>)
-<span class="bi">print</span>(classification_report(y_test, y_pred, target_names=load_iris().target_names))
-
-<span class="cm"># Probabilities for each class</span>
-proba = model.predict_proba(X_test[:<span class="nm">3</span>])
-<span class="bi">print</span>(<span class="st">f"3 sample probabilities:\n{proba.round(4)}"</span>)
-<span class="cm"># Each row sums to 1.0</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Accuracy: 0.9737<br>             precision  recall  f1-score<br>setosa         1.00    1.00      1.00<br>versicolor     0.92    1.00      0.96<br>virginica      1.00    0.92      0.96</div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; Handling Imbalanced Classes</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.datasets <span class="kw">import</span> make_classification
-<span class="kw">import</span> numpy <span class="kw">as</span> np
-
-<span class="cm"># Create imbalanced dataset (95% class 0, 5% class 1)</span>
-X, y = make_classification(n_samples=<span class="nm">1000</span>, weights=[<span class="nm">0.95</span>, <span class="nm">0.05</span>],
-                           random_state=<span class="nm">42</span>, n_informative=<span class="nm">5</span>)
-<span class="bi">print</span>(<span class="st">f"Class distribution: {np.bincount(y)}"</span>)  <span class="cm"># ~[950, 50]</span>
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=<span class="nm">42</span>)
-
-<span class="cm"># Without balancing</span>
-m1 = LogisticRegression()
-m1.fit(X_train, y_train)
-<span class="bi">print</span>(<span class="st">f"Without balance - F1: {f1_score(y_test, m1.predict(X_test)):.3f}"</span>)
-
-<span class="cm"># With class_weight="balanced"</span>
-m2 = LogisticRegression(class_weight=<span class="st">"balanced"</span>)
-m2.fit(X_train, y_train)
-<span class="bi">print</span>(<span class="st">f"With balance    - F1: {f1_score(y_test, m2.predict(X_test)):.3f}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Class distribution: [950, 50]<br>Without balance - F1: 0.400<br>With balance    - F1: 0.625</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; Classification Metrics Deep Dive</h2>
-<table class="data-table"><thead><tr><th>Metric</th><th>Formula</th><th>Use When</th></tr></thead><tbody>
-<tr><td>Accuracy</td><td>(TP+TN)/(Total)</td><td>Balanced classes</td></tr>
-<tr><td>Precision</td><td>TP/(TP+FP)</td><td>False positives are costly (spam filter)</td></tr>
-<tr><td>Recall</td><td>TP/(TP+FN)</td><td>False negatives are costly (cancer detect)</td></tr>
-<tr><td>F1</td><td>2&middot;P&middot;R/(P+R)</td><td>Imbalanced classes</td></tr>
-<tr><td>ROC-AUC</td><td>Area under ROC curve</td><td>Overall model quality</td></tr>
-</tbody></table>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; ROC-AUC</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.metrics <span class="kw">import</span> roc_auc_score, roc_curve
-
-<span class="cm"># Binary example</span>
-X, y = load_breast_cancer(return_X_y=<span class="kw">True</span>)
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=<span class="nm">42</span>)
-model = LogisticRegression(max_iter=<span class="nm">5000</span>)
-model.fit(X_train, y_train)
-
-y_proba = model.predict_proba(X_test)[:, <span class="nm">1</span>]  <span class="cm"># P(positive class)</span>
-<span class="bi">print</span>(<span class="st">f"ROC-AUC: {roc_auc_score(y_test, y_proba):.4f}"</span>)
-
-<span class="cm"># ROC curve data (for plotting)</span>
-fpr, tpr, thresholds = roc_curve(y_test, y_proba)
-<span class="bi">print</span>(<span class="st">f"FPR[:5]: {fpr[:5].round(3)}"</span>)
-<span class="bi">print</span>(<span class="st">f"TPR[:5]: {tpr[:5].round(3)}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>ROC-AUC: 0.9976</div></div></section>
-
+<section class="content-section" id="s2"><h2>2 &middot; Return Value: predict_proba()</h2>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value</div>
+    <p>While <code>.predict()</code> returns the class label (0 or 1), <code>.predict_proba()</code> returns a <strong>2D NumPy Array</strong> where each row contains the probabilities for all classes (e.g., <code>[P(class=0), P(class=1)]</code>).</p>
+</div>
+</section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="model-evaluation.html" class="sa-link">Precision & Recall</a><a href="logistic-regression.html" class="sa-link">Classification Logic</a></div></section>
 </div>
 <div class="page-nav">
 <a href="linear-regression.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Linear Regression</span></a>

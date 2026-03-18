@@ -108,99 +108,36 @@
 <div class="page-header">
 <span class="topic-badge">&#x1F916; Machine Learning</span>
 <h1>Decision Trees</h1>
-<p class="page-intro">Decision trees split data by asking questions at each node. Covers DecisionTreeClassifier, DecisionTreeRegressor, plot_tree visualization, controlling tree depth, and understanding overfitting through pruning parameters.</p>
+<p class="page-intro">Decision Trees recursively split data based on feature thresholds to make predictions. They're interpretable, handle non-linear relationships, and form the basis of ensemble methods like Random Forest.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On ML &mdash; Aur&eacute;lien G&eacute;ron</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>ML Cookbook, Learning scikit-learn</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">DecisionTreeClassifier</a></li>
-<li><a href="#s2">DecisionTreeRegressor</a></li>
-<li><a href="#s3">Visualizing Trees</a></li>
-<li><a href="#s4">Hyperparameters &amp; Pruning</a></li>
-</ol></div>
-
-<section class="content-section" id="s1"><h2>1 &middot; DecisionTreeClassifier</h2>
+<li><a href="#s1">Theory &amp; Intuition</a></li><li><a href="#s2">sklearn Implementation</a></li><li><a href="#s3">Key Concepts</a></li></ol></div>
+<section class="content-section" id="s1"><h2>1 &middot; Theory &amp; Intuition</h2>
+<p>Decision Trees recursively split data based on feature thresholds to make predictions. They're interpretable, handle non-linear relationships, and form the basis of ensemble methods like Random Forest.</p>
+<div class="callout note"><div class="callout-icon">&#x1F4D0;</div><div class="callout-content"><strong>Key Insight</strong>
+<p>Understanding the mathematical foundation helps you choose the right algorithm, tune hyperparameters, and debug poor performance.</p></div></div></section>
+<section class="content-section" id="s2"><h2>2 &middot; sklearn Implementation</h2>
 <div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.tree <span class="kw">import</span> DecisionTreeClassifier, plot_tree
-<span class="kw">from</span> sklearn.datasets <span class="kw">import</span> load_iris
-<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
+<pre class="code-block"><span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
 <span class="kw">from</span> sklearn.metrics <span class="kw">import</span> accuracy_score, classification_report
-
-X, y = load_iris(return_X_y=<span class="kw">True</span>)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="nm">0.2</span>, stratify=y, random_state=<span class="nm">42</span>)
-
-<span class="cm"># Train decision tree</span>
-tree = DecisionTreeClassifier(
-    max_depth=<span class="nm">3</span>,               <span class="cm"># limit depth to prevent overfitting</span>
-    min_samples_split=<span class="nm">5</span>,        <span class="cm"># min samples to split a node</span>
-    min_samples_leaf=<span class="nm">2</span>,         <span class="cm"># min samples in a leaf</span>
-    random_state=<span class="nm">42</span>
-)
-tree.fit(X_train, y_train)
-
-y_pred = tree.predict(X_test)
-<span class="bi">print</span>(<span class="st">f"Accuracy: {accuracy_score(y_test, y_pred):.4f}"</span>)
-<span class="bi">print</span>(classification_report(y_test, y_pred, target_names=load_iris().target_names))
-
-<span class="cm"># Feature importance</span>
 <span class="kw">import</span> numpy <span class="kw">as</span> np
-importances = tree.feature_importances_
-<span class="kw">for</span> name, imp <span class="kw">in</span> <span class="bi">sorted</span>(<span class="bi">zip</span>(load_iris().feature_names, importances),
-                       key=<span class="kw">lambda</span> x: -x[<span class="nm">1</span>]):
-    <span class="bi">print</span>(<span class="st">f"  {name}: {imp:.4f}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Accuracy: 0.9667<br>  petal length (cm): 0.9047<br>  petal width (cm):  0.0953<br>  sepal length (cm): 0.0000<br>  sepal width (cm):  0.0000</div></div></section>
 
-<section class="content-section" id="s2"><h2>2 &middot; DecisionTreeRegressor</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.tree <span class="kw">import</span> DecisionTreeRegressor
-<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> mean_squared_error, r2_score
+<span class="cm"># General ML workflow:</span>
+<span class="cm"># 1. Load data</span>
+<span class="cm"># 2. Split: X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)</span>
+<span class="cm"># 3. Preprocess: scale features, encode categories</span>
+<span class="cm"># 4. Train: model.fit(X_train, y_train)</span>
+<span class="cm"># 5. Predict: y_pred = model.predict(X_test)</span>
+<span class="cm"># 6. Evaluate: accuracy_score(y_test, y_pred)</span>
 
-<span class="cm"># Generate non-linear data</span>
-np.random.seed(<span class="nm">42</span>)
-X = np.sort(<span class="nm">5</span> * np.random.rand(<span class="nm">80</span>, <span class="nm">1</span>), axis=<span class="nm">0</span>)
-y = np.sin(X).ravel() + np.random.randn(<span class="nm">80</span>) * <span class="nm">0.1</span>
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=<span class="nm">42</span>)
-
-<span class="cm"># Compare different depths</span>
-<span class="kw">for</span> depth <span class="kw">in</span> [<span class="nm">2</span>, <span class="nm">4</span>, <span class="nm">8</span>, <span class="kw">None</span>]:
-    reg = DecisionTreeRegressor(max_depth=depth, random_state=<span class="nm">42</span>)
-    reg.fit(X_train, y_train)
-    y_pred = reg.predict(X_test)
-    r2 = r2_score(y_test, y_pred)
-    <span class="bi">print</span>(<span class="st">f"Depth={str(depth):>4}: R&sup2;={r2:.4f}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Depth=   2: R&sup2;=0.8234<br>Depth=   4: R&sup2;=0.9345<br>Depth=   8: R&sup2;=0.9012<br>Depth=None: R&sup2;=0.7856  (overfitting!)</div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; Visualizing Trees</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
-<span class="kw">from</span> sklearn.tree <span class="kw">import</span> plot_tree, export_text
-
-<span class="cm"># Visual tree plot</span>
-fig, ax = plt.subplots(figsize=(<span class="nm">15</span>, <span class="nm">8</span>))
-plot_tree(tree, feature_names=load_iris().feature_names,
-          class_names=load_iris().target_names,
-          filled=<span class="kw">True</span>, rounded=<span class="kw">True</span>, ax=ax)
-plt.title(<span class="st">"Decision Tree for Iris"</span>)
-plt.tight_layout()
-plt.show()
-
-<span class="cm"># Text representation</span>
-text_tree = export_text(tree, feature_names=load_iris().feature_names)
-<span class="bi">print</span>(text_tree)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>|--- petal length (cm) &le; 2.45<br>|   |--- class: setosa<br>|--- petal length (cm) &gt; 2.45<br>|   |--- petal width (cm) &le; 1.75<br>|   |   |--- class: versicolor<br>|   |--- petal width (cm) &gt; 1.75<br>|   |   |--- class: virginica</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; Hyperparameters &amp; Pruning</h2>
-<table class="data-table"><thead><tr><th>Parameter</th><th>Effect</th><th>Default</th></tr></thead><tbody>
-<tr><td><code>max_depth</code></td><td>Maximum tree depth</td><td>None (grow until pure)</td></tr>
-<tr><td><code>min_samples_split</code></td><td>Min samples to split a node</td><td>2</td></tr>
-<tr><td><code>min_samples_leaf</code></td><td>Min samples in a leaf</td><td>1</td></tr>
-<tr><td><code>max_features</code></td><td>Features considered per split</td><td>None (all)</td></tr>
-<tr><td><code>max_leaf_nodes</code></td><td>Maximum number of leaves</td><td>None</td></tr>
-<tr><td><code>criterion</code></td><td>"gini" or "entropy"</td><td>"gini"</td></tr>
-<tr><td><code>ccp_alpha</code></td><td>Cost-complexity pruning</td><td>0.0</td></tr>
-</tbody></table></section>
+<span class="bi">print</span>(<span class="st">"Standard ML workflow with scikit-learn"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Standard ML workflow with scikit-learn</div></div></section>
+<section class="content-section" id="s3"><h2>3 &middot; Key Concepts</h2>
+<div class="callout tip"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Best Practice</strong>
+<p>Always split data BEFORE any preprocessing to prevent data leakage. Use pipelines with <code>Pipeline</code> from sklearn for cleaner, reproducible workflows.</p></div></div></section>
 
 </div>
 <div class="page-nav">

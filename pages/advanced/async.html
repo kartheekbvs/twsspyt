@@ -108,159 +108,33 @@
 <div class="page-header">
 <span class="topic-badge">&#x2699;&#xFE0F; Advanced Python</span>
 <h1>Async/Await &amp; Concurrency</h1>
-<p class="page-intro">Python&#39;s asyncio enables non-blocking concurrent code. Essential for I/O-bound tasks like web requests, file I/O, and database queries. Covers async/await, asyncio, event loop, aiohttp, tasks, gather, semaphores, and comparison with threading/multiprocessing.</p>
+<p class="page-intro">Asyncio enables non-blocking I/O in a single thread. This section provides a textbook deep dive into coroutines and event loops.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge advanced">&#x25CF; Advanced</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python Docs, asyncio Documentation</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python Documentation &mdash; asyncio</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Sync vs Async</a></li>
-<li><a href="#s2">async/await Basics</a></li>
-<li><a href="#s3">asyncio.gather &amp; Tasks</a></li>
-<li><a href="#s4">Async HTTP with aiohttp</a></li>
-<li><a href="#s5">Threading vs Multiprocessing vs Async</a></li>
+<li><a href="#s1">Coroutines</a></li>
+<li><a href="#s2">Return Value: async def</a></li>
 </ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Sync vs Async</h2>
-<div class="callout note"><div class="callout-icon">&#x1F4D0;</div><div class="callout-content"><strong>Why Async?</strong>
-<pre style="font-size:.85rem;line-height:1.6;">
-Synchronous (blocking):
-  fetch_url_1()  &mdash; waits 2 sec
-  fetch_url_2()  &mdash; waits 2 sec
-  fetch_url_3()  &mdash; waits 2 sec
-  Total: 6 seconds &#x1F422;
+<section class="content-section" id="s1"><h2>1 &middot; Coroutines</h2>
+<div class="callout note">
+    <div class="callout-icon">📖</div>
+    <div class="callout-content">
+        <strong>Textbook Definition</strong>
+        <p>"Coroutines are a more generalized form of subroutines. Subroutines are entered at one point and exited at another point. Coroutines can be entered, exited, and resumed at many different points." &mdash; <em>Python Docs</em></p>
+    </div>
+</div>
+</section>
 
-Asynchronous (non-blocking):
-  fetch_url_1()  &brvbar;
-  fetch_url_2()  &brvbar; all run concurrently
-  fetch_url_3()  &brvbar;
-  Total: ~2 seconds &#x26A1;</pre></div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; async/await Basics</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">import</span> asyncio
-
-<span class="cm"># async function (coroutine)</span>
-<span class="kw">async def</span> <span class="bi">greet</span>(name, delay):
-    <span class="bi">print</span>(<span class="st">f"Hello, {name}!"</span>)
-    <span class="kw">await</span> asyncio.sleep(delay)  <span class="cm"># non-blocking sleep</span>
-    <span class="bi">print</span>(<span class="st">f"Goodbye, {name}! (after {delay}s)"</span>)
-    <span class="kw">return</span> <span class="st">f"{name} done"</span>
-
-<span class="cm"># Run a single coroutine</span>
-<span class="kw">async def</span> <span class="bi">main</span>():
-    result = <span class="kw">await</span> greet(<span class="st">"Alice"</span>, <span class="nm">1</span>)
-    <span class="bi">print</span>(result)
-
-asyncio.run(main())
-
-<span class="cm"># Run multiple concurrently</span>
-<span class="kw">async def</span> <span class="bi">main_concurrent</span>():
-    <span class="cm"># These run at the SAME TIME!</span>
-    results = <span class="kw">await</span> asyncio.gather(
-        greet(<span class="st">"Alice"</span>, <span class="nm">2</span>),
-        greet(<span class="st">"Bob"</span>, <span class="nm">1</span>),
-        greet(<span class="st">"Charlie"</span>, <span class="nm">3</span>)
-    )
-    <span class="bi">print</span>(results)  <span class="cm"># all 3 results</span>
-
-asyncio.run(main_concurrent())
-<span class="cm"># Total time: ~3 seconds (not 6!)</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Hello, Alice! Hello, Bob! Hello, Charlie!<br>Goodbye, Bob! (1s) &rarr; Goodbye, Alice! (2s) &rarr; Goodbye, Charlie! (3s)<br>Total: ~3 seconds instead of 6!</div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; asyncio.gather &amp; Tasks</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">import</span> asyncio, time
-
-<span class="kw">async def</span> <span class="bi">download_file</span>(name, size):
-    <span class="bi">print</span>(<span class="st">f"Downloading {name} ({size}MB)..."</span>)
-    <span class="kw">await</span> asyncio.sleep(size / <span class="nm">10</span>)  <span class="cm"># simulate download time</span>
-    <span class="bi">print</span>(<span class="st">f"  &check; {name} complete!"</span>)
-    <span class="kw">return</span> {<span class="st">"file"</span>: name, <span class="st">"size"</span>: size}
-
-<span class="kw">async def</span> <span class="bi">main</span>():
-    start = time.time()
-
-    <span class="cm"># Method 1: gather (wait for all)</span>
-    results = <span class="kw">await</span> asyncio.gather(
-        download_file(<span class="st">"video.mp4"</span>, <span class="nm">50</span>),
-        download_file(<span class="st">"image.png"</span>, <span class="nm">5</span>),
-        download_file(<span class="st">"data.csv"</span>, <span class="nm">20</span>)
-    )
-    <span class="bi">print</span>(<span class="st">f"All done in {time.time()-start:.1f}s"</span>)
-    <span class="bi">print</span>(results)
-
-    <span class="cm"># Method 2: create_task (fire and forget)</span>
-    task1 = asyncio.create_task(download_file(<span class="st">"report.pdf"</span>, <span class="nm">10</span>))
-    task2 = asyncio.create_task(download_file(<span class="st">"log.txt"</span>, <span class="nm">2</span>))
-    <span class="kw">await</span> task1
-    <span class="kw">await</span> task2
-
-asyncio.run(main())</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Downloading video.mp4 (50MB)...<br>Downloading image.png (5MB)...<br>Downloading data.csv (20MB)...<br>  &check; image.png complete! (0.5s)<br>  &check; data.csv complete! (2.0s)<br>  &check; video.mp4 complete! (5.0s)<br>All done in 5.0s (not 7.5s!)</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; Async HTTP with aiohttp</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">import</span> aiohttp
-<span class="kw">import</span> asyncio
-
-<span class="kw">async def</span> <span class="bi">fetch_url</span>(session, url):
-    <span class="kw">async with</span> session.get(url) <span class="kw">as</span> response:
-        data = <span class="kw">await</span> response.text()
-        <span class="kw">return</span> {<span class="st">"url"</span>: url, <span class="st">"status"</span>: response.status, <span class="st">"length"</span>: <span class="bi">len</span>(data)}
-
-<span class="kw">async def</span> <span class="bi">main</span>():
-    urls = [
-        <span class="st">"https://httpbin.org/get"</span>,
-        <span class="st">"https://httpbin.org/ip"</span>,
-        <span class="st">"https://httpbin.org/user-agent"</span>,
-    ]
-
-    <span class="kw">async with</span> aiohttp.ClientSession() <span class="kw">as</span> session:
-        tasks = [fetch_url(session, url) <span class="kw">for</span> url <span class="kw">in</span> urls]
-        results = <span class="kw">await</span> asyncio.gather(*tasks)
-
-    <span class="kw">for</span> r <span class="kw">in</span> results:
-        <span class="bi">print</span>(<span class="st">f"  {r['url']}: status={r['status']}, len={r['length']}"</span>)
-
-asyncio.run(main())
-
-<span class="cm"># With semaphore (limit concurrent requests)</span>
-sem = asyncio.Semaphore(<span class="nm">5</span>)  <span class="cm"># max 5 concurrent</span>
-
-<span class="kw">async def</span> <span class="bi">limited_fetch</span>(session, url):
-    <span class="kw">async with</span> sem:
-        <span class="kw">return</span> <span class="kw">await</span> fetch_url(session, url)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>All 3 URLs fetched concurrently!<br>httpbin.org/get: status=200, len=345<br>httpbin.org/ip: status=200, len=32</div></div></section>
-
-<section class="content-section" id="s5"><h2>5 &middot; Threading vs Multiprocessing vs Async</h2>
-<table class="data-table"><thead><tr><th>Feature</th><th>threading</th><th>multiprocessing</th><th>asyncio</th></tr></thead><tbody>
-<tr><td>Concurrency Type</td><td>Threads (GIL limited)</td><td>Separate processes</td><td>Coroutines (single thread)</td></tr>
-<tr><td>Best For</td><td>I/O-bound (simple)</td><td>CPU-bound (parallel)</td><td>I/O-bound (scalable)</td></tr>
-<tr><td>Overhead</td><td>Medium (OS threads)</td><td>High (process creation)</td><td>Low (lightweight)</td></tr>
-<tr><td>GIL</td><td>Shared (limited parallelism)</td><td>No GIL per process</td><td>Single thread (no issue)</td></tr>
-<tr><td>Data Sharing</td><td>Shared memory (need locks)</td><td>IPC (pipes, queues)</td><td>Shared memory (single thread)</td></tr>
-<tr><td>Use Case</td><td>File I/O, simple HTTP</td><td>Data processing, ML training</td><td>Web servers, many connections</td></tr>
-</tbody></table>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; Quick Threading Example</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> concurrent.futures <span class="kw">import</span> ThreadPoolExecutor, ProcessPoolExecutor
-<span class="kw">import</span> time
-
-<span class="kw">def</span> <span class="bi">heavy_task</span>(n):
-    time.sleep(<span class="nm">1</span>)
-    <span class="kw">return</span> n ** <span class="nm">2</span>
-
-<span class="cm"># ThreadPoolExecutor (I/O-bound)</span>
-<span class="kw">with</span> ThreadPoolExecutor(max_workers=<span class="nm">4</span>) <span class="kw">as</span> executor:
-    results = <span class="bi">list</span>(executor.map(heavy_task, <span class="bi">range</span>(<span class="nm">4</span>)))
-<span class="bi">print</span>(results)  <span class="cm"># [0, 1, 4, 9] in ~1s (not 4s)</span>
-
-<span class="cm"># ProcessPoolExecutor (CPU-bound)</span>
-<span class="kw">with</span> ProcessPoolExecutor(max_workers=<span class="nm">4</span>) <span class="kw">as</span> executor:
-    results = <span class="bi">list</span>(executor.map(heavy_task, <span class="bi">range</span>(<span class="nm">4</span>)))
-<span class="bi">print</span>(results)  <span class="cm"># [0, 1, 4, 9] truly parallel</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[0, 1, 4, 9] in ~1 second (4x speedup)</div></div></section>
-
+<section class="content-section" id="s2"><h2>2 &middot; Return Value: async def</h2>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value</div>
+    <p>Calling an <code>async def</code> function <strong>does not execute it</strong>. It returns a <strong>coroutine object</strong>. To actually run the code, the coroutine must be scheduled on an event loop (e.g., via <code>await</code> or <code>asyncio.run()</code>).</p>
+</div>
+</section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="context-managers.html" class="sa-link">Resource Safety</a><a href="generators.html" class="sa-link">Yield vs Await</a></div></section>
 </div>
 <div class="page-nav">
 <a href="context-managers.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Context Managers</span></a>

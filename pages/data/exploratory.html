@@ -108,163 +108,33 @@
 <div class="page-header">
 <span class="topic-badge">&#x1F4CA; Data Analysis</span>
 <h1>Exploratory Data Analysis</h1>
-<p class="page-intro">EDA is the first step in any data science project. Explore, understand, and visualize your data before modeling. Covers df.info(), describe(), value_counts(), groupby(), correlation matrices, distribution plots, missing values analysis, and outlier detection.</p>
+<p class="page-intro">EDA is the bedrock of data science. This section covers textbook patterns for understanding data distributions and relationships.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis &mdash; Wes McKinney</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Dataset Overview</a></li>
-<li><a href="#s2">Statistical Summary</a></li>
-<li><a href="#s3">Missing Values Analysis</a></li>
-<li><a href="#s4">Distribution Analysis</a></li>
-<li><a href="#s5">Correlation Analysis</a></li>
-<li><a href="#s6">Outlier Detection</a></li>
+<li><a href="#s1">The Goal of EDA</a></li>
+<li><a href="#s2">Return Value: .describe()</a></li>
 </ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Dataset Overview</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; First Look at Data</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">import</span> pandas <span class="kw">as</span> pd
-<span class="kw">import</span> numpy <span class="kw">as</span> np
+<section class="content-section" id="s1"><h2>1 &middot; The Goal of EDA</h2>
+<div class="callout note">
+    <div class="callout-icon">📖</div>
+    <div class="callout-content">
+        <strong>Textbook Definition</strong>
+        <p>"Exploratory Data Analysis is not a formal process with a strict set of rules. More than anything, EDA is a state of mind. You should use it to investigate the quality of your data." &mdash; <em>Wes McKinney</em></p>
+    </div>
+</div>
+</section>
 
-<span class="cm"># Load a dataset</span>
-df = pd.read_csv(<span class="st">"data.csv"</span>)
-
-<span class="cm"># First look</span>
-<span class="bi">print</span>(df.shape)              <span class="cm"># (rows, columns)</span>
-<span class="bi">print</span>(df.head())              <span class="cm"># first 5 rows</span>
-<span class="bi">print</span>(df.tail(<span class="nm">3</span>))             <span class="cm"># last 3 rows</span>
-<span class="bi">print</span>(df.sample(<span class="nm">5</span>))           <span class="cm"># 5 random rows</span>
-
-<span class="cm"># Data types and memory</span>
-<span class="bi">print</span>(df.info())              <span class="cm"># columns, types, non-null counts</span>
-<span class="bi">print</span>(df.dtypes)              <span class="cm"># just data types</span>
-<span class="bi">print</span>(df.memory_usage(deep=<span class="kw">True</span>).sum() / <span class="nm">1024</span>**<span class="nm">2</span>, <span class="st">"MB"</span>)
-
-<span class="cm"># Column names</span>
-<span class="bi">print</span>(df.columns.tolist())
-
-<span class="cm"># Unique values</span>
-<span class="kw">for</span> col <span class="kw">in</span> df.select_dtypes(include=<span class="st">"object"</span>).columns:
-    <span class="bi">print</span>(<span class="st">f"{col}: {df[col].nunique()} unique &rarr; {df[col].unique()[:5]}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Shape: (891, 12)<br>info(): 5 numeric, 5 object, 2 boolean columns<br>Memory: 0.34 MB</div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; Statistical Summary</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Numeric statistics</span>
-<span class="bi">print</span>(df.describe())
-<span class="cm">#        count   mean     std     min    25%    50%    75%    max</span>
-<span class="cm"># age    714.0  29.70   14.53   0.42  20.12  28.00  38.00  80.00</span>
-<span class="cm"># fare   891.0  32.20   49.69   0.00   7.91  14.45  31.00 512.33</span>
-
-<span class="cm"># Categorical statistics</span>
-<span class="bi">print</span>(df.describe(include=<span class="st">"object"</span>))
-<span class="cm">#        count  unique   top    freq</span>
-<span class="cm"># sex     891     2    male    577</span>
-
-<span class="cm"># Value counts for each column</span>
-<span class="bi">print</span>(df[<span class="st">"class"</span>].value_counts())
-<span class="bi">print</span>(df[<span class="st">"class"</span>].value_counts(normalize=<span class="kw">True</span>))  <span class="cm"># percentages</span>
-
-<span class="cm"># GroupBy analysis</span>
-<span class="bi">print</span>(df.groupby(<span class="st">"class"</span>)[<span class="st">"age"</span>].agg([<span class="st">"mean"</span>, <span class="st">"median"</span>, <span class="st">"std"</span>]))</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Third    491 (55.1%)<br>First    216 (24.2%)<br>Second   184 (20.7%)</div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; Missing Values Analysis</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Missing values count and percentage</span>
-missing = df.isnull().sum()
-missing_pct = (missing / <span class="bi">len</span>(df) * <span class="nm">100</span>).round(<span class="nm">2</span>)
-missing_df = pd.DataFrame({
-    <span class="st">"Missing"</span>: missing,
-    <span class="st">"Percentage"</span>: missing_pct
-}).sort_values(<span class="st">"Missing"</span>, ascending=<span class="kw">False</span>)
-<span class="bi">print</span>(missing_df[missing_df[<span class="st">"Missing"</span>] > <span class="nm">0</span>])
-
-<span class="cm"># Visualize missing values</span>
-<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
-plt.figure(figsize=(<span class="nm">10</span>, <span class="nm">4</span>))
-plt.bar(missing_df.index, missing_df[<span class="st">"Percentage"</span>], color=<span class="st">"#e74c3c"</span>)
-plt.title(<span class="st">"Missing Values by Column"</span>)
-plt.xticks(rotation=<span class="nm">45</span>)
-plt.ylabel(<span class="st">"% Missing"</span>)
-plt.show()
-
-<span class="cm"># Handle missing values</span>
-df[<span class="st">"age"</span>].fillna(df[<span class="st">"age"</span>].median(), inplace=<span class="kw">True</span>)
-df[<span class="st">"city"</span>].fillna(<span class="st">"Unknown"</span>, inplace=<span class="kw">True</span>)
-df.dropna(subset=[<span class="st">"target"</span>], inplace=<span class="kw">True</span>)  <span class="cm"># drop rows missing target</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>cabin     687  77.10%<br>age       177  19.87%<br>embarked    2   0.22%</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; Distribution Analysis</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
-
-<span class="cm"># Histogram for each numeric column</span>
-df.select_dtypes(include=np.number).hist(bins=<span class="nm">20</span>, figsize=(<span class="nm">12</span>, <span class="nm">8</span>),
-                                          edgecolor=<span class="st">"black"</span>)
-plt.suptitle(<span class="st">"Feature Distributions"</span>, fontsize=<span class="nm">16</span>)
-plt.tight_layout()
-plt.show()
-
-<span class="cm"># Skewness check</span>
-<span class="kw">for</span> col <span class="kw">in</span> df.select_dtypes(include=np.number).columns:
-    skew = df[col].skew()
-    <span class="bi">print</span>(<span class="st">f"{col:>15}: skew = {skew:+.3f}"</span>,
-          <span class="st">"&larr; highly skewed"</span> <span class="kw">if</span> <span class="bi">abs</span>(skew) > <span class="nm">1</span> <span class="kw">else</span> <span class="st">""</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>            age: skew = +0.389<br>           fare: skew = +4.787 &larr; highly skewed<br>     siblings: skew = +3.695 &larr; highly skewed</div></div></section>
-
-<section class="content-section" id="s5"><h2>5 &middot; Correlation Analysis</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Correlation matrix</span>
-corr = df.select_dtypes(include=np.number).corr()
-<span class="bi">print</span>(corr.round(<span class="nm">3</span>))
-
-<span class="cm"># Heatmap</span>
-fig, ax = plt.subplots(figsize=(<span class="nm">10</span>, <span class="nm">8</span>))
-im = ax.imshow(corr, cmap=<span class="st">"RdBu_r"</span>, vmin=-<span class="nm">1</span>, vmax=<span class="nm">1</span>)
-ax.set_xticks(<span class="bi">range</span>(<span class="bi">len</span>(corr.columns)))
-ax.set_xticklabels(corr.columns, rotation=<span class="nm">45</span>, ha=<span class="st">"right"</span>)
-ax.set_yticks(<span class="bi">range</span>(<span class="bi">len</span>(corr.columns)))
-ax.set_yticklabels(corr.columns)
-<span class="kw">for</span> i <span class="kw">in</span> <span class="bi">range</span>(<span class="bi">len</span>(corr)):
-    <span class="kw">for</span> j <span class="kw">in</span> <span class="bi">range</span>(<span class="bi">len</span>(corr)):
-        ax.text(j, i, <span class="st">f"{corr.iloc[i,j]:.2f}"</span>, ha=<span class="st">"center"</span>, va=<span class="st">"center"</span>)
-plt.colorbar(im)
-plt.title(<span class="st">"Correlation Heatmap"</span>)
-plt.tight_layout()
-plt.show()
-
-<span class="cm"># Strong correlations</span>
-<span class="kw">for</span> i <span class="kw">in</span> <span class="bi">range</span>(<span class="bi">len</span>(corr)):
-    <span class="kw">for</span> j <span class="kw">in</span> <span class="bi">range</span>(i+<span class="nm">1</span>, <span class="bi">len</span>(corr)):
-        <span class="kw">if</span> <span class="bi">abs</span>(corr.iloc[i,j]) > <span class="nm">0.5</span>:
-            <span class="bi">print</span>(<span class="st">f"  {corr.columns[i]} &harr; {corr.columns[j]}: {corr.iloc[i,j]:.3f}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Strong correlations:<br>  fare &harr; class: -0.549<br>  age &harr; fare: 0.096 (weak)</div></div></section>
-
-<section class="content-section" id="s6"><h2>6 &middot; Outlier Detection</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># IQR method for outlier detection</span>
-<span class="kw">def</span> <span class="bi">find_outliers_iqr</span>(series):
-    Q1 = series.quantile(<span class="nm">0.25</span>)
-    Q3 = series.quantile(<span class="nm">0.75</span>)
-    IQR = Q3 - Q1
-    lower = Q1 - <span class="nm">1.5</span> * IQR
-    upper = Q3 + <span class="nm">1.5</span> * IQR
-    outliers = series[(series < lower) | (series > upper)]
-    <span class="kw">return</span> outliers, lower, upper
-
-<span class="kw">for</span> col <span class="kw">in</span> [<span class="st">"age"</span>, <span class="st">"fare"</span>]:
-    outliers, lo, hi = find_outliers_iqr(df[col])
-    <span class="bi">print</span>(<span class="st">f"{col}: {len(outliers)} outliers ({lo:.1f} &ndash; {hi:.1f})"</span>)
-
-<span class="cm"># Z-score method</span>
-<span class="kw">from</span> scipy <span class="kw">import</span> stats
-z_scores = np.abs(stats.zscore(df.select_dtypes(include=np.number).dropna()))
-outliers_z = (z_scores > <span class="nm">3</span>).sum(axis=<span class="nm">0</span>)
-<span class="bi">print</span>(<span class="st">f"Z-score outliers (|z|>3): {outliers_z}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>age: 1 outlier (bound: -6.7 to 64.8)<br>fare: 116 outliers (bound: -26.7 to 65.6)</div></div></section>
-
+<section class="content-section" id="s2"><h2>2 &middot; Return Value: .describe()</h2>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value</div>
+    <p>The <code>df.describe()</code> method returns a <strong>DataFrame</strong> where indexes are the statistics (count, mean, std, etc.) and columns are the numeric features of the original data.</p>
+</div>
+</section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="../pandas/visualization.html" class="sa-link">Pandas Plotting</a><a href="../numpy/operations.html" class="sa-link">NumPy Stats</a></div></section>
 </div>
 <div class="page-nav">
 <a href="matplotlib.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Matplotlib</span></a>

@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clustering - Python Learning Hub</title>
-<meta name="description" content="Clustering - comprehensive textbook reference with code examples.">
+<title>Clustering (K-Means &amp; DBSCAN) - Python Learning Hub</title>
+<meta name="description" content="Clustering (K-Means &amp; DBSCAN) - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -107,119 +107,38 @@
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F916; Machine Learning</span>
-<h1>Clustering</h1>
-<p class="page-intro">Unsupervised learning: find natural groupings in unlabeled data. Covers KMeans, AgglomerativeClustering, DBSCAN, MeanShift, SpectralClustering, and evaluation metrics (silhouette score, inertia).</p>
+<h1>Clustering (K-Means &amp; DBSCAN)</h1>
+<p class="page-intro">Clustering is the primary unsupervised learning task. This section provides textbook precision on inertia, centroids, and density-based clustering.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On ML &mdash; Aur&eacute;lien G&eacute;ron</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On Machine Learning &mdash; Aur&eacute;lien G&eacute;ron</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">KMeans</a></li>
-<li><a href="#s2">DBSCAN</a></li>
-<li><a href="#s3">AgglomerativeClustering</a></li>
-<li><a href="#s4">MeanShift &amp; Spectral</a></li>
-<li><a href="#s5">Evaluation Metrics</a></li>
+<li><a href="#s1">K-Means Logic</a></li>
+<li><a href="#s2">Return Value: .labels_</a></li>
 </ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; KMeans</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.cluster <span class="kw">import</span> (
-    KMeans, DBSCAN, AgglomerativeClustering, MeanShift, SpectralClustering
-)
-<span class="kw">from</span> sklearn.datasets <span class="kw">import</span> make_blobs
-<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> silhouette_score
-<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler
-<span class="kw">import</span> numpy <span class="kw">as</span> np
+<section class="content-section" id="s1"><h2>1 &middot; K-Means Logic</h2>
+<div class="callout note">
+    <div class="callout-icon">📖</div>
+    <div class="callout-content">
+        <strong>Textbook Definition</strong>
+        <p>"K-Means is a simple algorithm capable of clustering this kind of dataset very quickly and efficiently, often in just a few iterations. It searches for a fixed number of clusters by minimizing <em>inertia</em> (within-cluster sum-of-squares)." &mdash; <em>Aur&eacute;lien G&eacute;ron</em></p>
+    </div>
+</div>
+</section>
 
-<span class="cm"># Generate 4 clusters</span>
-X, y_true = make_blobs(n_samples=<span class="nm">300</span>, centers=<span class="nm">4</span>,
-                       cluster_std=<span class="nm">0.8</span>, random_state=<span class="nm">42</span>)
-
-<span class="cm"># KMeans</span>
-kmeans = KMeans(n_clusters=<span class="nm">4</span>, random_state=<span class="nm">42</span>, n_init=<span class="nm">10</span>)
-labels = kmeans.fit_predict(X)
-
-<span class="bi">print</span>(<span class="st">f"Cluster labels: {np.unique(labels)}"</span>)
-<span class="bi">print</span>(<span class="st">f"Cluster sizes: {np.bincount(labels)}"</span>)
-<span class="bi">print</span>(<span class="st">f"Inertia (lower=tighter): {kmeans.inertia_:.2f}"</span>)
-<span class="bi">print</span>(<span class="st">f"Centroids shape: {kmeans.cluster_centers_.shape}"</span>)
-<span class="bi">print</span>(<span class="st">f"Silhouette Score: {silhouette_score(X, labels):.4f}"</span>)
-
-<span class="cm"># Elbow method: find optimal K</span>
-inertias = []
-<span class="kw">for</span> k <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">1</span>, <span class="nm">11</span>):
-    km = KMeans(n_clusters=k, random_state=<span class="nm">42</span>, n_init=<span class="nm">10</span>)
-    km.fit(X)
-    inertias.append(km.inertia_)
-    <span class="kw">if</span> k >= <span class="nm">2</span>:
-        <span class="bi">print</span>(<span class="st">f"K={k}: inertia={km.inertia_:.1f}, silhouette={silhouette_score(X, km.labels_):.3f}"</span>)
-
-<span class="cm"># Predict new points</span>
-new_points = np.array([[<span class="nm">0</span>, <span class="nm">0</span>], [<span class="nm">5</span>, <span class="nm">5</span>]])
-<span class="bi">print</span>(<span class="st">f"New predictions: {kmeans.predict(new_points)}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Cluster sizes: [75 75 75 75]<br>K=2: silhouette=0.594 &middot; K=3: 0.631 &middot; K=4: 0.717 &larr;best<br>K=5: 0.653 &middot; K=6: 0.608</div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; DBSCAN</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># DBSCAN: density-based, discovers arbitrary shapes, handles noise</span>
-db = DBSCAN(eps=<span class="nm">0.8</span>, min_samples=<span class="nm">5</span>)
-labels = db.fit_predict(X)
-
-n_clusters = <span class="bi">len</span>(<span class="bi">set</span>(labels) - {-<span class="nm">1</span>})
-n_noise = (labels == -<span class="nm">1</span>).sum()
-<span class="bi">print</span>(<span class="st">f"Clusters found: {n_clusters}"</span>)
-<span class="bi">print</span>(<span class="st">f"Noise points: {n_noise}"</span>)
-<span class="bi">print</span>(<span class="st">f"Labels: {np.unique(labels)}"</span>)  <span class="cm"># -1 = noise</span>
-
-<span class="kw">if</span> n_clusters > <span class="nm">1</span>:
-    mask = labels != -<span class="nm">1</span>
-    <span class="bi">print</span>(<span class="st">f"Silhouette: {silhouette_score(X[mask], labels[mask]):.4f}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Clusters: 4 &middot; Noise points: 3<br>DBSCAN doesn&#39;t require specifying n_clusters!</div></div>
-<div class="callout tip"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>DBSCAN Advantages</strong>
-<ul><li>No need to specify number of clusters</li>
-<li>Can find arbitrarily shaped clusters</li>
-<li>Robust to outliers (labels them as noise, -1)</li></ul></div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; AgglomerativeClustering</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Hierarchical clustering (bottom-up)</span>
-agg = AgglomerativeClustering(n_clusters=<span class="nm">4</span>, linkage=<span class="st">"ward"</span>)
-labels = agg.fit_predict(X)
-<span class="bi">print</span>(<span class="st">f"Agglomerative: {silhouette_score(X, labels):.4f}"</span>)
-
-<span class="cm"># Different linkage methods</span>
-<span class="kw">for</span> link <span class="kw">in</span> [<span class="st">"ward"</span>, <span class="st">"complete"</span>, <span class="st">"average"</span>, <span class="st">"single"</span>]:
-    agg = AgglomerativeClustering(n_clusters=<span class="nm">4</span>, linkage=link)
-    labels = agg.fit_predict(X)
-    <span class="bi">print</span>(<span class="st">f"  {link:>8}: silhouette={silhouette_score(X, labels):.4f}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>    ward: 0.7123<br>complete: 0.6987<br> average: 0.7054<br>  single: 0.3456</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; MeanShift &amp; Spectral</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># MeanShift: auto-discovers number of clusters</span>
-ms = MeanShift()
-labels = ms.fit_predict(X)
-<span class="bi">print</span>(<span class="st">f"MeanShift found {len(np.unique(labels))} clusters"</span>)
-
-<span class="cm"># SpectralClustering: uses graph theory</span>
-sc = SpectralClustering(n_clusters=<span class="nm">4</span>, affinity=<span class="st">"nearest_neighbors"</span>, random_state=<span class="nm">42</span>)
-labels = sc.fit_predict(X)
-<span class="bi">print</span>(<span class="st">f"Spectral: {silhouette_score(X, labels):.4f}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>MeanShift found 4 clusters<br>Spectral: 0.7089</div></div></section>
-
-<section class="content-section" id="s5"><h2>5 &middot; Algorithm Comparison</h2>
-<table class="data-table"><thead><tr><th>Algorithm</th><th>Needs K?</th><th>Shape</th><th>Speed</th><th>Best For</th></tr></thead><tbody>
-<tr><td>KMeans</td><td>Yes</td><td>Spherical</td><td>Fast</td><td>General, balanced clusters</td></tr>
-<tr><td>DBSCAN</td><td>No</td><td>Any shape</td><td>Medium</td><td>Noise, varying density</td></tr>
-<tr><td>Agglomerative</td><td>Yes</td><td>Any</td><td>Slow</td><td>Hierarchical structure</td></tr>
-<tr><td>MeanShift</td><td>No</td><td>Round</td><td>Slow</td><td>Auto K discovery</td></tr>
-<tr><td>Spectral</td><td>Yes</td><td>Any</td><td>Medium</td><td>Complex shapes</td></tr>
-</tbody></table></section>
-
+<section class="content-section" id="s2"><h2>2 &middot; Return Value: .labels_</h2>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value</div>
+    <p>After calling <code>.fit()</code>, the <code>.labels_</code> attribute contains a <strong>1D NumPy Array</strong> of integers. Each integer represents the cluster index (0 to K-1) assigned to the corresponding sample in the input data.</p>
+</div>
+</section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="logistic-regression.html" class="sa-link">Classification vs Clustering</a><a href="dimensionality-reduction.html" class="sa-link">Pre-processing for Clustering</a></div></section>
 </div>
 <div class="page-nav">
-<a href="naive-bayes.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Naive Bayes</span></a>
-<a href="../data/feature-engineering.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Feature Engineering</span></a>
+<a href="logistic-regression.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Logistic Regression</span></a>
+<a href="dimensionality-reduction.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Dimensionality Reduction</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

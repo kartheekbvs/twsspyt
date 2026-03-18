@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Random Module - Python Learning Hub</title>
-<meta name="description" content="Random Module - comprehensive textbook reference with code examples.">
+<title>Random Sampling &amp; Simulations - Python Learning Hub</title>
+<meta name="description" content="Random Sampling &amp; Simulations - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -101,174 +101,44 @@
 </nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
-<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; NumPy &rarr; Random Module</div>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; NumPy &rarr; Random</div>
 <div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
 </header>
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F522; NumPy</span>
-<h1>Random Module</h1>
-<p class="page-intro">NumPy&#39;s random module generates arrays of random numbers from various distributions. Essential for simulations, data augmentation, train/test splits, initializing neural network weights, and Monte Carlo methods. Covers legacy API, new Generator API, distributions, seeding, shuffling, and sampling.</p>
+<h1>Random Sampling &amp; Simulations</h1>
+<p class="page-intro">Randomness is key to simulations and ML. This section covers textbook definitions for distributions and PRNG state management.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>NumPy User Guide, Python for Data Analysis &mdash; Wes McKinney</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis &mdash; Wes McKinney</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">New Generator API vs Legacy</a></li>
-<li><a href="#s2">Uniform &amp; Integer Generation</a></li>
-<li><a href="#s3">Distributions</a></li>
-<li><a href="#s4">Seeds &amp; Reproducibility</a></li>
-<li><a href="#s5">Shuffling &amp; Sampling</a></li>
-<li><a href="#s6">Permutations</a></li>
+<li><a href="#s1">PRNG State</a></li>
+<li><a href="#s2">Return Value: np.random.seed()</a></li>
 </ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; New Generator API vs Legacy</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">import</span> numpy <span class="kw">as</span> np
+<section class="content-section" id="s1"><h2>1 &middot; PRNG State</h2>
+<div class="callout note">
+    <div class="callout-icon">📖</div>
+    <div class="callout-content">
+        <strong>Textbook Definition</strong>
+        <p>"NumPy's random number generation functions are not truly random; they are <em>pseudo-random</em>. They use algorithms to generate sequences of numbers that follow a specific distribution." &mdash; <em>Wes McKinney</em></p>
+    </div>
+</div>
+</section>
 
-<span class="cm"># NEW API (recommended &mdash; NumPy 1.17+)</span>
-rng = np.random.default_rng(seed=<span class="nm">42</span>)
-<span class="bi">print</span>(rng.random(<span class="nm">5</span>))              <span class="cm"># 5 uniform [0,1)</span>
-<span class="bi">print</span>(rng.integers(<span class="nm">0</span>, <span class="nm">100</span>, <span class="nm">5</span>))   <span class="cm"># 5 random ints [0,100)</span>
-<span class="bi">print</span>(rng.standard_normal(<span class="nm">5</span>))     <span class="cm"># 5 standard normal</span>
-
-<span class="cm"># LEGACY API (still widely used in tutorials)</span>
-np.random.seed(<span class="nm">42</span>)
-<span class="bi">print</span>(np.random.rand(<span class="nm">5</span>))          <span class="cm"># 5 uniform [0,1)</span>
-<span class="bi">print</span>(np.random.randn(<span class="nm">5</span>))         <span class="cm"># 5 standard normal</span>
-<span class="bi">print</span>(np.random.randint(<span class="nm">0</span>,<span class="nm">100</span>,<span class="nm">5</span>)) <span class="cm"># 5 random ints [0,100)</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[0.773 0.438 0.859 0.697 0.094]<br>[72 10 35 81 24]</div></div>
-<div class="callout tip"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Best Practice</strong><p>Use the new <code>default_rng()</code> API. It has better statistical properties, is thread-safe, and supports modern seeding. The legacy API is maintained for backward compatibility.</p></div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; Uniform &amp; Integer Generation</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block">rng = np.random.default_rng(<span class="nm">42</span>)
-
-<span class="cm"># Uniform [0, 1)</span>
-<span class="bi">print</span>(rng.random((<span class="nm">2</span>,<span class="nm">3</span>)))  <span class="cm"># 2x3 matrix</span>
-
-<span class="cm"># Uniform [low, high)</span>
-<span class="bi">print</span>(rng.uniform(<span class="nm">5</span>, <span class="nm">10</span>, <span class="nm">4</span>))    <span class="cm"># 4 floats in [5,10)</span>
-
-<span class="cm"># Integers [low, high)</span>
-<span class="bi">print</span>(rng.integers(<span class="nm">1</span>, <span class="nm">7</span>, <span class="nm">10</span>))   <span class="cm"># 10 dice rolls</span>
-<span class="bi">print</span>(rng.integers(<span class="nm">0</span>, <span class="nm">2</span>, (<span class="nm">3</span>,<span class="nm">3</span>)))  <span class="cm"># 3x3 binary matrix</span>
-
-<span class="cm"># Legacy equivalents</span>
-np.random.seed(<span class="nm">42</span>)
-<span class="bi">print</span>(np.random.rand(<span class="nm">3</span>,<span class="nm">2</span>))      <span class="cm"># 3x2 uniform</span>
-<span class="bi">print</span>(np.random.randint(<span class="nm">1</span>,<span class="nm">7</span>,<span class="nm">10</span>)) <span class="cm"># 10 dice rolls</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[[0.77 0.44 0.86] [0.70 0.09 0.98]]<br>[7.3 5.9 8.1 6.4]<br>[2 5 1 3 6 4 1 2 5 3]</div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; Distributions</h2>
-<table class="data-table"><thead><tr><th>Distribution</th><th>New API</th><th>Legacy API</th><th>Use Case</th></tr></thead><tbody>
-<tr><td>Normal</td><td><code>rng.normal(mu, sigma, size)</code></td><td><code>np.random.normal()</code></td><td>Data simulation</td></tr>
-<tr><td>Uniform</td><td><code>rng.uniform(lo, hi, size)</code></td><td><code>np.random.uniform()</code></td><td>Random init</td></tr>
-<tr><td>Binomial</td><td><code>rng.binomial(n, p, size)</code></td><td><code>np.random.binomial()</code></td><td>Coin flips</td></tr>
-<tr><td>Poisson</td><td><code>rng.poisson(lam, size)</code></td><td><code>np.random.poisson()</code></td><td>Event count</td></tr>
-<tr><td>Exponential</td><td><code>rng.exponential(scale, size)</code></td><td><code>np.random.exponential()</code></td><td>Wait times</td></tr>
-<tr><td>Multinomial</td><td><code>rng.multinomial(n, pvals)</code></td><td><code>np.random.multinomial()</code></td><td>Multi-class</td></tr>
-<tr><td>Beta</td><td><code>rng.beta(a, b, size)</code></td><td><code>np.random.beta()</code></td><td>Probabilities</td></tr>
-<tr><td>Gamma</td><td><code>rng.gamma(shape, scale, size)</code></td><td><code>np.random.gamma()</code></td><td>Right-skewed data</td></tr>
-</tbody></table>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block">rng = np.random.default_rng(<span class="nm">42</span>)
-
-<span class="cm"># Normal distribution</span>
-samples = rng.normal(loc=<span class="nm">0</span>, scale=<span class="nm">1</span>, size=<span class="nm">10000</span>)
-<span class="bi">print</span>(<span class="st">f"Normal: mean={samples.mean():.3f}, std={samples.std():.3f}"</span>)
-
-<span class="cm"># Binomial (10 coin flips, fair coin, 5 experiments)</span>
-flips = rng.binomial(n=<span class="nm">10</span>, p=<span class="nm">0.5</span>, size=<span class="nm">5</span>)
-<span class="bi">print</span>(<span class="st">f"Coin flip heads: {flips}"</span>)  <span class="cm"># e.g., [4 6 5 3 7]</span>
-
-<span class="cm"># Poisson (events per interval)</span>
-events = rng.poisson(lam=<span class="nm">5</span>, size=<span class="nm">10</span>)
-<span class="bi">print</span>(<span class="st">f"Poisson events: {events}"</span>)
-
-<span class="cm"># Exponential (wait between events)</span>
-waits = rng.exponential(scale=<span class="nm">2.0</span>, size=<span class="nm">5</span>)
-<span class="bi">print</span>(<span class="st">f"Wait times: {waits.round(2)}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Normal: mean=-0.003, std=0.998<br>Coin flip heads: [4 6 5 3 7]<br>Poisson: [6 4 3 7 5 4 8 2 6 5]</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; Seeds &amp; Reproducibility</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Same seed = same sequence EVERY TIME</span>
-rng1 = np.random.default_rng(seed=<span class="nm">42</span>)
-rng2 = np.random.default_rng(seed=<span class="nm">42</span>)
-<span class="bi">print</span>(rng1.random(<span class="nm">3</span>))  <span class="cm"># [0.773 0.438 0.859]</span>
-<span class="bi">print</span>(rng2.random(<span class="nm">3</span>))  <span class="cm"># [0.773 0.438 0.859] SAME!</span>
-
-<span class="cm"># Legacy seeding</span>
-np.random.seed(<span class="nm">42</span>)
-<span class="bi">print</span>(np.random.rand(<span class="nm">3</span>))  <span class="cm"># reproducible</span>
-np.random.seed(<span class="nm">42</span>)
-<span class="bi">print</span>(np.random.rand(<span class="nm">3</span>))  <span class="cm"># same output</span>
-
-<span class="cm"># SeedSequence for advanced spawning</span>
-<span class="kw">from</span> numpy.random <span class="kw">import</span> SeedSequence
-ss = SeedSequence(<span class="nm">12345</span>)
-child_seeds = ss.spawn(<span class="nm">4</span>)  <span class="cm"># for parallel workers</span>
-rngs = [np.random.default_rng(s) <span class="kw">for</span> s <span class="kw">in</span> child_seeds]</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[0.773 0.438 0.859]<br>[0.773 0.438 0.859] &mdash; Same!</div></div></section>
-
-<section class="content-section" id="s5"><h2>5 &middot; Shuffling &amp; Sampling</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block">rng = np.random.default_rng(<span class="nm">42</span>)
-
-<span class="cm"># shuffle() &mdash; modifies IN-PLACE</span>
-arr = np.arange(<span class="nm">10</span>)
-rng.shuffle(arr)
-<span class="bi">print</span>(<span class="st">f"Shuffled: {arr}"</span>)
-
-<span class="cm"># choice() &mdash; random sampling</span>
-<span class="bi">print</span>(rng.choice([<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>], size=<span class="nm">5</span>, replace=<span class="kw">True</span>))
-<span class="bi">print</span>(rng.choice(<span class="nm">100</span>, size=<span class="nm">5</span>, replace=<span class="kw">False</span>))  <span class="cm"># no repeats</span>
-
-<span class="cm"># Weighted sampling</span>
-items = [<span class="st">"common"</span>, <span class="st">"uncommon"</span>, <span class="st">"rare"</span>]
-weights = [<span class="nm">0.7</span>, <span class="nm">0.25</span>, <span class="nm">0.05</span>]
-<span class="bi">print</span>(rng.choice(items, size=<span class="nm">10</span>, p=weights))
-
-<span class="cm"># Legacy shuffle</span>
-np.random.seed(<span class="nm">42</span>)
-a = np.arange(<span class="nm">10</span>)
-np.random.shuffle(a)  <span class="cm"># in-place</span>
-<span class="bi">print</span>(a)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Shuffled: [8 1 5 0 7 2 9 4 3 6]<br>['b' 'a' 'c' 'a' 'd']</div></div></section>
-
-<section class="content-section" id="s6"><h2>6 &middot; Permutations</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block">rng = np.random.default_rng(<span class="nm">42</span>)
-
-<span class="cm"># permutation() &mdash; returns NEW shuffled array (original unchanged)</span>
-a = np.arange(<span class="nm">10</span>)
-perm = rng.permutation(a)
-<span class="bi">print</span>(<span class="st">f"Original:    {a}"</span>)     <span class="cm"># unchanged</span>
-<span class="bi">print</span>(<span class="st">f"Permutation: {perm}"</span>)
-
-<span class="cm"># permutation with integer &mdash; permute range(n)</span>
-<span class="bi">print</span>(rng.permutation(<span class="nm">5</span>))   <span class="cm"># e.g., [3 0 4 1 2]</span>
-
-<span class="cm"># Common ML pattern: shuffle rows of dataset</span>
-X = np.array([[<span class="nm">1</span>,<span class="nm">2</span>],[<span class="nm">3</span>,<span class="nm">4</span>],[<span class="nm">5</span>,<span class="nm">6</span>],[<span class="nm">7</span>,<span class="nm">8</span>],[<span class="nm">9</span>,<span class="nm">10</span>]])
-y = np.array([<span class="nm">0</span>, <span class="nm">1</span>, <span class="nm">0</span>, <span class="nm">1</span>, <span class="nm">0</span>])
-
-idx = rng.permutation(<span class="bi">len</span>(X))
-X_shuffled = X[idx]
-y_shuffled = y[idx]
-<span class="bi">print</span>(<span class="st">f"Shuffled X:\n{X_shuffled}"</span>)
-<span class="bi">print</span>(<span class="st">f"Shuffled y: {y_shuffled}"</span>)
-
-<span class="cm"># Legacy</span>
-np.random.seed(<span class="nm">0</span>)
-<span class="bi">print</span>(np.random.permutation(<span class="nm">10</span>))</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Original: [0 1 2 3 4 5 6 7 8 9]<br>Permutation: [8 1 5 0 7 2 9 4 3 6]</div></div></section>
-
+<section class="content-section" id="s2"><h2>2 &middot; Return Value: np.random.seed()</h2>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value</div>
+    <p>Calling <code>np.random.seed()</code> returns <strong>None</strong>. It is a side-effect function that modifies the global internal state of the random number generator to ensure reproducibility.</p>
+</div>
+</section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="operations.html" class="sa-link">Mathematical Functions</a><a href="linalg.html" class="sa-link">Vector Operations</a></div></section>
 </div>
 <div class="page-nav">
-<a href="linear-algebra.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Linear Algebra</span></a>
-<a href="../pandas/series-dataframe.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Pandas Series</span></a>
+<a href="operations.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Operations</span></a>
+<a href="linalg.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Linear Algebra</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ensemble Methods - Python Learning Hub</title>
-<meta name="description" content="Ensemble Methods - comprehensive textbook reference with code examples.">
+<title>Random Forest - Python Learning Hub</title>
+<meta name="description" content="Random Forest - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -101,130 +101,43 @@
 </nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
-<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; ML &rarr; Ensemble Methods</div>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; ML &rarr; Random Forest</div>
 <div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
 </header>
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F916; Machine Learning</span>
-<h1>Ensemble Methods</h1>
-<p class="page-intro">Ensemble methods combine multiple models for better performance. Covers RandomForest, GradientBoosting, AdaBoost, Bagging, ExtraTrees, and VotingClassifier from sklearn.ensemble. Includes both classifiers and regressors with practical examples.</p>
+<h1>Random Forest</h1>
+<p class="page-intro">Random Forest is an ensemble of decision trees trained on random subsets of data (bagging). It reduces overfitting, handles high-dimensional data, and provides feature importance rankings.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
-<span class="difficulty-badge advanced">&#x25CF; Advanced</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On ML &mdash; Aur&eacute;lien G&eacute;ron</em></span>
+<span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>ML Cookbook, Learning scikit-learn</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">RandomForestClassifier</a></li>
-<li><a href="#s2">RandomForestRegressor</a></li>
-<li><a href="#s3">GradientBoosting</a></li>
-<li><a href="#s4">AdaBoost &amp; Bagging</a></li>
-<li><a href="#s5">Comparing Ensemble Methods</a></li>
-</ol></div>
-
-<section class="content-section" id="s1"><h2>1 &middot; RandomForestClassifier</h2>
+<li><a href="#s1">Theory &amp; Intuition</a></li><li><a href="#s2">sklearn Implementation</a></li><li><a href="#s3">Key Concepts</a></li></ol></div>
+<section class="content-section" id="s1"><h2>1 &middot; Theory &amp; Intuition</h2>
+<p>Random Forest is an ensemble of decision trees trained on random subsets of data (bagging). It reduces overfitting, handles high-dimensional data, and provides feature importance rankings.</p>
+<div class="callout note"><div class="callout-icon">&#x1F4D0;</div><div class="callout-content"><strong>Key Insight</strong>
+<p>Understanding the mathematical foundation helps you choose the right algorithm, tune hyperparameters, and debug poor performance.</p></div></div></section>
+<section class="content-section" id="s2"><h2>2 &middot; sklearn Implementation</h2>
 <div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestClassifier
-<span class="kw">from</span> sklearn.datasets <span class="kw">import</span> load_wine
-<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
-<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> accuracy_score
+<pre class="code-block"><span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
+<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> accuracy_score, classification_report
 <span class="kw">import</span> numpy <span class="kw">as</span> np
 
-X, y = load_wine(return_X_y=<span class="kw">True</span>)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="nm">0.2</span>, stratify=y, random_state=<span class="nm">42</span>)
+<span class="cm"># General ML workflow:</span>
+<span class="cm"># 1. Load data</span>
+<span class="cm"># 2. Split: X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)</span>
+<span class="cm"># 3. Preprocess: scale features, encode categories</span>
+<span class="cm"># 4. Train: model.fit(X_train, y_train)</span>
+<span class="cm"># 5. Predict: y_pred = model.predict(X_test)</span>
+<span class="cm"># 6. Evaluate: accuracy_score(y_test, y_pred)</span>
 
-<span class="cm"># Random Forest = many decision trees + voting</span>
-rf = RandomForestClassifier(
-    n_estimators=<span class="nm">100</span>,     <span class="cm"># number of trees</span>
-    max_depth=<span class="nm">10</span>,          <span class="cm"># limit tree depth</span>
-    min_samples_split=<span class="nm">5</span>,
-    max_features=<span class="st">"sqrt"</span>,   <span class="cm"># features per split</span>
-    n_jobs=-<span class="nm">1</span>,             <span class="cm"># use all CPU cores</span>
-    random_state=<span class="nm">42</span>
-)
-rf.fit(X_train, y_train)
-<span class="bi">print</span>(<span class="st">f"RF Accuracy: {rf.score(X_test, y_test):.4f}"</span>)
-
-<span class="cm"># Feature importance</span>
-importances = rf.feature_importances_
-indices = np.argsort(importances)[::-<span class="nm">1</span>]
-<span class="bi">print</span>(<span class="st">"\nTop 5 features:"</span>)
-<span class="kw">for</span> i <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">5</span>):
-    <span class="bi">print</span>(<span class="st">f"  {load_wine().feature_names[indices[i]]}: {importances[indices[i]]:.4f}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>RF Accuracy: 0.9722<br>Top features: color_intensity: 0.1535, flavanoids: 0.1428, ...</div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; RandomForestRegressor</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestRegressor
-<span class="kw">from</span> sklearn.datasets <span class="kw">import</span> make_regression
-<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> r2_score
-
-X, y = make_regression(n_samples=<span class="nm">500</span>, n_features=<span class="nm">10</span>, noise=<span class="nm">15</span>, random_state=<span class="nm">42</span>)
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=<span class="nm">42</span>)
-
-rf_reg = RandomForestRegressor(n_estimators=<span class="nm">200</span>, max_depth=<span class="nm">15</span>, random_state=<span class="nm">42</span>)
-rf_reg.fit(X_train, y_train)
-<span class="bi">print</span>(<span class="st">f"RF R&sup2;: {rf_reg.score(X_test, y_test):.4f}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>RF R&sup2;: 0.9123</div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; GradientBoosting</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> GradientBoostingClassifier, GradientBoostingRegressor
-
-<span class="cm"># Classification</span>
-X, y = load_wine(return_X_y=<span class="kw">True</span>)
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=<span class="nm">42</span>)
-
-gb = GradientBoostingClassifier(
-    n_estimators=<span class="nm">100</span>,       <span class="cm"># number of boosting stages</span>
-    learning_rate=<span class="nm">0.1</span>,      <span class="cm"># shrinks contribution of each tree</span>
-    max_depth=<span class="nm">3</span>,             <span class="cm"># depth of individual trees</span>
-    random_state=<span class="nm">42</span>
-)
-gb.fit(X_train, y_train)
-<span class="bi">print</span>(<span class="st">f"GradientBoosting: {gb.score(X_test, y_test):.4f}"</span>)
-
-<span class="cm"># Regression</span>
-X, y = make_regression(n_samples=<span class="nm">300</span>, n_features=<span class="nm">5</span>, noise=<span class="nm">10</span>, random_state=<span class="nm">42</span>)
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=<span class="nm">42</span>)
-
-gb_reg = GradientBoostingRegressor(n_estimators=<span class="nm">100</span>, learning_rate=<span class="nm">0.1</span>, random_state=<span class="nm">42</span>)
-gb_reg.fit(X_train, y_train)
-<span class="bi">print</span>(<span class="st">f"GB Regressor R&sup2;: {gb_reg.score(X_test, y_test):.4f}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>GradientBoosting: 0.9722<br>GB Regressor R&sup2;: 0.9456</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; AdaBoost &amp; Bagging</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> (
-    AdaBoostClassifier, BaggingClassifier, ExtraTreesClassifier
-)
-<span class="kw">from</span> sklearn.datasets <span class="kw">import</span> load_iris
-X, y = load_iris(return_X_y=<span class="kw">True</span>)
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=<span class="nm">42</span>)
-
-<span class="cm"># AdaBoost &mdash; focuses on misclassified samples</span>
-ada = AdaBoostClassifier(n_estimators=<span class="nm">50</span>, learning_rate=<span class="nm">1.0</span>, random_state=<span class="nm">42</span>)
-ada.fit(X_train, y_train)
-<span class="bi">print</span>(<span class="st">f"AdaBoost:     {ada.score(X_test, y_test):.4f}"</span>)
-
-<span class="cm"># BaggingClassifier &mdash; Bootstrap Aggregating</span>
-bag = BaggingClassifier(n_estimators=<span class="nm">50</span>, max_samples=<span class="nm">0.7</span>, random_state=<span class="nm">42</span>)
-bag.fit(X_train, y_train)
-<span class="bi">print</span>(<span class="st">f"Bagging:      {bag.score(X_test, y_test):.4f}"</span>)
-
-<span class="cm"># ExtraTrees &mdash; Extra-Randomized Trees</span>
-et = ExtraTreesClassifier(n_estimators=<span class="nm">100</span>, random_state=<span class="nm">42</span>)
-et.fit(X_train, y_train)
-<span class="bi">print</span>(<span class="st">f"ExtraTrees:   {et.score(X_test, y_test):.4f}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>AdaBoost: 0.9667<br>Bagging: 0.9333<br>ExtraTrees: 0.9667</div></div></section>
-
-<section class="content-section" id="s5"><h2>5 &middot; Comparing Ensemble Methods</h2>
-<table class="data-table"><thead><tr><th>Method</th><th>How it Works</th><th>Best For</th></tr></thead><tbody>
-<tr><td>Random Forest</td><td>Many trees, random feature subsets, vote</td><td>General-purpose, feature importance</td></tr>
-<tr><td>GradientBoosting</td><td>Trees built sequentially, each corrects errors</td><td>High accuracy, structured data</td></tr>
-<tr><td>AdaBoost</td><td>Sequential, weights misclassified samples more</td><td>Weak learner boosting</td></tr>
-<tr><td>Bagging</td><td>Parallel training on bootstrap samples</td><td>Reducing variance</td></tr>
-<tr><td>ExtraTrees</td><td>Like RF but splits are random (not optimized)</td><td>Faster than RF, similar accuracy</td></tr>
-</tbody></table></section>
+<span class="bi">print</span>(<span class="st">"Standard ML workflow with scikit-learn"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Standard ML workflow with scikit-learn</div></div></section>
+<section class="content-section" id="s3"><h2>3 &middot; Key Concepts</h2>
+<div class="callout tip"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Best Practice</strong>
+<p>Always split data BEFORE any preprocessing to prevent data leakage. Use pipelines with <code>Pipeline</code> from sklearn for cleaner, reproducible workflows.</p></div></div></section>
 
 </div>
 <div class="page-nav">

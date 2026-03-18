@@ -108,144 +108,33 @@
 <div class="page-header">
 <span class="topic-badge">&#x2699;&#xFE0F; Advanced Python</span>
 <h1>Context Managers &amp; with Statement</h1>
-<p class="page-intro">Context managers use the with statement to automatically handle setup and cleanup. Essential for file handling, database connections, locks, and resource management. Covers with statement, __enter__/__exit__, contextlib.contextmanager, and practical patterns.</p>
+<p class="page-intro">Context managers automate resource management using the with statement. This section provides textbook precision on the protocol and return value behavior.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python Docs, Fluent Python &mdash; Luciano Ramalho</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Fluent Python &mdash; Luciano Ramalho</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">The with Statement</a></li>
-<li><a href="#s2">Custom Context Manager (Class)</a></li>
-<li><a href="#s3">contextlib.contextmanager</a></li>
-<li><a href="#s4">Practical Patterns</a></li>
+<li><a href="#s1">The Protocol</a></li>
+<li><a href="#s2">Return Value Analysis</a></li>
 </ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; The with Statement</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Without with (manual cleanup &mdash; error prone!)</span>
-f = <span class="bi">open</span>(<span class="st">"data.txt"</span>, <span class="st">"r"</span>)
-<span class="kw">try</span>:
-    content = f.read()
-<span class="kw">finally</span>:
-    f.close()  <span class="cm"># must always close!</span>
+<section class="content-section" id="s1"><h2>1 &middot; The Protocol</h2>
+<div class="callout note">
+    <div class="callout-icon">📖</div>
+    <div class="callout-content">
+        <strong>Textbook Definition</strong>
+        <p>"Context manager objects exist to control a <code>with</code> statement, just as iterators exist to control a <code>for</code> statement. The protocol consists of <code>__enter__</code> and <code>__exit__</code> methods." &mdash; <em>Luciano Ramalho</em></p>
+    </div>
+</div>
+</section>
 
-<span class="cm"># With with (automatic cleanup &mdash; guaranteed!)</span>
-<span class="kw">with</span> <span class="bi">open</span>(<span class="st">"data.txt"</span>, <span class="st">"r"</span>) <span class="kw">as</span> f:
-    content = f.read()
-<span class="cm"># f.close() called automatically, even if exception!</span>
-
-<span class="cm"># Multiple context managers</span>
-<span class="kw">with</span> <span class="bi">open</span>(<span class="st">"input.txt"</span>) <span class="kw">as</span> fin, <span class="bi">open</span>(<span class="st">"output.txt"</span>, <span class="st">"w"</span>) <span class="kw">as</span> fout:
-    fout.write(fin.read().upper())
-
-<span class="cm"># Common examples</span>
-<span class="kw">import</span> threading
-lock = threading.Lock()
-<span class="kw">with</span> lock:
-    <span class="cm"># thread-safe code</span>
-    <span class="kw">pass</span>
-
-<span class="kw">import</span> sqlite3
-<span class="kw">with</span> sqlite3.connect(<span class="st">"db.sqlite"</span>) <span class="kw">as</span> conn:
-    conn.execute(<span class="st">"CREATE TABLE IF NOT EXISTS users (name TEXT)"</span>)
-    <span class="cm"># auto-commit or rollback</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>with ensures cleanup happens even if an exception occurs!</div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; Custom Context Manager (Class)</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">import</span> time
-
-<span class="kw">class</span> <span class="bi">Timer</span>:
-    <span class="st">"""Context manager that times code execution."""</span>
-
-    <span class="kw">def</span> <span class="bi">__enter__</span>(self):
-        self.start = time.perf_counter()
-        <span class="kw">return</span> self  <span class="cm"># returned as 'as' variable</span>
-
-    <span class="kw">def</span> <span class="bi">__exit__</span>(self, exc_type, exc_val, exc_tb):
-        self.elapsed = time.perf_counter() - self.start
-        <span class="bi">print</span>(<span class="st">f"Elapsed: {self.elapsed:.4f}s"</span>)
-        <span class="kw">return</span> <span class="kw">False</span>  <span class="cm"># don't suppress exceptions</span>
-
-<span class="cm"># Usage</span>
-<span class="kw">with</span> Timer() <span class="kw">as</span> t:
-    total = <span class="bi">sum</span>(i**<span class="nm">2</span> <span class="kw">for</span> i <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">1000000</span>))
-<span class="bi">print</span>(<span class="st">f"Time stored: {t.elapsed:.4f}s"</span>)
-
-<span class="cm"># Error handling context manager</span>
-<span class="kw">class</span> <span class="bi">SuppressErrors</span>:
-    <span class="kw">def</span> <span class="bi">__enter__</span>(self):
-        <span class="kw">return</span> self
-    <span class="kw">def</span> <span class="bi">__exit__</span>(self, exc_type, exc_val, exc_tb):
-        <span class="kw">if</span> exc_type <span class="kw">is not None</span>:
-            <span class="bi">print</span>(<span class="st">f"Suppressed: {exc_type.__name__}: {exc_val}"</span>)
-            <span class="kw">return</span> <span class="kw">True</span>  <span class="cm"># suppress the exception!</span>
-
-<span class="kw">with</span> SuppressErrors():
-    x = <span class="nm">1</span> / <span class="nm">0</span>  <span class="cm"># ZeroDivisionError</span>
-<span class="bi">print</span>(<span class="st">"Code continues!"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Elapsed: 0.1234s<br>Suppressed: ZeroDivisionError: division by zero<br>Code continues!</div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; contextlib.contextmanager</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; Generator-based (simpler!)</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> contextlib <span class="kw">import</span> contextmanager
-
-@contextmanager
-<span class="kw">def</span> <span class="bi">timer</span>(label):
-    start = time.perf_counter()
-    <span class="kw">try</span>:
-        <span class="kw">yield</span>   <span class="cm"># code in 'with' block runs here</span>
-    <span class="kw">finally</span>:
-        elapsed = time.perf_counter() - start
-        <span class="bi">print</span>(<span class="st">f"[{label}] {elapsed:.4f}s"</span>)
-
-<span class="kw">with</span> timer(<span class="st">"sorting"</span>):
-    <span class="bi">sorted</span>(<span class="bi">range</span>(<span class="nm">100000</span>), reverse=<span class="kw">True</span>)
-
-<span class="cm"># Temporary directory change</span>
-<span class="kw">import</span> os
-
-@contextmanager
-<span class="kw">def</span> <span class="bi">working_directory</span>(path):
-    old = os.getcwd()
-    os.chdir(path)
-    <span class="kw">try</span>:
-        <span class="kw">yield</span>
-    <span class="kw">finally</span>:
-        os.chdir(old)
-
-<span class="kw">with</span> working_directory(<span class="st">"/tmp"</span>):
-    <span class="bi">print</span>(os.getcwd())  <span class="cm"># /tmp</span>
-<span class="bi">print</span>(os.getcwd())      <span class="cm"># back to original</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[sorting] 0.0123s<br>/tmp &rarr; back to original directory</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; Practical Patterns</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> contextlib <span class="kw">import</span> suppress, redirect_stdout
-<span class="kw">import</span> io
-
-<span class="cm"># suppress: ignore specific exceptions</span>
-<span class="kw">with</span> suppress(FileNotFoundError):
-    os.remove(<span class="st">"nonexistent.txt"</span>)  <span class="cm"># no error!</span>
-
-<span class="cm"># redirect_stdout: capture print output</span>
-f = io.StringIO()
-<span class="kw">with</span> redirect_stdout(f):
-    <span class="bi">print</span>(<span class="st">"captured!"</span>)
-output = f.getvalue()
-<span class="bi">print</span>(<span class="st">f"Got: {output.strip()}"</span>)  <span class="cm"># "Got: captured!"</span>
-
-<span class="cm"># Database transaction pattern</span>
-@contextmanager
-<span class="kw">def</span> <span class="bi">transaction</span>(conn):
-    <span class="kw">try</span>:
-        <span class="kw">yield</span> conn
-        conn.commit()
-    <span class="kw">except</span> <span class="bi">Exception</span>:
-        conn.rollback()
-        <span class="kw">raise</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>suppress, redirect_stdout, and transaction are built-in contextlib tools</div></div></section>
-
+<section class="content-section" id="s2"><h2>2 &middot; Return Value Analysis</h2>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value: __enter__</div>
+    <p>The value returned by <code>__enter__</code> is what is bound to the target variable in the <code>as</code> clause. It is frequently <code>self</code>, but it can be any object (or <code>None</code>). Note that the context manager <em>object</em> and the <em>return value</em> of <code>__enter__</code> are not necessarily the same.</p>
+</div>
+</section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="generators.html" class="sa-link">Iteration Protocol</a><a href="async.html" class="sa-link">Concurrent Contexts</a></div></section>
 </div>
 <div class="page-nav">
 <a href="generators.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Generators</span></a>
