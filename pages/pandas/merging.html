@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Merging &amp; Combining - Python Learning Hub</title>
-<meta name="description" content="Merging &amp; Combining - comprehensive textbook reference with code examples.">
+<title>Merging & Joining - Python Learning Hub</title>
+<meta name="description" content="Merging & Joining - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -111,37 +111,48 @@
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F43C; Pandas</span>
-<h1>Merging &amp; Combining</h1>
-<p class="page-intro">Combining datasets is a core task in data science. This section covers SQL-style joins and concatenations with textbook precision.</p>
+<h1>Merging & Joining</h1>
+<p class="page-intro">Comprehensive analysis of relational database operations in Pandas, covering merges, joins, and concatenations.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis &mdash; Wes McKinney</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Database-Style Joins</a></li>
-<li><a href="#s2">Return Values in Merging</a></li>
-</ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Database-Style Joins (merge)</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"Merge or join operations combine datasets by linking rows using one or more keys. These are central to relational databases." &mdash; <em>Wes McKinney</em></p>
+<div class="toc-box">
+    <h4>&#x1F4CB; Relational Algebra in Pandas</h4>
+    <ol>
+        <li><a href="#intro">1. The Merge Paradigm</a></li>
+        <li><a href="#inner">2. Inner, Outer, Left, and Right Joins</a></li>
+        <li><a href="#concat">3. Concatenation and Stacking</a></li>
+        <li><a href="#overlap">4. Handling Overlapping Column Names</a></li>
+    </ol>
+</div>
+
+<section class="content-section" id="intro">
+    <h2>1 &middot; The Merge Paradigm</h2>
+    <p>Merging is the process of combining datasets based on one or more common keys. This is identical to the SQL "JOIN" operations. We must choose the type of join based on how we want to handle missing keys in either dataset.</p>
+</section>
+
+<section class="content-section" id="inner">
+    <h2>2 &middot; Join Types</h2>
+    <div class="callout important">
+        <div class="callout-icon">🔗</div>
+        <div class="callout-content">
+            <strong>The Four Horsemen of Joins</strong>
+            <ul>
+                <li><strong>Inner Join:</strong> Only keys present in both.</li>
+                <li><strong>Outer Join:</strong> All keys from both (adds NaN).</li>
+                <li><strong>Left Join:</strong> All keys from left, intersection from right.</li>
+                <li><strong>Right Join:</strong> All keys from right, intersection from left.</li>
+            </ul>
+        </div>
     </div>
-</div>
 </section>
 
-<section class="content-section" id="s2"><h2>2 &middot; Return Values</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value: pd.merge()</div>
-    <p>The <code>pd.merge()</code> function returns a <strong>new DataFrame</strong> containing the combined columns from both input DataFrames based on the join logic.</p>
-</div>
-</section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="cleaning.html" class="sa-link">Preparing Data</a><a href="../ml/intro-ml.html" class="sa-link">ML Pipeline</a></div></section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="groupby.html" class="sa-link">Aggregating Data</a><a href="selection.html" class="sa-link">Filtering Keys</a></div></section>
 </div>
 <div class="page-nav">
-<a href="cleaning.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Data Cleaning</span></a>
+<a href="groupby.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">GroupBy & Aggregation</span></a>
 <a href="visualization.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Visualization</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>

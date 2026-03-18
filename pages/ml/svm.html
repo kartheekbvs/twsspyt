@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Support Vector Machines - Python Learning Hub</title>
-<meta name="description" content="Support Vector Machines - comprehensive textbook reference with code examples.">
+<title>Support Vector Machine - Python Learning Hub</title>
+<meta name="description" content="Support Vector Machine - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -111,42 +111,44 @@
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F916; Machine Learning</span>
-<h1>Support Vector Machines</h1>
-<p class="page-intro">SVMs find the optimal hyperplane that maximizes the margin between classes. They use kernel tricks (linear, RBF, polynomial) for non-linear classification and work well in high-dimensional spaces.</p>
+<h1>Support Vector Machine</h1>
+<p class="page-intro">Formal textbook analysis of Support Vector Machines, margin maximization, and the mathematical power of the Kernel Trick.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
-<span class="difficulty-badge advanced">&#x25CF; Advanced</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>ML Cookbook, Learning scikit-learn</em></span>
+<span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On Machine Learning &mdash; Aurélien Géron</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Theory &amp; Intuition</a></li><li><a href="#s2">sklearn Implementation</a></li><li><a href="#s3">Key Concepts</a></li></ol></div>
-<section class="content-section" id="s1"><h2>1 &middot; Theory &amp; Intuition</h2>
-<p>SVMs find the optimal hyperplane that maximizes the margin between classes. They use kernel tricks (linear, RBF, polynomial) for non-linear classification and work well in high-dimensional spaces.</p>
-<div class="callout note"><div class="callout-icon">&#x1F4D0;</div><div class="callout-content"><strong>Key Insight</strong>
-<p>Understanding the mathematical foundation helps you choose the right algorithm, tune hyperparameters, and debug poor performance.</p></div></div></section>
-<section class="content-section" id="s2"><h2>2 &middot; sklearn Implementation</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
-<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> accuracy_score, classification_report
-<span class="kw">import</span> numpy <span class="kw">as</span> np
 
-<span class="cm"># General ML workflow:</span>
-<span class="cm"># 1. Load data</span>
-<span class="cm"># 2. Split: X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)</span>
-<span class="cm"># 3. Preprocess: scale features, encode categories</span>
-<span class="cm"># 4. Train: model.fit(X_train, y_train)</span>
-<span class="cm"># 5. Predict: y_pred = model.predict(X_test)</span>
-<span class="cm"># 6. Evaluate: accuracy_score(y_test, y_pred)</span>
+<div class="toc-box">
+    <h4>&#x1F4CB; Support Vector Machines: The Margin Maximizers</h4>
+    <ol>
+        <li><a href="#intro">1. The Large Margin Classification Logic</a></li>
+        <li><a href="#kernel">2. The Kernel Trick: Linear to Non-Linear</a></li>
+        <li><a href="#cost">3. Hard vs Soft Margin (C-Parameter)</a></li>
+        <li><a href="#reg">4. SVM for Regression (SVR)</a></li>
+    </ol>
+</div>
 
-<span class="bi">print</span>(<span class="st">"Standard ML workflow with scikit-learn"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Standard ML workflow with scikit-learn</div></div></section>
-<section class="content-section" id="s3"><h2>3 &middot; Key Concepts</h2>
-<div class="callout tip"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Best Practice</strong>
-<p>Always split data BEFORE any preprocessing to prevent data leakage. Use pipelines with <code>Pipeline</code> from sklearn for cleaner, reproducible workflows.</p></div></div></section>
+<section class="content-section" id="intro">
+    <h2>1 &middot; Large Margin Classification</h2>
+    <p>SVM is a powerful and versatile ML model, capable of performing linear or non-linear classification, regression, and even outlier detection. The fundamental idea is to find a hyperplane that not only separates the classes but also stays as far away from the closest training instances as possible.</p>
+</section>
 
+<section class="content-section" id="kernel">
+    <h2>2 &middot; The Kernel Trick</h2>
+    <div class="callout note">
+        <div class="callout-icon">🧬</div>
+        <div class="callout-content">
+            <strong>Polynomial & RBF Kernels</strong>
+            <p>The kernel trick allows SVM to map inputs into high-dimensional feature spaces without actually computing the coordinates. This makes it possible to find linear separators in spaces where the original data is non-linearly distributed.</p>
+        </div>
+    </div>
+</section>
+
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="random-forest.html" class="sa-link">Ensembles</a><a href="model-evaluation.html" class="sa-link">Hyperparameters</a></div></section>
 </div>
 <div class="page-nav">
 <a href="random-forest.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Random Forest</span></a>
-<a href="knn.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">KNN</span></a>
+<a href="knn.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">K-Nearest Neighbors</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Selection &amp; Filtering - Python Learning Hub</title>
-<meta name="description" content="Selection &amp; Filtering - comprehensive textbook reference with code examples.">
+<title>Selection & Filtering - Python Learning Hub</title>
+<meta name="description" content="Selection & Filtering - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -111,40 +111,54 @@
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F43C; Pandas</span>
-<h1>Selection &amp; Filtering</h1>
-<p class="page-intro">Mastering selection with .loc and .iloc is crucial for robust data manipulation. This section covers textbook definitions and return value differences between Series and DataFrames.</p>
+<h1>Selection & Filtering</h1>
+<p class="page-intro">Mastering label and integer-based selection, boolean masking, and high-performance scalar access.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis &mdash; Wes McKinney</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Label-Based (.loc)</a></li>
-<li><a href="#s2">Integer-Based (.iloc)</a></li>
-<li><a href="#s3">Return Value Complexity</a></li>
-</ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Label-Based Selection (.loc)</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"The <code>loc</code> attribute allows for label-based indexing. It is inclusive of both the start and end labels." &mdash; <em>Wes McKinney</em></p>
+<div class="toc-box">
+    <h4>&#x1F4CB; Selection & Filtering: The Deep Dive</h4>
+    <ol>
+        <li><a href="#theory">1. Indexing Theory</a></li>
+        <li><a href="#loc">2. Label-Based Selection (.loc)</a></li>
+        <li><a href="#iloc">3. Integer-Based Selection (.iloc)</a></li>
+        <li><a href="#boolean">4. Boolean Indexing & Masking</a></li>
+        <li><a href="#at">5. High-Performance Access (.at/.iat)</a></li>
+        <li><a href="#setting">6. Setting Values & Views vs Copies</a></li>
+    </ol>
+</div>
+
+<section class="content-section" id="theory">
+    <h2>1 &middot; Indexing Theory</h2>
+    <p>Indexing in Pandas is more complex than in NumPy because of the <strong>Index Object</strong>. We must distinguish between <em>Label-based</em> (the name of the row) and <em>Position-based</em> (the numeric order) selection.</p>
+</section>
+
+<section class="content-section" id="loc">
+    <h2>2 &middot; Label-Based Selection (.loc)</h2>
+    <p>The <code>.loc</code> property is the primary way to access data by label. <strong>Crucially:</strong> It is inclusive of the end label.</p>
+    <div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"># Returns a Series
+row = df.loc['2023-01-01']
+
+# Returns a Scalar
+value = df.loc['2023-01-01', 'Price']</pre>
     </div>
-</div>
 </section>
 
-<section class="content-section" id="s3"><h2>2 &middot; Return Value Complexity</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value: Indexing</div>
-    <p>Selection behavior varies by input:
-    <ul>
-        <li><strong>Single Label:</strong> Returns a <strong>Series</strong> representing the row/column.</li>
-        <li><strong>List of Labels:</strong> Returns a <strong>DataFrame</strong>.</li>
-        <li><strong>Slice:</strong> Returns a <strong>DataFrame</strong> (inclusive for <code>.loc</code>).</li>
-    </ul></p>
-</div>
+<section class="content-section" id="setting">
+    <h2>6 &middot; Setting Values & The SettingWithCopyWarning</h2>
+    <div class="callout warning">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-content">
+            <strong>SettingWithCopyWarning</strong>
+            <p>This occurs when you try to modify a SLICE of a DataFrame. Always use <code>.loc[row, col] = val</code> to ensure you are modifying the original object.</p>
+        </div>
+    </div>
 </section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="reading-data.html" class="sa-link">Loading Data</a><a href="../numpy/indexing.html" class="sa-link">NumPy Indexing</a></div></section>
+
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="reading-data.html" class="sa-link">Loading Data</a><a href="../numpy/indexing.html" class="sa-link">NumPy Indexing</a><a href="cleaning.html" class="sa-link">Data Wrangling</a></div></section>
 </div>
 <div class="page-nav">
 <a href="reading-data.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Reading Data</span></a>

@@ -112,37 +112,43 @@
 <div class="page-header">
 <span class="topic-badge">&#x1F43C; Pandas</span>
 <h1>Visualization</h1>
-<p class="page-intro">Pandas plotting is a high-level wrapper around Matplotlib. This section covers textbook definitions for plot types and return value analysis for figure objects.</p>
+<p class="page-intro">Mastering the Pandas plotting API, covering all major statistical plot types and deep integration with Matplotlib Axes objects.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis &mdash; Wes McKinney</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Pandas &amp; Matplotlib</a></li>
-<li><a href="#s2">Return Values</a></li>
-</ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Pandas &amp; Matplotlib</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"Pandas has many built-in methods for creating visualizations from Series and DataFrame objects. Most of these are wrappers around the Matplotlib library." &mdash; <em>Wes McKinney</em></p>
+<div class="toc-box">
+    <h4>&#x1F4CB; Data Visualization: From Arrays to Insights</h4>
+    <ol>
+        <li><a href="#intro">1. The Matplotlib Wrapper Architecture</a></li>
+        <li><a href="#line">2. Line Plots & Time Series Trends</a></li>
+        <li><a href="#bar">3. Categorical Comparisons: Bar & Area</a></li>
+        <li><a href="#hist">4. Distribution Analysis: Histograms & KDE</a></li>
+        <li><a href="#scat">5. Relationship Exploration: Scatter & Hexbin</a></li>
+        <li><a href="#subplots">6. Subplots and Shared Axes</a></li>
+        <li><a href="#return">7. Return Values: The Axes Object</a></li>
+    </ol>
+</div>
+
+<section class="content-section" id="intro">
+    <h2>1 &middot; The Architecture of Pandas Plotting</h2>
+    <p>Pandas plotting is built on a "High-Level Wrapper" philosophy. It leverages Matplotlib's powerful backend while offering a much simpler, data-aware API. As Wes McKinney notes, the integration ensures that indexes and labels are automatically handled, preventing common plotting alignment errors.</p>
+</section>
+
+<section class="content-section" id="return">
+    <h2>7 &middot; Return Values: The Axes Object</h2>
+    <div class="return-value-box">
+        <div class="rv-label">🔁 Return Value: .plot()</div>
+        <p>The <code>.plot()</code> method (on Series or DataFrame) returns a <strong>Matplotlib Axes</strong> object. For subplots, it returns a <strong>NumPy array of Axes</strong>. This is the entry point for "low-level" Matplotlib customization (e.g., <code>ax.set_title()</code>).</p>
     </div>
-</div>
 </section>
 
-<section class="content-section" id="s2"><h2>2 &middot; Return Values</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value: .plot()</div>
-    <p>The <code>.plot()</code> method (on Series or DataFrame) returns a <strong>Matplotlib Axes</strong> object (or an array of them if <code>subplots=True</code>). This allows for further customization using Matplotlib commands.</p>
-</div>
-</section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="cleaning.html" class="sa-link">Preparing Data</a><a href="../data/matplotlib.html" class="sa-link">Matplotlib Basics</a></div></section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="merging.html" class="sa-link">Data Joins</a><a href="../data/matplotlib.html" class="sa-link">Matplotlib Basics</a><a href="time-series.html" class="sa-link">Temporal Data</a></div></section>
 </div>
 <div class="page-nav">
-<a href="cleaning.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Data Cleaning</span></a>
-<a href="../data-analysis/exploratory.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Exploratory Analysis</span></a>
+<a href="merging.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Merging</span></a>
+<a href="time-series.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Time Series</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

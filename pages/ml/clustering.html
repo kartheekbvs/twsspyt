@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clustering (K-Means &amp; DBSCAN) - Python Learning Hub</title>
-<meta name="description" content="Clustering (K-Means &amp; DBSCAN) - comprehensive textbook reference with code examples.">
+<title>K-Means Clustering - Python Learning Hub</title>
+<meta name="description" content="K-Means Clustering - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -111,38 +111,44 @@
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F916; Machine Learning</span>
-<h1>Clustering (K-Means &amp; DBSCAN)</h1>
-<p class="page-intro">Clustering is the primary unsupervised learning task. This section provides textbook precision on inertia, centroids, and density-based clustering.</p>
+<h1>K-Means Clustering</h1>
+<p class="page-intro">Formal textbook analysis of unsupervised learning, Centroid-based clustering logic, and performance metrics like Inertia and Silhouette.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On Machine Learning &mdash; Aur&eacute;lien G&eacute;ron</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On Machine Learning &mdash; Aurélien Géron</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">K-Means Logic</a></li>
-<li><a href="#s2">Return Value: .labels_</a></li>
-</ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; K-Means Logic</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"K-Means is a simple algorithm capable of clustering this kind of dataset very quickly and efficiently, often in just a few iterations. It searches for a fixed number of clusters by minimizing <em>inertia</em> (within-cluster sum-of-squares)." &mdash; <em>Aur&eacute;lien G&eacute;ron</em></p>
+<div class="toc-box">
+    <h4>&#x1F4CB; Clustering: Unsupervised Representation</h4>
+    <ol>
+        <li><a href="#intro">1. The K-Means Objective Function</a></li>
+        <li><a href="#limitations">2. Limitations & The Elbow Method</a></li>
+        <li><a href="#hier">3. Hierarchical & Density-Based Clustering</a></li>
+        <li><a href="#metrics">4. Unsupervised Metrics: Silhouette Score</a></li>
+    </ol>
+</div>
+
+<section class="content-section" id="intro">
+    <h2>1 &middot; K-Means Objective Function</h2>
+    <p>K-Means seeks to partition <em>n</em> observations into <em>k</em> clusters. The objective is to minimize the <strong>Inertia</strong>, or within-cluster sum-of-squares (WCSS). It is a hard-clustering algorithm, meaning each point belongs to exactly one cluster.</p>
+</section>
+
+<section class="content-section" id="metrics">
+    <h2>4 &middot; The Silhouette Score</h2>
+    <div class="callout note">
+        <div class="callout-icon">🧬</div>
+        <div class="callout-content">
+            <strong>Evaluating the Unknown</strong>
+            <p>In unsupervised learning, we don't have ground truth labels. The <strong>Silhouette Score</strong> measures how similar an object is to its own cluster (cohesion) compared to other clusters (separation). A score of +1 is ideal.</p>
+        </div>
     </div>
-</div>
 </section>
 
-<section class="content-section" id="s2"><h2>2 &middot; Return Value: .labels_</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value</div>
-    <p>After calling <code>.fit()</code>, the <code>.labels_</code> attribute contains a <strong>1D NumPy Array</strong> of integers. Each integer represents the cluster index (0 to K-1) assigned to the corresponding sample in the input data.</p>
-</div>
-</section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="logistic-regression.html" class="sa-link">Classification vs Clustering</a><a href="dimensionality-reduction.html" class="sa-link">Pre-processing for Clustering</a></div></section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="knn.html" class="sa-link">Instance-Based</a><a href="model-evaluation.html" class="sa-link">Metrics</a><a href="preprocessing.html" class="sa-link">Scaling</a></div></section>
 </div>
 <div class="page-nav">
-<a href="logistic-regression.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Logistic Regression</span></a>
-<a href="dimensionality-reduction.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Dimensionality Reduction</span></a>
+<a href="knn.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">K-Nearest Neighbors</span></a>
+<a href="model-evaluation.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Model Evaluation</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

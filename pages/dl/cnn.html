@@ -112,37 +112,44 @@
 <div class="page-header">
 <span class="topic-badge">&#x1F9E0; Deep Learning</span>
 <h1>Convolutional Neural Networks</h1>
-<p class="page-intro">CNNs are the gold standard for image recognition. This section covers convolution operations and architecture with textbook definitions.</p>
+<p class="page-intro">Formal textbook analysis of Convolutional architectures, pooling strategies, and spatial feature extraction for Computer Vision.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge advanced">&#x25CF; Advanced</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Deep Learning with Python &mdash; Fran&ccedil;ois Chollet</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Deep Learning &mdash; Ian Goodfellow</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Convolutional Layers</a></li>
-<li><a href="#s2">Return Value: Keras Layers</a></li>
-</ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Convolutional Layers</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"The fundamental difference between a densely connected layer and a convolutional layer is this: <code>Dense</code> layers learn global patterns, while <code>convolution</code> layers learn local patterns." &mdash; <em>Fran&ccedil;ois Chollet</em></p>
+<div class="toc-box">
+    <h4>&#x1F4CB; Convolutional Neural Networks (CNN)</h4>
+    <ol>
+        <li><a href="#intro">1. The Neuroscientific Basis</a></li>
+        <li><a href="#conv">2. The Convolution Operation</a></li>
+        <li><a href="#pooling">3. Pooling Paradigms: Max vs Average</a></li>
+        <li><a href="#arch">4. Classic Architectures: LeNet to ResNet</a></li>
+        <li><a href="#viz">5. Visualizing Kernels and Feature Maps</a></li>
+    </ol>
+</div>
+
+<section class="content-section" id="intro">
+    <h2>1 &middot; The Neuroscientific Basis</h2>
+    <p>CNNs were inspired by the work of Hubel and Wiesel on the visual cortex of mammals. They discovered that neurons respond to local regions of the visual field (receptive fields) and that some neurons respond to specific patterns (edges) but not others.</p>
+</section>
+
+<section class="content-section" id="conv">
+    <h2>2 &middot; The Convolution Operation</h2>
+    <div class="callout note">
+        <div class="callout-icon">🖼️</div>
+        <div class="callout-content">
+            <strong>Mathematical Convolution</strong>
+            <p>In deep learning, "convolution" is actually a <strong>cross-correlation</strong>. It involves sliding a kernel (filter) over an input image and computing the dot product at each position. This extracts spatial hierarchies of features.</p>
+        </div>
     </div>
-</div>
 </section>
 
-<section class="content-section" id="s2"><h2>2 &middot; Return Value: Keras Layers</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value</div>
-    <p>In Keras, a layer call (e.g., <code>layers.Conv2D(...)(input)</code>) returns a <strong>Keras Tensor</strong> or <strong>Symbolic Tensor</strong>. In an Eager execution environment, it may return an <strong>EagerTensor</strong> containing the actual data.</p>
-</div>
-</section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="backpropagation.html" class="sa-link">Training</a><a href="../numpy/operations.html" class="sa-link">Vectorization</a></div></section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="neural-networks.html" class="sa-link">NN Fundamentals</a><a href="backpropagation.html" class="sa-link">Gradients</a></div></section>
 </div>
 <div class="page-nav">
 <a href="backpropagation.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Backpropagation</span></a>
-<a href="rnn-lstm.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">RNN &amp; LSTM</span></a>
+<a href="rnn-lstm.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">RNN & LSTM</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

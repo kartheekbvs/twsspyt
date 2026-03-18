@@ -112,33 +112,37 @@
 <div class="page-header">
 <span class="topic-badge">&#x1F916; Machine Learning</span>
 <h1>Logistic Regression</h1>
-<p class="page-intro">Logistic Regression is a classifier that estimates probabilities. This section provides textbook precision on the sigmoid function and decision logic.</p>
+<p class="page-intro">Logistic Regression is a classification algorithm that models the probability of a binary outcome using the sigmoid function. Despite its name, it's for classification, not regression.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On Machine Learning &mdash; Aur&eacute;lien G&eacute;ron</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>ML Cookbook, Learning scikit-learn</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Estimating Probabilities</a></li>
-<li><a href="#s2">Return Value: predict_proba()</a></li>
-</ol></div>
+<li><a href="#s1">Theory &amp; Intuition</a></li><li><a href="#s2">sklearn Implementation</a></li><li><a href="#s3">Key Concepts</a></li></ol></div>
+<section class="content-section" id="s1"><h2>1 &middot; Theory &amp; Intuition</h2>
+<p>Logistic Regression is a classification algorithm that models the probability of a binary outcome using the sigmoid function. Despite its name, it's for classification, not regression.</p>
+<div class="callout note"><div class="callout-icon">&#x1F4D0;</div><div class="callout-content"><strong>Key Insight</strong>
+<p>Understanding the mathematical foundation helps you choose the right algorithm, tune hyperparameters, and debug poor performance.</p></div></div></section>
+<section class="content-section" id="s2"><h2>2 &middot; sklearn Implementation</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
+<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> accuracy_score, classification_report
+<span class="kw">import</span> numpy <span class="kw">as</span> np
 
-<section class="content-section" id="s1"><h2>1 &middot; Estimating Probabilities</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"Just like Linear Regression, a Logistic Regression model computes a weighted sum of input features, but it outputs the <em>logistic</em> (or sigmoid) of this result." &mdash; <em>Aur&eacute;lien G&eacute;ron</em></p>
-    </div>
-</div>
-</section>
+<span class="cm"># General ML workflow:</span>
+<span class="cm"># 1. Load data</span>
+<span class="cm"># 2. Split: X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)</span>
+<span class="cm"># 3. Preprocess: scale features, encode categories</span>
+<span class="cm"># 4. Train: model.fit(X_train, y_train)</span>
+<span class="cm"># 5. Predict: y_pred = model.predict(X_test)</span>
+<span class="cm"># 6. Evaluate: accuracy_score(y_test, y_pred)</span>
 
-<section class="content-section" id="s2"><h2>2 &middot; Return Value: predict_proba()</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value</div>
-    <p>While <code>.predict()</code> returns the class label (0 or 1), <code>.predict_proba()</code> returns a <strong>2D NumPy Array</strong> where each row contains the probabilities for all classes (e.g., <code>[P(class=0), P(class=1)]</code>).</p>
-</div>
-</section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="model-evaluation.html" class="sa-link">Precision & Recall</a><a href="logistic-regression.html" class="sa-link">Classification Logic</a></div></section>
+<span class="bi">print</span>(<span class="st">"Standard ML workflow with scikit-learn"</span>)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>Standard ML workflow with scikit-learn</div></div></section>
+<section class="content-section" id="s3"><h2>3 &middot; Key Concepts</h2>
+<div class="callout tip"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Best Practice</strong>
+<p>Always split data BEFORE any preprocessing to prevent data leakage. Use pipelines with <code>Pipeline</code> from sklearn for cleaner, reproducible workflows.</p></div></div></section>
+
 </div>
 <div class="page-nav">
 <a href="linear-regression.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Linear Regression</span></a>

@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GroupBy &amp; Aggregation - Python Learning Hub</title>
-<meta name="description" content="GroupBy &amp; Aggregation - comprehensive textbook reference with code examples.">
+<title>GroupBy & Aggregation - Python Learning Hub</title>
+<meta name="description" content="GroupBy & Aggregation - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -111,38 +111,45 @@
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F43C; Pandas</span>
-<h1>GroupBy &amp; Aggregation</h1>
-<p class="page-intro">The 'split-apply-combine' pattern is the heart of data aggregation. This section provides textbook precision on grouping logic.</p>
+<h1>GroupBy & Aggregation</h1>
+<p class="page-intro">The definitive guide to the Split-Apply-Combine paradigm, covering custom aggregations, transformations, and group-wise filtering.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
-<span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis &mdash; Wes McKinney</em></span>
+<span class="difficulty-badge advanced">&#x25CF; Advanced</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Pandas Documentation / Python for Data Analysis</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Split-Apply-Combine</a></li>
-<li><a href="#s2">Return Value: groupby()</a></li>
-</ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Split-Apply-Combine</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"Group operations can be described using the term <em>split-apply-combine</em>. Data is split into groups based on keys, a function is applied, and results are combined into a new object." &mdash; <em>Wes McKinney</em></p>
+<div class="toc-box">
+    <h4>&#x1F4CB; Split-Apply-Combine Pattern</h4>
+    <ol>
+        <li><a href="#intro">1. The Split-Apply-Combine Paradigm</a></li>
+        <li><a href="#groupby">2. The GroupBy Object: Lazy Evaluation</a></li>
+        <li><a href="#agg">3. Aggregation: compute summary stats</a></li>
+        <li><a href="#trans">4. Transformation: broadcast back to shape</a></li>
+        <li><a href="#filt">5. Filtering: dropping groups</a></li>
+    </ol>
+</div>
+
+<section class="content-section" id="intro">
+    <h2>1 &middot; Split-Apply-Combine</h2>
+    <p>Group operations follow the "split-apply-combine" pattern introduced by Hadley Wickham. <strong>1. Split:</strong> Breaking data into groups based on keys. <strong>2. Apply:</strong> Compute a function within each group. <strong>3. Combine:</strong> Merge results into a new object.</p>
+</section>
+
+<section class="content-section" id="groupby">
+    <h2>2 &middot; The GroupBy Object</h2>
+    <div class="callout note">
+        <div class="callout-icon">⚡</div>
+        <div class="callout-content">
+            <strong>Deep Dive: Lazy Evaluation</strong>
+            <p>Creating a GroupBy object (e.g., <code>df.groupby('A')</code>) does NOT perform any computation. It creates a plan. The work only happens when you call an aggregation like <code>.sum()</code> or <code>.mean()</code>.</p>
+        </div>
     </div>
-</div>
 </section>
 
-<section class="content-section" id="s2"><h2>2 &middot; Return Value: groupby()</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value</div>
-    <p>Calling <code>df.groupby()</code> does not compute anything immediately. It returns a <strong>DataFrameGroupBy</strong> object, which is an intermediate representation ready for aggregation (like <code>.sum()</code> or <code>.mean()</code>).</p>
-</div>
-</section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="merging.html" class="sa-link">Data Joins</a><a href="../numpy/operations.html" class="sa-link">Reductions</a></div></section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="cleaning.html" class="sa-link">Data Wrangling</a><a href="merging.html" class="sa-link">Bridging Data</a><a href="visualization.html" class="sa-link">Plotting Groups</a></div></section>
 </div>
 <div class="page-nav">
-<a href="merging.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Merging</span></a>
-<a href="visualization.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Visualization</span></a>
+<a href="cleaning.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Data Cleaning</span></a>
+<a href="merging.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Merging & Joining</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

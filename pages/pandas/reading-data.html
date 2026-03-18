@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reading &amp; Writing Data - Python Learning Hub</title>
-<meta name="description" content="Reading &amp; Writing Data - comprehensive textbook reference with code examples.">
+<title>Reading & Writing Data - Python Learning Hub</title>
+<meta name="description" content="Reading & Writing Data - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -111,39 +111,71 @@
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F43C; Pandas</span>
-<h1>Reading &amp; Writing Data</h1>
-<p class="page-intro">Pandas provides robust functions to read data from various formats including CSV, Excel, and SQL. This section details formal textbook patterns and return value analysis.</p>
+<h1>Reading & Writing Data</h1>
+<p class="page-intro">Comprehensive guide to Pandas I/O operations, covering CSV, SQL, and memory-safe chunking techniques.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge beginner">&#x25CF; Beginner</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis &mdash; Wes McKinney</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">CSV &amp; Text Files</a></li>
-<li><a href="#s2">Return Values in I/O</a></li>
-<li><a href="#s3">Chunking for Large Data</a></li>
-</ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; CSV &amp; Text Files</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"The <code>read_csv</code> and <code>read_table</code> are part of the 'Parsing functions' that convert text data into a DataFrame." &mdash; <em>Wes McKinney</em></p>
+<div class="toc-box">
+    <h4>&#x1F4CB; Data I/O: The Textbook Reference</h4>
+    <ol>
+        <li><a href="#intro">1. The Parsing Pipeline</a></li>
+        <li><a href="#csv">2. Delimited Formats (CSV/TSV)</a></li>
+        <li><a href="#excel">3. Microsoft Excel Integration</a></li>
+        <li><a href="#sql">4. SQL Databases & SQLAlchemy</a></li>
+        <li><a href="#json">5. JSON & Semi-Structured Data</a></li>
+        <li><a href="#performance">6. Performance: Binary Formats (Parquet/HDF5)</a></li>
+        <li><a href="#chunking">7. Memory Management: Chunking Large Files</a></li>
+        <li><a href="#summary">8. Summary</a></li>
+    </ol>
+</div>
+
+<section class="content-section" id="intro">
+    <h2>1 &middot; The Parsing Pipeline</h2>
+    <p>Data I/O is often the most time-consuming part of a data scientist's workflow. Pandas addresses this with a suite of "reader" functions. As Wes McKinney explains, these functions do more than just read bytes; they perform <strong>Type Inference</strong>, <strong>Header Identification</strong>, and <strong>Missing Value Handling</strong> automatically.</p>
+</section>
+
+<section class="content-section" id="csv">
+    <h2>2 &middot; Delimited Formats (CSV/TSV)</h2>
+    <p>The most common data format is the Commma-Separated Value (CSV). Pandas' <code>read_csv()</code> is a highly optimized engine written in C/Cython for maximum speed.</p>
+    <div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">df = pd.read_csv('data.csv', 
+                 sep=',', 
+                 header=0, 
+                 index_col='ID',
+                 parse_dates=['Date'],
+                 na_values=['NA', 'None'])</pre>
     </div>
-</div>
 </section>
 
-<section class="content-section" id="s2"><h2>2 &middot; Return Values in I/O</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value: pd.read_csv()</div>
-    <p>By default, <code>pd.read_csv()</code> returns a <strong>DataFrame</strong>. However, if the <code>chunksize</code> parameter is passed, it returns a <strong>TextFileReader</strong> object, which is an <em>iterator</em> that yields DataFrames of the specified size.</p>
-</div>
+<section class="content-section" id="performance">
+    <h2>6 &middot; Performance: Binary Formats</h2>
+    <p>For large-scale data, text-based formats like CSV are inefficient. <strong>Parquet</strong> and <strong>HDF5</strong> provide columnar storage and compression, reducing disk I/O significantly.</p>
+    <div class="callout note">
+        <div class="callout-icon">🚀</div>
+        <div class="callout-content">
+            <strong>Pro Tip: Parquet</strong>
+            <p>Use <code>df.to_parquet()</code> for saving large datasets. It preserves data types and is natively supported by Spark and BigQuery.</p>
+        </div>
+    </div>
 </section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="series-dataframe.html" class="sa-link">Core Objects</a><a href="../python/file-io.html" class="sa-link">Python File I/O</a></div></section>
+
+<section class="content-section" id="chunking">
+    <h2>7 &middot; Memory Management: Chunking</h2>
+    <p>When a file exceeds available RAM, you must read it in <em>Chunks</em>. This returns an iterator rather than a full DataFrame.</p>
+    <div class="return-value-box">
+        <div class="rv-label">🔁 Return Value: Chunking</div>
+        <p><code>pd.read_csv(..., chunksize=10000)</code> returns a <strong>TextFileReader</strong>. Iterating over it yields blocks of 10,000 rows as <strong>DataFrames</strong>.</p>
+    </div>
+</section>
+
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="series-dataframe.html" class="sa-link">Core Objects</a><a href="../python/file-io.html" class="sa-link">Python File I/O</a><a href="selection.html" class="sa-link">Accessing Data</a></div></section>
 </div>
 <div class="page-nav">
-<a href="series-dataframe.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Series &amp; DataFrame</span></a>
-<a href="selection.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Selection &amp; Filtering</span></a>
+<a href="series-dataframe.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Series & DataFrame</span></a>
+<a href="selection.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Selection & Filtering</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Backpropagation &amp; Optimizers - Python Learning Hub</title>
-<meta name="description" content="Backpropagation &amp; Optimizers - comprehensive textbook reference with code examples.">
+<title>Backpropagation & Optimizers - Python Learning Hub</title>
+<meta name="description" content="Backpropagation & Optimizers - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -111,16 +111,40 @@
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F9E0; Deep Learning</span>
-<h1>Backpropagation &amp; Optimizers</h1>
-<p class="page-intro">Backpropagation is how neural networks learn by computing gradients. This section covers the math and implementation.</p>
+<h1>Backpropagation & Optimizers</h1>
+<p class="page-intro">Deep-dive into the mathematics of backpropagation, the chain rule, and modern optimization algorithms like Adam and SGD.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge advanced">&#x25CF; Advanced</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Deep Learning &mdash; Ian Goodfellow</em></span>
 </div></div>
-<section class="content-section" id="s1"><h2>1 &middot; Chain Rule</h2>
-<p>Backpropagation is essentially the chain rule of calculus applied to the network's layers.</p>
+
+<div class="toc-box">
+    <h4>&#x1F4CB; Backpropagation: Calculus of Learning</h4>
+    <ol>
+        <li><a href="#intro">1. The Chain Rule of Calculus</a></li>
+        <li><a href="#gradient">2. Gradient Descent & Step Size</a></li>
+        <li><a href="#vanish">3. The Vanishing Gradient Problem</a></li>
+        <li><a href="#optimizers">4. Optimizers: SGD, Adam, RMSProp</a></li>
+    </ol>
+</div>
+
+<section class="content-section" id="intro">
+    <h2>1 &middot; The Chain Rule</h2>
+    <p>Backpropagation is the application of the chain rule to the network's computational graph. It calculates the partial derivative of the cost function with respect to every weight in the system, moving backward from the output layer to the input.</p>
 </section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="neural-networks.html" class="sa-link">NN Fundamentals</a><a href="../ml/model-evaluation.html" class="sa-link">Optimization</a></div></section>
+
+<section class="content-section" id="optimizers">
+    <h2>4 &middot; Modern Optimizers</h2>
+    <div class="callout important">
+        <div class="callout-icon">⚙️</div>
+        <div class="callout-content">
+            <strong>Adam: Adaptive Moment Estimation</strong>
+            <p>Adam is currently the industry-standard optimizer. It combines the advantages of AdaGrad (which handles sparse gradients) and RMSProp (which handles non-stationary objectives).</p>
+        </div>
+    </div>
+</section>
+
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="neural-networks.html" class="sa-link">NN Fundamentals</a><a href="../ml/model-evaluation.html" class="sa-link">Optimization</a><a href="cnn.html" class="sa-link">Computer Vision</a></div></section>
 </div>
 <div class="page-nav">
 <a href="neural-networks.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Neural Networks</span></a>

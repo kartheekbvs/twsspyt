@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Preprocessing &amp; Encoding - Python Learning Hub</title>
-<meta name="description" content="Preprocessing &amp; Encoding - comprehensive textbook reference with code examples.">
+<title>Data Preprocessing - Python Learning Hub</title>
+<meta name="description" content="Data Preprocessing - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -110,39 +110,51 @@
 </header>
 <div class="page-content">
 <div class="page-header">
-<span class="topic-badge">&#x1F4CA; Machine Learning</span>
-<h1>Preprocessing &amp; Encoding</h1>
-<p class="page-intro">Data preprocessing transforms raw data into a format suitable for models. This section covers scaling and encoding with textbook definitions.</p>
+<span class="topic-badge">&#x1F916; Machine Learning</span>
+<h1>Data Preprocessing</h1>
+<p class="page-intro">Mastering data preparation techniques, including feature scaling, categorical encoding, and automated pipelines with Scikit-Learn transformers.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On ML &mdash; Aur&eacute;lien G&eacute;ron</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On Machine Learning &mdash; Aurélien Géron</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Feature Scaling</a></li>
-<li><a href="#s2">Return Value: Scalers</a></li>
-</ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Feature Scaling</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"Machine Learning algorithms don't perform well when the input numerical attributes have very different scales. There are two common ways to get all attributes to have the same scale: <em>min-max scaling</em> and <em>standardization</em>." &mdash; <em>Aur&eacute;lien G&eacute;ron</em></p>
+<div class="toc-box">
+    <h4>&#x1F4CB; Data Preprocessing: Preparing for Models</h4>
+    <ol>
+        <li><a href="#intro">1. The Importance of Scaling</a></li>
+        <li><a href="#scaling">2. Standardization vs Normalization</a></li>
+        <li><a href="#encoding">3. Categorical Encoding: One-Hot vs Label</a></li>
+        <li><a href="#impute">4. Imputation: Handling Missing Features</a></li>
+        <li><a href="#poly">5. Feature Engineering: Polynomial Features</a></li>
+    </ol>
+</div>
+
+<section class="content-section" id="intro">
+    <h2>1 &middot; The Importance of Scaling</h2>
+    <p>Most machine learning algorithms are sensitive to the scale of the input features. Algorithms that use distance metrics (like KNN and SVM) or gradient descent (like Linear Regression and Neural Networks) will perform poorly if features have vastly different ranges.</p>
+</section>
+
+<section class="content-section" id="scaling">
+    <h2>2 &middot; Scaling Paradigms</h2>
+    <div class="callout note">
+        <div class="callout-icon">⚖️</div>
+        <div class="callout-content">
+            <strong>StandardScaler (Z-Score)</strong>
+            <p>Standardization scales data to have a mean of 0 and a standard deviation of 1. It is less affected by outliers than Min-Max scaling and is preferred for algorithms that assume Gaussian distributions.</p>
+        </div>
     </div>
-</div>
 </section>
 
-<section class="content-section" id="s2"><h2>2 &middot; Return Value: fit_transform</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value</div>
-    <p>Most transformer methods like <code>fit_transform()</code> return a <strong>new 2D NumPy ndarray</strong> (or sparse matrix), even if the input was a Pandas DataFrame.</p>
-</div>
+<section class="content-section" id="encoding">
+    <h2>3 &middot; Categorical Encoding</h2>
+    <p>Machine Learning models require numeric input. <strong>One-Hot Encoding</strong> creates a binary column for each category, while <strong>Label Encoding</strong> assigns a unique integer to each category.</p>
 </section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="model-evaluation.html" class="sa-link">Evaluation</a><a href="../numpy/arrays.html" class="sa-link">NumPy Arrays</a></div></section>
+
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="model-evaluation.html" class="sa-link">Generalization</a><a href="masterclass.html" class="sa-link">ML Hub</a><a href="../pandas/cleaning.html" class="sa-link">Pandas Cleaning</a></div></section>
 </div>
 <div class="page-nav">
 <a href="model-evaluation.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Model Evaluation</span></a>
-<a href="../data/feature-engineering.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Feature Engineering</span></a>
+<a href="masterclass.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">ML Masterclass</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

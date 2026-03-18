@@ -112,43 +112,54 @@
 <div class="page-header">
 <span class="topic-badge">&#x1F9E0; Deep Learning</span>
 <h1>Neural Networks Fundamentals</h1>
-<p class="page-intro">Neural networks are computing systems inspired by biological brains. This page covers formal textbook definitions and implementation details.</p>
+<p class="page-intro">Formal textbook analysis of neural network architectures, activation functions, and the mathematics of the forward pass.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge advanced">&#x25CF; Advanced</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Deep Learning &mdash; Ian Goodfellow, Yoshua Bengio, Aaron Courville</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Deep Learning &mdash; Ian Goodfellow</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">What is a Neural Network?</a></li>
-<li><a href="#s2">The Forward Pass</a></li>
-<li><a href="#s3">Training &amp; History</a></li>
-</ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; What is a Neural Network?</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"Deep learning is a form of machine learning that enables computers to learn from experience and understand the world in terms of a hierarchy of concepts." &mdash; <em>Ian Goodfellow, Deep Learning</em></p>
+<div class="toc-box">
+    <h4>&#x1F4CB; Neural Networks: The Theoretical Framework</h4>
+    <ol>
+        <li><a href="#intro">1. The Biological Inspiration</a></li>
+        <li><a href="#perceptron">2. The Perceptron vs Sigmoid Neuron</a></li>
+        <li><a href="#architecture">3. Multilayer Perceptrons (MLP)</a></li>
+        <li><a href="#activation">4. Activation Functions: ReLU, Sigmoid, Tanh</a></li>
+        <li><a href="#loss">5. Loss Functions: MSE vs Cross-Entropy</a></li>
+        <li><a href="#forward">6. The Forward Pass Algorithm</a></li>
+    </ol>
+</div>
+
+<section class="content-section" id="intro">
+    <h2>1 &middot; Biological Inspiration</h2>
+    <p>Neural networks are computing systems vaguely inspired by the biological neural networks that constitute animal brains. The 'neurons' in our networks are mathematical functions that receive inputs, weight them, and pass them through an activation function.</p>
+</section>
+
+<section class="content-section" id="activation">
+    <h2>4 &middot; Activation Functions</h2>
+    <div class="callout note">
+        <div class="callout-icon">🧠</div>
+        <div class="callout-content">
+            <strong>The ReLU Revolution</strong>
+            <p>The Rectified Linear Unit (ReLU) is defined as \( f(x) = \max(0, x) \). It solved the <strong>Vanishing Gradient Problem</strong> that plagued Sigmoid and Tanh functions, allowing for the training of much deeper networks.</p>
+        </div>
     </div>
-</div>
 </section>
 
-<section class="content-section" id="s3"><h2>2 &middot; Training &amp; History</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value: .fit()</div>
-    <p>In Keras, <code>model.fit()</code> returns a <strong>History object</strong>. Its <code>history</code> attribute is a dictionary recording training loss values and metrics values at successive epochs, as well as validation loss values and validation metrics values (if applicable).</p>
-</div>
-
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block">history = model.fit(X_train, y_train, epochs=<span class="nm">10</span>)
-<span class="bi">print</span>(history.history.keys())  <span class="cm"># dict_keys(['loss', 'accuracy'])</span></pre>
-</div>
+<section class="content-section" id="forward">
+    <h2>6 &middot; The Forward Pass</h2>
+    <p>The forward pass is the process of mapping an input vector to an output prediction through successive linear transformations and non-linear activations.</p>
+    <div class="return-value-box">
+        <div class="rv-label">🔁 Return Value: .predict()</div>
+        <p>In Keras/TensorFlow, <code>model.predict()</code> returns a <strong>NumPy ndarray</strong> of probabilities (for classification) or continuous values (for regression). For a single input, it returns a 2D array of shape <code>(1, num_classes)</code>.</p>
+    </div>
 </section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="../ml/intro-ml.html" class="sa-link">Intro to ML</a><a href="../numpy/arrays.html" class="sa-link">NumPy &amp; Tensors</a></div></section>
+
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="../ml/intro-ml.html" class="sa-link">Intro to ML</a><a href="../numpy/arrays.html" class="sa-link">NumPy & Tensors</a><a href="backpropagation.html" class="sa-link">Calculus</a></div></section>
 </div>
 <div class="page-nav">
-<a href="backpropagation.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Backpropagation</span></a>
-<a href="cnn.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">CNN</span></a>
+<a href="../ml/intro-ml.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Intro to ML</span></a>
+<a href="backpropagation.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Backpropagation</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

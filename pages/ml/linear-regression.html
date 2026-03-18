@@ -105,43 +105,49 @@
 </nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
-<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; ML &rarr; Linear Regression</div>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; ML &rarr; Regression</div>
 <div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
 </header>
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F916; Machine Learning</span>
 <h1>Linear Regression</h1>
-<p class="page-intro">Linear models are the workhorses of statistics and ML. This section covers textbook definitions for OLS and regularization.</p>
+<p class="page-intro">In-depth analysis of Linear Regression, covering the Normal Equation, Gradient Descent, and regularization techniques like Ridge and Lasso.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On Machine Learning &mdash; Aur&eacute;lien G&eacute;ron</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On Machine Learning &mdash; Aurélien Géron</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Normal Equation vs GD</a></li>
-<li><a href="#s2">Return Value: .predict()</a></li>
-</ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Normal Equation vs GD</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"Linear Regression models can be trained using either a direct closed-form solution (the <em>Normal Equation</em>) or using an iterative optimization approach called <em>Gradient Descent</em>." &mdash; <em>Aur&eacute;lien G&eacute;ron</em></p>
+<div class="toc-box">
+    <h4>&#x1F4CB; Linear Regression: Ordinary Least Squares</h4>
+    <ol>
+        <li><a href="#intro">1. The Statistical Hypothesis</a></li>
+        <li><a href="#math">2. The Normal Equation vs Gradient Descent</a></li>
+        <li><a href="#metrics">3. Evaluating Regression: MSE, RMSE, R²</a></li>
+        <li><a href="#regular">4. Regularization: Ridge, Lasso, Elastic Net</a></li>
+    </ol>
+</div>
+
+<section class="content-section" id="intro">
+    <h2>1 &middot; The Statistical Hypothesis</h2>
+    <p>Linear Regression models the relationship between a dependent variable and one or more independent variables using a linear function.</p>
+</section>
+
+<section class="content-section" id="math">
+    <h2>2 &middot; The Mathematics of Fitting</h2>
+    <div class="callout note">
+        <div class="callout-icon">📐</div>
+        <div class="callout-content">
+            <strong>Ordinary Least Squares (OLS)</strong>
+            <p>OLS minimizes the sum of squared residuals between the observed targets and the predictions. This can be solved analytically using the <strong>Normal Equation</strong> or iteratively using <strong>Gradient Descent</strong>.</p>
+        </div>
     </div>
-</div>
 </section>
 
-<section class="content-section" id="s2"><h2>2 &middot; Return Value: .predict()</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value</div>
-    <p>The <code>.predict()</code> method returns a <strong>NumPy Array</strong> of continuous values (floats). If you passed a 2D array of samples, you get a 1D array of predictions.</p>
-</div>
-</section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="model-evaluation.html" class="sa-link">Regression Metrics</a><a href="../numpy/arrays.html" class="sa-link">NumPy Arrays</a></div></section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="intro-ml.html" class="sa-link">ML Workflow</a><a href="model-evaluation.html" class="sa-link">Regression Metrics</a></div></section>
 </div>
 <div class="page-nav">
-<a href="model-evaluation.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Model Evaluation</span></a>
+<a href="intro-ml.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Introduction</span></a>
 <a href="logistic-regression.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Logistic Regression</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>

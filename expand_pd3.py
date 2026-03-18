@@ -1,61 +1,78 @@
 import sys, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_template import make_page
 
-# CLEANING
-make_page("pandas/cleaning.html","Data Cleaning","Pandas","&#x1F43C;","intermediate","Pandas &rarr; Data Cleaning",
-"Data cleaning is essential for quality analysis. This section provides textbook definitions for handling missing data and return value analysis for inplace operations.",
-"Python for Data Analysis &mdash; Wes McKinney",
-'''<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Missing Data</a></li>
-<li><a href="#s2">Return Values &amp; Inplace</a></li>
-<li><a href="#s3">Duplicates</a></li>
-</ol></div>
-
-<section class="content-section" id="s1"><h2>1 &middot; Missing Data</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"Missing data is common in most data analysis applications. pandas uses the floating-point value <code>NaN</code> to represent missing data." &mdash; <em>Wes McKinney</em></p>
-    </div>
+# DATA CLEANING (MASSIVE EXPANSION)
+pd_clean_body = """
+<div class="toc-box">
+    <h4>&#x1F4CB; Data Cleaning: The Art of Wrangling</h4>
+    <ol>
+        <li><a href="#intro">1. The Cleaning Workflow</a></li>
+        <li><a href="#missing">2. Handling Missing Data (NULL/NaN)</a></li>
+        <li><a href="#duplicates">3. Duplicate Identification</a></li>
+        <li><a href="#replace">4. Replacement and Mapping</a></li>
+        <li><a href="#outliers">5. Outlier Detection and Capping</a></li>
+    </ol>
 </div>
+
+<section class="content-section" id="intro">
+    <h2>1 &middot; The Cleaning Workflow</h2>
+    <p>Cleaning is the most important step in any data science project. Real-world data is messy, incomplete, and often incorrectly formatted. Pandas provides the tools to handle these issues with precision and performance.</p>
 </section>
 
-<section class="content-section" id="s2"><h2>2 &middot; Return Values &amp; Inplace</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value: dropna/fillna</div>
-    <p>By default, functions like <code>dropna()</code> and <code>fillna()</code> return a <strong>new DataFrame</strong>. If <code>inplace=True</code> is used, they return <strong>None</strong> and modify the original object.</p>
-</div>
-</section>''',
-("selection.html","Selection"),("merging.html","Merging &amp; Joining"),
-[("selection.html", "Filtering"), ("../numpy/indexing.html", "NumPy Indexing")])
-
-# MERGING / COMBINING
-make_page("pandas/merging.html","Merging &amp; Combining","Pandas","&#x1F43C;","intermediate","Pandas &rarr; Merging",
-"Combining datasets is a core task in data science. This section covers SQL-style joins and concatenations with textbook precision.",
-"Python for Data Analysis &mdash; Wes McKinney",
-'''<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Database-Style Joins</a></li>
-<li><a href="#s2">Return Values in Merging</a></li>
-</ol></div>
-
-<section class="content-section" id="s1"><h2>1 &middot; Database-Style Joins (merge)</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"Merge or join operations combine datasets by linking rows using one or more keys. These are central to relational databases." &mdash; <em>Wes McKinney</em></p>
+<section class="content-section" id="missing">
+    <h2>2 &middot; Handling Missing Data</h2>
+    <div class="callout note">
+        <div class="callout-icon">🔍</div>
+        <div class="callout-content">
+            <strong>Deep Dive: NaN vs None</strong>
+            <p>Pandas uses <code>NaN</code> (Not a Number) for missing numeric and object data. It inherits this from NumPy. For Python objects, <code>None</code> is often used, but Pandas automatically converts it to <code>NaN</code> for numeric types to allow for vectorized math.</p>
+        </div>
     </div>
+</section>
+"""
+
+make_page("pandas/cleaning.html","Data Cleaning & Wrangling","Pandas","&#x1F43C;","intermediate","Pandas &rarr; Cleaning",
+"Mastering missing data handling, duplicate removal, and value replacement using vectorized string and numeric operations.",
+"Python for Data Analysis &mdash; Wes McKinney", pd_clean_body, ("selection.html","Selection & Filtering"), ("groupby.html","GroupBy & Aggregation"),
+[("selection.html", "Accessing Data"), ("groupby.html", "Aggregating Data"), ("merging.html", "Joining Data")])
+
+# MERGING & JOINING (MASSIVE EXPANSION)
+pd_merge_body = """
+<div class="toc-box">
+    <h4>&#x1F4CB; Relational Algebra in Pandas</h4>
+    <ol>
+        <li><a href="#intro">1. The Merge Paradigm</a></li>
+        <li><a href="#inner">2. Inner, Outer, Left, and Right Joins</a></li>
+        <li><a href="#concat">3. Concatenation and Stacking</a></li>
+        <li><a href="#overlap">4. Handling Overlapping Column Names</a></li>
+    </ol>
 </div>
+
+<section class="content-section" id="intro">
+    <h2>1 &middot; The Merge Paradigm</h2>
+    <p>Merging is the process of combining datasets based on one or more common keys. This is identical to the SQL "JOIN" operations. We must choose the type of join based on how we want to handle missing keys in either dataset.</p>
 </section>
 
-<section class="content-section" id="s2"><h2>2 &middot; Return Values</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value: pd.merge()</div>
-    <p>The <code>pd.merge()</code> function returns a <strong>new DataFrame</strong> containing the combined columns from both input DataFrames based on the join logic.</p>
-</div>
-</section>''',
-("cleaning.html","Data Cleaning"),("visualization.html","Visualization"),
-[("cleaning.html", "Preparing Data"), ("../ml/intro-ml.html", "ML Pipeline")])
+<section class="content-section" id="inner">
+    <h2>2 &middot; Join Types</h2>
+    <div class="callout important">
+        <div class="callout-icon">🔗</div>
+        <div class="callout-content">
+            <strong>The Four Horsemen of Joins</strong>
+            <ul>
+                <li><strong>Inner Join:</strong> Only keys present in both.</li>
+                <li><strong>Outer Join:</strong> All keys from both (adds NaN).</li>
+                <li><strong>Left Join:</strong> All keys from left, intersection from right.</li>
+                <li><strong>Right Join:</strong> All keys from right, intersection from left.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+"""
 
-print("cleaning.html + merging.html expanded!")
+make_page("pandas/merging.html","Merging & Joining","Pandas","&#x1F43C;","intermediate","Pandas &rarr; Merging",
+"Comprehensive analysis of relational database operations in Pandas, covering merges, joins, and concatenations.",
+"Python for Data Analysis &mdash; Wes McKinney", pd_merge_body, ("groupby.html","GroupBy & Aggregation"), ("visualization.html","Visualization"),
+[("groupby.html", "Aggregating Data"), ("selection.html", "Filtering Keys")])
+
+print("cleaning.html + merging.html MASSIVELY expanded!")

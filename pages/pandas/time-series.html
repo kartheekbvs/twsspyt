@@ -112,37 +112,44 @@
 <div class="page-header">
 <span class="topic-badge">&#x1F43C; Pandas</span>
 <h1>Time Series Analysis</h1>
-<p class="page-intro">Time series support is a standout feature of Pandas. This section covers resampling and frequency conversion with textbook definitions.</p>
+<p class="page-intro">Deep-dive into temporal data structures, frequency conversion, resampling strategies, and rolling window computations.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge advanced">&#x25CF; Advanced</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis &mdash; Wes McKinney</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Resampling Logic</a></li>
-<li><a href="#s2">Return Value: resample()</a></li>
-</ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Resampling Logic</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"Resampling refers to the process of converting a time series from one frequency to another. Aggregating higher frequency data to lower frequency is called <em>downsampling</em>, while the reverse is <em>upsampling</em>." &mdash; <em>Wes McKinney</em></p>
+<div class="toc-box">
+    <h4>&#x1F4CB; Temporal Data: Concepts & Slicing</h4>
+    <ol>
+        <li><a href="#intro">1. The DatetimeIndex Object</a></li>
+        <li><a href="#freq">2. Frequency and Period Logic</a></li>
+        <li><a href="#resample">3. Resampling: Downsampling & Upsampling</a></li>
+        <li><a href="#window">4. Window Functions: Rolling & Expanding</a></li>
+        <li><a href="#timezone">5. TimeZone Localization</a></li>
+    </ol>
+</div>
+
+<section class="content-section" id="intro">
+    <h2>1 &middot; The DatetimeIndex</h2>
+    <p>Time series data in Pandas is centered around the <strong>DatetimeIndex</strong>. This specialized index allows for powerful string-based slicing (e.g., <code>df['2023']</code>) and temporal offsets.</p>
+</section>
+
+<section class="content-section" id="resample">
+    <h2>3 &middot; Resampling Paradigms</h2>
+    <div class="callout note">
+        <div class="callout-icon">🕒</div>
+        <div class="callout-content">
+            <strong>Textbook Definition: Resampling</strong>
+            <p>"Resampling is the process of converting a time series from one frequency to another. Downsampling (high to low) involves aggregation, while upsampling (low to high) involves interpolation." &mdash; <em>Wes McKinney</em></p>
+        </div>
     </div>
-</div>
 </section>
 
-<section class="content-section" id="s2"><h2>2 &middot; Return Value: resample()</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value</div>
-    <p>Similar to <code>groupby()</code>, the <code>resample()</code> method returns a <strong>Resampler</strong> object. You must call an aggregation method on it to get a DataFrame or Series.</p>
-</div>
-</section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="visualization.html" class="sa-link">Plotting Trends</a><a href="groupby.html" class="sa-link">Grouping Data</a></div></section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="visualization.html" class="sa-link">Plotting Trends</a><a href="groupby.html" class="sa-link">Grouping Data</a><a href="../data/exploratory.html" class="sa-link">EDA</a></div></section>
 </div>
 <div class="page-nav">
 <a href="visualization.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Visualization</span></a>
-<a href="../data-analysis/exploratory.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Data Analysis</span></a>
+<a href="../data/exploratory.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Data Analysis</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

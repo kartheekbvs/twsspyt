@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Model Evaluation &amp; Selection - Python Learning Hub</title>
-<meta name="description" content="Model Evaluation &amp; Selection - comprehensive textbook reference with code examples.">
+<title>Model Evaluation - Python Learning Hub</title>
+<meta name="description" content="Model Evaluation - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -105,44 +105,50 @@
 </nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
-<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; ML &rarr; Model Evaluation</div>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; ML &rarr; Evaluation</div>
 <div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
 </header>
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F916; Machine Learning</span>
-<h1>Model Evaluation &amp; Selection</h1>
-<p class="page-intro">Model evaluation is critical for assessing generalization. This section covers textbook definitions for cross-validation and return value analysis for split operations.</p>
+<h1>Model Evaluation</h1>
+<p class="page-intro">Comprehensive guide to statistical model evaluation, covering confusion matrices, ROC curves, and cross-validation strategies.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On ML &mdash; Aur&eacute;lien G&eacute;ron, sklearn docs</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On Machine Learning &mdash; Aurélien Géron</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Cross-Validation</a></li>
-<li><a href="#s2">Return Value: train_test_split</a></li>
-</ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Cross-Validation</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"A great way to evaluate a model is to use <em>K-fold cross-validation</em>: it randomly splits the training set into K distinct subsets called folds." &mdash; <em>Aur&eacute;lien G&eacute;ron</em></p>
+<div class="toc-box">
+    <h4>&#x1F4CB; Model Selection & Metrics</h4>
+    <ol>
+        <li><a href="#classification">1. Classification: Beyond Accuracy</a></li>
+        <li><a href="#confusion">2. The Confusion Matrix Deep Dive</a></li>
+        <li><a href="#roc">3. ROC Curves and AUC</a></li>
+        <li><a href="#cv">4. Cross-Validation Paradigms</a></li>
+    </ol>
+</div>
+
+<section class="content-section" id="classification">
+    <h2>1 &middot; Beyond Accuracy</h2>
+    <p>Accuracy is often misleading in imbalanced datasets. We must use <strong>Precision</strong>, <strong>Recall</strong>, and the <strong>F1-Score</strong> to get a true picture of model performance.</p>
+</section>
+
+<section class="content-section" id="cv">
+    <h2>4 &middot; K-Fold Cross-Validation</h2>
+    <div class="callout important">
+        <div class="callout-icon">🔄</div>
+        <div class="callout-content">
+            <strong>Generalization Error</strong>
+            <p>Cross-validation allows us to estimate the model's performance on unseen data. By splitting the training set into <em>K</em> folds and rotating the validation set, we ensure that every data point is used for both training and validation.</p>
+        </div>
     </div>
-</div>
 </section>
 
-<section class="content-section" id="s2"><h2>2 &middot; Return Value: train_test_split</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value</div>
-    <p>The <code>train_test_split()</code> function returns a <strong>List</strong> of four items: <code>[X_train, X_test, y_train, y_test]</code> (assuming one X and one y input). These are typically NumPy <strong>ndarrays</strong> or Pandas <strong>DataFrames/Series</strong>.</p>
-</div>
-</section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="intro-ml.html" class="sa-link">ML Basics</a><a href="../pandas/selection.html" class="sa-link">Data Selection</a></div></section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="clustering.html" class="sa-link">Unsupervised Eval</a><a href="intro-ml.html" class="sa-link">Workflow</a><a href="preprocessing.html" class="sa-link">Data Prep</a></div></section>
 </div>
 <div class="page-nav">
-<a href="intro-ml.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Intro to ML</span></a>
-<a href="linear-regression.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Linear Regression</span></a>
+<a href="clustering.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">K-Means Clustering</span></a>
+<a href="preprocessing.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Data Preprocessing</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

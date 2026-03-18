@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RNN, LSTM &amp; GRU - Python Learning Hub</title>
-<meta name="description" content="RNN, LSTM &amp; GRU - comprehensive textbook reference with code examples.">
+<title>Recurrent Neural Networks - Python Learning Hub</title>
+<meta name="description" content="Recurrent Neural Networks - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -105,43 +105,50 @@
 </nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
-<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; DL &rarr; RNN &amp; LSTM</div>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; DL &rarr; RNN</div>
 <div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
 </header>
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F9E0; Deep Learning</span>
-<h1>RNN, LSTM &amp; GRU</h1>
-<p class="page-intro">Processing sequential data requires memory. This section explores RNNs and LSTMs with textbook insights into sequence processing.</p>
+<h1>Recurrent Neural Networks</h1>
+<p class="page-intro">Deep-dive into sequence modeling, covering the vanishing gradient problem, LSTMs, and the transition to attention-based models.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge advanced">&#x25CF; Advanced</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Deep Learning with Python &mdash; Fran&ccedil;ois Chollet</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Deep Learning &mdash; Ian Goodfellow</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Recurrent Neural Networks</a></li>
-<li><a href="#s2">LSTM &amp; Memory</a></li>
-</ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Recurrent Neural Networks (RNN)</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"A recurrent neural network (RNN) processes sequences by iterating through the sequence elements and maintaining a <em>state</em> containing information relative to what it has seen so far." &mdash; <em>Fran&ccedil;ois Chollet</em></p>
+<div class="toc-box">
+    <h4>&#x1F4CB; Sequence Modeling: RNNs to Transformers</h4>
+    <ol>
+        <li><a href="#intro">1. Modeling Temporal Dependencies</a></li>
+        <li><a href="#rnn">2. Recurrent Neural Networks (RNN)</a></li>
+        <li><a href="#lstm">3. LSTM & GRU: Solving Vanishing Gradients</a></li>
+        <li><a href="#attn">4. Attention Mechanisms</a></li>
+        <li><a href="#trans">5. The Transformer Architecture (Self-Attention)</a></li>
+    </ol>
+</div>
+
+<section class="content-section" id="intro">
+    <h2>1 &middot; Temporal Dependencies</h2>
+    <p>Standard neural networks assume all inputs are independent. Sequence models (RNNs) break this by maintaining a 'hidden state' that captures information about previous time steps.</p>
+</section>
+
+<section class="section" id="trans">
+    <h2>5 &middot; The Transformer Revolution</h2>
+    <div class="callout important">
+        <div class="callout-icon">✨</div>
+        <div class="callout-content">
+            <strong>Attention is All You Need</strong>
+            <p>The Transformer architecture replaced recurrence with <strong>Self-Attention</strong>. This allowed for massive parallelization and the ability to capture long-range dependencies across thousands of tokens.</p>
+        </div>
     </div>
-</div>
 </section>
 
-<section class="content-section" id="s2"><h2>2 &middot; Return Value: RNN Layers</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value</div>
-    <p>By default, Keras RNN layers (LSTM/GRU) return only the <strong>last output</strong> in the sequence. If <code>return_sequences=True</code> is set, they return the <strong>entire sequence</strong> of outputs.</p>
-</div>
-</section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="cnn.html" class="sa-link">Spatial patterns</a><a href="../python/generators.html" class="sa-link">Iterators</a></div></section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="cnn.html" class="sa-link">Visual Hierarchies</a><a href="transformers.html" class="sa-link">Self-Attention</a></div></section>
 </div>
 <div class="page-nav">
-<a href="backpropagation.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Backpropagation</span></a>
+<a href="cnn.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">CNN</span></a>
 <a href="transformers.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Transformers</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
