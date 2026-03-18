@@ -47,6 +47,7 @@ NAV = '''<div class="nav-items" id="navItems">
 <a href="{P}numpy/math-functions.html" class="nav-item">Math Functions</a>
 <a href="{P}numpy/linear-algebra.html" class="nav-item">Linear Algebra</a>
 <a href="{P}numpy/random.html" class="nav-item">Random Module</a>
+<a href="{P}numpy/masterclass.html" class="nav-item" style="color:var(--accent);font-weight:700;">NumPy Masterclass</a>
 </div></div>
 <div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F43C; Pandas</span><span class="chevron">&#x25BC;</span></div>
 <div class="nav-section-items">
@@ -57,6 +58,7 @@ NAV = '''<div class="nav-items" id="navItems">
 <a href="{P}pandas/groupby.html" class="nav-item">GroupBy &amp; Aggregation</a>
 <a href="{P}pandas/merging.html" class="nav-item">Merging &amp; Joining</a>
 <a href="{P}pandas/visualization.html" class="nav-item">Visualization</a>
+<a href="{P}pandas/masterclass.html" class="nav-item" style="color:var(--accent);font-weight:700;">Pandas Masterclass</a>
 </div></div>
 <div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F916; Machine Learning</span><span class="chevron">&#x25BC;</span></div>
 <div class="nav-section-items">
@@ -70,6 +72,7 @@ NAV = '''<div class="nav-items" id="navItems">
 <a href="{P}ml/clustering.html" class="nav-item">K-Means Clustering</a>
 <a href="{P}ml/model-evaluation.html" class="nav-item">Model Evaluation</a>
 <a href="{P}ml/preprocessing.html" class="nav-item">Data Preprocessing</a>
+<a href="{P}ml/masterclass.html" class="nav-item" style="color:var(--accent);font-weight:700;">ML Masterclass</a>
 </div></div>
 <div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F9E0; Deep Learning</span><span class="chevron">&#x25BC;</span></div>
 <div class="nav-section-items">
@@ -78,6 +81,7 @@ NAV = '''<div class="nav-items" id="navItems">
 <a href="{P}dl/cnn.html" class="nav-item">CNN</a>
 <a href="{P}dl/rnn-lstm.html" class="nav-item">RNN &amp; LSTM</a>
 <a href="{P}dl/transformers.html" class="nav-item">Transformers</a>
+<a href="{P}dl/masterclass.html" class="nav-item" style="color:var(--accent);font-weight:700;">DL Masterclass</a>
 </div></div>
 <div class="nav-section"><div class="nav-section-header" onclick="toggleSection(this)"><span>&#x1F4CA; Data Analysis</span><span class="chevron">&#x25BC;</span></div>
 <div class="nav-section-items">

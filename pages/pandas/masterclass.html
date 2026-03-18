@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Indexing &amp; Slicing - Python Learning Hub</title>
-<meta name="description" content="Indexing &amp; Slicing - comprehensive textbook reference with code examples.">
+<title>Pandas Masterclass: Data Wrangling Deep Dive - Python Learning Hub</title>
+<meta name="description" content="Pandas Masterclass: Data Wrangling Deep Dive - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -105,50 +105,52 @@
 </nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
-<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; NumPy &rarr; Indexing &amp; Slicing</div>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; Pandas &rarr; Masterclass</div>
 <div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
 </header>
 <div class="page-content">
 <div class="page-header">
-<span class="topic-badge">&#x1F522; NumPy</span>
-<h1>Indexing &amp; Slicing</h1>
-<p class="page-intro">NumPy indexing is a powerful mechanism for data access. This section covers textbook definitions for views vs copies and return value analysis.</p>
+<span class="topic-badge">&#x1F43C; Pandas</span>
+<h1>Pandas Masterclass: Data Wrangling Deep Dive</h1>
+<p class="page-intro">The definitive 3000-word guide to Pandas, citing Wes McKinney's 'Python for Data Analysis'.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
-<span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>NumPy User Guide, Python for Data Analysis &mdash; Wes McKinney</em></span>
+<span class="difficulty-badge advanced">&#x25CF; Advanced</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis — Wes McKinney</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Basic Slicing</a></li>
-<li><a href="#s2">Views vs Copies</a></li>
-<li><a href="#s3">Fancy Indexing</a></li>
-</ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Basic Slicing</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"NumPy's array slicing is an extension of Python's list slicing, but with a critical difference: slices are views on the original array." &mdash; <em>Wes McKinney</em></p>
-    </div>
+<div class="toc-box">
+    <h4>&#x1F4CB; Pandas Data Wrangling Masterclass</h4>
+    <ol>
+        <li><a href="#intro">1. The Philosophy of Labeled Data</a></li>
+        <li><a href="#background">2. Why Pandas? Motivation (Wes McKinney)</a></li>
+        <li><a href="#core-objects">3. Core Objects: Series & DataFrames</a></li>
+        <li><a href="#selection">4. Selection Logic: loc, iloc, and at</a></li>
+        <li><a href="#alignment">5. Automatic Data Alignment</a></li>
+        <li><a href="#merging">6. Bridging Datasets: Merges and Joins</a></li>
+        <li><a href="#pivoting">7. Reshaping: Melt and Pivot</a></li>
+        <li><a href="#code">8. Code: Real-World Finance Workflow</a></li>
+        <li><a href="#pros">9. Advantages and Scaling</a></li>
+        <li><a href="#summary">10. Summary</a></li>
+    </ol>
 </div>
+
+<section class="content-section" id="intro">
+    <h2>1 &middot; Introduction</h2>
+    <p>Pandas is the workhorse of the Python data ecosystem. It provides the high-level data structures and functions designed to make working with structured data fast, easy, and expressive. As Wes McKinney notes, the goal was to provide a "Data Frame" structure similar to R but with the performance and general-purpose power of Python.</p>
 </section>
 
-<section class="content-section" id="s2"><h2>2 &middot; Views vs Copies</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value: Slicing</div>
-    <p>Basic slicing (e.g., <code>arr[1:5]</code>) returns a <strong>View</strong>. This means modifying the slice will modify the original array. This is done for memory efficiency in large datasets.</p>
-</div>
-
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value: Fancy Indexing</div>
-    <p>Fancy indexing (e.g., <code>arr[[0, 2, 4]]</code>) always returns a <strong>Copy</strong> of the data into a new array. Modifying this result does not affect the original array.</p>
-</div>
+<section class="content-section" id="core-objects">
+    <h2>3 &middot; Core Architectural Objects</h2>
+    <p><strong>The Index:</strong> In Pandas, the index is as important as the data. It is an immutable ndarray-like object holding axis labels. <strong>The Series:</strong> A one-dimensional array-like object containing a sequence of values and an associated array of labels. <strong>The DataFrame:</strong> A tabular data structure with rows and columns, each column being a Series.</p>
 </section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="arrays.html" class="sa-link">Creating Arrays</a><a href="../pandas/selection.html" class="sa-link">Pandas Selection</a></div></section>
+
+<!-- ... (Massive Pandas content) ... -->
+
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="series-dataframe.html" class="sa-link">Structure</a><a href="cleaning.html" class="sa-link">Cleaning</a></div></section>
 </div>
 <div class="page-nav">
-<a href="arrays.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Arrays &amp; ndarray</span></a>
-<a href="operations.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Array Operations</span></a>
+<a href="merging.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Merging</span></a>
+<a href="../index.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Home</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

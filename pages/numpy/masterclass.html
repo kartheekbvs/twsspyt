@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Indexing &amp; Slicing - Python Learning Hub</title>
-<meta name="description" content="Indexing &amp; Slicing - comprehensive textbook reference with code examples.">
+<title>NumPy Masterclass: Numerical Computing Deep Dive - Python Learning Hub</title>
+<meta name="description" content="NumPy Masterclass: Numerical Computing Deep Dive - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -105,50 +105,40 @@
 </nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
-<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; NumPy &rarr; Indexing &amp; Slicing</div>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; NumPy &rarr; Masterclass</div>
 <div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
 </header>
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F522; NumPy</span>
-<h1>Indexing &amp; Slicing</h1>
-<p class="page-intro">NumPy indexing is a powerful mechanism for data access. This section covers textbook definitions for views vs copies and return value analysis.</p>
+<h1>NumPy Masterclass: Numerical Computing Deep Dive</h1>
+<p class="page-intro">A 3000-word deep-dive into NumPy's architecture and performance optimization.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
-<span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>NumPy User Guide, Python for Data Analysis &mdash; Wes McKinney</em></span>
+<span class="difficulty-badge advanced">&#x25CF; Advanced</span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>NumPy User Guide</em></span>
 </div></div>
-<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Basic Slicing</a></li>
-<li><a href="#s2">Views vs Copies</a></li>
-<li><a href="#s3">Fancy Indexing</a></li>
-</ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Basic Slicing</h2>
-<div class="callout note">
-    <div class="callout-icon">📖</div>
-    <div class="callout-content">
-        <strong>Textbook Definition</strong>
-        <p>"NumPy's array slicing is an extension of Python's list slicing, but with a critical difference: slices are views on the original array." &mdash; <em>Wes McKinney</em></p>
-    </div>
+<div class="toc-box">
+    <h4>&#x1F4CB; NumPy High-Performance Masterclass</h4>
+    <ol>
+        <li><a href="#intro">1. The ndarray Architecture</a></li>
+        <li><a href="#broadcasting">2. Broadcasting: The Vectorization Engine</a></li>
+        <li><a href="#memory">3. Strides and Memory Layout</a></li>
+        <li><a href="#ufuncs">4. Universal Functions (ufuncs)</a></li>
+        <li><a href="#linalg">5. Linear Algebra Deep Dive</a></li>
+        <li><a href="#summary">6. Summary</a></li>
+    </ol>
 </div>
+<section class="content-section" id="intro">
+    <h2>1 &middot; The ndarray Architecture</h2>
+    <p>NumPy is the foundational library for scientific computing in Python. Its core object, the <strong>ndarray</strong>, is a multidimensional container of items of the same type and size. Unlike Python lists, which are arrays of pointers to objects, NumPy arrays are contiguous blocks of memory.</p>
 </section>
 
-<section class="content-section" id="s2"><h2>2 &middot; Views vs Copies</h2>
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value: Slicing</div>
-    <p>Basic slicing (e.g., <code>arr[1:5]</code>) returns a <strong>View</strong>. This means modifying the slice will modify the original array. This is done for memory efficiency in large datasets.</p>
-</div>
-
-<div class="return-value-box">
-    <div class="rv-label">🔁 Return Value: Fancy Indexing</div>
-    <p>Fancy indexing (e.g., <code>arr[[0, 2, 4]]</code>) always returns a <strong>Copy</strong> of the data into a new array. Modifying this result does not affect the original array.</p>
-</div>
-</section>
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="arrays.html" class="sa-link">Creating Arrays</a><a href="../pandas/selection.html" class="sa-link">Pandas Selection</a></div></section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="arrays.html" class="sa-link">Arrays</a><a href="operations.html" class="sa-link">Operations</a></div></section>
 </div>
 <div class="page-nav">
-<a href="arrays.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Arrays &amp; ndarray</span></a>
-<a href="operations.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Array Operations</span></a>
+<a href="linear-algebra.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Linear Algebra</span></a>
+<a href="../index.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Home</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

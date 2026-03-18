@@ -10,11 +10,19 @@ def extract_text_from_pdf(pdf_path, output_txt):
             f.write(page.get_text())
     doc.close()
 
-pdf_dir = r".\DL DL al is well"
+pdf_dir = r"D:\python refer"
+output_dir = r"C:\Users\DELL\.gemini\antigravity\scratch\python-textbook-site\DL DL al is well\extracted"
+os.makedirs(output_dir, exist_ok=True)
+
 pdf_files = [f for f in os.listdir(pdf_dir) if f.endswith(".pdf")]
 
 for pdf in pdf_files:
-    print(f"Extracting: {pdf}")
-    extract_text_from_pdf(os.path.join(pdf_dir, pdf), os.path.join(pdf_dir, pdf + ".txt"))
+    pdf_path = os.path.join(pdf_dir, pdf)
+    out_path = os.path.join(output_dir, pdf + ".txt")
+    print(f"Extracting: {pdf_path}")
+    try:
+        extract_text_from_pdf(pdf_path, out_path)
+    except Exception as e:
+        print(f"Error extracting {pdf}: {e}")
 
-print("Extraction complete.")
+print("Batch extraction complete.")
