@@ -98,7 +98,7 @@
 <div class="nav-section-items">
 <a href="../resources/python-programs.html" class="nav-item">140+ Python Programs</a>
 </div></div></div></div></div>
-    </nav>
+</nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
 <div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; Advanced &rarr; Lambda</div>
@@ -108,148 +108,87 @@
 <div class="page-header">
 <span class="topic-badge">&#x2699;&#xFE0F; Advanced Python</span>
 <h1>Lambda, Map, Filter &amp; Reduce</h1>
-<p class="page-intro">Lambda functions are anonymous one-liner functions. Combined with map(), filter(), and reduce(), they enable powerful functional programming patterns in Python. Covers lambda syntax, map, filter, reduce, functools, sorted with key, and practical examples.</p>
+<p class="page-intro">Lambda functions are anonymous one-liner functions. Combined with map(), filter(), and reduce(), they enable powerful functional programming patterns in Python. This section explores their formal definitions, behavior, and return values.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python Docs, Fluent Python &mdash; Luciano Ramalho</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python Docs, Fluent Python &mdash; Luciano Ramalho, Learning Python &mdash; Mark Lutz</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Lambda Functions</a></li>
-<li><a href="#s2">map()</a></li>
-<li><a href="#s3">filter()</a></li>
-<li><a href="#s4">reduce()</a></li>
-<li><a href="#s5">sorted() with key</a></li>
+<li><a href="#s1">Lambda Functions (Anonymous Functions)</a></li>
+<li><a href="#s2">map(): Transformation</a></li>
+<li><a href="#s3">filter(): Selection</a></li>
+<li><a href="#s4">reduce(): Aggregation</a></li>
+<li><a href="#s5">Custom Sorting with Lambda</a></li>
 </ol></div>
 
 <section class="content-section" id="s1"><h2>1 &middot; Lambda Functions</h2>
+<p>In computer science, a <strong>lambda abstraction</strong> is the definition of an anonymous function. In Python, the <code>lambda</code> keyword creates a function object that can be used anywhere a function is expected, but without a formal name (unless assigned to a variable).</p>
+
+<div class="callout note">
+    <div class="callout-icon">📖</div>
+    <div class="callout-content">
+        <strong>Textbook Definition</strong>
+        <p>"A lambda is an expression that creates a function object, but it is limited to a single expression. It is often called an 'anonymous function' because it doesn't require a <code>def</code> statement or a name." &mdash; <em>Learning Python, Mark Lutz</em></p>
+    </div>
+</div>
+
 <div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Regular function vs lambda</span>
-<span class="kw">def</span> <span class="bi">square</span>(x):
-    <span class="kw">return</span> x ** <span class="nm">2</span>
+<pre class="code-block"><span class="cm"># Anonymous function to square a number</span>
+square = <span class="kw">lambda</span> x: x ** <span class="nm">2</span>
+<span class="bi">print</span>(square(<span class="nm">5</span>))  <span class="cm"># Output: 25</span>
 
-square_lambda = <span class="kw">lambda</span> x: x ** <span class="nm">2</span>
+<span class="cm"># Immediately Invoked Function Expression (IIFE)</span>
+<span class="bi">print</span>((<span class="kw">lambda</span> x, y: x + y)(<span class="nm">10</span>, <span class="nm">20</span>))  <span class="cm"># Output: 30</span></pre>
+</div>
 
-<span class="bi">print</span>(square(<span class="nm">5</span>))          <span class="cm"># 25</span>
-<span class="bi">print</span>(square_lambda(<span class="nm">5</span>))   <span class="cm"># 25</span>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value</div>
+    <p>A <code>lambda</code> expression returns a <strong>function object</strong> at runtime. This object behaves exactly like a function defined with <code>def</code>, but it is restricted to a single expression whose result is the function's return value.</p>
+</div>
+</section>
 
-<span class="cm"># Multiple arguments</span>
-add = <span class="kw">lambda</span> a, b: a + b
-<span class="bi">print</span>(add(<span class="nm">3</span>, <span class="nm">7</span>))  <span class="cm"># 10</span>
+<section class="content-section" id="s2"><h2>2 &middot; map(): Functional Transformation</h2>
+<p>The <code>map(function, iterable)</code> function applies a given function to every item of an iterable (list, tuple, etc.) and returns a map object.</p>
 
-<span class="cm"># With default arguments</span>
-power = <span class="kw">lambda</span> x, n=<span class="nm">2</span>: x ** n
-<span class="bi">print</span>(power(<span class="nm">3</span>))     <span class="cm"># 9 (default n=2)</span>
-<span class="bi">print</span>(power(<span class="nm">3</span>, <span class="nm">3</span>))  <span class="cm"># 27</span>
+<div class="callout tip">
+    <div class="callout-icon">💡</div>
+    <div class="callout-content">
+        <strong>FastAPI Style Tip</strong>
+        <p>In modern Python, list comprehensions are often preferred over <code>map()</code> for readability, but <code>map()</code> is highly efficient when using built-in functions.</p>
+    </div>
+</div>
 
-<span class="cm"># Conditional expression</span>
-classify = <span class="kw">lambda</span> x: <span class="st">"positive"</span> <span class="kw">if</span> x > <span class="nm">0</span> <span class="kw">else</span> (<span class="st">"zero"</span> <span class="kw">if</span> x == <span class="nm">0</span> <span class="kw">else</span> <span class="st">"negative"</span>)
-<span class="bi">print</span>(classify(-<span class="nm">5</span>))  <span class="cm"># negative</span>
-<span class="bi">print</span>(classify(<span class="nm">0</span>))   <span class="cm"># zero</span>
-
-<span class="cm"># Immediately invoked (IIFE)</span>
-result = (<span class="kw">lambda</span> x, y: x * y)(<span class="nm">4</span>, <span class="nm">5</span>)
-<span class="bi">print</span>(result)  <span class="cm"># 20</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>25 &middot; 10 &middot; 9 &middot; 27 &middot; negative &middot; zero &middot; 20</div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; map()</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; Apply function to every element</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block">nums = [<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>, <span class="nm">4</span>, <span class="nm">5</span>]
-
-<span class="cm"># Square each number</span>
-squared = <span class="bi">list</span>(<span class="bi">map</span>(<span class="kw">lambda</span> x: x**<span class="nm">2</span>, nums))
-<span class="bi">print</span>(squared)  <span class="cm"># [1, 4, 9, 16, 25]</span>
-
-<span class="cm"># Convert temperatures</span>
-celsius = [<span class="nm">0</span>, <span class="nm">20</span>, <span class="nm">37</span>, <span class="nm">100</span>]
-fahrenheit = <span class="bi">list</span>(<span class="bi">map</span>(<span class="kw">lambda</span> c: c * <span class="nm">9</span>/<span class="nm">5</span> + <span class="nm">32</span>, celsius))
-<span class="bi">print</span>(fahrenheit)  <span class="cm"># [32.0, 68.0, 98.6, 212.0]</span>
-
-<span class="cm"># Multiple iterables</span>
-a = [<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>]
-b = [<span class="nm">10</span>, <span class="nm">20</span>, <span class="nm">30</span>]
-sums = <span class="bi">list</span>(<span class="bi">map</span>(<span class="kw">lambda</span> x, y: x + y, a, b))
-<span class="bi">print</span>(sums)  <span class="cm"># [11, 22, 33]</span>
-
-<span class="cm"># String operations</span>
-names = [<span class="st">"alice"</span>, <span class="st">"BOB"</span>, <span class="st">"Charlie"</span>]
-title_names = <span class="bi">list</span>(<span class="bi">map</span>(<span class="bi">str</span>.title, names))
-<span class="bi">print</span>(title_names)  <span class="cm"># ['Alice', 'Bob', 'Charlie']</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[1, 4, 9, 16, 25]<br>[32.0, 68.0, 98.6, 212.0]<br>[11, 22, 33]<br>['Alice', 'Bob', 'Charlie']</div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; filter()</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; Keep elements that pass a test</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block">nums = [<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>, <span class="nm">4</span>, <span class="nm">5</span>, <span class="nm">6</span>, <span class="nm">7</span>, <span class="nm">8</span>, <span class="nm">9</span>, <span class="nm">10</span>]
-
-<span class="cm"># Even numbers only</span>
-evens = <span class="bi">list</span>(<span class="bi">filter</span>(<span class="kw">lambda</span> x: x % <span class="nm">2</span> == <span class="nm">0</span>, nums))
-<span class="bi">print</span>(evens)  <span class="cm"># [2, 4, 6, 8, 10]</span>
-
-<span class="cm"># Filter strings by length</span>
-words = [<span class="st">"hi"</span>, <span class="st">"hello"</span>, <span class="st">"hey"</span>, <span class="st">"greetings"</span>, <span class="st">"yo"</span>]
-long_words = <span class="bi">list</span>(<span class="bi">filter</span>(<span class="kw">lambda</span> w: <span class="bi">len</span>(w) > <span class="nm">3</span>, words))
-<span class="bi">print</span>(long_words)  <span class="cm"># ['hello', 'greetings']</span>
-
-<span class="cm"># Remove None/empty values</span>
-data = [<span class="nm">0</span>, <span class="st">""</span>, <span class="kw">None</span>, <span class="nm">42</span>, <span class="st">"hello"</span>, [], <span class="kw">False</span>]
-truthy = <span class="bi">list</span>(<span class="bi">filter</span>(<span class="kw">None</span>, data))
-<span class="bi">print</span>(truthy)  <span class="cm"># [42, 'hello']</span>
-
-<span class="cm"># Chain map + filter</span>
-result = <span class="bi">list</span>(<span class="bi">map</span>(<span class="kw">lambda</span> x: x**<span class="nm">2</span>,
-              <span class="bi">filter</span>(<span class="kw">lambda</span> x: x % <span class="nm">2</span> == <span class="nm">0</span>, nums)))
-<span class="bi">print</span>(result)  <span class="cm"># [4, 16, 36, 64, 100]</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[2, 4, 6, 8, 10]<br>['hello', 'greetings']<br>[42, 'hello']<br>[4, 16, 36, 64, 100]</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; reduce()</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; Accumulate into single value</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> functools <span class="kw">import</span> reduce
-
-nums = [<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>, <span class="nm">4</span>, <span class="nm">5</span>]
-
-<span class="cm"># Sum (1+2+3+4+5 = 15)</span>
-total = reduce(<span class="kw">lambda</span> a, b: a + b, nums)
-<span class="bi">print</span>(total)  <span class="cm"># 15</span>
-
-<span class="cm"># Product (1*2*3*4*5 = 120)</span>
-product = reduce(<span class="kw">lambda</span> a, b: a * b, nums)
-<span class="bi">print</span>(product)  <span class="cm"># 120</span>
-
-<span class="cm"># Max</span>
-maximum = reduce(<span class="kw">lambda</span> a, b: a <span class="kw">if</span> a > b <span class="kw">else</span> b, nums)
-<span class="bi">print</span>(maximum)  <span class="cm"># 5</span>
-
-<span class="cm"># With initial value</span>
-total_with_init = reduce(<span class="kw">lambda</span> a, b: a + b, nums, <span class="nm">100</span>)
-<span class="bi">print</span>(total_with_init)  <span class="cm"># 115 (100 + 15)</span>
-
-<span class="cm"># Flatten nested list</span>
-nested = [[<span class="nm">1</span>,<span class="nm">2</span>], [<span class="nm">3</span>,<span class="nm">4</span>], [<span class="nm">5</span>,<span class="nm">6</span>]]
-flat = reduce(<span class="kw">lambda</span> a, b: a + b, nested)
-<span class="bi">print</span>(flat)  <span class="cm"># [1, 2, 3, 4, 5, 6]</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>15 &middot; 120 &middot; 5 &middot; 115 &middot; [1, 2, 3, 4, 5, 6]</div></div></section>
-
-<section class="content-section" id="s5"><h2>5 &middot; sorted() with key</h2>
 <div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Sort by custom key using lambda</span>
-students = [(<span class="st">"Alice"</span>, <span class="nm">85</span>), (<span class="st">"Bob"</span>, <span class="nm">92</span>), (<span class="st">"Charlie"</span>, <span class="nm">78</span>)]
+<pre class="code-block">names = [<span class="st">"alice"</span>, <span class="st">"bob"</span>, <span class="st">"charlie"</span>]
+upper_names = <span class="bi">map</span>(<span class="bi">str</span>.upper, names)
+<span class="bi">print</span>(<span class="bi">list</span>(upper_names))  <span class="cm"># ['ALICE', 'BOB', 'CHARLIE']</span></pre>
+</div>
 
-<span class="cm"># By score</span>
-by_score = <span class="bi">sorted</span>(students, key=<span class="kw">lambda</span> s: s[<span class="nm">1</span>], reverse=<span class="kw">True</span>)
-<span class="bi">print</span>(by_score)  <span class="cm"># [('Bob', 92), ('Alice', 85), ('Charlie', 78)]</span>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value</div>
+    <p>In Python 3.x, <code>map()</code> returns an <strong>iterator</strong> (specifically a <code>map object</code>). It is <em>lazy</em>, meaning it doesn't compute the values until you iterate over it (e.g., using <code>list()</code> or a <code>for</code> loop).</p>
+</div>
+</section>
 
-<span class="cm"># Sort strings by length</span>
-words = [<span class="st">"python"</span>, <span class="st">"is"</span>, <span class="st">"awesome"</span>, <span class="st">"and"</span>, <span class="st">"fun"</span>]
-<span class="bi">print</span>(<span class="bi">sorted</span>(words, key=<span class="bi">len</span>))
-<span class="cm"># ['is', 'and', 'fun', 'python', 'awesome']</span>
+<section class="content-section" id="s3"><h2>3 &middot; filter(): Boolean Selection</h2>
+<p><code>filter(function, iterable)</code> constructs an iterator from those elements of an iterable for which the function returns true.</p>
 
-<span class="cm"># Sort dicts</span>
-people = [{<span class="st">"name"</span>:<span class="st">"Alice"</span>,<span class="st">"age"</span>:<span class="nm">30</span>}, {<span class="st">"name"</span>:<span class="st">"Bob"</span>,<span class="st">"age"</span>:<span class="nm">25</span>}]
-<span class="bi">print</span>(<span class="bi">sorted</span>(people, key=<span class="kw">lambda</span> p: p[<span class="st">"age"</span>]))</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[('Bob', 92), ('Alice', 85), ('Charlie', 78)]<br>['is', 'and', 'fun', 'python', 'awesome']</div></div></section>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block">numbers = [<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>, <span class="nm">4</span>, <span class="nm">5</span>, <span class="nm">6</span>]
+evens = <span class="bi">filter</span>(<span class="kw">lambda</span> x: x % <span class="nm">2</span> == <span class="nm">0</span>, numbers)
+<span class="bi">print</span>(<span class="bi">list</span>(evens))  <span class="cm"># [2, 4, 6]</span></pre>
+</div>
+
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value</div>
+    <p>Similar to <code>map()</code>, <code>filter()</code> returns a <strong>filter object</strong> (an iterator). Elements are processed only when requested, saving memory for large datasets.</p>
+</div>
+</section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="../python/functions.html" class="sa-link">Standard Functions</a><a href="../advanced/generators.html" class="sa-link">Generators</a><a href="../advanced/comprehensions.html" class="sa-link">List Comprehensions</a></div></section>
 </div>
 <div class="page-nav">
-<a href="../oop/decorators.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Decorators</span></a>
-<a href="comprehensions.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Comprehensions</span></a>
+<a href="../python/functions.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Functions</span></a>
+<a href="../advanced/comprehensions.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Comprehensions</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

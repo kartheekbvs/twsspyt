@@ -98,7 +98,7 @@
 <div class="nav-section-items">
 <a href="../resources/python-programs.html" class="nav-item">140+ Python Programs</a>
 </div></div></div></div></div>
-    </nav>
+</nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
 <div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; Pandas &rarr; Data Cleaning</div>
@@ -108,170 +108,34 @@
 <div class="page-header">
 <span class="topic-badge">&#x1F43C; Pandas</span>
 <h1>Data Cleaning</h1>
-<p class="page-intro">Data cleaning is the most time-consuming part of data analysis (~80%). Pandas provides comprehensive tools for handling missing values (NaN), duplicates, type conversions, string cleaning, outlier detection, and data validation. Master these to prepare real-world data for analysis and machine learning.</p>
+<p class="page-intro">Data cleaning is essential for quality analysis. This section provides textbook definitions for handling missing data and return value analysis for inplace operations.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis &mdash; Wes McKinney</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Handling Missing Values</a></li>
-<li><a href="#s2">Filling Missing Values</a></li>
+<li><a href="#s1">Missing Data</a></li>
+<li><a href="#s2">Return Values &amp; Inplace</a></li>
 <li><a href="#s3">Duplicates</a></li>
-<li><a href="#s4">Type Conversion</a></li>
-<li><a href="#s5">String Cleaning</a></li>
-<li><a href="#s6">Renaming &amp; Replacing</a></li>
 </ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Handling Missing Values (NaN)</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">import</span> pandas <span class="kw">as</span> pd
-<span class="kw">import</span> numpy <span class="kw">as</span> np
+<section class="content-section" id="s1"><h2>1 &middot; Missing Data</h2>
+<div class="callout note">
+    <div class="callout-icon">📖</div>
+    <div class="callout-content">
+        <strong>Textbook Definition</strong>
+        <p>"Missing data is common in most data analysis applications. pandas uses the floating-point value <code>NaN</code> to represent missing data." &mdash; <em>Wes McKinney</em></p>
+    </div>
+</div>
+</section>
 
-df = pd.DataFrame({
-    <span class="st">"A"</span>: [<span class="nm">1</span>, <span class="nm">2</span>, np.nan, <span class="nm">4</span>, <span class="nm">5</span>],
-    <span class="st">"B"</span>: [np.nan, <span class="nm">2</span>, <span class="nm">3</span>, np.nan, <span class="nm">5</span>],
-    <span class="st">"C"</span>: [<span class="st">"x"</span>, <span class="kw">None</span>, <span class="st">"z"</span>, <span class="st">"w"</span>, np.nan]
-})
-<span class="bi">print</span>(df)
-
-<span class="cm"># Detect missing values</span>
-<span class="bi">print</span>(df.isnull())           <span class="cm"># True where NaN</span>
-<span class="bi">print</span>(df.isna())             <span class="cm"># same as isnull()</span>
-<span class="bi">print</span>(df.notna())            <span class="cm"># opposite</span>
-<span class="bi">print</span>(df.isnull().sum())      <span class="cm"># count NaNs per column</span>
-<span class="bi">print</span>(df.isnull().sum().sum()) <span class="cm"># total NaNs</span>
-<span class="bi">print</span>(df.isnull().mean())    <span class="cm"># fraction missing per col</span>
-
-<span class="cm"># Drop rows with ANY NaN</span>
-<span class="bi">print</span>(df.dropna())           <span class="cm"># only row 1 &amp; 4 remain</span>
-
-<span class="cm"># Drop rows where ALL values are NaN</span>
-<span class="bi">print</span>(df.dropna(how=<span class="st">"all"</span>))
-
-<span class="cm"># Drop columns with any NaN</span>
-<span class="bi">print</span>(df.dropna(axis=<span class="nm">1</span>))
-
-<span class="cm"># Require minimum non-NaN values</span>
-<span class="bi">print</span>(df.dropna(thresh=<span class="nm">2</span>))   <span class="cm"># keep rows with &ge;2 non-NaN</span>
-
-<span class="cm"># Drop based on specific columns</span>
-<span class="bi">print</span>(df.dropna(subset=[<span class="st">"A"</span>, <span class="st">"C"</span>]))</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>     A    B     C<br>0  1.0  NaN     x<br>1  2.0  2.0  None<br>2  NaN  3.0     z<br>3  4.0  NaN     w<br>4  5.0  5.0   NaN<br>NaN counts: A=1, B=2, C=2</div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; Filling Missing Values</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Fill with constant</span>
-<span class="bi">print</span>(df.fillna(<span class="nm">0</span>))              <span class="cm"># all NaN &rarr; 0</span>
-<span class="bi">print</span>(df.fillna(<span class="st">"MISSING"</span>))     <span class="cm"># all NaN &rarr; "MISSING"</span>
-
-<span class="cm"># Fill with column-specific values</span>
-<span class="bi">print</span>(df.fillna({<span class="st">"A"</span>: <span class="nm">0</span>, <span class="st">"B"</span>: df[<span class="st">"B"</span>].mean(), <span class="st">"C"</span>: <span class="st">"unknown"</span>}))
-
-<span class="cm"># Forward fill (use previous value)</span>
-<span class="bi">print</span>(df.fillna(method=<span class="st">"ffill"</span>))   <span class="cm"># or df.ffill()</span>
-
-<span class="cm"># Backward fill (use next value)</span>
-<span class="bi">print</span>(df.fillna(method=<span class="st">"bfill"</span>))   <span class="cm"># or df.bfill()</span>
-
-<span class="cm"># Limit fills</span>
-<span class="bi">print</span>(df.fillna(method=<span class="st">"ffill"</span>, limit=<span class="nm">1</span>))  <span class="cm"># max 1 consecutive fill</span>
-
-<span class="cm"># Interpolate (linear by default)</span>
-<span class="bi">print</span>(df[<span class="st">"A"</span>].interpolate())     <span class="cm"># [1, 2, 3, 4, 5]</span>
-<span class="bi">print</span>(df[<span class="st">"A"</span>].interpolate(method=<span class="st">"polynomial"</span>, order=<span class="nm">2</span>))
-
-<span class="cm"># Replace specific values with NaN</span>
-df2 = df.replace(<span class="nm">0</span>, np.nan)
-df2 = df.replace([<span class="nm">999</span>, -<span class="nm">1</span>, <span class="st">"?"</span>], np.nan)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>fillna(0): A=[1,2,0,4,5] B=[0,2,3,0,5]<br>ffill A: [1,2,2,4,5] &middot; interpolate A: [1,2,3,4,5]</div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; Duplicates</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block">df = pd.DataFrame({
-    <span class="st">"name"</span>: [<span class="st">"Alice"</span>,<span class="st">"Bob"</span>,<span class="st">"Alice"</span>,<span class="st">"Charlie"</span>,<span class="st">"Bob"</span>],
-    <span class="st">"age"</span>: [<span class="nm">25</span>, <span class="nm">30</span>, <span class="nm">25</span>, <span class="nm">35</span>, <span class="nm">30</span>]
-})
-
-<span class="cm"># Detect duplicates</span>
-<span class="bi">print</span>(df.duplicated())           <span class="cm"># [F, F, T, F, T]</span>
-<span class="bi">print</span>(df.duplicated().sum())     <span class="cm"># 2 duplicates</span>
-
-<span class="cm"># Check specific columns</span>
-<span class="bi">print</span>(df.duplicated(subset=[<span class="st">"name"</span>]))
-
-<span class="cm"># keep='first' (default), 'last', or False (mark ALL)</span>
-<span class="bi">print</span>(df.duplicated(keep=<span class="kw">False</span>))  <span class="cm"># True for all duplicated rows</span>
-
-<span class="cm"># Remove duplicates</span>
-<span class="bi">print</span>(df.drop_duplicates())
-<span class="bi">print</span>(df.drop_duplicates(subset=[<span class="st">"name"</span>], keep=<span class="st">"last"</span>))</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>duplicated: [False False True False True]<br>After drop: Alice(25), Bob(30), Charlie(35)</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; Type Conversion</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block">df = pd.DataFrame({
-    <span class="st">"price"</span>: [<span class="st">"10.5"</span>, <span class="st">"20.3"</span>, <span class="st">"30.1"</span>],
-    <span class="st">"qty"</span>: [<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>],
-    <span class="st">"date"</span>: [<span class="st">"2024-01-01"</span>, <span class="st">"2024-02-01"</span>, <span class="st">"2024-03-01"</span>]
-})
-<span class="bi">print</span>(df.dtypes)  <span class="cm"># all object (string)</span>
-
-<span class="cm"># .astype() &mdash; convert types</span>
-df[<span class="st">"price"</span>] = df[<span class="st">"price"</span>].astype(<span class="bi">float</span>)
-df[<span class="st">"qty"</span>] = df[<span class="st">"qty"</span>].astype(<span class="bi">int</span>)
-<span class="bi">print</span>(df.dtypes)
-
-<span class="cm"># pd.to_numeric() &mdash; with error handling</span>
-s = pd.Series([<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"bad"</span>, <span class="st">"4"</span>])
-<span class="bi">print</span>(pd.to_numeric(s, errors=<span class="st">"coerce"</span>))  <span class="cm"># "bad" &rarr; NaN</span>
-
-<span class="cm"># pd.to_datetime()</span>
-df[<span class="st">"date"</span>] = pd.to_datetime(df[<span class="st">"date"</span>])
-<span class="bi">print</span>(df.dtypes)
-
-<span class="cm"># Category type (saves memory)</span>
-df[<span class="st">"grade"</span>] = pd.Categorical([<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"A"</span>], ordered=<span class="kw">True</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>price: float64, qty: int64<br>to_numeric: [1, 2, NaN, 4]<br>date: datetime64[ns]</div></div></section>
-
-<section class="content-section" id="s5"><h2>5 &middot; String Cleaning (.str accessor)</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block">s = pd.Series([<span class="st">"  Alice  "</span>, <span class="st">"BOB"</span>, <span class="st">"charlie"</span>, <span class="st">"  Diana K."</span>])
-
-<span class="bi">print</span>(s.str.strip())       <span class="cm"># remove whitespace</span>
-<span class="bi">print</span>(s.str.lower())       <span class="cm"># lowercase</span>
-<span class="bi">print</span>(s.str.upper())       <span class="cm"># UPPERCASE</span>
-<span class="bi">print</span>(s.str.title())       <span class="cm"># Title Case</span>
-<span class="bi">print</span>(s.str.replace(<span class="st">"."</span>, <span class="st">""</span>, regex=<span class="kw">False</span>))  <span class="cm"># remove dots</span>
-
-<span class="bi">print</span>(s.str.len())         <span class="cm"># string lengths</span>
-<span class="bi">print</span>(s.str.contains(<span class="st">"a"</span>, case=<span class="kw">False</span>))  <span class="cm"># boolean</span>
-<span class="bi">print</span>(s.str.startswith(<span class="st">"A"</span>))
-<span class="bi">print</span>(s.str.split())       <span class="cm"># split by whitespace</span>
-
-<span class="cm"># Extract with regex</span>
-emails = pd.Series([<span class="st">"user@gmail.com"</span>, <span class="st">"admin@yahoo.com"</span>])
-<span class="bi">print</span>(emails.str.extract(<span class="st">r"@(\w+)\."</span>))  <span class="cm"># domain</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>strip: ['Alice', 'BOB', 'charlie', 'Diana K.']<br>lower: ['alice', 'bob', 'charlie', 'diana k.']</div></div></section>
-
-<section class="content-section" id="s6"><h2>6 &middot; Renaming &amp; Replacing</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block">df = pd.DataFrame({<span class="st">"old_name"</span>:[<span class="nm">1</span>,<span class="nm">2</span>], <span class="st">"old_val"</span>:[<span class="nm">3</span>,<span class="nm">4</span>]})
-
-<span class="cm"># Rename columns</span>
-df = df.rename(columns={<span class="st">"old_name"</span>:<span class="st">"name"</span>, <span class="st">"old_val"</span>:<span class="st">"value"</span>})
-
-<span class="cm"># Rename with function</span>
-df.columns = df.columns.str.upper()   <span class="cm"># all uppercase</span>
-df = df.rename(columns=<span class="bi">str</span>.lower)     <span class="cm"># all lowercase</span>
-
-<span class="cm"># Replace values</span>
-df = pd.DataFrame({<span class="st">"grade"</span>: [<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>,<span class="st">"F"</span>]})
-df[<span class="st">"grade"</span>] = df[<span class="st">"grade"</span>].replace({<span class="st">"A"</span>:<span class="st">"Excellent"</span>, <span class="st">"B"</span>:<span class="st">"Good"</span>, <span class="st">"C"</span>:<span class="st">"Average"</span>, <span class="st">"F"</span>:<span class="st">"Fail"</span>})
-<span class="bi">print</span>(df)
-
-<span class="cm"># Map (same as replace for Series)</span>
-df[<span class="st">"numeric"</span>] = df[<span class="st">"grade"</span>].map({<span class="st">"Excellent"</span>:<span class="nm">4</span>, <span class="st">"Good"</span>:<span class="nm">3</span>, <span class="st">"Average"</span>:<span class="nm">2</span>, <span class="st">"Fail"</span>:<span class="nm">0</span>})</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>      grade  numeric<br>0  Excellent        4<br>1      Good        3<br>2   Average        2<br>3      Fail        0</div></div></section>
+<section class="content-section" id="s2"><h2>2 &middot; Return Values &amp; Inplace</h2>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value: dropna/fillna</div>
+    <p>By default, functions like <code>dropna()</code> and <code>fillna()</code> return a <strong>new DataFrame</strong>. If <code>inplace=True</code> is used, they return <strong>None</strong> and modify the original object.</p>
+</div>
+</section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="selection.html" class="sa-link">Filtering</a><a href="../numpy/indexing.html" class="sa-link">NumPy Indexing</a></div></section>
 </div>
 <div class="page-nav">
 <a href="selection.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Selection</span></a>

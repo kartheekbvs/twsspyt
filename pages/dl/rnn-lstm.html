@@ -98,7 +98,7 @@
 <div class="nav-section-items">
 <a href="../resources/python-programs.html" class="nav-item">140+ Python Programs</a>
 </div></div></div></div></div>
-    </nav>
+</nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
 <div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; DL &rarr; RNN &amp; LSTM</div>
@@ -108,146 +108,33 @@
 <div class="page-header">
 <span class="topic-badge">&#x1F9E0; Deep Learning</span>
 <h1>RNN, LSTM &amp; GRU</h1>
-<p class="page-intro">Recurrent Neural Networks process sequential data (text, time series). Covers vanilla RNNs, vanishing gradients, LSTM cells, GRU cells, bidirectional RNNs, text generation, and sequence-to-sequence models with Keras implementations.</p>
+<p class="page-intro">Processing sequential data requires memory. This section explores RNNs and LSTMs with textbook insights into sequence processing.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge advanced">&#x25CF; Advanced</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Deep Learning with Python &mdash; Fran&ccedil;ois Chollet</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Sequences &amp; Vanilla RNN</a></li>
-<li><a href="#s2">Vanishing Gradient Problem</a></li>
-<li><a href="#s3">LSTM (Long Short-Term Memory)</a></li>
-<li><a href="#s4">GRU (Gated Recurrent Unit)</a></li>
-<li><a href="#s5">Bidirectional &amp; Stacked RNNs</a></li>
-<li><a href="#s6">Text Classification Example</a></li>
+<li><a href="#s1">Recurrent Neural Networks</a></li>
+<li><a href="#s2">LSTM &amp; Memory</a></li>
 </ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Sequences &amp; Vanilla RNN</h2>
-<div class="callout note"><div class="callout-icon">&#x1F4D0;</div><div class="callout-content"><strong>RNN: Memory for Sequences</strong>
-<pre style="font-size:.85rem;line-height:1.6;">
-x(t=0)   x(t=1)   x(t=2)   &hellip;   x(t=n)
-  &darr;        &darr;        &darr;              &darr;
-[RNN] &rarr; [RNN] &rarr; [RNN] &rarr; &hellip; &rarr; [RNN] &rarr; output
-  h0       h1       h2              hn
+<section class="content-section" id="s1"><h2>1 &middot; Recurrent Neural Networks (RNN)</h2>
+<div class="callout note">
+    <div class="callout-icon">📖</div>
+    <div class="callout-content">
+        <strong>Textbook Definition</strong>
+        <p>"A recurrent neural network (RNN) processes sequences by iterating through the sequence elements and maintaining a <em>state</em> containing information relative to what it has seen so far." &mdash; <em>Fran&ccedil;ois Chollet</em></p>
+    </div>
+</div>
+</section>
 
-h(t) = tanh(W_h &middot; h(t-1) + W_x &middot; x(t) + b)
-Each step has access to previous hidden state!</pre></div></div>
-
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; Manual RNN Cell</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">import</span> numpy <span class="kw">as</span> np
-
-<span class="cm"># Simple RNN from scratch</span>
-np.random.seed(<span class="nm">42</span>)
-hidden_size = <span class="nm">4</span>
-input_size = <span class="nm">3</span>
-
-W_h = np.random.randn(hidden_size, hidden_size) * <span class="nm">0.1</span>
-W_x = np.random.randn(hidden_size, input_size) * <span class="nm">0.1</span>
-b = np.zeros(hidden_size)
-
-<span class="cm"># Process a sequence of 5 time steps</span>
-sequence = np.random.randn(<span class="nm">5</span>, input_size)
-h = np.zeros(hidden_size)  <span class="cm"># initial hidden state</span>
-
-<span class="kw">for</span> t, x_t <span class="kw">in</span> <span class="bi">enumerate</span>(sequence):
-    h = np.tanh(W_h @ h + W_x @ x_t + b)
-    <span class="bi">print</span>(<span class="st">f"t={t}: h = {h.round(3)}"</span>)
-
-<span class="bi">print</span>(<span class="st">f"\nFinal hidden state: {h.round(3)}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>t=0: h = [ 0.012 -0.078  0.045  0.023]<br>t=1: h = [-0.034  0.056  0.012  0.089]<br>...<br>Final hidden state encodes the entire sequence!</div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; Vanishing Gradient Problem</h2>
-<table class="data-table"><thead><tr><th>Problem</th><th>Cause</th><th>Solution</th></tr></thead><tbody>
-<tr><td>Vanishing Gradient</td><td>Gradients shrink exponentially through time</td><td>LSTM, GRU, gradient clipping</td></tr>
-<tr><td>Exploding Gradient</td><td>Gradients grow exponentially</td><td>Gradient clipping, smaller learning rate</td></tr>
-<tr><td>Short-term Memory</td><td>RNN forgets early inputs</td><td>LSTM&#39;s cell state preserves long-term info</td></tr>
-</tbody></table></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; LSTM (Long Short-Term Memory)</h2>
-<div class="callout note"><div class="callout-icon">&#x1F4D0;</div><div class="callout-content"><strong>LSTM has 3 Gates + Cell State</strong>
-<ul><li><strong>Forget Gate</strong>: What to forget from cell state</li>
-<li><strong>Input Gate</strong>: What new info to store</li>
-<li><strong>Output Gate</strong>: What to output from cell state</li>
-<li><strong>Cell State</strong>: Long-term memory highway (&ldquo;conveyor belt&rdquo;)</li></ul></div></div>
-
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; LSTM in Keras</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> tensorflow.keras <span class="kw">import</span> layers, models
-
-<span class="cm"># LSTM for sequence classification</span>
-model = models.Sequential([
-    layers.LSTM(<span class="nm">64</span>, input_shape=(<span class="nm">100</span>, <span class="nm">1</span>),   <span class="cm"># 100 time steps, 1 feature</span>
-                return_sequences=<span class="kw">False</span>),       <span class="cm"># only final output</span>
-    layers.Dense(<span class="nm">32</span>, activation=<span class="st">"relu"</span>),
-    layers.Dense(<span class="nm">1</span>, activation=<span class="st">"sigmoid"</span>)
-])
-model.compile(optimizer=<span class="st">"adam"</span>, loss=<span class="st">"binary_crossentropy"</span>)
-model.summary()</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>lstm (LSTM)    (None, 64)    16896 params<br>dense          (None, 32)    2080<br>dense_1        (None, 1)     33</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; GRU (Gated Recurrent Unit)</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># GRU: simpler than LSTM, 2 gates (reset + update), no cell state</span>
-model = models.Sequential([
-    layers.GRU(<span class="nm">64</span>, input_shape=(<span class="nm">100</span>, <span class="nm">1</span>)),
-    layers.Dense(<span class="nm">1</span>, activation=<span class="st">"sigmoid"</span>)
-])
-<span class="cm"># GRU has ~25% fewer params than LSTM</span>
-<span class="cm"># Performance is often comparable</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>GRU: 12,864 params vs LSTM: 16,896 (25% fewer)</div></div>
-<table class="data-table"><thead><tr><th>Feature</th><th>LSTM</th><th>GRU</th></tr></thead><tbody>
-<tr><td>Gates</td><td>3 (forget, input, output)</td><td>2 (reset, update)</td></tr>
-<tr><td>Memory</td><td>Cell state + hidden state</td><td>Hidden state only</td></tr>
-<tr><td>Parameters</td><td>More</td><td>~25% fewer</td></tr>
-<tr><td>Performance</td><td>Better on long sequences</td><td>Similar, faster training</td></tr>
-</tbody></table></section>
-
-<section class="content-section" id="s5"><h2>5 &middot; Bidirectional &amp; Stacked RNNs</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Bidirectional: reads sequence forward AND backward</span>
-model = models.Sequential([
-    layers.Bidirectional(
-        layers.LSTM(<span class="nm">64</span>, return_sequences=<span class="kw">True</span>),
-        input_shape=(<span class="nm">100</span>, <span class="nm">1</span>)
-    ),
-    layers.Bidirectional(layers.LSTM(<span class="nm">32</span>)),  <span class="cm"># stacked</span>
-    layers.Dense(<span class="nm">1</span>, activation=<span class="st">"sigmoid"</span>)
-])
-<span class="cm"># Bidirectional doubles the output units (64*2=128 per step)</span>
-
-<span class="cm"># Stacked LSTM: use return_sequences=True for all but last</span>
-model = models.Sequential([
-    layers.LSTM(<span class="nm">64</span>, return_sequences=<span class="kw">True</span>, input_shape=(<span class="nm">100</span>,<span class="nm">1</span>)),
-    layers.LSTM(<span class="nm">32</span>, return_sequences=<span class="kw">False</span>),
-    layers.Dense(<span class="nm">1</span>)
-])</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Bidirectional: forward h + backward h = richer representation</div></div></section>
-
-<section class="content-section" id="s6"><h2>6 &middot; Text Classification (IMDB Reviews)</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">import</span> tensorflow <span class="kw">as</span> tf
-<span class="kw">from</span> tensorflow.keras <span class="kw">import</span> layers, models
-
-<span class="cm"># Load IMDB dataset</span>
-vocab_size = <span class="nm">10000</span>
-max_len = <span class="nm">200</span>
-(X_train, y_train), (X_test, y_test) = tf.keras.datasets.imdb.load_data(
-    num_words=vocab_size)
-X_train = tf.keras.preprocessing.sequence.pad_sequences(X_train, maxlen=max_len)
-X_test = tf.keras.preprocessing.sequence.pad_sequences(X_test, maxlen=max_len)
-
-<span class="cm"># Build LSTM model</span>
-model = models.Sequential([
-    layers.Embedding(vocab_size, <span class="nm">128</span>, input_length=max_len),
-    layers.Bidirectional(layers.LSTM(<span class="nm">64</span>, dropout=<span class="nm">0.2</span>)),
-    layers.Dense(<span class="nm">32</span>, activation=<span class="st">"relu"</span>),
-    layers.Dropout(<span class="nm">0.5</span>),
-    layers.Dense(<span class="nm">1</span>, activation=<span class="st">"sigmoid"</span>)
-])
-
-model.compile(optimizer=<span class="st">"adam"</span>, loss=<span class="st">"binary_crossentropy"</span>, metrics=[<span class="st">"accuracy"</span>])
-history = model.fit(X_train, y_train, epochs=<span class="nm">5</span>, batch_size=<span class="nm">64</span>, validation_split=<span class="nm">0.2</span>)
-<span class="bi">print</span>(<span class="st">f"Test accuracy: {model.evaluate(X_test, y_test)[1]:.4f}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Epoch 5: accuracy: 0.9234 &middot; val_accuracy: 0.8756<br>Test accuracy: 0.8687</div></div></section>
+<section class="content-section" id="s2"><h2>2 &middot; Return Value: RNN Layers</h2>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value</div>
+    <p>By default, Keras RNN layers (LSTM/GRU) return only the <strong>last output</strong> in the sequence. If <code>return_sequences=True</code> is set, they return the <strong>entire sequence</strong> of outputs.</p>
+</div>
+</section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="cnn.html" class="sa-link">Spatial patterns</a><a href="../python/generators.html" class="sa-link">Iterators</a></div></section>
 </div>
 <div class="page-nav">
 <a href="backpropagation.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Backpropagation</span></a>

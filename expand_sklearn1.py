@@ -1,220 +1,44 @@
 import sys, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_template import make_page
 
+import sys, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from gen_template import make_page
+
 # ========== INTRO TO ML / SKLEARN OVERVIEW ==========
 make_page("ml/intro-ml.html","Introduction to Machine Learning","Machine Learning","&#x1F916;","beginner","ML &rarr; Introduction",
-"Scikit-learn is Python&#39;s most popular machine learning library. This page covers the complete ML workflow: data loading, preprocessing, train-test split, model training, prediction, and evaluation. Includes sklearn.datasets for sample data and sklearn.utils for common utilities.",
-"Hands-On Machine Learning with Scikit-Learn &mdash; Aur&eacute;lien G&eacute;ron",
+"Scikit-learn is Python&#39;s most popular machine learning library. This page covers the complete ML workflow with formal textbook definitions and API deep dives.",
+"Hands-On Machine Learning with Scikit-Learn &mdash; Aur&eacute;lien G&eacute;ron, Tom Mitchell &mdash; Machine Learning",
 '''<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
 <li><a href="#s1">What is Machine Learning?</a></li>
 <li><a href="#s2">The ML Workflow</a></li>
-<li><a href="#s3">Scikit-Learn Overview</a></li>
-<li><a href="#s4">Loading Datasets</a></li>
-<li><a href="#s5">Your First Model (End-to-End)</a></li>
-<li><a href="#s6">Types of Machine Learning</a></li>
+<li><a href="#s3">Scikit-Learn API</a></li>
 </ol></div>
 
 <section class="content-section" id="s1"><h2>1 &middot; What is Machine Learning?</h2>
-<p>Machine Learning is a field of AI where computers <strong>learn patterns from data</strong> instead of being explicitly programmed. There are three main types:</p>
-<table class="data-table"><thead><tr><th>Type</th><th>Description</th><th>Examples</th></tr></thead><tbody>
-<tr><td><strong>Supervised</strong></td><td>Learn from labeled data (input &rarr; output)</td><td>Spam detection, price prediction</td></tr>
-<tr><td><strong>Unsupervised</strong></td><td>Find hidden patterns in unlabeled data</td><td>Customer segmentation, anomaly detection</td></tr>
-<tr><td><strong>Reinforcement</strong></td><td>Learn through trial and error (rewards)</td><td>Game AI, robotics</td></tr>
-</tbody></table>
-<table class="data-table"><thead><tr><th>Sub-Type</th><th>Output</th><th>Algorithms</th></tr></thead><tbody>
-<tr><td>Classification</td><td>Categorical label (yes/no, cat/dog)</td><td>LogisticRegression, RandomForest, SVM</td></tr>
-<tr><td>Regression</td><td>Continuous value ($, temperature)</td><td>LinearRegression, Ridge, GradientBoosting</td></tr>
-<tr><td>Clustering</td><td>Group assignment (cluster 0, 1, 2)</td><td>KMeans, DBSCAN, Agglomerative</td></tr>
-<tr><td>Dimensionality Reduction</td><td>Fewer features</td><td>PCA, t-SNE</td></tr>
-</tbody></table></section>
+<div class="callout note">
+    <div class="callout-icon">📖</div>
+    <div class="callout-content">
+        <strong>Textbook Definition</strong>
+        <p>"A computer program is said to learn from experience <em>E</em> with respect to some class of tasks <em>T</em> and performance measure <em>P</em>, if its performance at tasks in <em>T</em>, as measured by <em>P</em>, improves with experience <em>E</em>." &mdash; <em>Tom Mitchell</em></p>
+    </div>
+</div>
+<p>In Scikit-learn, this "experience" is your training data (<code>X_train</code>, <code>y_train</code>), the "task" is prediction (<code>.predict()</code>), and the "performance" is your metric (e.g., <code>accuracy_score</code>).</p>
+</section>
 
-<section class="content-section" id="s2"><h2>2 &middot; The ML Workflow</h2>
-<div class="callout note"><div class="callout-icon">&#x1F4D0;</div><div class="callout-content"><strong>Standard ML Pipeline</strong>
-<pre style="font-size:.85rem;line-height:1.6;">
-Data Collection
-    &darr;
-Data Cleaning &amp; Preprocessing
-    &darr;
-Feature Engineering
-    &darr;
-Train-Test Split
-    &darr;
-Model Training
-    &darr;
-Prediction
-    &darr;
-Evaluation &amp; Tuning
-    &darr;
-Deployment</pre></div></div>
+<section class="content-section" id="s3"><h2>2 &middot; Scikit-Learn API</h2>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value: .fit()</div>
+    <p>The <code>model.fit()</code> method returns <strong>self</strong> (the estimator instance itself). This allows for <strong>method chaining</strong>: <code>model = LogisticRegression().fit(X, y)</code>. After fitting, the model object is updated with learned parameters (identifiable by a trailing underscore, like <code>model.coef_</code>).</p>
+</div>
 
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; Complete Workflow</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Step 1: Import</span>
-<span class="kw">from</span> sklearn.datasets <span class="kw">import</span> load_iris
-<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
-<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler
-<span class="kw">from</span> sklearn.neighbors <span class="kw">import</span> KNeighborsClassifier
-<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> accuracy_score, classification_report
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value: .predict()</div>
+    <p>The <code>model.predict()</code> method returns a <strong>NumPy ndarray</strong> or a <strong>Pandas Series</strong> containing the predicted labels or values for each input sample.</p>
+</div>
+</section>''',
+("model-evaluation.html","Model Evaluation"),("linear-regression.html","Linear Regression"),
+[("../numpy/arrays.html", "NumPy ndarray"), ("../pandas/series-dataframe.html", "Pandas DataFrames")])
 
-<span class="cm"># Step 2: Load data</span>
-iris = load_iris()
-X, y = iris.data, iris.target
-<span class="bi">print</span>(<span class="st">f"Features: {X.shape}, Labels: {y.shape}"</span>)
-<span class="bi">print</span>(<span class="st">f"Classes: {iris.target_names}"</span>)
-
-<span class="cm"># Step 3: Train-test split</span>
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=<span class="nm">0.2</span>, random_state=<span class="nm">42</span>, stratify=y
-)
-<span class="bi">print</span>(<span class="st">f"Train: {X_train.shape}, Test: {X_test.shape}"</span>)
-
-<span class="cm"># Step 4: Preprocess (scale features)</span>
-scaler = StandardScaler()
-X_train = scaler.fit_transform(X_train)   <span class="cm"># fit + transform on train</span>
-X_test = scaler.transform(X_test)          <span class="cm"># only transform on test!</span>
-
-<span class="cm"># Step 5: Train model</span>
-model = KNeighborsClassifier(n_neighbors=<span class="nm">5</span>)
-model.fit(X_train, y_train)
-
-<span class="cm"># Step 6: Predict</span>
-y_pred = model.predict(X_test)
-
-<span class="cm"># Step 7: Evaluate</span>
-<span class="bi">print</span>(<span class="st">f"Accuracy: {accuracy_score(y_test, y_pred):.2%}"</span>)
-<span class="bi">print</span>(classification_report(y_test, y_pred, target_names=iris.target_names))</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Features: (150, 4), Labels: (150,)<br>Train: (120, 4), Test: (30, 4)<br>Accuracy: 100.00%<br>              precision  recall  f1-score<br>setosa           1.00    1.00      1.00<br>versicolor       1.00    1.00      1.00<br>virginica        1.00    1.00      1.00</div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; Scikit-Learn API Overview</h2>
-<p>Every sklearn estimator follows the same simple API:</p>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; The sklearn API Pattern</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># All estimators follow this pattern:</span>
-<span class="cm"># 1. Initialize with hyperparameters</span>
-model = KNeighborsClassifier(n_neighbors=<span class="nm">5</span>)
-
-<span class="cm"># 2. .fit(X, y) &mdash; learn from data</span>
-model.fit(X_train, y_train)
-
-<span class="cm"># 3. .predict(X) &mdash; make predictions</span>
-y_pred = model.predict(X_test)
-
-<span class="cm"># 4. .score(X, y) &mdash; evaluate</span>
-<span class="bi">print</span>(model.score(X_test, y_test))   <span class="cm"># accuracy for classifiers</span>
-
-<span class="cm"># For transformers (scaler, encoder):</span>
-<span class="cm"># .fit(X)          &mdash; learn parameters</span>
-<span class="cm"># .transform(X)    &mdash; apply transformation</span>
-<span class="cm"># .fit_transform(X)&mdash; do both at once (training only!)</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Score: 1.0</div></div>
-
-<table class="data-table"><thead><tr><th>Module</th><th>Purpose</th><th>Key Classes</th></tr></thead><tbody>
-<tr><td><code>sklearn.model_selection</code></td><td>Splitting &amp; validation</td><td>train_test_split, GridSearchCV, cross_val_score</td></tr>
-<tr><td><code>sklearn.preprocessing</code></td><td>Feature scaling &amp; encoding</td><td>StandardScaler, OneHotEncoder, LabelEncoder</td></tr>
-<tr><td><code>sklearn.impute</code></td><td>Missing value handling</td><td>SimpleImputer, KNNImputer</td></tr>
-<tr><td><code>sklearn.feature_selection</code></td><td>Feature importance</td><td>SelectKBest, RFE, VarianceThreshold</td></tr>
-<tr><td><code>sklearn.decomposition</code></td><td>Dimensionality reduction</td><td>PCA, TruncatedSVD</td></tr>
-<tr><td><code>sklearn.pipeline</code></td><td>Automated workflows</td><td>Pipeline, make_pipeline</td></tr>
-<tr><td><code>sklearn.metrics</code></td><td>Evaluation metrics</td><td>accuracy_score, f1_score, confusion_matrix</td></tr>
-<tr><td><code>sklearn.linear_model</code></td><td>Linear algorithms</td><td>LinearRegression, LogisticRegression</td></tr>
-<tr><td><code>sklearn.tree</code></td><td>Decision trees</td><td>DecisionTreeClassifier</td></tr>
-<tr><td><code>sklearn.ensemble</code></td><td>Ensemble methods</td><td>RandomForestClassifier, GradientBoosting</td></tr>
-<tr><td><code>sklearn.svm</code></td><td>Support vectors</td><td>SVC, SVR</td></tr>
-<tr><td><code>sklearn.neighbors</code></td><td>Nearest neighbors</td><td>KNeighborsClassifier</td></tr>
-<tr><td><code>sklearn.cluster</code></td><td>Clustering</td><td>KMeans, DBSCAN</td></tr>
-</tbody></table></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; Loading Datasets (sklearn.datasets)</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.datasets <span class="kw">import</span> (
-    load_iris, load_digits, load_wine, load_breast_cancer,
-    make_classification, make_regression, make_blobs
-)
-
-<span class="cm"># &#x1F4E6; Built-in datasets (Bunch objects)</span>
-iris = load_iris()
-<span class="bi">print</span>(<span class="st">f"Iris: {iris.data.shape} features, {iris.target_names}"</span>)
-
-digits = load_digits()
-<span class="bi">print</span>(<span class="st">f"Digits: {digits.data.shape} (8x8 images)"</span>)
-
-wine = load_wine()
-<span class="bi">print</span>(<span class="st">f"Wine: {wine.data.shape} &mdash; {wine.target_names}"</span>)
-
-cancer = load_breast_cancer()
-<span class="bi">print</span>(<span class="st">f"Cancer: {cancer.data.shape} &mdash; {cancer.target_names}"</span>)
-
-<span class="cm"># &#x1F3ED; Generate synthetic datasets</span>
-X, y = make_classification(
-    n_samples=<span class="nm">1000</span>, n_features=<span class="nm">20</span>,
-    n_informative=<span class="nm">10</span>, n_classes=<span class="nm">3</span>,
-    random_state=<span class="nm">42</span>
-)
-<span class="bi">print</span>(<span class="st">f"Synthetic classification: {X.shape}"</span>)
-
-X, y = make_regression(
-    n_samples=<span class="nm">500</span>, n_features=<span class="nm">5</span>,
-    noise=<span class="nm">10</span>, random_state=<span class="nm">42</span>
-)
-<span class="bi">print</span>(<span class="st">f"Synthetic regression: {X.shape}"</span>)
-
-X, y = make_blobs(
-    n_samples=<span class="nm">300</span>, centers=<span class="nm">4</span>,
-    cluster_std=<span class="nm">1.0</span>, random_state=<span class="nm">42</span>
-)
-<span class="bi">print</span>(<span class="st">f"Synthetic blobs: {X.shape}, {len(set(y))} clusters"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Iris: (150, 4) &mdash; ['setosa','versicolor','virginica']<br>Digits: (1797, 64)<br>Wine: (178, 13)<br>Cancer: (569, 30)<br>Synthetic: (1000, 20) &middot; (500, 5) &middot; (300, 2)</div></div></section>
-
-<section class="content-section" id="s5"><h2>5 &middot; Your First Model (End-to-End Example)</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python &middot; Breast Cancer Classification</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.datasets <span class="kw">import</span> load_breast_cancer
-<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
-<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler
-<span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LogisticRegression
-<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> accuracy_score, confusion_matrix
-<span class="kw">import</span> numpy <span class="kw">as</span> np
-
-<span class="cm"># Load</span>
-data = load_breast_cancer()
-X, y = data.data, data.target
-<span class="bi">print</span>(<span class="st">f"Features: {data.feature_names[:5]}..."</span>)
-<span class="bi">print</span>(<span class="st">f"Classes: {data.target_names}"</span>)   <span class="cm"># ['malignant' 'benign']</span>
-
-<span class="cm"># Split (80/20)</span>
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=<span class="nm">0.2</span>, random_state=<span class="nm">42</span>)
-
-<span class="cm"># Scale</span>
-scaler = StandardScaler()
-X_train_s = scaler.fit_transform(X_train)
-X_test_s = scaler.transform(X_test)
-
-<span class="cm"># Train</span>
-model = LogisticRegression(max_iter=<span class="nm">5000</span>)
-model.fit(X_train_s, y_train)
-
-<span class="cm"># Predict &amp; evaluate</span>
-y_pred = model.predict(X_test_s)
-<span class="bi">print</span>(<span class="st">f"Accuracy: {accuracy_score(y_test, y_pred):.2%}"</span>)
-<span class="bi">print</span>(<span class="st">f"Confusion Matrix:\\n{confusion_matrix(y_test, y_pred)}"</span>)
-
-<span class="cm"># Probabilities</span>
-y_proba = model.predict_proba(X_test_s)
-<span class="bi">print</span>(<span class="st">f"Sample probabilities: {y_proba[0].round(4)}"</span>)
-<span class="bi">print</span>(<span class="st">f"Predicted: {'Benign' if y_pred[0]==1 else 'Malignant'}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Features: ['mean radius','mean texture',...]<br>Accuracy: 97.37%<br>Confusion Matrix:<br>[[42  1]<br> [ 2 69]]</div></div></section>
-
-<section class="content-section" id="s6"><h2>6 &middot; Types of Machine Learning</h2>
-<table class="data-table"><thead><tr><th>Algorithm</th><th>Type</th><th>Task</th><th>sklearn Class</th></tr></thead><tbody>
-<tr><td>Linear Regression</td><td>Supervised</td><td>Regression</td><td><code>LinearRegression()</code></td></tr>
-<tr><td>Logistic Regression</td><td>Supervised</td><td>Classification</td><td><code>LogisticRegression()</code></td></tr>
-<tr><td>Decision Tree</td><td>Supervised</td><td>Both</td><td><code>DecisionTreeClassifier()</code></td></tr>
-<tr><td>Random Forest</td><td>Supervised</td><td>Both</td><td><code>RandomForestClassifier()</code></td></tr>
-<tr><td>SVM</td><td>Supervised</td><td>Both</td><td><code>SVC()</code></td></tr>
-<tr><td>KNN</td><td>Supervised</td><td>Both</td><td><code>KNeighborsClassifier()</code></td></tr>
-<tr><td>Naive Bayes</td><td>Supervised</td><td>Classification</td><td><code>GaussianNB()</code></td></tr>
-<tr><td>KMeans</td><td>Unsupervised</td><td>Clustering</td><td><code>KMeans()</code></td></tr>
-<tr><td>DBSCAN</td><td>Unsupervised</td><td>Clustering</td><td><code>DBSCAN()</code></td></tr>
-<tr><td>PCA</td><td>Unsupervised</td><td>Dim. Reduction</td><td><code>PCA()</code></td></tr>
-</tbody></table></section>''',
-("model-evaluation.html","Model Evaluation"),("linear-regression.html","Linear Regression"))
+print("intro-ml.html expanded with enriched content!")
 
 print("intro-ml.html expanded!")

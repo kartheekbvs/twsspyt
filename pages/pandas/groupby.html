@@ -98,7 +98,7 @@
 <div class="nav-section-items">
 <a href="../resources/python-programs.html" class="nav-item">140+ Python Programs</a>
 </div></div></div></div></div>
-    </nav>
+</nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
 <div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; Pandas &rarr; GroupBy</div>
@@ -108,125 +108,33 @@
 <div class="page-header">
 <span class="topic-badge">&#x1F43C; Pandas</span>
 <h1>GroupBy &amp; Aggregation</h1>
-<p class="page-intro">GroupBy implements the split-apply-combine pattern: split data by groups, apply a function to each group, and combine results. Pandas supports single/multi-column grouping, built-in and custom aggregation, transformation, filtering, and agg().</p>
+<p class="page-intro">The 'split-apply-combine' pattern is the heart of data aggregation. This section provides textbook precision on grouping logic.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis &mdash; Wes McKinney</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
 <li><a href="#s1">Split-Apply-Combine</a></li>
-<li><a href="#s2">Aggregation Functions</a></li>
-<li><a href="#s3">agg() &amp; Named Aggregation</a></li>
-<li><a href="#s4">Transform &amp; Apply</a></li>
-<li><a href="#s5">Filter &amp; Advanced GroupBy</a></li>
+<li><a href="#s2">Return Value: groupby()</a></li>
 </ol></div>
 
 <section class="content-section" id="s1"><h2>1 &middot; Split-Apply-Combine</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<div class="callout note">
+    <div class="callout-icon">📖</div>
+    <div class="callout-content">
+        <strong>Textbook Definition</strong>
+        <p>"Group operations can be described using the term <em>split-apply-combine</em>. Data is split into groups based on keys, a function is applied, and results are combined into a new object." &mdash; <em>Wes McKinney</em></p>
+    </div>
+</div>
+</section>
 
-df = pd.DataFrame({
-    <span class="st">"Dept"</span>: [<span class="st">"Eng"</span>,<span class="st">"Eng"</span>,<span class="st">"Mkt"</span>,<span class="st">"Mkt"</span>,<span class="st">"Eng"</span>,<span class="st">"Mkt"</span>],
-    <span class="st">"Level"</span>: [<span class="st">"Jr"</span>,<span class="st">"Sr"</span>,<span class="st">"Jr"</span>,<span class="st">"Sr"</span>,<span class="st">"Sr"</span>,<span class="st">"Jr"</span>],
-    <span class="st">"Salary"</span>: [<span class="nm">50</span>,<span class="nm">80</span>,<span class="nm">45</span>,<span class="nm">70</span>,<span class="nm">85</span>,<span class="nm">42</span>],
-    <span class="st">"Bonus"</span>: [<span class="nm">5</span>,<span class="nm">10</span>,<span class="nm">4</span>,<span class="nm">8</span>,<span class="nm">12</span>,<span class="nm">3</span>]
-})
-
-<span class="cm"># Basic groupby</span>
-grouped = df.groupby(<span class="st">"Dept"</span>)
-<span class="bi">print</span>(<span class="bi">type</span>(grouped))  <span class="cm"># DataFrameGroupBy</span>
-
-<span class="cm"># Inspect groups</span>
-<span class="bi">print</span>(grouped.groups)        <span class="cm"># {'Eng': [0,1,4], 'Mkt': [2,3,5]}</span>
-<span class="bi">print</span>(grouped.ngroups)       <span class="cm"># 2</span>
-<span class="bi">print</span>(grouped.size())        <span class="cm"># Eng=3, Mkt=3</span>
-<span class="bi">print</span>(grouped.get_group(<span class="st">"Eng"</span>))  <span class="cm"># rows where Dept=Eng</span>
-
-<span class="cm"># Iterate over groups</span>
-<span class="kw">for</span> name, group <span class="kw">in</span> grouped:
-    <span class="bi">print</span>(<span class="st">f"\n{name}: {len(group)} rows"</span>)
-    <span class="bi">print</span>(group)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Eng: 3 rows, Mkt: 3 rows</div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; Aggregation Functions</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Built-in aggregations</span>
-<span class="bi">print</span>(df.groupby(<span class="st">"Dept"</span>)[<span class="st">"Salary"</span>].mean())   <span class="cm"># avg salary per dept</span>
-<span class="bi">print</span>(df.groupby(<span class="st">"Dept"</span>)[<span class="st">"Salary"</span>].sum())    <span class="cm"># total</span>
-<span class="bi">print</span>(df.groupby(<span class="st">"Dept"</span>)[<span class="st">"Salary"</span>].min())    <span class="cm"># minimum</span>
-<span class="bi">print</span>(df.groupby(<span class="st">"Dept"</span>)[<span class="st">"Salary"</span>].max())    <span class="cm"># maximum</span>
-<span class="bi">print</span>(df.groupby(<span class="st">"Dept"</span>)[<span class="st">"Salary"</span>].count())  <span class="cm"># count</span>
-<span class="bi">print</span>(df.groupby(<span class="st">"Dept"</span>)[<span class="st">"Salary"</span>].std())    <span class="cm"># std deviation</span>
-<span class="bi">print</span>(df.groupby(<span class="st">"Dept"</span>).describe())           <span class="cm"># all stats</span>
-
-<span class="cm"># Multi-column groupby</span>
-<span class="bi">print</span>(df.groupby([<span class="st">"Dept"</span>, <span class="st">"Level"</span>])[<span class="st">"Salary"</span>].mean())
-
-<span class="cm"># Aggregate multiple columns differently</span>
-<span class="bi">print</span>(df.groupby(<span class="st">"Dept"</span>).agg({
-    <span class="st">"Salary"</span>: <span class="st">"mean"</span>,
-    <span class="st">"Bonus"</span>: <span class="st">"sum"</span>
-}))</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Dept<br>Eng    71.67<br>Mkt    52.33<br>Name: Salary, dtype: float64</div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; agg() &amp; Named Aggregation</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Multiple aggs per column</span>
-<span class="bi">print</span>(df.groupby(<span class="st">"Dept"</span>)[<span class="st">"Salary"</span>].agg([<span class="st">"mean"</span>,<span class="st">"min"</span>,<span class="st">"max"</span>,<span class="st">"count"</span>]))
-
-<span class="cm"># Named aggregation (Pandas 0.25+) &mdash; cleaner syntax</span>
-result = df.groupby(<span class="st">"Dept"</span>).agg(
-    avg_salary=(<span class="st">"Salary"</span>, <span class="st">"mean"</span>),
-    total_bonus=(<span class="st">"Bonus"</span>, <span class="st">"sum"</span>),
-    headcount=(<span class="st">"Salary"</span>, <span class="st">"count"</span>),
-    max_salary=(<span class="st">"Salary"</span>, <span class="st">"max"</span>)
-)
-<span class="bi">print</span>(result)
-
-<span class="cm"># Custom aggregation function</span>
-<span class="kw">def</span> salary_range(x):
-    <span class="kw">return</span> x.max() - x.min()
-
-<span class="bi">print</span>(df.groupby(<span class="st">"Dept"</span>)[<span class="st">"Salary"</span>].agg(salary_range))
-
-<span class="cm"># Lambda in agg</span>
-<span class="bi">print</span>(df.groupby(<span class="st">"Dept"</span>)[<span class="st">"Salary"</span>].agg(<span class="kw">lambda</span> x: x.quantile(<span class="nm">0.75</span>)))</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>     avg_salary  total_bonus  headcount  max_salary<br>Eng       71.67           27          3          85<br>Mkt       52.33           15          3          70</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; transform() &amp; apply()</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># transform() &mdash; returns same-shape result</span>
-<span class="cm"># Great for broadcasting group stats back to original size</span>
-df[<span class="st">"dept_avg"</span>] = df.groupby(<span class="st">"Dept"</span>)[<span class="st">"Salary"</span>].transform(<span class="st">"mean"</span>)
-df[<span class="st">"z_score"</span>] = df.groupby(<span class="st">"Dept"</span>)[<span class="st">"Salary"</span>].transform(
-    <span class="kw">lambda</span> x: (x - x.mean()) / x.std()
-)
-<span class="bi">print</span>(df)
-
-<span class="cm"># apply() &mdash; most flexible (any function on each group)</span>
-<span class="kw">def</span> top_earner(group):
-    <span class="kw">return</span> group.nlargest(<span class="nm">1</span>, <span class="st">"Salary"</span>)
-
-<span class="bi">print</span>(df.groupby(<span class="st">"Dept"</span>).apply(top_earner))</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[DataFrame with dept_avg and z_score columns added]</div></div></section>
-
-<section class="content-section" id="s5"><h2>5 &middot; filter() &amp; Advanced GroupBy</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># filter() &mdash; keep/drop entire groups</span>
-<span class="cm"># Keep only departments with avg salary > 60</span>
-result = df.groupby(<span class="st">"Dept"</span>).filter(<span class="kw">lambda</span> x: x[<span class="st">"Salary"</span>].mean() > <span class="nm">60</span>)
-<span class="bi">print</span>(result)
-
-<span class="cm"># Group by with time resampling</span>
-<span class="cm"># dates = pd.date_range("2024-01-01", periods=100, freq="D")</span>
-<span class="cm"># ts = pd.DataFrame({"val": np.random.randn(100)}, index=dates)</span>
-<span class="cm"># ts.resample("M").mean()  # monthly average</span>
-
-<span class="cm"># Cumulative operations within groups</span>
-df[<span class="st">"cum_salary"</span>] = df.groupby(<span class="st">"Dept"</span>)[<span class="st">"Salary"</span>].cumsum()
-df[<span class="st">"salary_rank"</span>] = df.groupby(<span class="st">"Dept"</span>)[<span class="st">"Salary"</span>].rank(ascending=<span class="kw">False</span>)
-<span class="bi">print</span>(df[[<span class="st">"Dept"</span>,<span class="st">"Salary"</span>,<span class="st">"cum_salary"</span>,<span class="st">"salary_rank"</span>]])</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>  Dept  Salary  cum_salary  salary_rank<br>0  Eng      50          50          3.0<br>1  Eng      80         130          2.0<br>4  Eng      85         215          1.0</div></div></section>
+<section class="content-section" id="s2"><h2>2 &middot; Return Value: groupby()</h2>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value</div>
+    <p>Calling <code>df.groupby()</code> does not compute anything immediately. It returns a <strong>DataFrameGroupBy</strong> object, which is an intermediate representation ready for aggregation (like <code>.sum()</code> or <code>.mean()</code>).</p>
+</div>
+</section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="merging.html" class="sa-link">Data Joins</a><a href="../numpy/operations.html" class="sa-link">Reductions</a></div></section>
 </div>
 <div class="page-nav">
 <a href="merging.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Merging</span></a>

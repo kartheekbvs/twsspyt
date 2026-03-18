@@ -98,7 +98,7 @@
 <div class="nav-section-items">
 <a href="../resources/python-programs.html" class="nav-item">140+ Python Programs</a>
 </div></div></div></div></div>
-    </nav>
+</nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
 <div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; Pandas &rarr; Visualization</div>
@@ -108,154 +108,33 @@
 <div class="page-header">
 <span class="topic-badge">&#x1F43C; Pandas</span>
 <h1>Visualization</h1>
-<p class="page-intro">Pandas integrates with Matplotlib to provide built-in plotting for DataFrames and Series. Supports line plots, bar charts, histograms, scatter plots, box plots, pie charts, area plots, and more. Also covers customization, subplots, and styling.</p>
+<p class="page-intro">Pandas plotting is a high-level wrapper around Matplotlib. This section covers textbook definitions for plot types and return value analysis for figure objects.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis &mdash; Wes McKinney</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
-<li><a href="#s1">Basic Plotting</a></li>
-<li><a href="#s2">Plot Types</a></li>
-<li><a href="#s3">Customization &amp; Styling</a></li>
-<li><a href="#s4">Subplots &amp; Multiple Plots</a></li>
-<li><a href="#s5">Statistical Plots</a></li>
+<li><a href="#s1">Pandas &amp; Matplotlib</a></li>
+<li><a href="#s2">Return Values</a></li>
 </ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Basic Plotting with Pandas</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">import</span> pandas <span class="kw">as</span> pd
-<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
-<span class="kw">import</span> numpy <span class="kw">as</span> np
+<section class="content-section" id="s1"><h2>1 &middot; Pandas &amp; Matplotlib</h2>
+<div class="callout note">
+    <div class="callout-icon">📖</div>
+    <div class="callout-content">
+        <strong>Textbook Definition</strong>
+        <p>"Pandas has many built-in methods for creating visualizations from Series and DataFrame objects. Most of these are wrappers around the Matplotlib library." &mdash; <em>Wes McKinney</em></p>
+    </div>
+</div>
+</section>
 
-<span class="cm"># Series plot</span>
-s = pd.Series([<span class="nm">3</span>, <span class="nm">7</span>, <span class="nm">2</span>, <span class="nm">8</span>, <span class="nm">5</span>], index=[<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>,<span class="st">"D"</span>,<span class="st">"E"</span>])
-s.plot()                 <span class="cm"># line plot (default)</span>
-plt.title(<span class="st">"Series Plot"</span>)
-plt.show()
-
-<span class="cm"># DataFrame plot</span>
-df = pd.DataFrame({
-    <span class="st">"Sales"</span>: [<span class="nm">100</span>,<span class="nm">150</span>,<span class="nm">200</span>,<span class="nm">180</span>],
-    <span class="st">"Costs"</span>: [<span class="nm">80</span>,<span class="nm">100</span>,<span class="nm">120</span>,<span class="nm">110</span>]
-}, index=[<span class="st">"Q1"</span>,<span class="st">"Q2"</span>,<span class="st">"Q3"</span>,<span class="st">"Q4"</span>])
-df.plot()                <span class="cm"># plots all numeric columns</span>
-plt.ylabel(<span class="st">"Amount ($)"</span>)
-plt.show()</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[Line plots displayed]</div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; Plot Types</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Bar chart</span>
-df.plot(kind=<span class="st">"bar"</span>)
-df.plot.bar()                     <span class="cm"># same</span>
-df.plot.bar(stacked=<span class="kw">True</span>)         <span class="cm"># stacked bars</span>
-df.plot.barh()                    <span class="cm"># horizontal bars</span>
-
-<span class="cm"># Histogram</span>
-data = pd.Series(np.random.randn(<span class="nm">1000</span>))
-data.plot.hist(bins=<span class="nm">30</span>, alpha=<span class="nm">0.7</span>)
-
-<span class="cm"># Scatter plot</span>
-df2 = pd.DataFrame({<span class="st">"x"</span>: np.random.randn(<span class="nm">100</span>), <span class="st">"y"</span>: np.random.randn(<span class="nm">100</span>)})
-df2.plot.scatter(x=<span class="st">"x"</span>, y=<span class="st">"y"</span>, alpha=<span class="nm">0.5</span>)
-
-<span class="cm"># Box plot</span>
-df.plot.box()
-
-<span class="cm"># Pie chart</span>
-pd.Series([<span class="nm">30</span>,<span class="nm">20</span>,<span class="nm">50</span>], index=[<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>]).plot.pie(autopct=<span class="st">"%.0f%%"</span>)
-
-<span class="cm"># Area plot</span>
-df.plot.area(alpha=<span class="nm">0.5</span>)
-
-<span class="cm"># KDE (Kernel Density Estimation)</span>
-data.plot.kde()
-
-plt.show()</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[Various plot types displayed]</div></div>
-<table class="data-table"><thead><tr><th>Kind</th><th>Method</th><th>Use Case</th></tr></thead><tbody>
-<tr><td><code>"line"</code></td><td><code>df.plot.line()</code></td><td>Trends over time</td></tr>
-<tr><td><code>"bar"</code></td><td><code>df.plot.bar()</code></td><td>Categorical comparisons</td></tr>
-<tr><td><code>"barh"</code></td><td><code>df.plot.barh()</code></td><td>Horizontal bar chart</td></tr>
-<tr><td><code>"hist"</code></td><td><code>df.plot.hist()</code></td><td>Distributions</td></tr>
-<tr><td><code>"scatter"</code></td><td><code>df.plot.scatter()</code></td><td>Relationships</td></tr>
-<tr><td><code>"box"</code></td><td><code>df.plot.box()</code></td><td>Distributions &amp; outliers</td></tr>
-<tr><td><code>"pie"</code></td><td><code>df.plot.pie()</code></td><td>Proportions</td></tr>
-<tr><td><code>"area"</code></td><td><code>df.plot.area()</code></td><td>Cumulative quantities</td></tr>
-<tr><td><code>"kde"</code></td><td><code>df.plot.kde()</code></td><td>Smooth distributions</td></tr>
-<tr><td><code>"hexbin"</code></td><td><code>df.plot.hexbin()</code></td><td>Dense scatter plots</td></tr>
-</tbody></table></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; Customization &amp; Styling</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Common plot parameters</span>
-df.plot(
-    kind=<span class="st">"bar"</span>,
-    figsize=(<span class="nm">10</span>, <span class="nm">6</span>),        <span class="cm"># figure size</span>
-    title=<span class="st">"Quarterly Report"</span>,
-    xlabel=<span class="st">"Quarter"</span>,
-    ylabel=<span class="st">"Amount"</span>,
-    color=[<span class="st">"#2ecc71"</span>, <span class="st">"#e74c3c"</span>],
-    alpha=<span class="nm">0.8</span>,               <span class="cm"># transparency</span>
-    rot=<span class="nm">0</span>,                   <span class="cm"># x-label rotation</span>
-    grid=<span class="kw">True</span>,               <span class="cm"># show grid</span>
-    legend=<span class="kw">True</span>,             <span class="cm"># show legend</span>
-    edgecolor=<span class="st">"black"</span>,
-)
-
-<span class="cm"># Style context</span>
-<span class="kw">with</span> plt.style.context(<span class="st">"seaborn-v0_8"</span>):
-    df.plot()
-    plt.show()
-
-<span class="cm"># Available styles:</span>
-<span class="cm"># 'ggplot', 'seaborn-v0_8', 'dark_background', 'bmh', 'fivethirtyeight'</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[Styled bar chart displayed]</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; Subplots &amp; Multiple Plots</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Each column in separate subplot</span>
-df.plot(subplots=<span class="kw">True</span>, figsize=(<span class="nm">8</span>,<span class="nm">6</span>), layout=(<span class="nm">1</span>,<span class="nm">2</span>))
-plt.tight_layout()
-plt.show()
-
-<span class="cm"># Manual subplots with matplotlib</span>
-fig, axes = plt.subplots(<span class="nm">2</span>, <span class="nm">2</span>, figsize=(<span class="nm">12</span>, <span class="nm">8</span>))
-df[<span class="st">"Sales"</span>].plot.bar(ax=axes[<span class="nm">0</span>,<span class="nm">0</span>], title=<span class="st">"Sales Bar"</span>)
-df[<span class="st">"Costs"</span>].plot.line(ax=axes[<span class="nm">0</span>,<span class="nm">1</span>], title=<span class="st">"Costs Line"</span>)
-df.plot.box(ax=axes[<span class="nm">1</span>,<span class="nm">0</span>], title=<span class="st">"Box Plot"</span>)
-df.plot.area(ax=axes[<span class="nm">1</span>,<span class="nm">1</span>], title=<span class="st">"Area"</span>, alpha=<span class="nm">0.5</span>)
-plt.tight_layout()
-plt.show()
-
-<span class="cm"># Save figure</span>
-<span class="cm"># fig.savefig("report.png", dpi=300, bbox_inches="tight")</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[2x2 subplot grid displayed]</div></div></section>
-
-<section class="content-section" id="s5"><h2>5 &middot; Statistical Plots</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Scatter matrix (pairs plot)</span>
-<span class="kw">from</span> pandas.plotting <span class="kw">import</span> scatter_matrix
-df_num = pd.DataFrame(np.random.randn(<span class="nm">100</span>,<span class="nm">4</span>), columns=[<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>,<span class="st">"D"</span>])
-scatter_matrix(df_num, figsize=(<span class="nm">10</span>,<span class="nm">10</span>), diagonal=<span class="st">"hist"</span>)
-plt.show()
-
-<span class="cm"># Correlation heatmap (with Pandas + Matplotlib)</span>
-corr = df_num.corr()
-fig, ax = plt.subplots(figsize=(<span class="nm">8</span>,<span class="nm">6</span>))
-im = ax.imshow(corr, cmap=<span class="st">"coolwarm"</span>, aspect=<span class="st">"auto"</span>)
-ax.set_xticks(<span class="bi">range</span>(<span class="bi">len</span>(corr)))
-ax.set_xticklabels(corr.columns, rotation=<span class="nm">45</span>)
-ax.set_yticks(<span class="bi">range</span>(<span class="bi">len</span>(corr)))
-ax.set_yticklabels(corr.index)
-plt.colorbar(im)
-plt.title(<span class="st">"Correlation Heatmap"</span>)
-plt.show()
-
-<span class="cm"># Andrews curves (multivariate visualization)</span>
-<span class="kw">from</span> pandas.plotting <span class="kw">import</span> andrews_curves
-<span class="cm"># andrews_curves(iris_df, "species")</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[Scatter matrix and heatmap displayed]</div></div></section>
+<section class="content-section" id="s2"><h2>2 &middot; Return Values</h2>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value: .plot()</div>
+    <p>The <code>.plot()</code> method (on Series or DataFrame) returns a <strong>Matplotlib Axes</strong> object (or an array of them if <code>subplots=True</code>). This allows for further customization using Matplotlib commands.</p>
+</div>
+</section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="cleaning.html" class="sa-link">Preparing Data</a><a href="../data/matplotlib.html" class="sa-link">Matplotlib Basics</a></div></section>
 </div>
 <div class="page-nav">
 <a href="cleaning.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Data Cleaning</span></a>

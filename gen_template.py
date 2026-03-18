@@ -90,13 +90,22 @@ NAV = '''<div class="nav-items" id="navItems">
 <a href="{P}resources/python-programs.html" class="nav-item">140+ Python Programs</a>
 </div></div></div></div></div>'''
 
-def make_page(rel_path, title, section, emoji, diff, bc, intro, books, body, prev, next_):
+def make_page(rel_path, title, section, emoji, diff, bc, intro, books, body, prev, next_, see_also=None):
     fp = os.path.join(BASE, rel_path)
     os.makedirs(os.path.dirname(fp), exist_ok=True)
     nav = NAV.replace("{P}", "../")
     css = "../../css/style.css"
     js = "../../js/main.js"
     home = "../../index.html"
+    
+    # Generate See Also HTML if provided
+    see_also_html = ""
+    if see_also:
+        see_also_html = '<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links">'
+        for sa_link, sa_title in see_also:
+            see_also_html += f'<a href="{sa_link}" class="sa-link">{sa_title}</a>'
+        see_also_html += '</div></section>'
+
     html = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -128,6 +137,7 @@ def make_page(rel_path, title, section, emoji, diff, bc, intro, books, body, pre
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>{books}</em></span>
 </div></div>
 {body}
+{see_also_html}
 </div>
 <div class="page-nav">
 <a href="{prev[0]}"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">{prev[1]}</span></a>

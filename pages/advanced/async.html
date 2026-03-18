@@ -98,7 +98,7 @@
 <div class="nav-section-items">
 <a href="../resources/python-programs.html" class="nav-item">140+ Python Programs</a>
 </div></div></div></div></div>
-    </nav>
+</nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
 <div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; Advanced &rarr; Async</div>
@@ -260,6 +260,7 @@ sem = asyncio.Semaphore(<span class="nm">5</span>)  <span class="cm"># max 5 con
     results = <span class="bi">list</span>(executor.map(heavy_task, <span class="bi">range</span>(<span class="nm">4</span>)))
 <span class="bi">print</span>(results)  <span class="cm"># [0, 1, 4, 9] truly parallel</span></pre>
 <div class="output-block"><div class="output-label">&#x25B6; Output</div>[0, 1, 4, 9] in ~1 second (4x speedup)</div></div></section>
+
 </div>
 <div class="page-nav">
 <a href="context-managers.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Context Managers</span></a>

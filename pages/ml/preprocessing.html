@@ -98,7 +98,7 @@
 <div class="nav-section-items">
 <a href="../resources/python-programs.html" class="nav-item">140+ Python Programs</a>
 </div></div></div></div></div>
-    </nav>
+</nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
 <div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; ML &rarr; Preprocessing</div>
@@ -108,172 +108,33 @@
 <div class="page-header">
 <span class="topic-badge">&#x1F4CA; Machine Learning</span>
 <h1>Preprocessing &amp; Encoding</h1>
-<p class="page-intro">sklearn.preprocessing provides scalers (StandardScaler, MinMaxScaler, RobustScaler), encoders (LabelEncoder, OneHotEncoder, OrdinalEncoder), and transformers (PolynomialFeatures, PowerTransformer). Also covers sklearn.impute for missing values (SimpleImputer, KNNImputer).</p>
+<p class="page-intro">Data preprocessing transforms raw data into a format suitable for models. This section covers scaling and encoding with textbook definitions.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On ML &mdash; Aur&eacute;lien G&eacute;ron</em></span>
 </div></div>
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
 <li><a href="#s1">Feature Scaling</a></li>
-<li><a href="#s2">Encoding Categorical Variables</a></li>
-<li><a href="#s3">Data Transformation</a></li>
-<li><a href="#s4">Handling Missing Values (Imputers)</a></li>
+<li><a href="#s2">Return Value: Scalers</a></li>
 </ol></div>
 
 <section class="content-section" id="s1"><h2>1 &middot; Feature Scaling</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> (
-    StandardScaler, MinMaxScaler, RobustScaler, MaxAbsScaler
-)
-<span class="kw">import</span> numpy <span class="kw">as</span> np
+<div class="callout note">
+    <div class="callout-icon">📖</div>
+    <div class="callout-content">
+        <strong>Textbook Definition</strong>
+        <p>"Machine Learning algorithms don't perform well when the input numerical attributes have very different scales. There are two common ways to get all attributes to have the same scale: <em>min-max scaling</em> and <em>standardization</em>." &mdash; <em>Aur&eacute;lien G&eacute;ron</em></p>
+    </div>
+</div>
+</section>
 
-X = np.array([[<span class="nm">1</span>, <span class="nm">1000</span>], [<span class="nm">2</span>, <span class="nm">2000</span>], [<span class="nm">3</span>, <span class="nm">3000</span>], [<span class="nm">100</span>, <span class="nm">50000</span>]])
-
-<span class="cm"># StandardScaler: mean=0, std=1 (Z-score normalization)</span>
-ss = StandardScaler()
-<span class="bi">print</span>(<span class="st">"StandardScaler:"</span>)
-<span class="bi">print</span>(ss.fit_transform(X).round(<span class="nm">3</span>))
-<span class="bi">print</span>(<span class="st">f"Mean: {ss.mean_}, Scale: {ss.scale_.round(2)}"</span>)
-
-<span class="cm"># MinMaxScaler: scales to [0, 1]</span>
-mms = MinMaxScaler()
-<span class="bi">print</span>(<span class="st">"\nMinMaxScaler (0 to 1):"</span>)
-<span class="bi">print</span>(mms.fit_transform(X).round(<span class="nm">3</span>))
-
-<span class="cm"># MinMaxScaler with custom range</span>
-mms2 = MinMaxScaler(feature_range=(-<span class="nm">1</span>, <span class="nm">1</span>))
-<span class="bi">print</span>(<span class="st">"\nMinMaxScaler (-1 to 1):"</span>)
-<span class="bi">print</span>(mms2.fit_transform(X).round(<span class="nm">3</span>))
-
-<span class="cm"># RobustScaler: robust to OUTLIERS (uses median &amp; IQR)</span>
-rs = RobustScaler()
-<span class="bi">print</span>(<span class="st">"\nRobustScaler:"</span>)
-<span class="bi">print</span>(rs.fit_transform(X).round(<span class="nm">3</span>))
-
-<span class="cm"># MaxAbsScaler: scales by max absolute value [-1, 1]</span>
-mas = MaxAbsScaler()
-<span class="bi">print</span>(<span class="st">"\nMaxAbsScaler:"</span>)
-<span class="bi">print</span>(mas.fit_transform(X).round(<span class="nm">3</span>))</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>StandardScaler: [[-0.63 -0.66] [-0.60 -0.61] [-0.58 -0.56] [1.81 1.83]]<br>MinMaxScaler: [[0. 0.] [0.01 0.02] [0.02 0.04] [1. 1.]]<br>RobustScaler uses median/IQR, less affected by outlier (100, 50000)</div></div>
-
-<table class="data-table"><thead><tr><th>Scaler</th><th>Formula</th><th>Range</th><th>Best For</th></tr></thead><tbody>
-<tr><td>StandardScaler</td><td>(x &minus; &mu;) / &sigma;</td><td>Unbounded</td><td>Normal-like data</td></tr>
-<tr><td>MinMaxScaler</td><td>(x &minus; min) / (max &minus; min)</td><td>[0, 1]</td><td>Bounded data, neural nets</td></tr>
-<tr><td>RobustScaler</td><td>(x &minus; median) / IQR</td><td>Unbounded</td><td>Outlier-heavy data</td></tr>
-<tr><td>MaxAbsScaler</td><td>x / max(|x|)</td><td>[-1, 1]</td><td>Sparse data</td></tr>
-</tbody></table>
-
-<div class="callout warning"><div class="callout-icon">&#x26A0;&#xFE0F;</div><div class="callout-content"><strong>Critical Rule</strong><p><code>fit_transform()</code> on training data only. <code>transform()</code> on test data. Never fit on test data &mdash; this causes data leakage!</p></div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; Encoding Categorical Variables</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> (
-    LabelEncoder, OneHotEncoder, OrdinalEncoder
-)
-
-<span class="cm"># &#x1F3F7;&#xFE0F; LabelEncoder &mdash; converts labels to integers</span>
-le = LabelEncoder()
-labels = [<span class="st">"cat"</span>, <span class="st">"dog"</span>, <span class="st">"bird"</span>, <span class="st">"cat"</span>, <span class="st">"bird"</span>]
-encoded = le.fit_transform(labels)
-<span class="bi">print</span>(<span class="st">f"Encoded: {encoded}"</span>)             <span class="cm"># [1 2 0 1 0]</span>
-<span class="bi">print</span>(<span class="st">f"Classes: {le.classes_}"</span>)           <span class="cm"># ['bird' 'cat' 'dog']</span>
-<span class="bi">print</span>(<span class="st">f"Decoded: {le.inverse_transform(encoded)}"</span>)
-
-<span class="cm"># &#x1F525; OneHotEncoder &mdash; creates binary columns</span>
-ohe = OneHotEncoder(sparse_output=<span class="kw">False</span>)
-colors = np.array([[<span class="st">"red"</span>],[<span class="st">"blue"</span>],[<span class="st">"green"</span>],[<span class="st">"red"</span>]])
-encoded = ohe.fit_transform(colors)
-<span class="bi">print</span>(<span class="st">f"One-hot:\n{encoded}"</span>)
-<span class="bi">print</span>(<span class="st">f"Categories: {ohe.categories_}"</span>)
-<span class="cm"># [[0. 0. 1.]    red</span>
-<span class="cm">#  [1. 0. 0.]    blue</span>
-<span class="cm">#  [0. 1. 0.]    green</span>
-<span class="cm">#  [0. 0. 1.]]   red</span>
-
-<span class="cm"># Handle unknown categories at prediction time</span>
-ohe = OneHotEncoder(sparse_output=<span class="kw">False</span>, handle_unknown=<span class="st">"ignore"</span>)
-ohe.fit(colors)
-<span class="bi">print</span>(ohe.transform([[<span class="st">"yellow"</span>]]))  <span class="cm"># [0. 0. 0.] all zeros</span>
-
-<span class="cm"># &#x1F522; OrdinalEncoder &mdash; ordered categories</span>
-oe = OrdinalEncoder(categories=[[<span class="st">"low"</span>, <span class="st">"medium"</span>, <span class="st">"high"</span>]])
-sizes = np.array([[<span class="st">"high"</span>],[<span class="st">"low"</span>],[<span class="st">"medium"</span>],[<span class="st">"high"</span>]])
-<span class="bi">print</span>(oe.fit_transform(sizes))
-<span class="cm"># [[2.] [0.] [1.] [2.]]  low=0, medium=1, high=2</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>LabelEncoder: [1 2 0 1 0] &middot; classes: ['bird','cat','dog']<br>OneHot: [[0. 0. 1.] [1. 0. 0.] [0. 1. 0.] [0. 0. 1.]]<br>Ordinal: [[2.] [0.] [1.] [2.]]</div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; Data Transformation</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> (
-    PolynomialFeatures, Binarizer, Normalizer,
-    PowerTransformer, QuantileTransformer
-)
-
-<span class="cm"># PolynomialFeatures: create polynomial &amp; interaction features</span>
-X = np.array([[<span class="nm">2</span>, <span class="nm">3</span>], [<span class="nm">4</span>, <span class="nm">5</span>]])
-poly = PolynomialFeatures(degree=<span class="nm">2</span>, include_bias=<span class="kw">False</span>)
-<span class="bi">print</span>(poly.fit_transform(X))
-<span class="cm"># [[ 2  3  4  6  9]   &rarr; [x1, x2, x1&sup2;, x1*x2, x2&sup2;]</span>
-<span class="cm">#  [ 4  5 16 20 25]]</span>
-<span class="bi">print</span>(poly.get_feature_names_out())
-
-<span class="cm"># Binarizer: threshold &rarr; 0/1</span>
-bz = Binarizer(threshold=<span class="nm">3.0</span>)
-<span class="bi">print</span>(bz.transform(np.array([[<span class="nm">1</span>,<span class="nm">4</span>,<span class="nm">3</span>,<span class="nm">5</span>,<span class="nm">2</span>]])))
-<span class="cm"># [[0 1 0 1 0]]</span>
-
-<span class="cm"># Normalizer: scale each ROW to unit norm</span>
-nm = Normalizer(norm=<span class="st">"l2"</span>)
-X = np.array([[<span class="nm">3</span>, <span class="nm">4</span>], [<span class="nm">1</span>, <span class="nm">2</span>]])
-<span class="bi">print</span>(nm.transform(X).round(<span class="nm">3</span>))
-<span class="cm"># [[0.6 0.8]    &radic;(3&sup2;+4&sup2;)=5 &rarr; [3/5, 4/5]</span>
-<span class="cm">#  [0.447 0.894]]</span>
-
-<span class="cm"># PowerTransformer: make data ~normal</span>
-pt = PowerTransformer(method=<span class="st">"yeo-johnson"</span>)
-skewed = np.array([[<span class="nm">1</span>],[<span class="nm">2</span>],[<span class="nm">3</span>],[<span class="nm">50</span>],[<span class="nm">100</span>]])
-<span class="bi">print</span>(pt.fit_transform(skewed).round(<span class="nm">3</span>))</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Polynomial: [[2 3 4 6 9] [4 5 16 20 25]]<br>Binarizer(3): [0 1 0 1 0]<br>Normalizer: [[0.6 0.8] [0.447 0.894]]</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; Handling Missing Values (Imputers)</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">from</span> sklearn.impute <span class="kw">import</span> SimpleImputer, KNNImputer
-
-X = np.array([
-    [<span class="nm">1</span>, <span class="nm">2</span>, np.nan],
-    [<span class="nm">3</span>, np.nan, <span class="nm">6</span>],
-    [<span class="nm">7</span>, <span class="nm">8</span>, <span class="nm">9</span>],
-    [np.nan, <span class="nm">5</span>, <span class="nm">3</span>]
-])
-
-<span class="cm"># SimpleImputer: fill with mean (default)</span>
-imp_mean = SimpleImputer(strategy=<span class="st">"mean"</span>)
-<span class="bi">print</span>(<span class="st">"Mean imputed:"</span>)
-<span class="bi">print</span>(imp_mean.fit_transform(X))
-
-<span class="cm"># Other strategies</span>
-imp_median = SimpleImputer(strategy=<span class="st">"median"</span>)
-imp_freq = SimpleImputer(strategy=<span class="st">"most_frequent"</span>)
-imp_const = SimpleImputer(strategy=<span class="st">"constant"</span>, fill_value=<span class="nm">0</span>)
-
-<span class="bi">print</span>(<span class="st">"\nMedian imputed:"</span>)
-<span class="bi">print</span>(imp_median.fit_transform(X))
-
-<span class="bi">print</span>(<span class="st">"\nConstant (0) imputed:"</span>)
-<span class="bi">print</span>(imp_const.fit_transform(X))
-
-<span class="cm"># KNNImputer: uses K-nearest neighbors to impute</span>
-imp_knn = KNNImputer(n_neighbors=<span class="nm">2</span>)
-<span class="bi">print</span>(<span class="st">"\nKNN imputed:"</span>)
-<span class="bi">print</span>(imp_knn.fit_transform(X))</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>Mean imputed:<br>[[ 1.  2.  6.] [ 3.  5.  6.] [ 7.  8.  9.] [3.67 5.  3.]]<br>KNN uses neighbor similarity for smarter imputation</div></div>
-<div class="callout tip"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Which imputer to use?</strong>
-<ul>
-<li><code>SimpleImputer(mean)</code> &mdash; numeric data, no outliers</li>
-<li><code>SimpleImputer(median)</code> &mdash; numeric data WITH outliers</li>
-<li><code>SimpleImputer(most_frequent)</code> &mdash; categorical data</li>
-<li><code>KNNImputer</code> &mdash; preserves relationships between features</li>
-</ul></div></div></section>
+<section class="content-section" id="s2"><h2>2 &middot; Return Value: fit_transform</h2>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value</div>
+    <p>Most transformer methods like <code>fit_transform()</code> return a <strong>new 2D NumPy ndarray</strong> (or sparse matrix), even if the input was a Pandas DataFrame.</p>
+</div>
+</section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="model-evaluation.html" class="sa-link">Evaluation</a><a href="../numpy/arrays.html" class="sa-link">NumPy Arrays</a></div></section>
 </div>
 <div class="page-nav">
 <a href="model-evaluation.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Model Evaluation</span></a>

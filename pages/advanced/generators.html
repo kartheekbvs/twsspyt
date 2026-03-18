@@ -98,7 +98,7 @@
 <div class="nav-section-items">
 <a href="../resources/python-programs.html" class="nav-item">140+ Python Programs</a>
 </div></div></div></div></div>
-    </nav>
+</nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
 <div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; Advanced &rarr; Generators</div>
@@ -108,7 +108,7 @@
 <div class="page-header">
 <span class="topic-badge">&#x2699;&#xFE0F; Advanced Python</span>
 <h1>Generators &amp; Iterators</h1>
-<p class="page-intro">Generators produce values lazily using yield, consuming memory for one item at a time. Essential for processing large datasets. Covers yield, generator expressions, itertools, custom iterators, send/throw, and practical applications.</p>
+<p class="page-intro">Generators are a simple and powerful tool for creating iterators. They are written like regular functions but use the yield statement whenever they want to return data.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge advanced">&#x25CF; Advanced</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python Docs, Fluent Python &mdash; Luciano Ramalho</em></span>
@@ -116,118 +116,37 @@
 <div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
 <li><a href="#s1">Generator Functions (yield)</a></li>
 <li><a href="#s2">Generator Expressions</a></li>
-<li><a href="#s3">itertools Module</a></li>
-<li><a href="#s4">Custom Iterators</a></li>
+<li><a href="#s3">Memory Efficiency</a></li>
 </ol></div>
 
-<section class="content-section" id="s1"><h2>1 &middot; Generator Functions (yield)</h2>
+<section class="content-section" id="s1"><h2>1 &middot; Generator Functions</h2>
+<p>When a generator function is called, it returns a generator object without even beginning execution of the function. When <code>next()</code> is called, the function resumes execution until a <code>yield</code> is reached.</p>
+
+<div class="callout note">
+    <div class="callout-icon">📖</div>
+    <div class="callout-content">
+        <strong>Textbook Definition</strong>
+        <p>"A generator is a function that remembers its state between calls. Unlike regular functions that start from the top every time, generators 'resume' where they left off." &mdash; <em>Fluent Python</em></p>
+    </div>
+</div>
+
 <div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Regular function returns ALL at once (uses memory!)</span>
-<span class="kw">def</span> <span class="bi">get_squares_list</span>(n):
-    <span class="kw">return</span> [x**<span class="nm">2</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(n)]
+<pre class="code-block"><span class="kw">def</span> <span class="bi">countdown</span>(n):
+    <span class="kw">while</span> n > <span class="nm">0</span>:
+        <span class="kw">yield</span> n
+        n -= <span class="nm">1</span>
 
-<span class="cm"># Generator yields ONE AT A TIME (lazy!)</span>
-<span class="kw">def</span> <span class="bi">get_squares_gen</span>(n):
-    <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(n):
-        <span class="kw">yield</span> x ** <span class="nm">2</span>
+counter = countdown(<span class="nm">3</span>)
+<span class="bi">print</span>(<span class="bi">next</span>(counter))  <span class="cm"># 3</span>
+<span class="bi">print</span>(<span class="bi">next</span>(counter))  <span class="cm"># 2</span></pre>
+</div>
 
-<span class="cm"># Use the generator</span>
-gen = get_squares_gen(<span class="nm">5</span>)
-<span class="bi">print</span>(<span class="bi">type</span>(gen))        <span class="cm"># &lt;class 'generator'&gt;</span>
-<span class="bi">print</span>(<span class="bi">next</span>(gen))        <span class="cm"># 0</span>
-<span class="bi">print</span>(<span class="bi">next</span>(gen))        <span class="cm"># 1</span>
-<span class="bi">print</span>(<span class="bi">next</span>(gen))        <span class="cm"># 4</span>
-<span class="bi">print</span>(<span class="bi">list</span>(gen))        <span class="cm"># [9, 16] (remaining)</span>
-
-<span class="cm"># Fibonacci generator</span>
-<span class="kw">def</span> <span class="bi">fibonacci</span>():
-    a, b = <span class="nm">0</span>, <span class="nm">1</span>
-    <span class="kw">while</span> <span class="kw">True</span>:
-        <span class="kw">yield</span> a
-        a, b = b, a + b
-
-fib = fibonacci()
-first_10 = [<span class="bi">next</span>(fib) <span class="kw">for</span> _ <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">10</span>)]
-<span class="bi">print</span>(first_10)  <span class="cm"># [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</span>
-
-<span class="cm"># Memory comparison</span>
-<span class="kw">import</span> sys
-list_size = sys.getsizeof(get_squares_list(<span class="nm">1000000</span>))
-gen_size = sys.getsizeof(get_squares_gen(<span class="nm">1000000</span>))
-<span class="bi">print</span>(<span class="st">f"List: {list_size:,} bytes"</span>)   <span class="cm"># ~8,000,000</span>
-<span class="bi">print</span>(<span class="st">f"Gen:  {gen_size:,} bytes"</span>)    <span class="cm"># ~200</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>&lt;class 'generator'&gt;<br>0 &rarr; 1 &rarr; 4 &rarr; [9, 16]<br>Fibonacci: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]<br>List: 8,000,056 bytes vs Gen: 200 bytes &#x1F4A5;</div></div></section>
-
-<section class="content-section" id="s2"><h2>2 &middot; Generator Expressions</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="cm"># Like list comprehension but with () instead of []</span>
-gen = (x**<span class="nm">2</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">10</span>))  <span class="cm"># generator</span>
-lst = [x**<span class="nm">2</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">10</span>)]  <span class="cm"># list</span>
-
-<span class="cm"># Use with sum, min, max, any, all</span>
-total = <span class="bi">sum</span>(x**<span class="nm">2</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">100</span>))
-<span class="bi">print</span>(total)  <span class="cm"># 328350</span>
-
-<span class="cm"># Check if any number is even</span>
-nums = [<span class="nm">1</span>, <span class="nm">3</span>, <span class="nm">5</span>, <span class="nm">8</span>, <span class="nm">9</span>]
-<span class="bi">print</span>(<span class="bi">any</span>(x % <span class="nm">2</span> == <span class="nm">0</span> <span class="kw">for</span> x <span class="kw">in</span> nums))  <span class="cm"># True</span>
-<span class="bi">print</span>(<span class="bi">all</span>(x > <span class="nm">0</span> <span class="kw">for</span> x <span class="kw">in</span> nums))        <span class="cm"># True</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>328350 &middot; True &middot; True</div></div></section>
-
-<section class="content-section" id="s3"><h2>3 &middot; itertools Module</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">import</span> itertools
-
-<span class="cm"># count: infinite counter</span>
-counter = itertools.count(start=<span class="nm">10</span>, step=<span class="nm">5</span>)
-<span class="bi">print</span>([<span class="bi">next</span>(counter) <span class="kw">for</span> _ <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">5</span>)])  <span class="cm"># [10, 15, 20, 25, 30]</span>
-
-<span class="cm"># cycle: repeat infinitely</span>
-colors = itertools.cycle([<span class="st">"red"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span>])
-<span class="bi">print</span>([<span class="bi">next</span>(colors) <span class="kw">for</span> _ <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">6</span>)])
-
-<span class="cm"># chain: concatenate iterables</span>
-<span class="bi">print</span>(<span class="bi">list</span>(itertools.chain([<span class="nm">1</span>,<span class="nm">2</span>], [<span class="nm">3</span>,<span class="nm">4</span>], [<span class="nm">5</span>])))  <span class="cm"># [1,2,3,4,5]</span>
-
-<span class="cm"># product: cartesian product</span>
-<span class="bi">print</span>(<span class="bi">list</span>(itertools.product(<span class="st">"AB"</span>, <span class="st">"12"</span>)))
-<span class="cm"># [('A','1'), ('A','2'), ('B','1'), ('B','2')]</span>
-
-<span class="cm"># combinations &amp; permutations</span>
-<span class="bi">print</span>(<span class="bi">list</span>(itertools.combinations(<span class="st">"ABC"</span>, <span class="nm">2</span>)))  <span class="cm"># AB AC BC</span>
-<span class="bi">print</span>(<span class="bi">list</span>(itertools.permutations(<span class="st">"AB"</span>, <span class="nm">2</span>)))   <span class="cm"># AB BA</span>
-
-<span class="cm"># islice: slice a generator</span>
-fib = fibonacci()
-first_5 = <span class="bi">list</span>(itertools.islice(fib, <span class="nm">5</span>))
-<span class="bi">print</span>(first_5)  <span class="cm"># [0, 1, 1, 2, 3]</span>
-
-<span class="cm"># groupby: group consecutive elements</span>
-data = [(<span class="st">"A"</span>,<span class="nm">1</span>),(<span class="st">"A"</span>,<span class="nm">2</span>),(<span class="st">"B"</span>,<span class="nm">3</span>),(<span class="st">"B"</span>,<span class="nm">4</span>)]
-<span class="kw">for</span> key, group <span class="kw">in</span> itertools.groupby(data, key=<span class="kw">lambda</span> x: x[<span class="nm">0</span>]):
-    <span class="bi">print</span>(<span class="st">f"{key}: {list(group)}"</span>)</pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>[10, 15, 20, 25, 30]<br>['red','green','blue','red','green','blue']<br>[('A','1'),('A','2'),('B','1'),('B','2')]<br>A: [('A',1),('A',2)] &middot; B: [('B',3),('B',4)]</div></div></section>
-
-<section class="content-section" id="s4"><h2>4 &middot; Custom Iterator Class</h2>
-<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"><span class="kw">class</span> <span class="bi">Countdown</span>:
-    <span class="kw">def</span> <span class="bi">__init__</span>(self, start):
-        self.current = start
-
-    <span class="kw">def</span> <span class="bi">__iter__</span>(self):
-        <span class="kw">return</span> self
-
-    <span class="kw">def</span> <span class="bi">__next__</span>(self):
-        <span class="kw">if</span> self.current <= <span class="nm">0</span>:
-            <span class="kw">raise</span> <span class="bi">StopIteration</span>
-        val = self.current
-        self.current -= <span class="nm">1</span>
-        <span class="kw">return</span> val
-
-<span class="kw">for</span> num <span class="kw">in</span> Countdown(<span class="nm">5</span>):
-    <span class="bi">print</span>(num, end=<span class="st">" "</span>)
-<span class="cm"># 5 4 3 2 1</span></pre>
-<div class="output-block"><div class="output-label">&#x25B6; Output</div>5 4 3 2 1</div></div></section>
+<div class="return-value-box">
+    <div class="rv-label">🔁 Return Value</div>
+    <p>Calling a generator function returns a <strong>generator iterator object</strong>. It does <em>not</em> return the value yielded; you must iterate over the generator object to retrieve values.</p>
+</div>
+</section>
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="comprehensions.html" class="sa-link">List Comprehensions</a><a href="lambda.html" class="sa-link">Lambda and Map</a></div></section>
 </div>
 <div class="page-nav">
 <a href="comprehensions.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Comprehensions</span></a>
