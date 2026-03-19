@@ -19,27 +19,34 @@ def load_concepts():
     with open('py_concepts.json', 'r') as f:
         return json.load(f)
 
-def format_textbook_content(text):
-    """Formats raw text into a premium web experience with cards, icons, and sentence splitting."""
+def format_textbook_content(text, category):
+    """Formats raw text into a premium web experience with cards, icons, and list detection."""
+    # Category-specific technical filtering to avoid contamination
+    if category == "NumPy":
+        # If segment is overwhelmed by Pandas, try to clean it or return early
+        if text.count("DataFrame") > 20 or text.count("Series") > 20:
+             text = re.sub(r'[^.]*?pandas[^.]*?\.', '', text, flags=re.IGNORECASE)
+
     # Clean up massive text before processing
-    text = re.sub(r'\s+', ' ', text) # Resolve PDF line break issues
+    text = re.sub(r'\s+', ' ', text)
     
-    # Split into rough 'blocks' based on possible headings (numbered or short caps)
-    blocks = re.split(r'(\d+\.\d+\s+[A-Z][^.]{5,50}|[A-Z\s]{10,50}:)', text)
+    # Improved List Detection: Look for ' • ', ' - ', or ' 1. ' in the big text blob
+    # and convert them to newlines for the block splitter
+    text = re.sub(r' (•|-|\d+\.) ', r'\n- ', text)
+    
+    # Split into blocks (Headings vs Paragraphs)
+    blocks = re.split(r'(\d+\.\d+\s+[A-Z][^.]{5,50}|[A-Z\s]{10,50}:|\n- )', text)
     
     formatted = ""
-    in_code = False
-    
-    # Icons for variety
     icons = ["&#x1F4D8;", "&#x1F52C;", "&#x1F4CA;", "&#x1F527;", "&#x1F4A1;", "&#x1F4BB;"]
     icon_idx = 0
+    in_list = False
     
     keywords = [
         "ndarray", "DataFrame", "Series", "Backpropagation", "Gradient Descent",
         "Stochastic", "Activation Function", "Hyperparameter", "Vectorization",
         "Broadcasting", "Regularization", "Overfitting", "Transformer", "Attention",
-        "Convolutional", "Recurrent", "Optimization", "Loss Function", "Weights",
-        "Neurons", "Layers", "Tensors", "Matrices", "Eigenvalues", "Covariance"
+        "Convolutional", "Recurrent", "Optimization", "Loss Function", "Weights"
     ]
 
     for block in blocks:
@@ -51,10 +58,20 @@ def format_textbook_content(text):
         for kw in keywords:
             bolded_block = re.sub(rf'\b{kw}\b', f'<strong>{kw}</strong>', bolded_block, flags=re.IGNORECASE)
 
-        # Heading detection (Block is very short or matches heading pattern)
-        # Avoid short numeric strings (like page numbers)
+        # List item detection
+        if clean_block.startswith('- '):
+            if not in_list:
+                formatted += '<ul class="textbook-list">'
+                in_list = True
+            content = clean_block[2:].strip()
+            formatted += f'<li>{content}</li>'
+            continue
+        elif in_list:
+            formatted += '</ul>'
+            in_list = False
+
+        # Heading detection
         is_page_num = re.match(r'^\d+$', clean_block) or (len(clean_block) < 5 and clean_block.isdigit())
-        
         if len(clean_block) < 60 and not is_page_num and (re.match(r'^\d+\.', clean_block) or clean_block.isupper() or ":" in clean_block):
             icon = icons[icon_idx % len(icons)]
             icon_idx += 1
@@ -65,60 +82,48 @@ def format_textbook_content(text):
         if ">>>" in clean_block or "..." in clean_block:
             formatted += f'<div class="code-block-wrapper"><pre class="code-block">{clean_block}</pre></div>'
         else:
-            # Paragraph splitting for readability
             sentences = re.split(r'(?<=[.!?])\s+', bolded_block)
             formatted += '<div class="content-card">'
             current_p = ""
             for i, sent in enumerate(sentences):
                 current_p += sent + " "
-                # Every 3-4 sentences, start a new paragraph
                 if (i + 1) % 4 == 0 or i == len(sentences) - 1:
                     formatted += f'<p>{current_p.strip()}</p>'
                     current_p = ""
             formatted += '</div>'
             
+    if in_list: formatted += '</ul>'
     return formatted
 
 def get_text_segment(file_paths, query, category, min_chars=50000):
     """Searches for a query across sources with keyword relaxation."""
     combined_content = ""
-    
-    # Keyword relaxation strategy
     search_terms = [query]
-    if " " in query:
-        search_terms += query.split()
-    search_terms.append(category) # Final fallback
+    if " " in query: search_terms += query.split()
+    search_terms.append(category)
     
     for term in search_terms:
         if len(term) < 3: continue
-        
         for file_path in file_paths:
             if not os.path.exists(file_path): continue
-            
             with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
                 content = f.read()
-            
             pattern = rf"\b{re.escape(term)}\b"
             matches = list(re.finditer(pattern, content, re.IGNORECASE))
-            
             if matches:
-                # Grab a HUGE chunk from each match until we hit min_chars
-                for m in matches[:3]: # Take up to 3 major sections
+                for m in matches[:3]:
                     start = m.start()
                     combined_content += content[start : start + (min_chars // 2)]
                     if len(combined_content) >= min_chars: break
             if len(combined_content) >= min_chars: break
         if len(combined_content) >= min_chars: break
-            
+    
     if not combined_content:
-        return f"<p>Aggregated technical data for <strong>{query}</strong> is being synthesized from core Python specifications.</p>"
-        
-    return format_textbook_content(combined_content)
+        return f"<p>Aggregated technical data for <strong>{query}</strong> is being synthesized.</p>"
+    return format_textbook_content(combined_content, category)
 
 def generate_site():
     sections = load_concepts()
-    print(f"Generating site for {sum(len(s['pages']) for s in sections.values())} concepts...")
-    
     all_pages = []
     for s_name, s_data in sections.items():
         for p in s_data['pages']:
@@ -135,15 +140,24 @@ def generate_site():
         bc = f"{s_name} &rarr; {query}"
         intro = f"Technically exhaustive breakdown of <strong>{query}</strong>. This module provide infinite depth with textbook-level precision."
         
-        prev = all_pages[i-1][2] if i > 0 else {"path": "index.html", "title": "Home"}
-        next_ = all_pages[i+1][2] if i < len(all_pages)-1 else {"path": "index.html", "title": "Home"}
+        # FIX: Relative paths for Prev/Next
+        p_raw = all_pages[i-1][2] if i > 0 else {"path": "index.html", "title": "Home"}
+        n_raw = all_pages[i+1][2] if i < len(all_pages)-1 else {"path": "index.html", "title": "Home"}
+        
+        # If it's a section page (like python/intro.html), we need ../
+        prev = ("../" + p_raw['path'], p_raw['title']) if "/" in p_raw['path'] else (p_raw['path'], p_raw['title'])
+        # Special case for index.html from a section: it needs ../index.html
+        if p_raw['path'] == "index.html": prev = ("../../index.html", "Home")
+        
+        next_ = ("../" + n_raw['path'], n_raw['title']) if "/" in n_raw['path'] else (n_raw['path'], n_raw['title'])
+        if n_raw['path'] == "index.html": next_ = ("../../index.html", "Home")
         
         make_page(
             rel_path=p_data['path'], title=p_data['title'], section_name=s_name,
             emoji=s_icon, diff="advanced", bc=bc, intro=intro,
             books=", ".join([os.path.basename(s) for s in sources if os.path.exists(s)]),
             body=body_content,
-            prev=(prev['path'], prev['title']), next_=(next_['path'], next_['title']),
+            prev=prev, next_=next_,
             sections=sections
         )
 
