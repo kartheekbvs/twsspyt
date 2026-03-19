@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introduction to Machine Learning - Python Learning Hub</title>
-<meta name="description" content="Introduction to Machine Learning - comprehensive textbook reference with code examples.">
+<title>Supervised Learning & SVM - Python Learning Hub</title>
+<meta name="description" content="Supervised Learning & SVM - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -105,52 +105,74 @@
 </nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
-<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; ML &rarr; Introduction</div>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; ML &rarr; Supervised Learning</div>
 <div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
 </header>
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F916; Machine Learning</span>
-<h1>Introduction to Machine Learning</h1>
-<p class="page-intro">Formal textbook introduction to Machine Learning, the Scikit-Learn API philosophy, and the end-to-end data science workflow.</p>
+<h1>Supervised Learning & SVM</h1>
+<p class="page-intro">Massive textbook-accurate expansion of Supervised Learning fundamentals and Support Vector Machines, including image recognition and the kernel trick.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge beginner">&#x25CF; Beginner</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Hands-On Machine Learning &mdash; Aurélien Géron</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Learning scikit-learn &mdash; Raúl Garreta</em></span>
 </div></div>
 
 <div class="toc-box">
-    <h4>&#x1F4CB; Machine Learning: The Scikit-Learn Pipeline</h4>
+    <h4>&#x1F4CB; 2 &middot; Supervised Learning & SVM</h4>
     <ol>
-        <li><a href="#intro">1. The Formal Definition of Learning</a></li>
-        <li><a href="#types">2. Supervised vs Unsupervised Learning</a></li>
-        <li><a href="#api">3. The Estimator API Philosophy</a></li>
-        <li><a href="#workflow">4. The End-to-End Workflow</a></li>
-        <li><a href="#scaling">5. Scaling & Preprocessing</a></li>
+        <li><a href="#intro">1. The General Idea of Supervised Learning</a></li>
+        <li><a href="#svm-theory">2. Image Recognition with Support Vector Machines</a></li>
+        <li><a href="#hyperplane">3. The Optimal Hyperplane & Margin</a></li>
+        <li><a href="#kernel">4. The Kernel Trick: Polynomial & RBF</a></li>
+        <li><a href="#example">5. Practical Example: Olivetti Faces</a></li>
     </ol>
 </div>
 
 <section class="content-section" id="intro">
-    <h2>1 &middot; The Formal Definition of Learning</h2>
-    <p>Machine Learning is the study of algorithms that improve through experience. As Tom Mitchell formally defines it, a computer program is said to learn from experience <em>E</em> with respect to some task <em>T</em> and performance measure <em>P</em>, if its performance at tasks in <em>T</em> improves with experience <em>E</em>.</p>
+    <h2>1 &middot; The General Idea of Supervised Learning</h2>
+    <p>Supervised learning algorithms work with training data where each instance has an input (a set of attributes) and a desired output (a target class). As the textbook clarifies: <em>"We use this data to train a model that will predict the same target class for new unseen instances."</em> These methods are standard tools in disciplines ranging from medical diagnosis to particle physics at the Large Hadron Collider (LHC).</p>
 </section>
 
-<section class="content-section" id="api">
-    <h2>3 &middot; The Estimator API Philosophy</h2>
+<section class="content-section" id="svm-theory">
+    <h2>2 &middot; Image Recognition with Support Vector Machines</h2>
+    <p>Imagine instances in your dataset as points in a multidimensional space. Support Vector Machines (SVM) attempt to find a <strong>hyperplane</strong> that separates instances of one class from the rest in an optimal way, selecting those that pass through the widest possible gaps between instances of different classes.</p>
     <div class="callout note">
-        <div class="callout-icon">🛠️</div>
+        <div class="callout-icon">📐</div>
         <div class="callout-content">
-            <strong>The Consistency Principle</strong>
-            <p>Every object in Scikit-Learn follows a strict interface. <strong>Estimators</strong> use <code>.fit()</code>, <strong>Transformers</strong> use <code>.transform()</code>, and <strong>Predictors</strong> use <code>.predict()</code>. This design allows for the creation of complex <strong>Pipelines</strong>.</p>
+            <strong>The Optimal Hyperplane</strong>
+            <p>The "red surface" typically represents the hyperplane with the <strong>maximum margin</strong>; it is the most distant hyperplane from the closest instances of the two categories. This approach lowers the <strong>generalization error</strong>, making the model resistant to overfitting.</p>
         </div>
     </div>
 </section>
 
-<section class="content-section" id="workflow">
-    <h2>4 &middot; The End-to-End Workflow</h2>
-    <p>A typical ML project sequence: 1. Data Selection &rarr; 2. Data Preprocessing &rarr; 3. Feature Selection &rarr; 4. Model Selection &rarr; 5. Training &rarr; 6. Evaluation.</p>
+<section class="content-section" id="kernel">
+    <h2>4 &middot; The Kernel Trick</h2>
+    <p>SVM can construct hyperplanes in high or infinite dimensional spaces using nonlinear surfaces, such as polynomial or radial basis functions (RBF), by using the <strong>kernel trick</strong>. This implicitly maps inputs into high-dimensional feature spaces without the computational cost of direct transformation.</p>
     <div class="return-value-box">
-        <div class="rv-label">🔁 Return Value: .fit()</div>
-        <p>The <code>model.fit()</code> method returns <strong>self</strong>. This enables method chaining: <code>model = LogisticRegression().fit(X, y)</code>.</p>
+        <div class="rv-label">⚙️ Hyperparameters: kernel, C, gamma</div>
+        <p>The <code>SVC</code> implementation in Scikit-Learn defaults to the <code>rbf</code> kernel. The <code>C</code> parameter controls the trade-off between smooth decision boundaries and classifying training points correctly.</p>
+    </div>
+</section>
+
+<section class="content-section" id="example">
+    <h2>5 &middot; Practical Example: Face Recognition</h2>
+    <p>Using the <code>fetch_olivetti_faces</code> dataset, we treat pixel values as learning attributes. Since pixel values are already in a uniform range (0 to 1), normalization is often unnecessary.</p>
+    <div class="code-block">
+        <div class="code-header"><span>Python</span><button class="copy-btn">Copy</button></div>
+        <pre><code>from sklearn.svm import SVC
+from sklearn.cross_validation import train_test_split
+
+# Initialize SVC with a linear kernel
+svc_1 = SVC(kernel='linear')
+
+# Split dataset (75% training, 25% testing)
+X_train, X_test, y_train, y_test = train_test_split(
+    faces.data, faces.target, test_size=0.25, random_state=0)
+
+# Fit the model
+svc_1.fit(X_train, y_train)
+print(f"Accuracy: {svc_1.score(X_test, y_test)}")</code></pre>
     </div>
 </section>
 
@@ -158,7 +180,7 @@
 </div>
 <div class="page-nav">
 <a href="../pandas/visualization.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Pandas Visualization</span></a>
-<a href="linear-regression.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Linear Regression</span></a>
+<a href="naive-bayes.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Naive Bayes</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

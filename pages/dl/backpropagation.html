@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Backpropagation & Optimizers - Python Learning Hub</title>
-<meta name="description" content="Backpropagation & Optimizers - comprehensive textbook reference with code examples.">
+<title>Backpropagation Algorithms - Python Learning Hub</title>
+<meta name="description" content="Backpropagation Algorithms - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -111,43 +111,59 @@
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F9E0; Deep Learning</span>
-<h1>Backpropagation & Optimizers</h1>
-<p class="page-intro">Deep-dive into the mathematics of backpropagation, the chain rule, and modern optimization algorithms like Adam and SGD.</p>
+<h1>Backpropagation Algorithms</h1>
+<p class="page-intro">Deep-dive into the mathematics of backpropagation, computational graphs, and symbol-to-symbol differentiation algorithms.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge advanced">&#x25CF; Advanced</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Deep Learning &mdash; Ian Goodfellow</em></span>
 </div></div>
 
 <div class="toc-box">
-    <h4>&#x1F4CB; Backpropagation: Calculus of Learning</h4>
+    <h4>&#x1F4CB; 6.5 &middot; Back-Propagation Algorithms</h4>
     <ol>
-        <li><a href="#intro">1. The Chain Rule of Calculus</a></li>
-        <li><a href="#gradient">2. Gradient Descent & Step Size</a></li>
-        <li><a href="#vanish">3. The Vanishing Gradient Problem</a></li>
-        <li><a href="#optimizers">4. Optimizers: SGD, Adam, RMSProp</a></li>
+        <li><a href="#graphs">1. Computational Graphs</a></li>
+        <li><a href="#chain">2. The Chain Rule of Calculus</a></li>
+        <li><a href="#backprop">3. The Backprop Algorithm (6.2)</a></li>
+        <li><a href="#symbolic">4. Symbol-to-Symbol Derivatives</a></li>
+        <li><a href="#jacobian">5. Jacobians & Tensors</a></li>
     </ol>
 </div>
 
-<section class="content-section" id="intro">
-    <h2>1 &middot; The Chain Rule</h2>
-    <p>Backpropagation is the application of the chain rule to the network's computational graph. It calculates the partial derivative of the cost function with respect to every weight in the system, moving backward from the output layer to the input.</p>
+<section class="content-section" id="graphs">
+    <h2>1 &middot; Computational Graphs</h2>
+    <p>To describe back-propagation precisely, we use a <strong>computational graph</strong> where each node indicates a variable (scalar, vector, matrix, or tensor) and directed edges represent operations.</p>
 </section>
 
-<section class="content-section" id="optimizers">
-    <h2>4 &middot; Modern Optimizers</h2>
-    <div class="callout important">
-        <div class="callout-icon">⚙️</div>
+<section class="content-section" id="chain">
+    <h2>2 &middot; The Chain Rule</h2>
+    <p>Back-propagation is an algorithm that computes the chain rule with a specific order of operations that is highly efficient. In vector notation: \( 
+abla_{\mathbf{x}} z = \left( rac{\partial \mathbf{y}}{\partial \mathbf{x}} ight)^	op 
+abla_{\mathbf{y}} z \), where \( rac{\partial \mathbf{y}}{\partial \mathbf{x}} \) is the <strong>Jacobian matrix</strong>.</p>
+</section>
+
+<section class="content-section" id="backprop">
+    <h2>3 &middot; The Back-Prop Procedure</h2>
+    <div class="callout note">
+        <div class="callout-icon">🔍</div>
         <div class="callout-content">
-            <strong>Adam: Adaptive Moment Estimation</strong>
-            <p>Adam is currently the industry-standard optimizer. It combines the advantages of AdaGrad (which handles sparse gradients) and RMSProp (which handles non-stationary objectives).</p>
+            <strong>Algorithm 6.2: Scalar Backprop</strong>
+            <p>1. Run forward propagation to obtain activations.<br>
+            2. Initialize <code>grad_table[u_n] = 1</code>.<br>
+            3. For \( j = n-1 \) down to 1: <br>
+            &nbsp;&nbsp;&nbsp;<code>grad_table[u_j] = \sum grad_table[u_i] (\partial u_i / \partial u_j)</code></p>
         </div>
     </div>
+</section>
+
+<section class="content-section" id="symbolic">
+    <h2>4 &middot; Symbol-to-Symbol Derivatives</h2>
+    <p>Modern software implementations use the <strong>symbol-to-symbol</strong> approach. Instead of accessing numeric values directly, the algorithm adds nodes to the computational graph describing how to compute derivatives. This allows a generic graph evaluation engine to compute gradients for any specific values.</p>
 </section>
 
 <section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="neural-networks.html" class="sa-link">NN Fundamentals</a><a href="../ml/model-evaluation.html" class="sa-link">Optimization</a><a href="cnn.html" class="sa-link">Computer Vision</a></div></section>
 </div>
 <div class="page-nav">
-<a href="neural-networks.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Neural Networks</span></a>
+<a href="neural-networks.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Feedforward Networks</span></a>
 <a href="cnn.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">CNN</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>

@@ -1,78 +1,127 @@
 import sys, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_template import make_page
 
-# DATA CLEANING (MASSIVE EXPANSION)
-pd_clean_body = """
+# DATA CLEANING (PRECISION MAPPING FROM MCKINNEY CHAPTER 7)
+pd_cleaning_body = """
 <div class="toc-box">
-    <h4>&#x1F4CB; Data Cleaning: The Art of Wrangling</h4>
-    <ol>
-        <li><a href="#intro">1. The Cleaning Workflow</a></li>
-        <li><a href="#missing">2. Handling Missing Data (NULL/NaN)</a></li>
-        <li><a href="#duplicates">3. Duplicate Identification</a></li>
-        <li><a href="#replace">4. Replacement and Mapping</a></li>
-        <li><a href="#outliers">5. Outlier Detection and Capping</a></li>
-    </ol>
+    <h4>&#x1F4CB; Data Cleaning and Preparation</h4>
+    <p>During the course of doing data analysis and modeling, a significant amount of time is spent on data preparation: loading, cleaning, transforming, and rearranging.</p>
 </div>
 
-<section class="content-section" id="intro">
-    <h2>1 &middot; The Cleaning Workflow</h2>
-    <p>Cleaning is the most important step in any data science project. Real-world data is messy, incomplete, and often incorrectly formatted. Pandas provides the tools to handle these issues with precision and performance.</p>
-</section>
-
-<section class="content-section" id="missing">
-    <h2>2 &middot; Handling Missing Data</h2>
-    <div class="callout note">
-        <div class="callout-icon">🔍</div>
-        <div class="callout-content">
-            <strong>Deep Dive: NaN vs None</strong>
-            <p>Pandas uses <code>NaN</code> (Not a Number) for missing numeric and object data. It inherits this from NumPy. For Python objects, <code>None</code> is often used, but Pandas automatically converts it to <code>NaN</code> for numeric types to allow for vectorized math.</p>
-        </div>
+<div class="theory-box">
+    <h3>7.1 Handling Missing Data</h3>
+    <p>Missing data occurs commonly in many data analysis applications. One of the goals of pandas is to make working with missing data as painless as possible. For example, all of the descriptive statistics on pandas objects exclude missing data by default.</p>
+    
+    <div class="spec-card">
+        <h4>Table 7-2: fillna function arguments</h4>
+        <ul>
+            <li><strong>value:</strong> Scalar value or dict-like object to use to fill missing values.</li>
+            <li><strong>method:</strong> Interpolation; by default 'ffill' (forward fill).</li>
+            <li><strong>axis:</strong> Axis to fill on; default axis=0.</li>
+            <li><strong>inplace:</strong> Modify the calling object without producing a copy.</li>
+        </ul>
     </div>
-</section>
-"""
-
-make_page("pandas/cleaning.html","Data Cleaning & Wrangling","Pandas","&#x1F43C;","intermediate","Pandas &rarr; Cleaning",
-"Mastering missing data handling, duplicate removal, and value replacement using vectorized string and numeric operations.",
-"Python for Data Analysis &mdash; Wes McKinney", pd_clean_body, ("selection.html","Selection & Filtering"), ("groupby.html","GroupBy & Aggregation"),
-[("selection.html", "Accessing Data"), ("groupby.html", "Aggregating Data"), ("merging.html", "Joining Data")])
-
-# MERGING & JOINING (MASSIVE EXPANSION)
-pd_merge_body = """
-<div class="toc-box">
-    <h4>&#x1F4CB; Relational Algebra in Pandas</h4>
-    <ol>
-        <li><a href="#intro">1. The Merge Paradigm</a></li>
-        <li><a href="#inner">2. Inner, Outer, Left, and Right Joins</a></li>
-        <li><a href="#concat">3. Concatenation and Stacking</a></li>
-        <li><a href="#overlap">4. Handling Overlapping Column Names</a></li>
-    </ol>
 </div>
 
-<section class="content-section" id="intro">
-    <h2>1 &middot; The Merge Paradigm</h2>
-    <p>Merging is the process of combining datasets based on one or more common keys. This is identical to the SQL "JOIN" operations. We must choose the type of join based on how we want to handle missing keys in either dataset.</p>
-</section>
+<div class="code-block">
+    <div class="code-header"><span>Python: Cleaning & Transformation</span></div>
+    <pre><code>import pandas as pd
+import numpy as np
 
-<section class="content-section" id="inner">
-    <h2>2 &middot; Join Types</h2>
-    <div class="callout important">
-        <div class="callout-icon">🔗</div>
-        <div class="callout-content">
-            <strong>The Four Horsemen of Joins</strong>
-            <ul>
-                <li><strong>Inner Join:</strong> Only keys present in both.</li>
-                <li><strong>Outer Join:</strong> All keys from both (adds NaN).</li>
-                <li><strong>Left Join:</strong> All keys from left, intersection from right.</li>
-                <li><strong>Right Join:</strong> All keys from right, intersection from left.</li>
-            </ul>
-        </div>
-    </div>
-</section>
+# Filling missing values
+df.fillna(0, inplace=True)
+df.fillna(method='ffill', limit=2)
+
+# Removing Duplicates
+data = pd.DataFrame({'k1': ['one', 'two'] * 3 + ['two'],
+                     'k2': [1, 1, 2, 3, 3, 4, 4]})
+data.duplicated()
+data.drop_duplicates(['k1'])
+
+# Element-wise Transformation
+meat_to_animal = {'bacon': 'pig', 'pastrami': 'cow'}
+data['animal'] = data['food'].str.lower().map(meat_to_animal)
+
+# Replacing values (Sentinel handling)
+data.replace(-999, np.nan)</code></pre>
+</div>
+
+<div class="theory-box">
+    <h3>7.2 Data Transformation</h3>
+    <p>Discretization and binning is another class of important operations. Continuous data is often separated into "bins" for analysis. Pandas provides <code>cut</code> for fixed-edge binning and <code>qcut</code> for quantile-based binning.</p>
+</div>
+
+<div class="code-block">
+    <div class="code-header"><span>Python: Discretization</span></div>
+    <pre><code>ages = [20, 22, 25, 27, 21, 23, 37, 31, 61, 45, 41, 32]
+bins = [18, 25, 35, 60, 100]
+cats = pd.cut(ages, bins)
+
+# Quantile-based binning
+pd.qcut(data, 4) # Cut into quartiles</code></pre>
+</div>
 """
 
-make_page("pandas/merging.html","Merging & Joining","Pandas","&#x1F43C;","intermediate","Pandas &rarr; Merging",
-"Comprehensive analysis of relational database operations in Pandas, covering merges, joins, and concatenations.",
-"Python for Data Analysis &mdash; Wes McKinney", pd_merge_body, ("groupby.html","GroupBy & Aggregation"), ("visualization.html","Visualization"),
-[("groupby.html", "Aggregating Data"), ("selection.html", "Filtering Keys")])
+# MERGING & COMBINING (PRECISION MAPPING FROM MCKINNEY CHAPTER 8)
+pd_merging_body = """
+<div class="toc-box">
+    <h4>&#x1F4CB; Combining and Merging Datasets</h4>
+    <p>Data contained in pandas objects can be combined together in a number of ways: <strong>merge</strong>, <strong>concat</strong>, and <strong>combine_first</strong>.</p>
+</div>
 
-print("cleaning.html + merging.html MASSIVELY expanded!")
+<div class="theory-box">
+    <h3>Database-Style DataFrame Joins</h3>
+    <p>Merge or join operations combine datasets by linking rows using one or more keys. These are similar to the join operations in relational databases. If no key is specified, <code>merge</code> uses the overlapping column names as the keys.</p>
+</div>
+
+<div class="code-block">
+    <div class="code-header"><span>Python: Merging Datasets</span></div>
+    <pre><code># Basic merge on overlapping column
+pd.merge(df1, df2, on='key')
+
+# Specifying different keys
+pd.merge(df3, df4, left_on='lkey', right_on='rkey')
+
+# Join types: 'inner', 'outer', 'left', 'right'
+pd.merge(df1, df2, how='outer')
+
+# Merging on Index
+pd.merge(left1, right1, left_on='key', right_index=True)</code></pre>
+</div>
+
+<div class="theory-box">
+    <h3>Concatenation Along an Axis</h3>
+    <p>Concatenation refers to binding or stacking datasets. The <code>concat</code> function provides a consistent way to glue together values and indexes along an axis. By default, it works along <code>axis=0</code> (rows).</p>
+</div>
+
+<div class="code-block">
+    <div class="code-header"><span>Python: Concatenation</span></div>
+    <pre><code># Concatenating Series
+pd.concat([s1, s2, s3])
+
+# Concatenating along columns
+pd.concat([s1, s2, s3], axis=1)
+
+# Hierarchical Indexing with Concat
+pd.concat([s1, s1, s3], keys=['one', 'two', 'three'])</code></pre>
+</div>
+
+<div class="theory-box">
+    <h3>Reshaping: Stacking and Pivoting</h3>
+    <p>Hierarchical indexing provides a consistent way to rearrange data. <code>stack</code> rotates from columns to rows, and <code>unstack</code> rotates from rows to columns.</p>
+</div>
+
+<div class="code-block">
+    <div class="code-header"><span>Python: Reshaping Format</span></div>
+    <pre><code># Pivoting 'Long' to 'Wide'
+pivoted = ldata.pivot('date', 'item', 'value')
+
+# Stacking/Unstacking
+result = data.stack()
+result.unstack()</code></pre>
+</div>
+"""
+
+make_page("Data Cleaning", pd_cleaning_body, "pages/pandas/cleaning.html", "pandas")
+make_page("Merging & Combining", pd_merging_body, "pages/pandas/merging.html", "pandas")
+make_page("Reshaping Data", pd_merging_body, "pages/pandas/reshaping.html", "pandas")

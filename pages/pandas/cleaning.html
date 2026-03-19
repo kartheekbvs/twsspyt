@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Data Cleaning & Wrangling - Python Learning Hub</title>
-<meta name="description" content="Data Cleaning & Wrangling - comprehensive textbook reference with code examples.">
+<title>Data Cleaning - Python Learning Hub</title>
+<meta name="description" content="Data Cleaning - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -105,51 +105,47 @@
 </nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
-<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; Pandas &rarr; Cleaning</div>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; Pandas &rarr; Data Cleaning</div>
 <div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
 </header>
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F43C; Pandas</span>
-<h1>Data Cleaning & Wrangling</h1>
-<p class="page-intro">Mastering missing data handling, duplicate removal, and value replacement using vectorized string and numeric operations.</p>
+<h1>Data Cleaning</h1>
+<p class="page-intro">Data cleaning handles missing values (NaN), duplicates, type conversions, and outliers. Essential preprocessing step before any analysis or ML model training.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
-<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis &mdash; Wes McKinney</em></span>
+<span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis &mdash; Wes McKinney, Data Science and Analytics with Python</em></span>
 </div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
+<li><a href="#s1">Core Concepts</a></li><li><a href="#s2">Code Examples</a></li><li><a href="#s3">Common Patterns</a></li><li><a href="#s4">Best Practices</a></li></ol></div>
+<section class="content-section" id="s1"><h2>1 &middot; Core Concepts</h2>
+<p>Data cleaning handles missing values (NaN), duplicates, type conversions, and outliers. Essential preprocessing step before any analysis or ML model training.</p></section>
+<section class="content-section" id="s2"><h2>2 &middot; Code Examples</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
 
-<div class="toc-box">
-    <h4>&#x1F4CB; Data Cleaning: The Art of Wrangling</h4>
-    <ol>
-        <li><a href="#intro">1. The Cleaning Workflow</a></li>
-        <li><a href="#missing">2. Handling Missing Data (NULL/NaN)</a></li>
-        <li><a href="#duplicates">3. Duplicate Identification</a></li>
-        <li><a href="#replace">4. Replacement and Mapping</a></li>
-        <li><a href="#outliers">5. Outlier Detection and Capping</a></li>
-    </ol>
-</div>
+<span class="cm"># Example DataFrame</span>
+df = pd.DataFrame({
+    <span class="st">"name"</span>: [<span class="st">"Alice"</span>,<span class="st">"Bob"</span>,<span class="st">"Charlie"</span>,<span class="st">"Diana"</span>],
+    <span class="st">"age"</span>: [<span class="nm">25</span>,<span class="nm">30</span>,<span class="nm">35</span>,<span class="nm">28</span>],
+    <span class="st">"salary"</span>: [<span class="nm">50000</span>,<span class="nm">60000</span>,<span class="nm">70000</span>,<span class="nm">55000</span>],
+    <span class="st">"dept"</span>: [<span class="st">"Engineering"</span>,<span class="st">"Marketing"</span>,<span class="st">"Engineering"</span>,<span class="st">"Marketing"</span>]
+})
+<span class="bi">print</span>(df)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>      name  age  salary         dept<br>0    Alice   25   50000  Engineering<br>1      Bob   30   60000    Marketing<br>2  Charlie   35   70000  Engineering<br>3    Diana   28   55000    Marketing</div></div></section>
+<section class="content-section" id="s3"><h2>3 &middot; Common Patterns</h2>
+<div class="callout note"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Textbook Insight</strong>
+<p>Pandas is built on NumPy and provides high-performance, easy-to-use data structures. The two primary structures are Series (1D) and DataFrame (2D). Always prefer vectorized operations over loops.</p></div></div></section>
+<section class="content-section" id="s4"><h2>4 &middot; Best Practices</h2>
+<div class="callout tip"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Performance Tip</strong>
+<p>Use <code>.apply()</code> sparingly &mdash; prefer vectorized operations. Use <code>category</code> dtype for string columns with few unique values to save memory.</p></div></div></section>
 
-<section class="content-section" id="intro">
-    <h2>1 &middot; The Cleaning Workflow</h2>
-    <p>Cleaning is the most important step in any data science project. Real-world data is messy, incomplete, and often incorrectly formatted. Pandas provides the tools to handle these issues with precision and performance.</p>
-</section>
-
-<section class="content-section" id="missing">
-    <h2>2 &middot; Handling Missing Data</h2>
-    <div class="callout note">
-        <div class="callout-icon">🔍</div>
-        <div class="callout-content">
-            <strong>Deep Dive: NaN vs None</strong>
-            <p>Pandas uses <code>NaN</code> (Not a Number) for missing numeric and object data. It inherits this from NumPy. For Python objects, <code>None</code> is often used, but Pandas automatically converts it to <code>NaN</code> for numeric types to allow for vectorized math.</p>
-        </div>
-    </div>
-</section>
-
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="selection.html" class="sa-link">Accessing Data</a><a href="groupby.html" class="sa-link">Aggregating Data</a><a href="merging.html" class="sa-link">Joining Data</a></div></section>
 </div>
 <div class="page-nav">
-<a href="selection.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Selection & Filtering</span></a>
-<a href="groupby.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">GroupBy & Aggregation</span></a>
+<a href="selection.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Selection</span></a>
+<a href="groupby.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">GroupBy</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

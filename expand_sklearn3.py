@@ -4,58 +4,64 @@ from gen_template import make_page
 # SVM (MASSIVE EXPANSION)
 ml_svm_body = """
 <div class="toc-box">
-    <h4>&#x1F4CB; Support Vector Machines: The Margin Maximizers</h4>
+    <h4>&#x1F4CB; 11 &middot; Support Vector Machines</h4>
     <ol>
-        <li><a href="#intro">1. The Large Margin Classification Logic</a></li>
-        <li><a href="#kernel">2. The Kernel Trick: Linear to Non-Linear</a></li>
-        <li><a href="#cost">3. Hard vs Soft Margin (C-Parameter)</a></li>
-        <li><a href="#reg">4. SVM for Regression (SVR)</a></li>
+        <li><a href="#hyperplane">1. Optimal Hyperplanes & Margins</a></li>
+        <li><a href="#image">2. Application: Face Recognition</a></li>
+        <li><a href="#kernel">3. The Kernel Trick: Mapping Higher Dimensions</a></li>
+        <li><a href="#pros">4. Efficiency in High-Dimensional Spaces</a></li>
     </ol>
 </div>
 
-<section class="content-section" id="intro">
-    <h2>1 &middot; Large Margin Classification</h2>
-    <p>SVM is a powerful and versatile ML model, capable of performing linear or non-linear classification, regression, and even outlier detection. The fundamental idea is to find a hyperplane that not only separates the classes but also stays as far away from the closest training instances as possible.</p>
-</section>
-
-<section class="content-section" id="kernel">
-    <h2>2 &middot; The Kernel Trick</h2>
+<section class="content-section" id="hyperplane">
+    <h2>1 &middot; Optimal Hyperplanes</h2>
+    <p>Imagine instances as points in a multidimensional space. A classifier builds a surface—a <strong>hyperplane</strong>—to separate classes. Support Vector Machines (SVM) obtain these hyperplanes optimally by selecting those that pass through the widest possible gaps (margins) between classes.</p>
     <div class="callout note">
-        <div class="callout-icon">🧬</div>
+        <div class="callout-icon">📏</div>
         <div class="callout-content">
-            <strong>Polynomial & RBF Kernels</strong>
-            <p>The kernel trick allows SVM to map inputs into high-dimensional feature spaces without actually computing the coordinates. This makes it possible to find linear separators in spaces where the original data is non-linearly distributed.</p>
+            <strong>The Large Margin Principle</strong>
+            <p>The "Red Surface" (Optimal Hyperplane) is chosen to maximize the distance to the closest training instances. This reduces generalization error and makes the model resistant to overfitting.</p>
         </div>
     </div>
 </section>
+
+<section class="content-section" id="image">
+    <h2>2 &middot; Case Study: Image Recognition</h2>
+    <p>SVM is effective in high-dimensional spaces where features (pixels) outnumber instances. In the Olivetti Faces dataset (64x64 pixels = 4096 features), SVM finds the unique signatures of individual faces by modeling pixels as coordinate vectors.</p>
+</section>
 """
 
-make_page("ml/svm.html","Support Vector Machine","Machine Learning","&#x1F916;","intermediate","ML &rarr; SVM",
-"Formal textbook analysis of Support Vector Machines, margin maximization, and the mathematical power of the Kernel Trick.",
-"Hands-On Machine Learning &mdash; Aurélien Géron", ml_svm_body, ("random-forest.html","Random Forest"), ("knn.html","K-Nearest Neighbors"),
+make_page("ml/svm.html","Support Vector Machines","Machine Learning","&#x1F916;","intermediate","ML &rarr; SVM",
+"Formal textbook analysis of Optimal Hyperplanes, Margin Maximization, and high-dimensional efficiency for Image Recognition.",
+"Learning scikit-learn &mdash; Raúl Garreta", ml_svm_body, ("random-forest.html","Random Forest"), ("knn.html","K-Nearest Neighbors"),
 [("random-forest.html", "Ensembles"), ("model-evaluation.html", "Hyperparameters")])
 
 # KNN (MASSIVE EXPANSION)
 ml_knn_body = """
 <div class="toc-box">
-    <h4>&#x1F4CB; K-Nearest Neighbors: Instance-Based Learning</h4>
+    <h4>&#x1F4CB; 12 &middot; K-Nearest Neighbors</h4>
     <ol>
-        <li><a href="#intro">1. The Lazy Learner Paradigm</a></li>
-        <li><a href="#dist">2. Distance Metrics: Euclidean vs Manhattan</a></li>
-        <li><a href="#k">3. Choosing the Optimal K</a></li>
-        <li><a href="#pros">4. Computational Complexity and Scaling</a></li>
+        <li><a href="#lazy">1. The Lazy Learner Paradigm</a></li>
+        <li><a href="#distance">2. Distance Metrics: Euclidean vs Manhattan</a></li>
+        <li><a href="#scaling">3. The Importance of Feature Scaling</a></li>
     </ol>
 </div>
 
-<section class="content-section" id="intro">
+<section class="content-section" id="lazy">
     <h2>1 &middot; The Lazy Learner</h2>
-    <p>KNN is a non-parametric, instance-based learning algorithm. It is 'lazy' because it does not learn a discriminative function from the training data but 'memorizes' the training dataset instead.</p>
+    <p>k-NN is a non-parametric, instance-based method. It is called a <strong>Lazy Learner</strong> because it does not learn a discriminative function; instead, it memorizes the training set and classifies new instances based on their proximity to stored examples.</p>
+</section>
+
+<section class="content-section" id="distance">
+    <h2>2 &middot; Distance Metrics</h2>
+    <p>The choice of k and the distance metric (Equation: \( \sqrt{\sum (x_i - y_i)^2} \) for Euclidean) determines how the local neighborhood is constructed. In high-dimensional spaces, k-NN is susceptible to the 'curse of dimensionality'.</p>
 </section>
 """
 
 make_page("ml/knn.html","K-Nearest Neighbors","Machine Learning","&#x1F916;","beginner","ML &rarr; KNN",
-"In-depth analysis of KNN, distance metrics, and the effects of feature scaling on instance-based learning models.",
-"Hands-On Machine Learning &mdash; Aurélien Géron", ml_knn_body, ("svm.html","Support Vector Machine"), ("clustering.html","K-Means Clustering"),
-[("svm.html", "Classification"), ("preprocessing.html", "Scaling")])
+"In-depth analysis of Instance-Based learning, distance calculations, and the theoretical implications of the 'Lazy' paradigm.",
+"Learning scikit-learn &mdash; Raúl Garreta", ml_knn_body, ("svm.html","SVM"), ("clustering.html","K-Means"),
+[("svm.html", "Optimal Hyperplane"), ("preprocessing.html", "Scaling")])
 
-print("svm.html + knn.html MASSIVELY expanded!")
+print("svm.html + knn.html MASSIVELY expanded with Garreta content!")
+

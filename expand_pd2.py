@@ -1,113 +1,168 @@
 import sys, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_template import make_page
 
-# READING DATA (MASSIVE EXPANSION)
+# READING DATA (PRECISION MAPPING FROM MCKINNEY CHAPTER 6)
 pd_io_body = """
 <div class="toc-box">
-    <h4>&#x1F4CB; Data I/O: The Textbook Reference</h4>
-    <ol>
-        <li><a href="#intro">1. The Parsing Pipeline</a></li>
-        <li><a href="#csv">2. Delimited Formats (CSV/TSV)</a></li>
-        <li><a href="#excel">3. Microsoft Excel Integration</a></li>
-        <li><a href="#sql">4. SQL Databases & SQLAlchemy</a></li>
-        <li><a href="#json">5. JSON & Semi-Structured Data</a></li>
-        <li><a href="#performance">6. Performance: Binary Formats (Parquet/HDF5)</a></li>
-        <li><a href="#chunking">7. Memory Management: Chunking Large Files</a></li>
-        <li><a href="#summary">8. Summary</a></li>
-    </ol>
+    <h4>&#x1F4CB; Data Loading, Storage, and File Formats</h4>
+    <p>This module provides a definitive reference for pandas' parsing functions, based on the primary technical documentation of Wes McKinney's <i>Python for Data Analysis</i>.</p>
 </div>
 
-<section class="content-section" id="intro">
-    <h2>1 &middot; The Parsing Pipeline</h2>
-    <p>Data I/O is often the most time-consuming part of a data scientist's workflow. Pandas addresses this with a suite of "reader" functions. As Wes McKinney explains, these functions do more than just read bytes; they perform <strong>Type Inference</strong>, <strong>Header Identification</strong>, and <strong>Missing Value Handling</strong> automatically.</p>
-</section>
-
-<section class="content-section" id="csv">
-    <h2>2 &middot; Delimited Formats (CSV/TSV)</h2>
-    <p>The most common data format is the Commma-Separated Value (CSV). Pandas' <code>read_csv()</code> is a highly optimized engine written in C/Cython for maximum speed.</p>
-    <div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block">df = pd.read_csv('data.csv', 
-                 sep=',', 
-                 header=0, 
-                 index_col='ID',
-                 parse_dates=['Date'],
-                 na_values=['NA', 'None'])</pre>
+<div class="theory-box">
+    <h3>6.1 Reading and Writing Data in Text Format</h3>
+    <p>Pandas features a number of functions for reading tabular data as a DataFrame object. The most frequently used are <code>read_csv</code> and <code>read_table</code>. These functions have many additional arguments to help you handle the wide variety of exception file formats that occur.</p>
+    
+    <div class="spec-card">
+        <h4>Table 6-1: Parsing Functions</h4>
+        <ul>
+            <li><strong>read_csv:</strong> Load delimited data from a file, URL, or file-like object; uses comma as default delimiter.</li>
+            <li><strong>read_table:</strong> Load delimited data from a file, URL, or file-like object; uses tab ('\t') as default delimiter.</li>
+            <li><strong>read_fwf:</strong> Read data in fixed-width column format (i.e., no delimiters).</li>
+            <li><strong>read_clipboard:</strong> Variant of read_table that reads data from the clipboard; useful for converting tables from web pages.</li>
+            <li><strong>read_excel:</strong> Read tabular data from an Excel XLS or XLSX file.</li>
+            <li><strong>read_hdf:</strong> Read HDF5 files written by pandas.</li>
+            <li><strong>read_json:</strong> Read data from a JSON (JavaScript Object Notation) string representation.</li>
+        </ul>
     </div>
-</section>
+</div>
 
-<section class="content-section" id="performance">
-    <h2>6 &middot; Performance: Binary Formats</h2>
-    <p>For large-scale data, text-based formats like CSV are inefficient. <strong>Parquet</strong> and <strong>HDF5</strong> provide columnar storage and compression, reducing disk I/O significantly.</p>
-    <div class="callout note">
-        <div class="callout-icon">🚀</div>
-        <div class="callout-content">
-            <strong>Pro Tip: Parquet</strong>
-            <p>Use <code>df.to_parquet()</code> for saving large datasets. It preserves data types and is natively supported by Spark and BigQuery.</p>
-        </div>
-    </div>
-</section>
+<div class="code-block">
+    <div class="code-header"><span>Python: Basic Data Loading</span></div>
+    <pre><code>import pandas as pd
 
-<section class="content-section" id="chunking">
-    <h2>7 &middot; Memory Management: Chunking</h2>
-    <p>When a file exceeds available RAM, you must read it in <em>Chunks</em>. This returns an iterator rather than a full DataFrame.</p>
-    <div class="return-value-box">
-        <div class="rv-label">🔁 Return Value: Chunking</div>
-        <p><code>pd.read_csv(..., chunksize=10000)</code> returns a <strong>TextFileReader</strong>. Iterating over it yields blocks of 10,000 rows as <strong>DataFrames</strong>.</p>
+# Basic reading without header
+pd.read_csv('examples/ex2.csv', header=None)
+
+# Specifying column names
+pd.read_csv('examples/ex2.csv', names=['a', 'b', 'c', 'd', 'message'])
+
+# Using a specific column as the row index
+names = ['a', 'b', 'c', 'd', 'message']
+pd.read_csv('examples/ex2.csv', names=names, index_col='message')</code></pre>
+</div>
+
+<div class="theory-box">
+    <h3>Handling Missing Values</h3>
+    <p>Handling missing values is an important and frequently nuanced part of the file parsing process. Missing data is usually either not present (empty string) or marked by some sentinel value. By default, pandas uses a set of commonly occurring sentinels, such as <code>NA</code> and <code>NULL</code>.</p>
+    <div class="info-item">
+        <strong>The na_values option:</strong> Can take either a list or set of strings to consider missing values.
     </div>
-</section>
+</div>
+
+<div class="code-block">
+    <div class="code-header"><span>Python: Custom Missing Values</span></div>
+    <pre><code># Specify global sentinels
+result = pd.read_csv('examples/ex5.csv', na_values=['NULL'])
+
+# Different NA sentinels for each column
+sentinels = {'message': ['foo', 'NA'], 'something': ['two']}
+pd.read_csv('examples/ex5.csv', na_values=sentinels)</code></pre>
+</div>
+
+<div class="theory-box">
+    <h3>Reading Text Files in Pieces</h3>
+    <p>When processing very large files, you may only want to read in a small piece or iterate through smaller chunks. The <code>TextParser</code> object returned by <code>read_csv</code> allows you to iterate over the parts of the file according to the <code>chunksize</code>.</p>
+</div>
+
+<div class="code-block">
+    <div class="code-header"><span>Python: Chunked Loading</span></div>
+    <pre><code># Read only a small number of rows
+pd.read_csv('examples/ex6.csv', nrows=5)
+
+# Iterating over chunks
+chunker = pd.read_csv('examples/ex6.csv', chunksize=1000)
+tot = pd.Series([])
+for piece in chunker:
+    tot = tot.add(piece['key'].value_counts(), fill_value=0)
+tot = tot.sort_values(ascending=False)</code></pre>
+</div>
+
+<div class="theory-box">
+    <h3>Binary Data Formats</h3>
+    <p>Pandas supports several binary formats for efficient storage. One of the easiest is Python's built-in <code>pickle</code> serialization. For large quantities of scientific array data, <code>HDF5</code> is a well-regarded format. It is available as a C library and supports on-the-fly compression.</p>
+</div>
 """
 
-make_page("pandas/reading-data.html","Reading & Writing Data","Pandas","&#x1F43C;","beginner","Pandas &rarr; Reading Data",
-"Comprehensive guide to Pandas I/O operations, covering CSV, SQL, and memory-safe chunking techniques.",
-"Python for Data Analysis &mdash; Wes McKinney", pd_io_body, ("series-dataframe.html","Series & DataFrame"), ("selection.html","Selection & Filtering"),
-[("series-dataframe.html", "Core Objects"), ("../python/file-io.html", "Python File I/O"), ("selection.html", "Accessing Data")])
-
-# SELECTION & FILTERING (MASSIVE EXPANSION)
-pd_sel_body = """
+# SELECTION & FILTERING (PRECISION MAPPING FROM MCKINNEY CHAPTER 5.2)
+pd_selection_body = """
 <div class="toc-box">
-    <h4>&#x1F4CB; Selection & Filtering: The Deep Dive</h4>
-    <ol>
-        <li><a href="#theory">1. Indexing Theory</a></li>
-        <li><a href="#loc">2. Label-Based Selection (.loc)</a></li>
-        <li><a href="#iloc">3. Integer-Based Selection (.iloc)</a></li>
-        <li><a href="#boolean">4. Boolean Indexing & Masking</a></li>
-        <li><a href="#at">5. High-Performance Access (.at/.iat)</a></li>
-        <li><a href="#setting">6. Setting Values & Views vs Copies</a></li>
-    </ol>
+    <h4>&#x1F4CB; Indexing, Selection, and Filtering</h4>
+    <p>This module covers the fundamental mechanics of interacting with the data contained in a Series or DataFrame, following the 'Essential Functionality' section of the McKinney textbook.</p>
 </div>
 
-<section class="content-section" id="theory">
-    <h2>1 &middot; Indexing Theory</h2>
-    <p>Indexing in Pandas is more complex than in NumPy because of the <strong>Index Object</strong>. We must distinguish between <em>Label-based</em> (the name of the row) and <em>Position-based</em> (the numeric order) selection.</p>
-</section>
+<div class="theory-box">
+    <h3>Series Indexing</h3>
+    <p>Series indexing (<code>obj[...]</code>) works analogously to NumPy array indexing, except you can use the Series’s index values instead of only integers. Note that slicing with labels behaves differently than normal Python slicing in that the endpoint is <strong>inclusive</strong>.</p>
+</div>
 
-<section class="content-section" id="loc">
-    <h2>2 &middot; Label-Based Selection (.loc)</h2>
-    <p>The <code>.loc</code> property is the primary way to access data by label. <strong>Crucially:</strong> It is inclusive of the end label.</p>
-    <div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
-<pre class="code-block"># Returns a Series
-row = df.loc['2023-01-01']
+<div class="code-block">
+    <div class="code-header"><span>Python: Series Selection</span></div>
+    <pre><code>import pandas as pd
+import numpy as np
 
-# Returns a Scalar
-value = df.loc['2023-01-01', 'Price']</pre>
+obj = pd.Series(np.arange(4.), index=['a', 'b', 'c', 'd'])
+
+# Label indexing
+obj['b'] # Returns 1.0
+
+# Positional indexing
+obj[1] # Returns 1.0
+
+# Slicing with labels (Inclusive!)
+obj['b':'c'] # Returns 'b' and 'c' values</code></pre>
+</div>
+
+<div class="theory-box">
+    <h3>Selection with loc and iloc</h3>
+    <p>For DataFrame label-indexing on the rows, pandas provides the special indexing operators <code>loc</code> and <code>iloc</code>. They enable you to select a subset of the rows and columns with NumPy-like notation using either axis labels (<code>loc</code>) or integers (<code>iloc</code>).</p>
+    
+    <div class="spec-card">
+        <h4>Indexing Option Summary</h4>
+        <ul>
+            <li><strong>df[val]:</strong> Select single column or sequence of columns. Special cases: boolean array (filter rows), slice (slice rows).</li>
+            <li><strong>df.loc[val]:</strong> Selects single row or subset of rows by label.</li>
+            <li><strong>df.iloc[where]:</strong> Selects single row or subset of rows by integer position.</li>
+            <li><strong>df.at[r, c]:</strong> Select a single scalar value by row and column label.</li>
+            <li><strong>df.iat[i, j]:</strong> Select a single scalar value by row and column position.</li>
+        </ul>
     </div>
-</section>
+</div>
 
-<section class="content-section" id="setting">
-    <h2>6 &middot; Setting Values & The SettingWithCopyWarning</h2>
-    <div class="callout warning">
-        <div class="callout-icon">⚠️</div>
-        <div class="callout-content">
-            <strong>SettingWithCopyWarning</strong>
-            <p>This occurs when you try to modify a SLICE of a DataFrame. Always use <code>.loc[row, col] = val</code> to ensure you are modifying the original object.</p>
-        </div>
-    </div>
-</section>
+<div class="code-block">
+    <div class="code-header"><span>Python: loc and iloc Usage</span></div>
+    <pre><code>data = pd.DataFrame(np.arange(16).reshape((4, 4)),
+                    index=['Ohio', 'Colorado', 'Utah', 'New York'],
+                    columns=['one', 'two', 'three', 'four'])
+
+# Select single row and multiple columns by label
+data.loc['Colorado', ['two', 'three']]
+
+# Select multiple rows and specific columns by integer position
+data.iloc[[1, 2], [3, 0, 1]]
+
+# Slicing with loc (Inclusive)
+data.loc[:'Utah', 'two']
+
+# Slicing with iloc (Exclusive at end)
+data.iloc[:, :3][data.three > 5]</code></pre>
+</div>
+
+<div class="theory-box">
+    <h3>Integer Indexes and Ambiguity</h3>
+    <p>Working with pandas objects indexed by integers can be confusing. If you have an axis index containing integers, data selection will always be <strong>label-oriented</strong> to avoid ambiguity. For precise handling, always use <code>loc</code> (for labels) or <code>iloc</code> (for integers).</p>
+</div>
+
+<div class="code-block">
+    <div class="code-header"><span>Python: Avoiding Integer Ambiguity</span></div>
+    <pre><code>ser = pd.Series(np.arange(3.))
+
+# This will fail if index is [0, 1, 2] because -1 is not a label
+# ser[-1] # Generates KeyError
+
+# Use iloc for consistent positional access
+ser.iloc[-1] # Returns 2.0</code></pre>
+</div>
 """
 
-make_page("pandas/selection.html","Selection & Filtering","Pandas","&#x1F43C;","intermediate","Pandas &rarr; Selection",
-"Mastering label and integer-based selection, boolean masking, and high-performance scalar access.",
-"Python for Data Analysis &mdash; Wes McKinney", pd_sel_body, ("reading-data.html","Reading Data"), ("cleaning.html","Data Cleaning"),
-[("reading-data.html", "Loading Data"), ("../numpy/indexing.html", "NumPy Indexing"), ("cleaning.html", "Data Wrangling")])
-
-print("reading-data.html + selection.html MASSIVELY expanded!")
+make_page("Reading Data", pd_io_body, "pages/pandas/reading-data.html", "pandas")
+make_page("Selection & Filtering", pd_selection_body, "pages/pandas/selection.html", "pandas")

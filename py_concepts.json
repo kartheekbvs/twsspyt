@@ -1,0 +1,124 @@
+{
+    "Python Fundamentals": {
+        "icon": "&#x1F40D;",
+        "pages": [
+            {"title": "Introduction", "path": "python/introduction.html"},
+            {"title": "Variables & Data Types", "path": "python/variables-datatypes.html"},
+            {"title": "Operators", "path": "python/operators.html"},
+            {"title": "Control Flow", "path": "python/control-flow.html"},
+            {"title": "Loops", "path": "python/loops.html"},
+            {"title": "Functions", "path": "python/functions.html"},
+            {"title": "Strings", "path": "python/strings.html"},
+            {"title": "Lists", "path": "python/lists.html"},
+            {"title": "Tuples", "path": "python/tuples.html"},
+            {"title": "Dictionaries", "path": "python/dictionaries.html"},
+            {"title": "Sets", "path": "python/sets.html"},
+            {"title": "File I/O", "path": "python/file-io.html"},
+            {"title": "Exception Handling", "path": "python/exceptions.html"},
+            {"title": "Modules & Packages", "path": "python/modules.html"}
+        ]
+    },
+    "Object Oriented Programming": {
+        "icon": "&#x1F3D7;&#xFE0F;",
+        "pages": [
+            {"title": "Classes & Objects", "path": "oop/classes-objects.html"},
+            {"title": "Inheritance", "path": "oop/inheritance.html"},
+            {"title": "Polymorphism", "path": "oop/polymorphism.html"},
+            {"title": "Encapsulation", "path": "oop/encapsulation.html"},
+            {"title": "Magic Methods", "path": "oop/magic-methods.html"},
+            {"title": "Decorators", "path": "oop/decorators.html"}
+        ]
+    },
+    "NumPy": {
+        "icon": "&#x1F522;",
+        "pages": [
+            {"title": "ndarray Architecture", "path": "numpy/arrays.html"},
+            {"title": "Memory Layout & Strides", "path": "numpy/memory.html"},
+            {"title": "Indexing & Slicing", "path": "numpy/indexing.html"},
+            {"title": "Fancy Indexing", "path": "numpy/fancy-indexing.html"},
+            {"title": "Vectorization & ufuncs", "path": "numpy/vectorization.html"},
+            {"title": "Broadcasting Rules", "path": "numpy/broadcasting.html"},
+            {"title": "Mathematical Functions", "path": "numpy/math.html"},
+            {"title": "Linear Algebra", "path": "numpy/linalg.html"},
+            {"title": "Random Sampling", "path": "numpy/random.html"},
+            {"title": "Reshaping & Stacking", "path": "numpy/reshaping.html"},
+            {"title": "Polynomials", "path": "numpy/polynomials.html"},
+            {"title": "I/O with NumPy", "path": "numpy/io.html"},
+            {"title": "NumPy Masterclass", "path": "numpy/masterclass.html"}
+        ]
+    },
+    "Pandas": {
+        "icon": "&#x1F43C;",
+        "pages": [
+            {"title": "Series & DataFrame", "path": "pandas/structures.html"},
+            {"title": "Index Objects", "path": "pandas/index.html"},
+            {"title": "Reindexing & Dropping", "path": "pandas/reindexing.html"},
+            {"title": "Selection & Filtering", "path": "pandas/selection.html"},
+            {"title": "Arithmetic & Alignment", "path": "pandas/arithmetic.html"},
+            {"title": "Function Mapping", "path": "pandas/mapping.html"},
+            {"title": "Sorting & Ranking", "path": "pandas/sorting.html"},
+            {"title": "Duplicate Labels", "path": "pandas/duplicates.html"},
+            {"title": "Statistics & Reduction", "path": "pandas/stats.html"},
+            {"title": "Handling Missing Data", "path": "pandas/missing.html"},
+            {"title": "Hierarchical Indexing", "path": "pandas/hierarchical.html"},
+            {"title": "Reading Data (CSV, JSON)", "path": "pandas/reading.html"},
+            {"title": "Writing Data", "path": "pandas/writing.html"},
+            {"title": "Binary Formats (HDF5)", "path": "pandas/binary.html"},
+            {"title": "Database Interaction", "path": "pandas/database.html"},
+            {"title": "Merge & Join Algorithms", "path": "pandas/merging.html"},
+            {"title": "Concatenation", "path": "pandas/concat.html"},
+            {"title": "Grouping Internals", "path": "pandas/groupby.html"},
+            {"title": "Split-Apply-Combine", "path": "pandas/split-apply.html"},
+            {"title": "Pivot Tables", "path": "pandas/pivoting.html"},
+            {"title": "Reshaping (Stack/Unstack)", "path": "pandas/reshaping.html"},
+            {"title": "Time Series Basics", "path": "pandas/timeseries.html"},
+            {"title": "Resampling & Frequency", "path": "pandas/resampling.html"},
+            {"title": "Window Functions", "path": "pandas/window.html"},
+            {"title": "Categorical Data", "path": "pandas/categorical.html"},
+            {"title": "Pandas Masterclass", "path": "pandas/masterclass.html"}
+        ]
+    },
+    "Machine Learning": {
+        "icon": "&#x1F916;",
+        "pages": [
+            {"title": "Introduction to ML", "path": "ml/intro.html"},
+            {"title": "Linear Regression", "path": "ml/linear-regression.html"},
+            {"title": "Logistic Regression", "path": "ml/logistic-regression.html"},
+            {"title": "Support Vector Machines", "path": "ml/svm.html"},
+            {"title": "Naive Bayes", "path": "ml/naive-bayes.html"},
+            {"title": "Decision Trees", "path": "ml/decision-trees.html"},
+            {"title": "Random Forests", "path": "ml/random-forest.html"},
+            {"title": "Gradient Boosting", "path": "ml/gradient-boosting.html"},
+            {"title": "K-Nearest Neighbors", "path": "ml/knn.html"},
+            {"title": "K-Means Clustering", "path": "ml/clustering.html"},
+            {"title": "Hierarchical Clustering", "path": "ml/hierarchical.html"},
+            {"title": "DBSCAN", "path": "ml/dbscan.html"},
+            {"title": "PCA", "path": "ml/pca.html"},
+            {"title": "Evaluation Metrics", "path": "ml/evaluation.html"},
+            {"title": "Confusion Matrix", "path": "ml/confusion.html"},
+            {"title": "ROC & AUC", "path": "ml/roc-auc.html"},
+            {"title": "Grid Search CV", "path": "ml/gridsearch.html"},
+            {"title": "Preprocessing & Scaling", "path": "ml/preprocessing.html"},
+            {"title": "ML Masterclass", "path": "ml/masterclass.html"}
+        ]
+    },
+    "Deep Learning": {
+        "icon": "&#x1F9E0;",
+        "pages": [
+            {"title": "Neural Networks Logic", "path": "dl/intro.html"},
+            {"title": "Activation Functions", "path": "dl/activation.html"},
+            {"title": "Backpropagation Math", "path": "dl/backprop.html"},
+            {"title": "Optimization (Adam, SGD)", "path": "dl/optimization.html"},
+            {"title": "Regularization (Dropout)", "path": "dl/regularization.html"},
+            {"title": "CNN Architecture", "path": "dl/cnn.html"},
+            {"title": "Pooling & Padding", "path": "dl/cnn-details.html"},
+            {"title": "RNN & Sequence Modeling", "path": "dl/rnn.html"},
+            {"title": "LSTM & GRU", "path": "dl/lstm.html"},
+            {"title": "Self-Attention Mechanism", "path": "dl/attention.html"},
+            {"title": "Transformers", "path": "dl/transformers.html"},
+            {"title": "GANs", "path": "dl/gan.html"},
+            {"title": "Autoencoders", "path": "dl/autoencoder.html"},
+            {"title": "DL Masterclass", "path": "dl/masterclass.html"}
+        ]
+    }
+}

@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Visualization - Python Learning Hub</title>
-<meta name="description" content="Visualization - comprehensive textbook reference with code examples.">
+<title>Visualization with Pandas - Python Learning Hub</title>
+<meta name="description" content="Visualization with Pandas - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -111,44 +111,41 @@
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F43C; Pandas</span>
-<h1>Visualization</h1>
-<p class="page-intro">Mastering the Pandas plotting API, covering all major statistical plot types and deep integration with Matplotlib Axes objects.</p>
+<h1>Visualization with Pandas</h1>
+<p class="page-intro">Pandas integrates with Matplotlib for quick plotting: line, bar, histogram, scatter, box, pie charts directly from DataFrames and Series using .plot().</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge intermediate">&#x25CF; Intermediate</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Python for Data Analysis &mdash; Wes McKinney</em></span>
 </div></div>
+<div class="toc-box"><h4>&#x1F4CB; Table of Contents</h4><ol>
+<li><a href="#s1">Core Concepts</a></li><li><a href="#s2">Code Examples</a></li><li><a href="#s3">Common Patterns</a></li><li><a href="#s4">Best Practices</a></li></ol></div>
+<section class="content-section" id="s1"><h2>1 &middot; Core Concepts</h2>
+<p>Pandas integrates with Matplotlib for quick plotting: line, bar, histogram, scatter, box, pie charts directly from DataFrames and Series using .plot().</p></section>
+<section class="content-section" id="s2"><h2>2 &middot; Code Examples</h2>
+<div class="code-block-wrapper"><div class="code-block-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang-badge">Python</span><button class="copy-btn">Copy</button></div>
+<pre class="code-block"><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
 
-<div class="toc-box">
-    <h4>&#x1F4CB; Data Visualization: From Arrays to Insights</h4>
-    <ol>
-        <li><a href="#intro">1. The Matplotlib Wrapper Architecture</a></li>
-        <li><a href="#line">2. Line Plots & Time Series Trends</a></li>
-        <li><a href="#bar">3. Categorical Comparisons: Bar & Area</a></li>
-        <li><a href="#hist">4. Distribution Analysis: Histograms & KDE</a></li>
-        <li><a href="#scat">5. Relationship Exploration: Scatter & Hexbin</a></li>
-        <li><a href="#subplots">6. Subplots and Shared Axes</a></li>
-        <li><a href="#return">7. Return Values: The Axes Object</a></li>
-    </ol>
-</div>
+<span class="cm"># Example DataFrame</span>
+df = pd.DataFrame({
+    <span class="st">"name"</span>: [<span class="st">"Alice"</span>,<span class="st">"Bob"</span>,<span class="st">"Charlie"</span>,<span class="st">"Diana"</span>],
+    <span class="st">"age"</span>: [<span class="nm">25</span>,<span class="nm">30</span>,<span class="nm">35</span>,<span class="nm">28</span>],
+    <span class="st">"salary"</span>: [<span class="nm">50000</span>,<span class="nm">60000</span>,<span class="nm">70000</span>,<span class="nm">55000</span>],
+    <span class="st">"dept"</span>: [<span class="st">"Engineering"</span>,<span class="st">"Marketing"</span>,<span class="st">"Engineering"</span>,<span class="st">"Marketing"</span>]
+})
+<span class="bi">print</span>(df)</pre>
+<div class="output-block"><div class="output-label">&#x25B6; Output</div>      name  age  salary         dept<br>0    Alice   25   50000  Engineering<br>1      Bob   30   60000    Marketing<br>2  Charlie   35   70000  Engineering<br>3    Diana   28   55000    Marketing</div></div></section>
+<section class="content-section" id="s3"><h2>3 &middot; Common Patterns</h2>
+<div class="callout note"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Textbook Insight</strong>
+<p>Pandas is built on NumPy and provides high-performance, easy-to-use data structures. The two primary structures are Series (1D) and DataFrame (2D). Always prefer vectorized operations over loops.</p></div></div></section>
+<section class="content-section" id="s4"><h2>4 &middot; Best Practices</h2>
+<div class="callout tip"><div class="callout-icon">&#x1F4A1;</div><div class="callout-content"><strong>Performance Tip</strong>
+<p>Use <code>.apply()</code> sparingly &mdash; prefer vectorized operations. Use <code>category</code> dtype for string columns with few unique values to save memory.</p></div></div></section>
 
-<section class="content-section" id="intro">
-    <h2>1 &middot; The Architecture of Pandas Plotting</h2>
-    <p>Pandas plotting is built on a "High-Level Wrapper" philosophy. It leverages Matplotlib's powerful backend while offering a much simpler, data-aware API. As Wes McKinney notes, the integration ensures that indexes and labels are automatically handled, preventing common plotting alignment errors.</p>
-</section>
-
-<section class="content-section" id="return">
-    <h2>7 &middot; Return Values: The Axes Object</h2>
-    <div class="return-value-box">
-        <div class="rv-label">🔁 Return Value: .plot()</div>
-        <p>The <code>.plot()</code> method (on Series or DataFrame) returns a <strong>Matplotlib Axes</strong> object. For subplots, it returns a <strong>NumPy array of Axes</strong>. This is the entry point for "low-level" Matplotlib customization (e.g., <code>ax.set_title()</code>).</p>
-    </div>
-</section>
-
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="merging.html" class="sa-link">Data Joins</a><a href="../data/matplotlib.html" class="sa-link">Matplotlib Basics</a><a href="time-series.html" class="sa-link">Temporal Data</a></div></section>
 </div>
 <div class="page-nav">
 <a href="merging.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">Merging</span></a>
-<a href="time-series.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Time Series</span></a>
+<a href="../ml/intro-ml.html" class="next"><span class="nav-direction">Next &rarr;</span><span class="nav-topic">Intro to ML</span></a>
 </div>
 <footer class="footer"><p>&#x1F40D; Python Learning Hub &mdash; Built from leading textbooks for deep understanding</p></footer>
 </main>

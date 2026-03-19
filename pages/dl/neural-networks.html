@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Neural Networks Fundamentals - Python Learning Hub</title>
-<meta name="description" content="Neural Networks Fundamentals - comprehensive textbook reference with code examples.">
+<title>Deep Feedforward Networks - Python Learning Hub</title>
+<meta name="description" content="Deep Feedforward Networks - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -105,53 +105,62 @@
 </nav>
 <main class="main-content" id="mainContent">
 <header class="topbar"><button class="mobile-toggle" id="mobileToggle">&#x2630;</button>
-<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; DL &rarr; Neural Networks</div>
+<div class="topbar-breadcrumb"><a href="../../index.html" style="color:var(--accent);text-decoration:none;">Home</a> &rarr; DL &rarr; Feedforward Networks</div>
 <div class="topbar-progress"><span class="progress-text">Reading</span><div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div><span id="progressPercent">0%</span></div>
 </header>
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F9E0; Deep Learning</span>
-<h1>Neural Networks Fundamentals</h1>
-<p class="page-intro">Formal textbook analysis of neural network architectures, activation functions, and the mathematics of the forward pass.</p>
+<h1>Deep Feedforward Networks</h1>
+<p class="page-intro">Formal textbook analysis of MLP architectures, forward propagation, and the role of depth in function approximation.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge advanced">&#x25CF; Advanced</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Deep Learning &mdash; Ian Goodfellow</em></span>
 </div></div>
 
 <div class="toc-box">
-    <h4>&#x1F4CB; Neural Networks: The Theoretical Framework</h4>
+    <h4>&#x1F4CB; 6 &middot; Deep Feedforward Networks</h4>
     <ol>
-        <li><a href="#intro">1. The Biological Inspiration</a></li>
-        <li><a href="#perceptron">2. The Perceptron vs Sigmoid Neuron</a></li>
-        <li><a href="#architecture">3. Multilayer Perceptrons (MLP)</a></li>
-        <li><a href="#activation">4. Activation Functions: ReLU, Sigmoid, Tanh</a></li>
-        <li><a href="#loss">5. Loss Functions: MSE vs Cross-Entropy</a></li>
-        <li><a href="#forward">6. The Forward Pass Algorithm</a></li>
+        <li><a href="#intro">1. The Multi-Layer Perceptron (MLP)</a></li>
+        <li><a href="#forward">2. Forward Propagation Algorithm</a></li>
+        <li><a href="#cost">3. Cost Functions & Output Units</a></li>
+        <li><a href="#architecture">4. Architecture Design & Depth</a></li>
+        <li><a href="#relu">5. Hidden Units: ReLU & Variants</a></li>
     </ol>
 </div>
 
 <section class="content-section" id="intro">
-    <h2>1 &middot; Biological Inspiration</h2>
-    <p>Neural networks are computing systems vaguely inspired by the biological neural networks that constitute animal brains. The 'neurons' in our networks are mathematical functions that receive inputs, weight them, and pass them through an activation function.</p>
+    <h2>1 &middot; Deep Feedforward Networks</h2>
+    <p>Deep feedforward networks, also called feedforward neural networks or <strong>multi-layer perceptrons (MLPs)</strong>, are the quintessential deep learning models. The goal is to approximate some function \( f^* \). A feedforward network defines a mapping \( \mathbf{y} = f(\mathbf{x}; 	heta) \) and learns the value of parameters \( 	heta \) that result in the best function approximation.</p>
 </section>
 
-<section class="content-section" id="activation">
-    <h2>4 &middot; Activation Functions</h2>
+<section class="content-section" id="forward">
+    <h2>2 &middot; Forward Propagation Algorithm</h2>
+    <p>During training, information flows forward through the network. The inputs \( \mathbf{x} \) provide the initial information that then propagates up to the hidden units at each layer and finally produces \( \hat{\mathbf{y}} \). This is called <strong>forward propagation</strong>.</p>
     <div class="callout note">
-        <div class="callout-icon">🧠</div>
+        <div class="callout-icon">⚙️</div>
         <div class="callout-content">
-            <strong>The ReLU Revolution</strong>
-            <p>The Rectified Linear Unit (ReLU) is defined as \( f(x) = \max(0, x) \). It solved the <strong>Vanishing Gradient Problem</strong> that plagued Sigmoid and Tanh functions, allowing for the training of much deeper networks.</p>
+            <strong>Algorithm 6.1: Forward-Prop</strong>
+            <p>For each layer \( i = n_i + 1, \dots, n \): <br>
+            1. \( \mathbf{a}^{(i)} = \mathbf{b}^{(i)} + \mathbf{W}^{(i)}\mathbf{h}^{(i-1)} \) <br>
+            2. \( \mathbf{h}^{(i)} = f^{(i)}(\mathbf{a}^{(i)}) \)</p>
         </div>
     </div>
 </section>
 
-<section class="content-section" id="forward">
-    <h2>6 &middot; The Forward Pass</h2>
-    <p>The forward pass is the process of mapping an input vector to an output prediction through successive linear transformations and non-linear activations.</p>
-    <div class="return-value-box">
-        <div class="rv-label">🔁 Return Value: .predict()</div>
-        <p>In Keras/TensorFlow, <code>model.predict()</code> returns a <strong>NumPy ndarray</strong> of probabilities (for classification) or continuous values (for regression). For a single input, it returns a 2D array of shape <code>(1, num_classes)</code>.</p>
+<section class="content-section" id="architecture">
+    <h2>4 &middot; Architecture Design</h2>
+    <p>Deeper models tend to perform better. This is not merely because the model is larger; increasing the number of parameters without increasing depth is not nearly as effective. Shallow models overfit at around 20 million parameters while deep ones can benefit from over 60 million.</p>
+</section>
+
+<section class="content-section" id="relu">
+    <h2>5 &middot; Hidden Units (ReLU)</h2>
+    <div class="callout important">
+        <div class="callout-icon">🚀</div>
+        <div class="callout-content">
+            <strong>Rectified Linear Units</strong>
+            <p>Modern feedforward networks use <strong>ReLU</strong> defined by \( g(z) = \max\{0, z\} \). They are easy to optimize because they are very similar to linear units. Variations include Leaky ReLU, PReLU, and Maxout units.</p>
+        </div>
     </div>
 </section>
 

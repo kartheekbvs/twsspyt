@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Recurrent Neural Networks - Python Learning Hub</title>
-<meta name="description" content="Recurrent Neural Networks - comprehensive textbook reference with code examples.">
+<title>Sequence Modeling: RNNs - Python Learning Hub</title>
+<meta name="description" content="Sequence Modeling: RNNs - comprehensive textbook reference with code examples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
@@ -111,41 +111,57 @@
 <div class="page-content">
 <div class="page-header">
 <span class="topic-badge">&#x1F9E0; Deep Learning</span>
-<h1>Recurrent Neural Networks</h1>
-<p class="page-intro">Deep-dive into sequence modeling, covering the vanishing gradient problem, LSTMs, and the transition to attention-based models.</p>
+<h1>Sequence Modeling: RNNs</h1>
+<p class="page-intro">Deep-dive into recurrent architectures, unfolding computational graphs, and the BPTT algorithm for sequence learning.</p>
 <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
 <span class="difficulty-badge advanced">&#x25CF; Advanced</span>
 <span style="font-size:.8rem;color:var(--text-muted);align-self:center;">&#x1F4D6; Based on: <em>Deep Learning &mdash; Ian Goodfellow</em></span>
 </div></div>
 
 <div class="toc-box">
-    <h4>&#x1F4CB; Sequence Modeling: RNNs to Transformers</h4>
+    <h4>&#x1F4CB; 10 &middot; Sequence Modeling: RNNs</h4>
     <ol>
-        <li><a href="#intro">1. Modeling Temporal Dependencies</a></li>
-        <li><a href="#rnn">2. Recurrent Neural Networks (RNN)</a></li>
-        <li><a href="#lstm">3. LSTM & GRU: Solving Vanishing Gradients</a></li>
-        <li><a href="#attn">4. Attention Mechanisms</a></li>
-        <li><a href="#trans">5. The Transformer Architecture (Self-Attention)</a></li>
+        <li><a href="#unfolding">1. Unfolding Computational Graphs</a></li>
+        <li><a href="#sharing">2. Parameter Sharing across Time</a></li>
+        <li><a href="#forward-rnn">3. RNN Forward Propagation</a></li>
+        <li><a href="#bptt">4. Back-Propagation Through Time (BPTT)</a></li>
+        <li><a href="#teacher">5. Teacher Forcing & Open-Loop</a></li>
     </ol>
 </div>
 
-<section class="content-section" id="intro">
-    <h2>1 &middot; Temporal Dependencies</h2>
-    <p>Standard neural networks assume all inputs are independent. Sequence models (RNNs) break this by maintaining a 'hidden state' that captures information about previous time steps.</p>
+<section class="content-section" id="unfolding">
+    <h2>1 &middot; Unfolding Graphs</h2>
+    <p>Unfolding is the operation that maps a circuit with recurrent connections to a computational graph with repeated pieces—one per time step. This allows the model to handle variable-length histories using a fixed-size input transition function.</p>
 </section>
 
-<section class="section" id="trans">
-    <h2>5 &middot; The Transformer Revolution</h2>
-    <div class="callout important">
-        <div class="callout-icon">✨</div>
+<section class="content-section" id="forward-rnn">
+    <h2>3 &middot; RNN Forward Propagation</h2>
+    <p>Assuming a hyperbolic tangent activation and softmax output, the standard RNN update equations are:</p>
+    <ul>
+        <li>\( \mathbf{a}^{(t)} = \mathbf{b} + \mathbf{W}\mathbf{h}^{(t-1)} + \mathbf{U}\mathbf{x}^{(t)} \)</li>
+        <li>\( \mathbf{h}^{(t)} = 	anh(\mathbf{a}^{(t)}) \)</li>
+        <li>\( \mathbf{o}^{(t)} = \mathbf{c} + \mathbf{V}\mathbf{h}^{(t)} \)</li>
+        <li>\( \hat{\mathbf{y}}^{(t)} = 	ext{softmax}(\mathbf{o}^{(t)}) \)</li>
+    </ul>
+</section>
+
+<section class="content-section" id="bptt">
+    <h2>4 &middot; BPTT Algorithm</h2>
+    <div class="callout note">
+        <div class="callout-icon">⏳</div>
         <div class="callout-content">
-            <strong>Attention is All You Need</strong>
-            <p>The Transformer architecture replaced recurrence with <strong>Self-Attention</strong>. This allowed for massive parallelization and the ability to capture long-range dependencies across thousands of tokens.</p>
+            <strong>Back-Propagation Through Time</strong>
+            <p>Computing the gradient involves a forward pass (left to right) followed by a backward pass (right to left). The runtime is \( O(	au) \) where \( 	au \) is the sequence length. This cannot be parallelized because the graph is inherently sequential.</p>
         </div>
     </div>
 </section>
 
-<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="cnn.html" class="sa-link">Visual Hierarchies</a><a href="transformers.html" class="sa-link">Self-Attention</a></div></section>
+<section class="content-section" id="teacher">
+    <h2>5 &middot; Teacher Forcing</h2>
+    <p>Teacher forcing is a training technique where the ground truth output \( \mathbf{y}^{(t)} \) is fed as input at time \( t+1 \), rather than the model's own (potentially noisy) output. This decouples time steps and allows for parallelization during training.</p>
+</section>
+
+<section class="see-also-section"><h3>📚 See Also</h3><div class="see-also-links"><a href="cnn.html" class="sa-link">Spatial Hierarchy</a><a href="transformers.html" class="sa-link">Attention</a></div></section>
 </div>
 <div class="page-nav">
 <a href="cnn.html"><span class="nav-direction">&larr; Previous</span><span class="nav-topic">CNN</span></a>
