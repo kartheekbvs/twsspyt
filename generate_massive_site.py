@@ -20,76 +20,63 @@ def load_concepts():
         return json.load(f)
 
 def format_textbook_content(text):
-    """Formats raw text into HTML with code blocks, sections, lists, and bolding."""
-    lines = text.split('\n')
+    """Formats raw text into a premium web experience with cards, icons, and sentence splitting."""
+    # Clean up massive text before processing
+    text = re.sub(r'\s+', ' ', text) # Resolve PDF line break issues
+    
+    # Split into rough 'blocks' based on possible headings (numbered or short caps)
+    blocks = re.split(r'(\d+\.\d+\s+[A-Z][^.]{5,50}|[A-Z\s]{10,50}:)', text)
+    
     formatted = ""
     in_code = False
-    in_list = False
     
-    # Technical keywords to bold for better readability
+    # Icons for variety
+    icons = ["&#x1F4D8;", "&#x1F52C;", "&#x1F4CA;", "&#x1F527;", "&#x1F4A1;", "&#x1F4BB;"]
+    icon_idx = 0
+    
     keywords = [
         "ndarray", "DataFrame", "Series", "Backpropagation", "Gradient Descent",
         "Stochastic", "Activation Function", "Hyperparameter", "Vectorization",
         "Broadcasting", "Regularization", "Overfitting", "Transformer", "Attention",
-        "Convolutional", "Recurrent", "Optimization", "Loss Function", "Weights"
+        "Convolutional", "Recurrent", "Optimization", "Loss Function", "Weights",
+        "Neurons", "Layers", "Tensors", "Matrices", "Eigenvalues", "Covariance"
     ]
-    
-    for line in lines:
-        clean_line = line.strip()
-        if not clean_line: 
-            if in_list:
-                formatted += '</ul>'
-                in_list = False
-            continue
+
+    for block in blocks:
+        clean_block = block.strip()
+        if not clean_block: continue
         
         # Bolding technical keywords
-        bolded_line = line
+        bolded_block = clean_block
         for kw in keywords:
-            bolded_line = re.sub(rf'\b{kw}\b', f'<strong>{kw}</strong>', bolded_line, flags=re.IGNORECASE)
+            bolded_block = re.sub(rf'\b{kw}\b', f'<strong>{kw}</strong>', bolded_block, flags=re.IGNORECASE)
+
+        # Heading detection (Block is very short or matches heading pattern)
+        # Avoid short numeric strings (like page numbers)
+        is_page_num = re.match(r'^\d+$', clean_block) or (len(clean_block) < 5 and clean_block.isdigit())
         
-        # Code block detection
-        if clean_line.startswith('>>>') or clean_line.startswith('...') or (in_code and line.startswith('    ')):
-            if in_list:
-                formatted += '</ul>'
-                in_list = False
-            if not in_code:
-                formatted += '<div class="code-block-wrapper"><pre class="code-block">'
-                in_code = True
-            formatted += line + '\n'
+        if len(clean_block) < 60 and not is_page_num and (re.match(r'^\d+\.', clean_block) or clean_block.isupper() or ":" in clean_block):
+            icon = icons[icon_idx % len(icons)]
+            icon_idx += 1
+            formatted += f'<h2 class="side-heading">{icon} {bolded_block}</h2>'
+            continue
+
+        # Content detection
+        if ">>>" in clean_block or "..." in clean_block:
+            formatted += f'<div class="code-block-wrapper"><pre class="code-block">{clean_block}</pre></div>'
         else:
-            if in_code:
-                formatted += '</pre></div>'
-                in_code = False
+            # Paragraph splitting for readability
+            sentences = re.split(r'(?<=[.!?])\s+', bolded_block)
+            formatted += '<div class="content-card">'
+            current_p = ""
+            for i, sent in enumerate(sentences):
+                current_p += sent + " "
+                # Every 3-4 sentences, start a new paragraph
+                if (i + 1) % 4 == 0 or i == len(sentences) - 1:
+                    formatted += f'<p>{current_p.strip()}</p>'
+                    current_p = ""
+            formatted += '</div>'
             
-            # List detection
-            if clean_line.startswith('- ') or clean_line.startswith('* ') or re.match(r'^\d+\. ', clean_line):
-                if not in_list:
-                    formatted += '<ul class="textbook-list">'
-                    in_list = True
-                content = clean_line.lstrip('-*').strip()
-                if re.match(r'^\d+\. ', content): content = re.sub(r'^\d+\. ', '', content)
-                formatted += f'<li>{content}</li>'
-                continue
-            elif in_list:
-                formatted += '</ul>'
-                in_list = False
-
-            # Callout detection
-            if any(clean_line.upper().startswith(x) for x in ["NOTE:", "WARNING:", "DEFINITION:", "IMPORTANT:"]):
-                parts = clean_line.split(':', 1)
-                type_ = parts[0].lower()
-                content = parts[1].strip() if len(parts) > 1 else ""
-                formatted += f'<div class="callout callout-{type_}"><strong>{parts[0]}</strong> {content}</div>'
-                continue
-
-            # Massive paragraphs vs titles
-            if len(clean_line) > 80:
-                formatted += f'<section class="content-section"><p>{bolded_line}</p></section>'
-            else:
-                formatted += f'<h3 class="section-title">{bolded_line}</h3>'
-                
-    if in_code: formatted += '</pre></div>'
-    if in_list: formatted += '</ul>'
     return formatted
 
 def get_text_segment(file_paths, query, category, min_chars=50000):
