@@ -21,17 +21,10 @@ def load_concepts():
 
 def format_textbook_content(text, category):
     """Formats raw text into a premium web experience with cards, icons, and list detection."""
-    # Category-specific technical filtering to avoid contamination
-    if category == "NumPy":
-        # If segment is overwhelmed by Pandas, try to clean it or return early
-        if text.count("DataFrame") > 20 or text.count("Series") > 20:
-             text = re.sub(r'[^.]*?pandas[^.]*?\.', '', text, flags=re.IGNORECASE)
-
     # Clean up massive text before processing
     text = re.sub(r'\s+', ' ', text)
     
     # Improved List Detection: Look for ' • ', ' - ', or ' 1. ' in the big text blob
-    # and convert them to newlines for the block splitter
     text = re.sub(r' (•|-|\d+\.) ', r'\n- ', text)
     
     # Split into blocks (Headings vs Paragraphs)
@@ -42,45 +35,40 @@ def format_textbook_content(text, category):
     icon_idx = 0
     in_list = False
     
-    keywords = [
-        "ndarray", "DataFrame", "Series", "Backpropagation", "Gradient Descent",
-        "Stochastic", "Activation Function", "Hyperparameter", "Vectorization",
-        "Broadcasting", "Regularization", "Overfitting", "Transformer", "Attention",
-        "Convolutional", "Recurrent", "Optimization", "Loss Function", "Weights"
-    ]
+    keywords = ["ndarray", "DataFrame", "Series", "Convolutional", "Transformer", "Attention", "Broadcasting", "Vectorization"]
 
     for block in blocks:
         clean_block = block.strip()
-        if not clean_block: continue
+        if not clean_block or clean_block == "-": continue
         
-        # Bolding technical keywords
+        # Bolding
         bolded_block = clean_block
         for kw in keywords:
             bolded_block = re.sub(rf'\b{kw}\b', f'<strong>{kw}</strong>', bolded_block, flags=re.IGNORECASE)
 
-        # List item detection
+        # List item
         if clean_block.startswith('- '):
             if not in_list:
                 formatted += '<ul class="textbook-list">'
                 in_list = True
             content = clean_block[2:].strip()
-            formatted += f'<li>{content}</li>'
+            if content: formatted += f'<li>{content}</li>'
             continue
         elif in_list:
             formatted += '</ul>'
             in_list = False
 
-        # Heading detection
+        # Heading
         is_page_num = re.match(r'^\d+$', clean_block) or (len(clean_block) < 5 and clean_block.isdigit())
-        if len(clean_block) < 60 and not is_page_num and (re.match(r'^\d+\.', clean_block) or clean_block.isupper() or ":" in clean_block):
+        if len(clean_block) < 70 and not is_page_num and (re.match(r'^\d+\.', clean_block) or clean_block.isupper() or ":" in clean_block):
             icon = icons[icon_idx % len(icons)]
             icon_idx += 1
             formatted += f'<h2 class="side-heading">{icon} {bolded_block}</h2>'
             continue
 
-        # Content detection
+        # Content
         if ">>>" in clean_block or "..." in clean_block:
-            formatted += f'<div class="code-block-wrapper"><pre class="code-block">{clean_block}</pre></div>'
+            formatted += f'<div class="code-block-wrapper"><pre class="code-block">{clean_block}</pre><button class="copy-btn">&#x1F4CB; Copy</button></div>'
         else:
             sentences = re.split(r'(?<=[.!?])\s+', bolded_block)
             formatted += '<div class="content-card">'
@@ -96,30 +84,47 @@ def format_textbook_content(text, category):
     return formatted
 
 def get_text_segment(file_paths, query, category, min_chars=50000):
-    """Searches for a query across sources with keyword relaxation."""
+    """Searches for a query across sources with exact match prioritization."""
     combined_content = ""
-    search_terms = [query]
-    if " " in query: search_terms += query.split()
-    search_terms.append(category)
     
-    for term in search_terms:
-        if len(term) < 3: continue
+    # Strategy: Try EXACT match of query + category first
+    search_queries = [f"{query} {category}", query]
+    
+    for sq in search_queries:
         for file_path in file_paths:
             if not os.path.exists(file_path): continue
             with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
                 content = f.read()
-            pattern = rf"\b{re.escape(term)}\b"
+            
+            # Use regex for whole-phrase matching
+            pattern = rf"\b{re.escape(sq)}\b"
             matches = list(re.finditer(pattern, content, re.IGNORECASE))
             if matches:
-                for m in matches[:3]:
-                    start = m.start()
+                for m in matches[:5]:
+                    start = max(0, m.start() - 500) # Give some context before
                     combined_content += content[start : start + (min_chars // 2)]
                     if len(combined_content) >= min_chars: break
             if len(combined_content) >= min_chars: break
         if len(combined_content) >= min_chars: break
+
+    # Fallback to word-level if still too short
+    if len(combined_content) < 5000:
+        words = query.split()
+        for word in words:
+            if len(word) < 4: continue
+            for file_path in file_paths:
+                if not os.path.exists(file_path): continue
+                with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                    content = f.read()
+                matches = list(re.finditer(rf"\b{re.escape(word)}\b", content, re.IGNORECASE))
+                for m in matches[:2]:
+                    start = m.start()
+                    combined_content += content[start : start + 10000]
+                if len(combined_content) >= min_chars: break
+            if len(combined_content) >= min_chars: break
     
     if not combined_content:
-        return f"<p>Aggregated technical data for <strong>{query}</strong> is being synthesized.</p>"
+        return f"<p>Detailed concepts for <strong>{query}</strong> are being synthesized.</p>"
     return format_textbook_content(combined_content, category)
 
 def generate_site():
@@ -136,28 +141,24 @@ def generate_site():
         sources = [primary_source] + FALLBACKS if primary_source else FALLBACKS
         
         body_content = get_text_segment(sources, query, s_name)
-        
         bc = f"{s_name} &rarr; {query}"
-        intro = f"Technically exhaustive breakdown of <strong>{query}</strong>. This module provide infinite depth with textbook-level precision."
+        intro = f"Premium masterclass on <strong>{query}</strong> with industrial-grade technical depth."
         
-        # FIX: Relative paths for Prev/Next
+        # Navigation logic
         p_raw = all_pages[i-1][2] if i > 0 else {"path": "index.html", "title": "Home"}
         n_raw = all_pages[i+1][2] if i < len(all_pages)-1 else {"path": "index.html", "title": "Home"}
         
-        # If it's a section page (like python/intro.html), we need ../
-        prev = ("../" + p_raw['path'], p_raw['title']) if "/" in p_raw['path'] else (p_raw['path'], p_raw['title'])
-        # Special case for index.html from a section: it needs ../index.html
-        if p_raw['path'] == "index.html": prev = ("../../index.html", "Home")
-        
-        next_ = ("../" + n_raw['path'], n_raw['title']) if "/" in n_raw['path'] else (n_raw['path'], n_raw['title'])
-        if n_raw['path'] == "index.html": next_ = ("../../index.html", "Home")
-        
+        def fix_path(path):
+            if path == "index.html": return "../../index.html"
+            return "../" + path if "/" in path else path
+            
         make_page(
             rel_path=p_data['path'], title=p_data['title'], section_name=s_name,
             emoji=s_icon, diff="advanced", bc=bc, intro=intro,
             books=", ".join([os.path.basename(s) for s in sources if os.path.exists(s)]),
             body=body_content,
-            prev=prev, next_=next_,
+            prev=(fix_path(p_raw['path']), p_raw['title']), 
+            next_=(fix_path(n_raw['path']), n_raw['title']),
             sections=sections
         )
 
